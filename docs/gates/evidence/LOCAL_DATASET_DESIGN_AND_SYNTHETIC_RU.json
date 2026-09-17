@@ -1,0 +1,2245 @@
+{
+  "gate": "LOCAL_DATASET_DESIGN_AND_SYNTHETIC_RU",
+  "schema_version": 1,
+  "verdict": "LOCAL_DATASET_DESIGN_AND_SYNTHETIC_RU_PASS",
+  "completed_at_utc": "2026-09-17T11:44:21.013546+00:00",
+  "contract": {
+    "version": 1,
+    "authority_sha256": {
+      "packages/contracts/src/g3.ts": "74bd9c059678247cc2d63b45b8384de8ba5337c29ab96d44a63df00195c19e0e",
+      "packages/contracts/src/action.ts": "25a6c69a251ca940a793135766016b2f3e8a96e0187d131a48e653aed698e8dd",
+      "packages/contracts/src/common.ts": "a2f0769a74949661586f434283a0b4a86e75ec0e60b660279ea3807d4edeaaa9",
+      "packages/ai/src/context.ts": "1b5ce4b64beb2bfb23ec9e072de0bb5a4c1227bff2cfde1f3f73320c48074659",
+      "packages/ai/src/prompt.ts": "5f9ef9ef8f4fdfe0a4bc1e19dab62320483240becd95dbd944356c59e4d95cca",
+      "packages/scenarios/src/s1-supply-launch.ts": "a29ee9a1579625bf9863105e573ab61dcd326ff6d995c7087febf14d5b3e2f5a",
+      "packages/scenarios/src/s2-workload-urgent.ts": "a3cd71e10d7088db1e358f27636042e86931d34e9cb59e1311fb9f390853a0a4",
+      "evals/local-qwen/interpretation.schema.json": "0df92dd03436502599f12d6ec245ce8948dd5d4d3e85ca2657d9cd0c79db2f5d"
+    }
+  },
+  "design": {
+    "target": "Russian utterance + public context -> complete PlayerMoveInterpretation JSON",
+    "root_seed": 20260917,
+    "generator_version": "ru-v1.0.0",
+    "source_type": "PROJECT_SYNTHETIC",
+    "license_status": "NOT_ASSIGNED",
+    "pipeline": [
+      "deterministic semantic case",
+      "authoritative expected bindings",
+      "independent Russian realization",
+      "authored UTF-16 support spans",
+      "strict validation",
+      "duplicate and contamination checks",
+      "preassigned isolated family splits"
+    ],
+    "canonical_format": "Context registry plus JSONL rows; no repeated expanded prompts",
+    "production_changes": false,
+    "interpretation_only": true
+  },
+  "statistics": {
+    "main_total": 10000,
+    "examples_per_split": {
+      "dev": 1000,
+      "internal_test": 1000,
+      "train": 8000,
+      "tuning_eval": 304
+    },
+    "examples_per_intent": {
+      "argument": 900,
+      "ask_question": 900,
+      "clarification": 700,
+      "close_attempt": 500,
+      "concession": 900,
+      "counter_offer": 1000,
+      "empathy": 500,
+      "objection": 900,
+      "offer": 1200,
+      "pressure": 600,
+      "probe_interest": 700,
+      "reveal_information": 600,
+      "walk_away": 600
+    },
+    "intent_by_split": {
+      "dev": {
+        "argument": 90,
+        "ask_question": 90,
+        "clarification": 70,
+        "close_attempt": 50,
+        "concession": 90,
+        "counter_offer": 100,
+        "empathy": 50,
+        "objection": 90,
+        "offer": 120,
+        "pressure": 60,
+        "probe_interest": 70,
+        "reveal_information": 60,
+        "walk_away": 60
+      },
+      "internal_test": {
+        "argument": 90,
+        "ask_question": 90,
+        "clarification": 70,
+        "close_attempt": 50,
+        "concession": 90,
+        "counter_offer": 100,
+        "empathy": 50,
+        "objection": 90,
+        "offer": 120,
+        "pressure": 60,
+        "probe_interest": 70,
+        "reveal_information": 60,
+        "walk_away": 60
+      },
+      "train": {
+        "argument": 720,
+        "ask_question": 720,
+        "clarification": 560,
+        "close_attempt": 400,
+        "concession": 720,
+        "counter_offer": 800,
+        "empathy": 400,
+        "objection": 720,
+        "offer": 960,
+        "pressure": 480,
+        "probe_interest": 560,
+        "reveal_information": 480,
+        "walk_away": 480
+      },
+      "tuning_eval": {
+        "argument": 16,
+        "ask_question": 16,
+        "clarification": 48,
+        "close_attempt": 16,
+        "concession": 16,
+        "counter_offer": 40,
+        "empathy": 16,
+        "objection": 32,
+        "offer": 40,
+        "pressure": 16,
+        "probe_interest": 16,
+        "reveal_information": 16,
+        "walk_away": 16
+      }
+    },
+    "contexts_count": 180,
+    "context_counts": {
+      "dev": 20,
+      "train": 140,
+      "internal_test": 20
+    },
+    "domain_distribution": {
+      "b2b_pricing": 1003,
+      "hiring": 1003,
+      "logistics": 982,
+      "procurement": 988,
+      "project": 1009,
+      "rent": 995,
+      "resources": 1002,
+      "service": 996,
+      "support": 1000,
+      "workload": 1022
+    },
+    "styles": {
+      "concise": 2497,
+      "formal": 2498,
+      "neutral": 2584,
+      "conversational": 2421,
+      "number_words": 1756
+    },
+    "noise": {
+      "emoji": 102,
+      "abbreviation": 100,
+      "missing_punctuation": 98,
+      "lowercase": 110,
+      "dash_punctuation": 111,
+      "minor_typo": 110
+    },
+    "noisy_count": 631,
+    "critical_counts": {
+      "negation": 4112,
+      "commitment": 3600,
+      "ambiguity": 1486,
+      "no_plausible_topic_id": 1415,
+      "conditional_offer": 379,
+      "counter_offer_inheritance": 323,
+      "prompt_injection": 348
+    },
+    "critical_rates": {
+      "negation": 0.4112,
+      "commitment": 0.36,
+      "ambiguity": 0.1486,
+      "no_plausible_topic_id": 0.1415,
+      "conditional_offer": 0.0379,
+      "counter_offer_inheritance": 0.0323,
+      "prompt_injection": 0.0348
+    },
+    "eval_critical_counts": {
+      "negation": 139,
+      "no_plausible_topic_id": 34,
+      "ambiguity": 62,
+      "commitment": 112,
+      "counter_offer_inheritance": 27,
+      "conditional_offer": 21,
+      "prompt_injection": 24
+    },
+    "active_offer_context_rows": 5881,
+    "target_offer_bindings": 1500,
+    "conditional_offers": 379,
+    "argument_bindings": 900,
+    "needs_clarification_count": 1834,
+    "null_fields_by_intent": {
+      "argument": {
+        "primaryTopicId": 80,
+        "secondaryTopicId": 900,
+        "factIds": 0,
+        "argument": 0,
+        "acknowledgementFactId": 900,
+        "offerDraft": 900,
+        "targetOfferId": 900
+      },
+      "ask_question": {
+        "primaryTopicId": 42,
+        "secondaryTopicId": 785,
+        "factIds": 900,
+        "argument": 900,
+        "acknowledgementFactId": 900,
+        "offerDraft": 900,
+        "targetOfferId": 900
+      },
+      "clarification": {
+        "primaryTopicId": 606,
+        "secondaryTopicId": 700,
+        "factIds": 700,
+        "argument": 700,
+        "acknowledgementFactId": 700,
+        "offerDraft": 616,
+        "targetOfferId": 700
+      },
+      "close_attempt": {
+        "primaryTopicId": 500,
+        "secondaryTopicId": 500,
+        "factIds": 488,
+        "argument": 500,
+        "acknowledgementFactId": 488,
+        "offerDraft": 500,
+        "targetOfferId": 0
+      },
+      "concession": {
+        "primaryTopicId": 900,
+        "secondaryTopicId": 900,
+        "factIds": 900,
+        "argument": 900,
+        "acknowledgementFactId": 900,
+        "offerDraft": 98,
+        "targetOfferId": 900
+      },
+      "counter_offer": {
+        "primaryTopicId": 1000,
+        "secondaryTopicId": 1000,
+        "factIds": 1000,
+        "argument": 1000,
+        "acknowledgementFactId": 1000,
+        "offerDraft": 100,
+        "targetOfferId": 0
+      },
+      "empathy": {
+        "primaryTopicId": 267,
+        "secondaryTopicId": 500,
+        "factIds": 244,
+        "argument": 500,
+        "acknowledgementFactId": 244,
+        "offerDraft": 500,
+        "targetOfferId": 500
+      },
+      "objection": {
+        "primaryTopicId": 55,
+        "secondaryTopicId": 900,
+        "factIds": 900,
+        "argument": 900,
+        "acknowledgementFactId": 900,
+        "offerDraft": 900,
+        "targetOfferId": 900
+      },
+      "offer": {
+        "primaryTopicId": 1200,
+        "secondaryTopicId": 1200,
+        "factIds": 1200,
+        "argument": 1200,
+        "acknowledgementFactId": 1200,
+        "offerDraft": 107,
+        "targetOfferId": 1200
+      },
+      "pressure": {
+        "primaryTopicId": 28,
+        "secondaryTopicId": 600,
+        "factIds": 600,
+        "argument": 600,
+        "acknowledgementFactId": 600,
+        "offerDraft": 600,
+        "targetOfferId": 600
+      },
+      "probe_interest": {
+        "primaryTopicId": 36,
+        "secondaryTopicId": 700,
+        "factIds": 700,
+        "argument": 700,
+        "acknowledgementFactId": 700,
+        "offerDraft": 700,
+        "targetOfferId": 700
+      },
+      "reveal_information": {
+        "primaryTopicId": 157,
+        "secondaryTopicId": 600,
+        "factIds": 462,
+        "argument": 600,
+        "acknowledgementFactId": 600,
+        "offerDraft": 600,
+        "targetOfferId": 600
+      },
+      "walk_away": {
+        "primaryTopicId": 600,
+        "secondaryTopicId": 600,
+        "factIds": 600,
+        "argument": 600,
+        "acknowledgementFactId": 600,
+        "offerDraft": 600,
+        "targetOfferId": 600
+      }
+    },
+    "field_nonnull_counts": {
+      "primaryTopicId": 4529,
+      "secondaryTopicId": 115,
+      "factIds": 1306,
+      "argument": 900,
+      "acknowledgementFactId": 268,
+      "offerDraft": 2879,
+      "targetOfferId": 1500
+    },
+    "contrast_pairs": 108,
+    "surface_families": 203,
+    "semantic_families": 203,
+    "identifier_styles": {
+      "descriptive": 3361,
+      "opaque": 3339,
+      "semi_opaque": 3300
+    }
+  },
+  "validation": {
+    "rows": 10304,
+    "schema_and_semantic_valid": 10304,
+    "errors": [],
+    "unknownIds": [],
+    "duplicates": {},
+    "groupLeakage": [],
+    "counts": {
+      "train": 8000,
+      "dev": 1000,
+      "internal_test": 1000,
+      "tuning_eval": 304
+    }
+  },
+  "verification": {
+    "focused_tests_passed": 28,
+    "focused_tests_failed": 0,
+    "authoritative_zod_rows_validated": 10304,
+    "authoritative_zod_contexts_validated": 180,
+    "schema_parity": true,
+    "byte_reproduction": true,
+    "compiler_roundtrip_records": 1000,
+    "utf16_node_slice_validation": true,
+    "privacy_schema_catalog_scan": "PASS",
+    "no_new_dependencies_installed": true,
+    "application_tests_repeated": false,
+    "application_test_rationale": "No application source changed; full protected-file hashes preserved."
+  },
+  "splits": {
+    "method": "Whole semantic and surface recipe groups, all contrast siblings together; additional disjoint TRAIN/DEV/INTERNAL_TEST contexts.",
+    "context_counts": {
+      "dev": 20,
+      "train": 140,
+      "internal_test": 20
+    },
+    "group_leakage": [],
+    "internal_test_locked": true,
+    "internal_test_sha256": "ba929ff5528325ce2abe61b4861f6b0dc459c79b7d15d9fc6976c395b4a09f03",
+    "tuning_eval": {
+      "path": "evals/local-qwen/dev-ru-v1.json",
+      "TUNING_EVAL_ALLOWED": true,
+      "count": 304,
+      "language_families_independent_from_train": true,
+      "contexts": "DEV contexts only; no training contexts",
+      "coverage": {
+        "negation": 139,
+        "no_plausible_topic_id": 34,
+        "ambiguity": 62,
+        "commitment": 112,
+        "counter_offer_inheritance": 27,
+        "conditional_offer": 21,
+        "prompt_injection": 24
+      }
+    },
+    "final_holdout": {
+      "path": "evals/local-qwen/a01-a16.json",
+      "unchanged": true,
+      "training_exposure": "NONE",
+      "labels_used_for_generation": false,
+      "individual_failures_used_for_generation": false,
+      "raw_model_outputs_inspected": false,
+      "usage": "Hash and text-only lexical exclusion audit after authoring snapshot; no inference or prompt tuning."
+    }
+  },
+  "holdout_similarity": {
+    "holdout_sha256": "c32e0b688d0f0a3d7eda547c60cffdcef74c15c95ecfa941e7741adc7be89dc1",
+    "thresholds": {
+      "exact": true,
+      "token_jaccard": 0.6,
+      "token_bigram_jaccard": 0.38,
+      "character_ratio": 0.78
+    },
+    "comparisons": 164864,
+    "exact_matches": 0,
+    "flagged": [],
+    "nearest_per_holdout": [
+      {
+        "rowId": "ru-6b7402cad75d85c5",
+        "split": "train",
+        "family": "train.clarification.absent_inheritance",
+        "holdoutId": "A01",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.0,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.442953
+        }
+      },
+      {
+        "rowId": "ru-68350af42c354cda",
+        "split": "train",
+        "family": "train.probe_interest.concern",
+        "holdoutId": "A02",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.230769,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.539326
+        }
+      },
+      {
+        "rowId": "ru-ed338f6aa3647e7e",
+        "split": "train",
+        "family": "train.ask_question.timing",
+        "holdoutId": "A03",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.0,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.431034
+        }
+      },
+      {
+        "rowId": "ru-3d7a1ef6ae77af63",
+        "split": "train",
+        "family": "train.offer.business",
+        "holdoutId": "A04",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.076923,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.440678
+        }
+      },
+      {
+        "rowId": "ru-96e8f7f8459bf38f",
+        "split": "train",
+        "family": "train.probe_interest.reason",
+        "holdoutId": "A05",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.0,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.444444
+        }
+      },
+      {
+        "rowId": "ru-592d43de27212b3f",
+        "split": "train",
+        "family": "train.counter_offer.inherit_all",
+        "holdoutId": "A06",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.0,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.45
+        }
+      },
+      {
+        "rowId": "ru-89d3baf5d400fd75",
+        "split": "train",
+        "family": "train.ask_question.procedure",
+        "holdoutId": "A07",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.0625,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.516667
+        }
+      },
+      {
+        "rowId": "ru-fd5475c729556044",
+        "split": "train",
+        "family": "train.pressure.personal",
+        "holdoutId": "A08",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.125,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.528
+        }
+      },
+      {
+        "rowId": "ru-19faf0896f4d544f",
+        "split": "train",
+        "family": "train.objection.reject",
+        "holdoutId": "A09",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.111111,
+          "token_bigram_jaccard": 0.058824,
+          "character_ratio": 0.441176
+        }
+      },
+      {
+        "rowId": "ru-5d1fd0da39da92f2",
+        "split": "train",
+        "family": "contrast.feeling_fact",
+        "holdoutId": "A10",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.071429,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.465116
+        }
+      },
+      {
+        "rowId": "ru-c31bcd653de9a53d",
+        "split": "train",
+        "family": "train.probe_interest.priority",
+        "holdoutId": "A11",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.058824,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.408163
+        }
+      },
+      {
+        "rowId": "ru-b925ed6bd4515199",
+        "split": "dev",
+        "family": "dev.clarification.reference",
+        "holdoutId": "A12",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.125,
+          "token_bigram_jaccard": 0.04,
+          "character_ratio": 0.442857
+        }
+      },
+      {
+        "rowId": "ru-0dde16685d701cae",
+        "split": "train",
+        "family": "contrast.question_need",
+        "holdoutId": "A13",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.0,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.423529
+        }
+      },
+      {
+        "rowId": "ru-47b5a1247e533187",
+        "split": "train",
+        "family": "train.probe_interest.motivation",
+        "holdoutId": "A14",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.0,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.463768
+        }
+      },
+      {
+        "rowId": "ru-1d03b769220b43d2",
+        "split": "train",
+        "family": "train.walk_away.closed",
+        "holdoutId": "A15",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.058824,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.446043
+        }
+      },
+      {
+        "rowId": "ru-fcc67820ffb4099a",
+        "split": "tuning_eval",
+        "family": "tuning_eval.clarification.inject_eval",
+        "holdoutId": "A16",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.0,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.423077
+        }
+      }
+    ],
+    "top_family_neighbors": [
+      {
+        "rowId": "ru-68350af42c354cda",
+        "split": "train",
+        "family": "train.probe_interest.concern",
+        "holdoutId": "A02",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.230769,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.539326
+        }
+      },
+      {
+        "rowId": "ru-fd5475c729556044",
+        "split": "train",
+        "family": "train.pressure.personal",
+        "holdoutId": "A08",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.125,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.528
+        }
+      },
+      {
+        "rowId": "ru-e78989b9a0b916e8",
+        "split": "train",
+        "family": "train.probe_interest.reason",
+        "holdoutId": "A02",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.153846,
+          "token_bigram_jaccard": 0.083333,
+          "character_ratio": 0.52381
+        }
+      },
+      {
+        "rowId": "ru-223d2ae5271cc1c0",
+        "split": "train",
+        "family": "train.probe_interest.tradeoff",
+        "holdoutId": "A02",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.25,
+          "token_bigram_jaccard": 0.125,
+          "character_ratio": 0.517857
+        }
+      },
+      {
+        "rowId": "ru-89d3baf5d400fd75",
+        "split": "train",
+        "family": "train.ask_question.procedure",
+        "holdoutId": "A07",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.0625,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.516667
+        }
+      },
+      {
+        "rowId": "ru-05ed066b09fbe297",
+        "split": "train",
+        "family": "train.offer.business",
+        "holdoutId": "A07",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.035714,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.474747
+        }
+      },
+      {
+        "rowId": "ru-5d1fd0da39da92f2",
+        "split": "train",
+        "family": "contrast.feeling_fact",
+        "holdoutId": "A10",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.071429,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.465116
+        }
+      },
+      {
+        "rowId": "ru-47b5a1247e533187",
+        "split": "train",
+        "family": "train.probe_interest.motivation",
+        "holdoutId": "A14",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.0,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.463768
+        }
+      },
+      {
+        "rowId": "ru-268a389c443dbd39",
+        "split": "internal_test",
+        "family": "internal_test.probe_interest.success",
+        "holdoutId": "A07",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.090909,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.45122
+        }
+      },
+      {
+        "rowId": "ru-592d43de27212b3f",
+        "split": "train",
+        "family": "train.counter_offer.inherit_all",
+        "holdoutId": "A06",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.0,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.45
+        }
+      },
+      {
+        "rowId": "ru-cbe401f032efc7c2",
+        "split": "train",
+        "family": "train.counter_offer.inherit_except",
+        "holdoutId": "A06",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.0,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.448276
+        }
+      },
+      {
+        "rowId": "ru-dc97f4ce20520b3e",
+        "split": "train",
+        "family": "contrast.offer_concession",
+        "holdoutId": "A07",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.076923,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.447761
+        }
+      },
+      {
+        "rowId": "ru-c6408d28e6916832",
+        "split": "train",
+        "family": "contrast.threat_boundary",
+        "holdoutId": "A07",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.111111,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.447552
+        }
+      },
+      {
+        "rowId": "ru-1b90ea64d63bbb29",
+        "split": "train",
+        "family": "train.objection.firm",
+        "holdoutId": "A07",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.15,
+          "token_bigram_jaccard": 0.05,
+          "character_ratio": 0.447205
+        }
+      },
+      {
+        "rowId": "ru-81bc4b208758e504",
+        "split": "train",
+        "family": "train.counter_offer.sole_change",
+        "holdoutId": "A06",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.05,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.446043
+        }
+      },
+      {
+        "rowId": "ru-1d03b769220b43d2",
+        "split": "train",
+        "family": "train.walk_away.closed",
+        "holdoutId": "A15",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.058824,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.446043
+        }
+      },
+      {
+        "rowId": "ru-264fb35b4f2510dd",
+        "split": "train",
+        "family": "train.counter_offer.restated",
+        "holdoutId": "A06",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.117647,
+          "token_bigram_jaccard": 0.055556,
+          "character_ratio": 0.444444
+        }
+      },
+      {
+        "rowId": "ru-6b7402cad75d85c5",
+        "split": "train",
+        "family": "train.clarification.absent_inheritance",
+        "holdoutId": "A01",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.0,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.442953
+        }
+      },
+      {
+        "rowId": "ru-b925ed6bd4515199",
+        "split": "dev",
+        "family": "dev.clarification.reference",
+        "holdoutId": "A12",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.125,
+          "token_bigram_jaccard": 0.04,
+          "character_ratio": 0.442857
+        }
+      },
+      {
+        "rowId": "ru-4047c2f1d8d7a433",
+        "split": "train",
+        "family": "train.ask_question.two",
+        "holdoutId": "A07",
+        "similarity": {
+          "exact": false,
+          "token_jaccard": 0.111111,
+          "token_bigram_jaccard": 0.0,
+          "character_ratio": 0.441379
+        }
+      }
+    ],
+    "expected_labels_used": false,
+    "raw_model_outputs_read": false,
+    "limitation": "Lexical checks cannot prove absence of all semantic paraphrases; nearest pairs require manual review."
+  },
+  "duplicates": {
+    "scope": "All main/eval rows as queries; bounded 24 within/all + 24 cross-split neighbors from eight rare bigrams",
+    "inspected_candidate_pairs": 362636,
+    "unique_text_count": 8341,
+    "repeated_text_occurrences": 1963,
+    "exact_text_context_duplicates": 0,
+    "duplicates_by_intent": {
+      "argument": {
+        "rows": 916,
+        "unique_texts": 649,
+        "repeated_text_occurrences": 267
+      },
+      "ask_question": {
+        "rows": 916,
+        "unique_texts": 780,
+        "repeated_text_occurrences": 136
+      },
+      "clarification": {
+        "rows": 748,
+        "unique_texts": 530,
+        "repeated_text_occurrences": 218
+      },
+      "close_attempt": {
+        "rows": 516,
+        "unique_texts": 199,
+        "repeated_text_occurrences": 317
+      },
+      "concession": {
+        "rows": 916,
+        "unique_texts": 883,
+        "repeated_text_occurrences": 33
+      },
+      "counter_offer": {
+        "rows": 1040,
+        "unique_texts": 940,
+        "repeated_text_occurrences": 100
+      },
+      "empathy": {
+        "rows": 516,
+        "unique_texts": 430,
+        "repeated_text_occurrences": 86
+      },
+      "objection": {
+        "rows": 932,
+        "unique_texts": 767,
+        "repeated_text_occurrences": 165
+      },
+      "offer": {
+        "rows": 1240,
+        "unique_texts": 1199,
+        "repeated_text_occurrences": 41
+      },
+      "pressure": {
+        "rows": 616,
+        "unique_texts": 502,
+        "repeated_text_occurrences": 114
+      },
+      "probe_interest": {
+        "rows": 716,
+        "unique_texts": 581,
+        "repeated_text_occurrences": 135
+      },
+      "reveal_information": {
+        "rows": 616,
+        "unique_texts": 523,
+        "repeated_text_occurrences": 93
+      },
+      "walk_away": {
+        "rows": 616,
+        "unique_texts": 358,
+        "repeated_text_occurrences": 258
+      }
+    },
+    "normalized_texts_shared_across_splits": 0,
+    "nearest_similarity_distribution": {
+      "0.70-0.85": 2961,
+      "0.50-0.70": 1117,
+      ">=0.95": 3558,
+      "<0.50": 62,
+      "0.85-0.95": 2606
+    },
+    "cross_split_nearest_distribution": {
+      "<0.50": 9778,
+      "0.50-0.70": 526
+    },
+    "top_cross_split_pairs": [
+      {
+        "leftId": "ru-2a5e52971b9a5a47",
+        "rightId": "ru-559a812d528e5bfb",
+        "token_bigram_jaccard": 0.3,
+        "character_trigram_jaccard": 0.697987,
+        "sameContext": false,
+        "sameFamily": false
+      }
+    ],
+    "limitation": "Candidate search is bounded, not exhaustive all-pairs semantic equivalence. Repeated text in distinct public contexts is retained."
+  },
+  "quality_review": {
+    "status": "PASS",
+    "reviewer": "Codex project author; not independent human annotators",
+    "selection": {
+      "train": [
+        "ru-7d8d119c06697119",
+        "ru-cb3672994aac752e",
+        "ru-ce624dd35e9ae216",
+        "ru-7b0c8e9cccb43267",
+        "ru-f362ec5f238f1d77",
+        "ru-13eb61c6e8c8a0be",
+        "ru-55341d66937d835a",
+        "ru-c07e286cf8b4ca95",
+        "ru-07509963ae205ac9",
+        "ru-c1d600988ced6729",
+        "ru-e10e80e64ac7cf76",
+        "ru-873b073ebeae79e2",
+        "ru-1bcab49a5893e51f",
+        "ru-9f8e3f8102d2f45a",
+        "ru-9ff6d91512f5cd5e",
+        "ru-22cac7483a550fbc",
+        "ru-e475563a9cb9f0cd",
+        "ru-75e5786bbc0ca399",
+        "ru-bc792ed942f34a59",
+        "ru-239eab8db969ec67",
+        "ru-9e1dc68c4af07ec6",
+        "ru-a4b71ce6f58143ce",
+        "ru-32d9e59ae278267a",
+        "ru-0183f3c11a1645a0",
+        "ru-5a5da8d60b416d02"
+      ],
+      "dev": [
+        "ru-d9c9d413fc4ca1ae",
+        "ru-8f05d72b2d9ef7bc",
+        "ru-58160c8467300dd2",
+        "ru-af74675df0c3274e",
+        "ru-ed5bef0c8fb8428a",
+        "ru-72f1eed2fed615b7",
+        "ru-299256199422891a",
+        "ru-79650b9adf7e27c4",
+        "ru-83b6433d98e777e8",
+        "ru-1b46538191203fc7",
+        "ru-56ddcc9fc348a025",
+        "ru-bc8149050165da05",
+        "ru-e1f324fa299ba520",
+        "ru-79c582207da5117e",
+        "ru-8f221bf75264ba2c",
+        "ru-4c3f2287b8ac3ae8",
+        "ru-fe215f4ba3972db3",
+        "ru-21bb06b2783a9a32",
+        "ru-14d4785c61968dfb",
+        "ru-a937574fd780b6ec",
+        "ru-a3caacbc7e255bd9",
+        "ru-a6a554b4a8a16d5f",
+        "ru-f48e7268d2522d9d",
+        "ru-f02c15c384b4f6f1",
+        "ru-d19429a27ce53be3"
+      ],
+      "internal_test": [
+        "ru-f83a7899d258017b",
+        "ru-2ee40f48c7effce1",
+        "ru-4bce6373ef34a9ee",
+        "ru-33f8b0d25d8be4ad",
+        "ru-436ef595e9987223",
+        "ru-777c794faeeb1313",
+        "ru-b744f804b06f2fce",
+        "ru-e5f8b44ff99722db",
+        "ru-218beb76cdcbef86",
+        "ru-8c9ff1c99aaab8a1",
+        "ru-27c57ebb20a0b1c1",
+        "ru-235f8cde1b213fd3",
+        "ru-c5af378b6eb96334",
+        "ru-b1e56b5f28b91e6f",
+        "ru-b4c5495355687506",
+        "ru-65dd23a42c94c111",
+        "ru-0a6d31e54c6731bb",
+        "ru-72bac78c890d53ce",
+        "ru-6a6721b695fb9a3f",
+        "ru-d46eac8fbb8d27f2",
+        "ru-2f06715cc08a1037",
+        "ru-2290c484478725af",
+        "ru-54fa61cc3aa52f01",
+        "ru-ea55e89dfe3f2a51",
+        "ru-86447437b9dcc5fe"
+      ],
+      "intent:argument": [
+        "ru-c936c15d1f28ca94",
+        "ru-8ab7803f97a239e7",
+        "ru-ba9d30fc0c2e06d0",
+        "ru-f6b58aec9f694384",
+        "ru-33a2c3cd1a11bb5d"
+      ],
+      "intent:ask_question": [
+        "ru-ccbffbfabfa8ce57",
+        "ru-93816055d015daea",
+        "ru-b8dfbbff1476df82",
+        "ru-9455f340b467a5b7",
+        "ru-ec3eff8305a1f1c2"
+      ],
+      "intent:clarification": [
+        "ru-62bbd36b11067858",
+        "ru-8d79bef85b56a3ea",
+        "ru-86447437b9dcc5fe",
+        "ru-00c4cedd7b9bc234",
+        "ru-894979c381870c84"
+      ],
+      "intent:close_attempt": [
+        "ru-e21227029ae9944c",
+        "ru-4e003ede5f862aea",
+        "ru-8e835af3b80f3671",
+        "ru-9bc81cf39be51e60",
+        "ru-1f4b1c0999525723"
+      ],
+      "intent:concession": [
+        "ru-30f8554ef11bbfa4",
+        "ru-28b5c0e01a5a39e7",
+        "ru-4a732e9145b6e88a",
+        "ru-c0273f898f0e470c",
+        "ru-6981a83295f2ece3"
+      ],
+      "intent:counter_offer": [
+        "ru-d13f625c9ef52717",
+        "ru-ed8f596d406728b4",
+        "ru-53855ea22d856cc0",
+        "ru-dc5ee43a9edebdbf",
+        "ru-78c95d1352106fe8"
+      ],
+      "intent:empathy": [
+        "ru-021a8b2625ad211f",
+        "ru-aae449c75711f373",
+        "ru-e685911345be6771",
+        "ru-8afb91659a23c11b",
+        "ru-7a571c7a24b64419"
+      ],
+      "intent:objection": [
+        "ru-710be598f91699b5",
+        "ru-bb13a965935baa4a",
+        "ru-62f30ed1709fd168",
+        "ru-a464d96a68a30d4d",
+        "ru-46a49fde8fe223dc"
+      ],
+      "intent:offer": [
+        "ru-3f3fa0ad0ccddada",
+        "ru-807ffd2c1ba3ea62",
+        "ru-d926200ff4e18c11",
+        "ru-edc3283b017c9ab6",
+        "ru-1fb83be79a42e4f4"
+      ],
+      "intent:pressure": [
+        "ru-8623b06ca9f068e4",
+        "ru-ae0e04b4ca5574ba",
+        "ru-2a794d6482857c0a",
+        "ru-dce9fa232a5651ce",
+        "ru-994f45a1c45b5220"
+      ],
+      "intent:probe_interest": [
+        "ru-7805b5e01aad6c24",
+        "ru-32bd59bb6bc70430",
+        "ru-382757f5fa4c08fc",
+        "ru-cd35b31be8cd60d7",
+        "ru-5f21bd9cb8748550"
+      ],
+      "intent:reveal_information": [
+        "ru-90e738c6504793dd",
+        "ru-02a46960f1741236",
+        "ru-ba9925aacff94aff",
+        "ru-1e8b99c68ce5d894",
+        "ru-42de99009a3648e4"
+      ],
+      "intent:walk_away": [
+        "ru-3af8576ed6841fb1",
+        "ru-e5877cd046cc3447",
+        "ru-2306047b4aa7da14",
+        "ru-cb5426a580316616",
+        "ru-d3084c5e5bb6fd7d"
+      ],
+      "safety_families": [
+        "ru-91491d41b37a5ed6",
+        "ru-98ee7a52aa616fa4",
+        "ru-d6b13fa5a3fdb805",
+        "ru-8e3a858161926273",
+        "ru-786cea07f5123ec7",
+        "ru-e6d52b456bfe3282",
+        "ru-3d9ec6a823f1d964",
+        "ru-23fc37b744690f72",
+        "ru-d46eac8fbb8d27f2",
+        "ru-5f9e24740c0e9974",
+        "ru-51d2d14229541616",
+        "ru-c1e96c5b56701b62",
+        "ru-dd7eb5566cdb0e2c",
+        "ru-920943a69860ead2",
+        "ru-be9eeeb52d78dab2"
+      ]
+    },
+    "unique_sampled_records": 153,
+    "reviewed_dimensions": [
+      "Russian meaning and naturalness",
+      "intent and commitment cue",
+      "public ID/term binding",
+      "negation and alternatives",
+      "condition and inheritance",
+      "fact versus acknowledgement versus argument",
+      "evidence support",
+      "privacy"
+    ],
+    "train_random": 25,
+    "dev_random": 25,
+    "internal_test_random": 25,
+    "per_intent": 5,
+    "safety_families": 15,
+    "holdout_nearest_per_case_review": [
+      {
+        "holdoutId": "A01",
+        "rowId": "ru-6b7402cad75d85c5",
+        "decision": "retain independently authored construction",
+        "reason": "Nearest candidate is a missing-reference edit in project scope, not a logistics availability question."
+      },
+      {
+        "holdoutId": "A02",
+        "rowId": "ru-68350af42c354cda",
+        "decision": "retain independently authored construction",
+        "reason": "Broad preference language is required by the contract. Concern, causal motivation and reciprocal tradeoff constructions were authored from separate semantic recipes before holdout text access; they are not a rewritten priority question. Same public topic alone is not derivation."
+      },
+      {
+        "holdoutId": "A03",
+        "rowId": "ru-ed338f6aa3647e7e",
+        "decision": "retain independently authored construction",
+        "reason": "Nearest candidate asks when information will be available; it contains no materials/prepayment argument."
+      },
+      {
+        "holdoutId": "A04",
+        "rowId": "ru-3d7a1ef6ae77af63",
+        "decision": "retain independently authored construction",
+        "reason": "Independently generated package uses a different public catalogue and calendar delivery choices. No holdout package or value was used as a seed."
+      },
+      {
+        "holdoutId": "A05",
+        "rowId": "ru-96e8f7f8459bf38f",
+        "decision": "retain independently authored construction",
+        "reason": "Nearest candidate asks about motivation; it does not reproduce the compound price alternatives/negated prepayment construction."
+      },
+      {
+        "holdoutId": "A06",
+        "rowId": "ru-592d43de27212b3f",
+        "decision": "retain independently authored construction",
+        "reason": "Explicit single-term editing and retained terms are required general contract operations. Construction, issue marking and active public fixture were authored from that rule before audit. This is necessary task overlap, with no shared normalized tokens in the nearest pair; not a number-edited descendant."
+      },
+      {
+        "holdoutId": "A07",
+        "rowId": "ru-89d3baf5d400fd75",
+        "decision": "retain independently authored construction",
+        "reason": "Highest neighbour asks about a procedure, not a conditional concession. Other neighbours differ in conditions or concern whole independently generated packages."
+      },
+      {
+        "holdoutId": "A08",
+        "rowId": "ru-fd5475c729556044",
+        "decision": "retain independently authored construction",
+        "reason": "Both contain a personal threat, as required by the frozen prompt. The candidate demands agreement on a named service issue and threatens negotiator replacement; the holdout targets pricing and employment. The construction was independently authored, not derived."
+      },
+      {
+        "holdoutId": "A09",
+        "rowId": "ru-19faf0896f4d544f",
+        "decision": "retain independently authored construction",
+        "reason": "Candidate rejects one catalogue option while explicitly continuing discussion; it does not assert an economic limit and alternative supplier."
+      },
+      {
+        "holdoutId": "A10",
+        "rowId": "ru-5d1fd0da39da92f2",
+        "decision": "retain independently authored construction",
+        "reason": "Candidate expresses concern/empathy without the holdout factual workload content or acknowledgement binding."
+      },
+      {
+        "holdoutId": "A11",
+        "rowId": "ru-c31bcd653de9a53d",
+        "decision": "retain independently authored construction",
+        "reason": "Candidate probes desired outcomes on a topic; no workload-feasibility assertion or deadline is copied."
+      },
+      {
+        "holdoutId": "A12",
+        "rowId": "ru-b925ed6bd4515199",
+        "decision": "retain independently authored construction",
+        "reason": "Candidate has an unresolved offer referent, rather than asking the meaning of a quantified delivery term."
+      },
+      {
+        "holdoutId": "A13",
+        "rowId": "ru-0dde16685d701cae",
+        "decision": "retain independently authored construction",
+        "reason": "Candidate requests catalogue options in project scope; no alternative-supplier assertion is reproduced."
+      },
+      {
+        "holdoutId": "A14",
+        "rowId": "ru-47b5a1247e533187",
+        "decision": "retain independently authored construction",
+        "reason": "Nearest lexical candidate asks about motivation; acceptance examples come from independent explicit current-package constructions."
+      },
+      {
+        "holdoutId": "A15",
+        "rowId": "ru-1d03b769220b43d2",
+        "decision": "retain independently authored construction",
+        "reason": "Final exit is a required intent. The candidate closes a named fictional rent discussion, with separately authored discourse and context; no holdout wording or conditional disagreement prefix is used."
+      },
+      {
+        "holdoutId": "A16",
+        "rowId": "ru-fcc67820ffb4099a",
+        "decision": "retain independently authored construction",
+        "reason": "Candidate requests a fabricated strategy score; it does not reproduce the combined instruction/hidden-price/numeric-score payload. All safety families were authored independently and targets contain no private fields."
+      }
+    ],
+    "holdout_top_family_review": [
+      {
+        "rowId": "ru-68350af42c354cda",
+        "holdoutId": "A02",
+        "decision": "retain",
+        "reason": "Broad preference language is required by the contract. Concern, causal motivation and reciprocal tradeoff constructions were authored from separate semantic recipes before holdout text access; they are not a rewritten priority question. Same public topic alone is not derivation."
+      },
+      {
+        "rowId": "ru-fd5475c729556044",
+        "holdoutId": "A08",
+        "decision": "retain",
+        "reason": "Both contain a personal threat, as required by the frozen prompt. The candidate demands agreement on a named service issue and threatens negotiator replacement; the holdout targets pricing and employment. The construction was independently authored, not derived."
+      },
+      {
+        "rowId": "ru-e78989b9a0b916e8",
+        "holdoutId": "A02",
+        "decision": "retain",
+        "reason": "Broad preference language is required by the contract. Concern, causal motivation and reciprocal tradeoff constructions were authored from separate semantic recipes before holdout text access; they are not a rewritten priority question. Same public topic alone is not derivation."
+      },
+      {
+        "rowId": "ru-223d2ae5271cc1c0",
+        "holdoutId": "A02",
+        "decision": "retain",
+        "reason": "Broad preference language is required by the contract. Concern, causal motivation and reciprocal tradeoff constructions were authored from separate semantic recipes before holdout text access; they are not a rewritten priority question. Same public topic alone is not derivation."
+      },
+      {
+        "rowId": "ru-89d3baf5d400fd75",
+        "holdoutId": "A07",
+        "decision": "retain",
+        "reason": "Highest neighbour asks about a procedure, not a conditional concession. Other neighbours differ in conditions or concern whole independently generated packages."
+      },
+      {
+        "rowId": "ru-05ed066b09fbe297",
+        "holdoutId": "A07",
+        "decision": "retain",
+        "reason": "Highest neighbour asks about a procedure, not a conditional concession. Other neighbours differ in conditions or concern whole independently generated packages."
+      },
+      {
+        "rowId": "ru-5d1fd0da39da92f2",
+        "holdoutId": "A10",
+        "decision": "retain",
+        "reason": "Candidate expresses concern/empathy without the holdout factual workload content or acknowledgement binding."
+      },
+      {
+        "rowId": "ru-47b5a1247e533187",
+        "holdoutId": "A14",
+        "decision": "retain",
+        "reason": "Nearest lexical candidate asks about motivation; acceptance examples come from independent explicit current-package constructions."
+      },
+      {
+        "rowId": "ru-268a389c443dbd39",
+        "holdoutId": "A07",
+        "decision": "retain",
+        "reason": "Highest neighbour asks about a procedure, not a conditional concession. Other neighbours differ in conditions or concern whole independently generated packages."
+      },
+      {
+        "rowId": "ru-592d43de27212b3f",
+        "holdoutId": "A06",
+        "decision": "retain",
+        "reason": "Explicit single-term editing and retained terms are required general contract operations. Construction, issue marking and active public fixture were authored from that rule before audit. This is necessary task overlap, with no shared normalized tokens in the nearest pair; not a number-edited descendant."
+      },
+      {
+        "rowId": "ru-cbe401f032efc7c2",
+        "holdoutId": "A06",
+        "decision": "retain",
+        "reason": "Explicit single-term editing and retained terms are required general contract operations. Construction, issue marking and active public fixture were authored from that rule before audit. This is necessary task overlap, with no shared normalized tokens in the nearest pair; not a number-edited descendant."
+      },
+      {
+        "rowId": "ru-dc97f4ce20520b3e",
+        "holdoutId": "A07",
+        "decision": "retain",
+        "reason": "Highest neighbour asks about a procedure, not a conditional concession. Other neighbours differ in conditions or concern whole independently generated packages."
+      },
+      {
+        "rowId": "ru-c6408d28e6916832",
+        "holdoutId": "A07",
+        "decision": "retain",
+        "reason": "Highest neighbour asks about a procedure, not a conditional concession. Other neighbours differ in conditions or concern whole independently generated packages."
+      },
+      {
+        "rowId": "ru-1b90ea64d63bbb29",
+        "holdoutId": "A07",
+        "decision": "retain",
+        "reason": "Highest neighbour asks about a procedure, not a conditional concession. Other neighbours differ in conditions or concern whole independently generated packages."
+      },
+      {
+        "rowId": "ru-81bc4b208758e504",
+        "holdoutId": "A06",
+        "decision": "retain",
+        "reason": "Explicit single-term editing and retained terms are required general contract operations. Construction, issue marking and active public fixture were authored from that rule before audit. This is necessary task overlap, with no shared normalized tokens in the nearest pair; not a number-edited descendant."
+      },
+      {
+        "rowId": "ru-1d03b769220b43d2",
+        "holdoutId": "A15",
+        "decision": "retain",
+        "reason": "Final exit is a required intent. The candidate closes a named fictional rent discussion, with separately authored discourse and context; no holdout wording or conditional disagreement prefix is used."
+      },
+      {
+        "rowId": "ru-264fb35b4f2510dd",
+        "holdoutId": "A06",
+        "decision": "retain",
+        "reason": "Explicit single-term editing and retained terms are required general contract operations. Construction, issue marking and active public fixture were authored from that rule before audit. This is necessary task overlap, with no shared normalized tokens in the nearest pair; not a number-edited descendant."
+      },
+      {
+        "rowId": "ru-6b7402cad75d85c5",
+        "holdoutId": "A01",
+        "decision": "retain",
+        "reason": "Nearest candidate is a missing-reference edit in project scope, not a logistics availability question."
+      },
+      {
+        "rowId": "ru-b925ed6bd4515199",
+        "holdoutId": "A12",
+        "decision": "retain",
+        "reason": "Candidate has an unresolved offer referent, rather than asking the meaning of a quantified delivery term."
+      },
+      {
+        "rowId": "ru-4047c2f1d8d7a433",
+        "holdoutId": "A07",
+        "decision": "retain",
+        "reason": "Highest neighbour asks about a procedure, not a conditional concession. Other neighbours differ in conditions or concern whole independently generated packages."
+      }
+    ],
+    "cross_split_review": [
+      {
+        "leftId": "ru-2a5e52971b9a5a47",
+        "rightId": "ru-559a812d528e5bfb",
+        "token_bigram_jaccard": 0.3,
+        "character_trigram_jaccard": 0.697987,
+        "sameContext": false,
+        "sameFamily": false,
+        "decision": "retain",
+        "reason": "One utterance makes the concession conditional on a reciprocal term; the other is unconditional. Different contexts and independently authored families; targets preserve this material distinction."
+      }
+    ],
+    "removed_surface_families": [
+      {
+        "family": "dev.offer.memo",
+        "reason": "Three nearest cross-split pairs reused the same whole package under closely related request frames. Whole family quarantined; quota reassigned within DEV; thresholds unchanged."
+      }
+    ],
+    "generator_failures_reviewed": [
+      {
+        "kind": "duplicate_text_context",
+        "count": 1,
+        "ids": [
+          "ru-0856620c1746cc26",
+          "ru-84f6998449aae8e8"
+        ],
+        "cause": "contrast context stride revisited one context",
+        "fix": "coprime stride 11; all pairs regenerated"
+      },
+      {
+        "kind": "duplicate_id",
+        "count": 21,
+        "cause": "two internal concession recipes reused a family name",
+        "fix": "unique null_draft recipe name and fail-fast duplicate-family guard",
+        "failed_ids": [
+          "ru-f7b4084f5f6c4473",
+          "ru-23dc2608db2834da",
+          "ru-b4e8fc1fdf453f44",
+          "ru-2f5e856fcbe3f9fd",
+          "ru-0411777465699b00",
+          "ru-3115a977066ec90b",
+          "ru-180744a6a94b4865",
+          "ru-05d812736819c30c",
+          "ru-09969fdd0ba5b586",
+          "ru-0e0cf983db6df160",
+          "ru-470b80a4326eb4a7",
+          "ru-fb9e8f2b70e089a4",
+          "ru-efd6f1025c142bf3",
+          "ru-7eb442d9ec92e27f",
+          "ru-b65304e732e6169a",
+          "ru-ecc0b77d85e82219",
+          "ru-5233bf48a61cc35b",
+          "ru-6ee9ab9ef36b590d",
+          "ru-5298bcf2c743cdcf",
+          "ru-72fdb52b895b62c1",
+          "ru-f659d7b7e8352ef7"
+        ]
+      },
+      {
+        "kind": "reporting_NameError",
+        "count": 1,
+        "cause": "report used an out-of-scope recipes variable",
+        "fix": "report calls families()"
+      }
+    ],
+    "source_fixes": [
+      "Lowercase sentence starts after comma/colon wrappers",
+      "Bind explicit pressure/empathy topics; keep unlinked fact-only topics null",
+      "Add null-draft and absent-reference explicit-term cases",
+      "Disjoint TRAIN/DEV/INTERNAL_TEST contexts",
+      "Quarantine whole cross-split family, not individual rows"
+    ],
+    "generator_validation_failures_remaining": 0,
+    "individual_generated_rows_edited": false,
+    "limitations": [
+      "Single project-author review; no inter-annotator agreement estimate.",
+      "Synthetic labelled term lists dominate binding examples; not an empirical sample of all Russian negotiation styles.",
+      "Bounded lexical similarity and source isolation cannot mathematically exclude every semantic paraphrase; required task operations necessarily overlap."
+    ]
+  },
+  "token_statistics": {
+    "tokenizer": "existing AlagModels/Qwen3-4B",
+    "weights_opened": false,
+    "network_used": false,
+    "enable_thinking": false,
+    "add_generation_prompt": false,
+    "chat_template_included": true,
+    "sequence": "system + user + assistant completion including chat special tokens",
+    "method": "nearest-rank percentiles; exact tokenization, no truncation",
+    "all": {
+      "count": 10000,
+      "median": 869.0,
+      "p90": 1114,
+      "p95": 1186,
+      "p99": 1245,
+      "max": 1421,
+      "fraction_at_most_1536": 1.0
+    },
+    "by_split": {
+      "train": {
+        "count": 8000,
+        "median": 870.0,
+        "p90": 1126,
+        "p95": 1188,
+        "p99": 1253,
+        "max": 1421,
+        "fraction_at_most_1536": 1.0
+      },
+      "dev": {
+        "count": 1000,
+        "median": 867.0,
+        "p90": 1088,
+        "p95": 1162,
+        "p99": 1213,
+        "max": 1264,
+        "fraction_at_most_1536": 1.0
+      },
+      "internal_test": {
+        "count": 1000,
+        "median": 870.0,
+        "p90": 1084,
+        "p95": 1172,
+        "p99": 1214,
+        "max": 1267,
+        "fraction_at_most_1536": 1.0
+      },
+      "tuning_eval": {
+        "count": 304,
+        "median": 866.0,
+        "p90": 1096,
+        "p95": 1180,
+        "p99": 1245,
+        "max": 1258,
+        "fraction_at_most_1536": 1.0
+      }
+    }
+  },
+  "external_data": {
+    "boundary": "Aggregate linguistic research only; no source dialogue/label conversion, translation or copying.",
+    "patterns": {
+      "method": "Overlapping case-insensitive bounded regex counts; research patterns, not dialogue-act labels",
+      "patterns": {
+        "preference_probing": "\\b(?:what|which).{0,65}\\b(?:prefer|important|need|priority|want)\\b",
+        "bargaining_proposal": "\\b(?:how about|would you|i can offer|i could offer|can we|i propose)\\b",
+        "need_or_reason": "\\b(?:because|i need|we need|due to|so that)\\b",
+        "coordination": "\\b(?:work together|both of us|we can|let us|let\\'s|agreement|agree on)\\b",
+        "concession_structure": "\\b(?:willing to|in return|compromise|instead|if you|in exchange)\\b",
+        "multi_issue_link": "\\b(?:and|but|if|while)\\b.{0,100}\\b(?:and|but|if|while)\\b"
+      },
+      "sources": [
+        {
+          "dataset": "CaSiNo",
+          "source_repository": "https://github.com/kushalchawla/CaSiNo",
+          "revision": "2f6ed4a6a55110152a7699fbaa8150d6036314be",
+          "paper": "https://aclanthology.org/2021.naacl-main.254/",
+          "source_license": "CC-BY-4.0",
+          "raw_sha256": "4f2c4560a0070906ed018c3f0766e35f8f8f31b36274ebf35b608621915744ab",
+          "utterances_scanned": 11919,
+          "categories": {
+            "preference_probing": 449,
+            "bargaining_proposal": 1111,
+            "need_or_reason": 1373,
+            "coordination": 711,
+            "concession_structure": 1053,
+            "multi_issue_link": 2356
+          }
+        },
+        {
+          "dataset": "Job Interview Negotiation",
+          "source_repository": "https://github.com/gucci-j/negotiation-breakdown-detection",
+          "revision": "d4c2bf63b4da95b342fd952065f9ad3e97179134",
+          "paper": "https://aclanthology.org/2021.eacl-main.63/",
+          "source_license": "MIT",
+          "raw_sha256": "989ad5bb86a4c4552e34bfb1af4c31344dd21c9c02900eb218328f3c2126199e",
+          "utterances_scanned": 39636,
+          "categories": {
+            "preference_probing": 406,
+            "bargaining_proposal": 1613,
+            "need_or_reason": 462,
+            "coordination": 949,
+            "concession_structure": 1063,
+            "multi_issue_link": 722
+          }
+        }
+      ],
+      "source_text_stored": false,
+      "source_labels_converted": false,
+      "translations_created": 0,
+      "raw_conversation_ids_stored": false,
+      "influence": "Pattern categories motivated independently authored probing, reason, exchange and multi-issue constructions; no source utterance was shown to the author or copied.",
+      "limitations": "Regexes are coarse linguistic indicators, not exhaustive or gold strategy annotation. Counts may overlap.",
+      "synthetic_license_status": "NOT_ASSIGNED"
+    },
+    "raw_unchanged": true,
+    "attribution_preserved": true
+  },
+  "privacy": {
+    "hidden_fields_in_contexts_or_targets": 0,
+    "unknown_ids": 0,
+    "obvious_identifier_scan_findings": 0,
+    "real_source_personal_fields_copied": false,
+    "method": "Strict schema/public allowlist, synthetic fixture sources and bounded email/phone/address/worker/demographic/personality regex scan.",
+    "limitations": "Bounded scan and project-author sampling are not a comprehensive PII detector or independent annotation campaign."
+  },
+  "integrity": {
+    "before_utc": "2026-09-17T10:52:29.520430+00:00",
+    "after_utc": "2026-09-17T11:35:07.138409+00:00",
+    "unchanged": true,
+    "model_file_inventory": {
+      ".cache/huggingface/.gitignore": {
+        "bytes": 1,
+        "mtime_ns": 1789629359627046900
+      },
+      ".cache/huggingface/CACHEDIR.TAG": {
+        "bytes": 195,
+        "mtime_ns": 1789629359521843100
+      },
+      ".cache/huggingface/download/.gitattributes.metadata": {
+        "bytes": 104,
+        "mtime_ns": 1789629360194955300
+      },
+      ".cache/huggingface/download/config.json.metadata": {
+        "bytes": 103,
+        "mtime_ns": 1789629360130709100
+      },
+      ".cache/huggingface/download/generation_config.json.metadata": {
+        "bytes": 104,
+        "mtime_ns": 1789629360085824700
+      },
+      ".cache/huggingface/download/LICENSE.metadata": {
+        "bytes": 104,
+        "mtime_ns": 1789629360194955300
+      },
+      ".cache/huggingface/download/merges.txt.metadata": {
+        "bytes": 104,
+        "mtime_ns": 1789629360407769000
+      },
+      ".cache/huggingface/download/model-00001-of-00003.safetensors.metadata": {
+        "bytes": 128,
+        "mtime_ns": 1789629482376095500
+      },
+      ".cache/huggingface/download/model-00002-of-00003.safetensors.metadata": {
+        "bytes": 127,
+        "mtime_ns": 1789629484489032000
+      },
+      ".cache/huggingface/download/model-00003-of-00003.safetensors.metadata": {
+        "bytes": 128,
+        "mtime_ns": 1789629402596074400
+      },
+      ".cache/huggingface/download/model.safetensors.index.json.metadata": {
+        "bytes": 104,
+        "mtime_ns": 1789629360360173400
+      },
+      ".cache/huggingface/download/README.md.metadata": {
+        "bytes": 104,
+        "mtime_ns": 1789629359782565300
+      },
+      ".cache/huggingface/download/tokenizer.json.metadata": {
+        "bytes": 128,
+        "mtime_ns": 1789629368101522400
+      },
+      ".cache/huggingface/download/tokenizer_config.json.metadata": {
+        "bytes": 103,
+        "mtime_ns": 1789629360459851100
+      },
+      ".cache/huggingface/download/vocab.json.metadata": {
+        "bytes": 104,
+        "mtime_ns": 1789629360651546600
+      },
+      ".cache/huggingface/trees/1cfa9a7208912126459214e8b04321603b3df60c.json": {
+        "bytes": 2283,
+        "mtime_ns": 1789629359514723300
+      },
+      ".gitattributes": {
+        "bytes": 1570,
+        "mtime_ns": 1789629360169130700
+      },
+      "config.json": {
+        "bytes": 726,
+        "mtime_ns": 1789629360128813600
+      },
+      "generation_config.json": {
+        "bytes": 239,
+        "mtime_ns": 1789629360083819400
+      },
+      "LICENSE": {
+        "bytes": 11343,
+        "mtime_ns": 1789629360169130700
+      },
+      "merges.txt": {
+        "bytes": 1671853,
+        "mtime_ns": 1789629360405698100
+      },
+      "model-00001-of-00003.safetensors": {
+        "bytes": 3957900840,
+        "mtime_ns": 1789629482372965200
+      },
+      "model-00002-of-00003.safetensors": {
+        "bytes": 3987450520,
+        "mtime_ns": 1789629484484761000
+      },
+      "model-00003-of-00003.safetensors": {
+        "bytes": 99630640,
+        "mtime_ns": 1789629402589648400
+      },
+      "model.safetensors.index.json": {
+        "bytes": 32819,
+        "mtime_ns": 1789629360358099600
+      },
+      "README.md": {
+        "bytes": 16857,
+        "mtime_ns": 1789629359780557200
+      },
+      "tokenizer.json": {
+        "bytes": 11422654,
+        "mtime_ns": 1789629368096979400
+      },
+      "tokenizer_config.json": {
+        "bytes": 9732,
+        "mtime_ns": 1789629360457075600
+      },
+      "vocab.json": {
+        "bytes": 2776833,
+        "mtime_ns": 1789629360649966600
+      }
+    },
+    "model_shards": [
+      {
+        "file": "model-00001-of-00003.safetensors",
+        "bytes": 3957900840,
+        "sha256": "328a91d3122359d5547f9d79521205bc0a46e1f79a792dfe650e99fc2d651223",
+        "header_valid": true
+      },
+      {
+        "file": "model-00002-of-00003.safetensors",
+        "bytes": 3987450520,
+        "sha256": "6cd087b316306a68c562436b5492edbcf6e16c6dba3a1308279caa5a58e21ca5",
+        "header_valid": true
+      },
+      {
+        "file": "model-00003-of-00003.safetensors",
+        "bytes": 99630640,
+        "sha256": "e4bf436957184f4eeb86a80e9db394503f1f56446b2e6b7edeac5b81470f4ca1",
+        "header_valid": true
+      }
+    ],
+    "model_small_files": [
+      {
+        "path": "AlagModels/Qwen3-4B/.gitattributes",
+        "bytes": 1570,
+        "sha256": "34448b82c17d60fec9b65b1f093c115ddbaadc04beb1b0140b6bfed2e012a930"
+      },
+      {
+        "path": "AlagModels/Qwen3-4B/config.json",
+        "bytes": 726,
+        "sha256": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a"
+      },
+      {
+        "path": "AlagModels/Qwen3-4B/generation_config.json",
+        "bytes": 239,
+        "sha256": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2"
+      },
+      {
+        "path": "AlagModels/Qwen3-4B/LICENSE",
+        "bytes": 11343,
+        "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e"
+      },
+      {
+        "path": "AlagModels/Qwen3-4B/merges.txt",
+        "bytes": 1671853,
+        "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+      },
+      {
+        "path": "AlagModels/Qwen3-4B/model.safetensors.index.json",
+        "bytes": 32819,
+        "sha256": "6dc0981b8829fead746441f68f38f24c5ca4a3a66351f652c26c6df0efc43ab2"
+      },
+      {
+        "path": "AlagModels/Qwen3-4B/README.md",
+        "bytes": 16857,
+        "sha256": "71add1cd091c309b1cb1a6b943f2476eb2b004124b3bd1d32dcd0b24cc1abc47"
+      },
+      {
+        "path": "AlagModels/Qwen3-4B/tokenizer.json",
+        "bytes": 11422654,
+        "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+      },
+      {
+        "path": "AlagModels/Qwen3-4B/tokenizer_config.json",
+        "bytes": 9732,
+        "sha256": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101"
+      },
+      {
+        "path": "AlagModels/Qwen3-4B/vocab.json",
+        "bytes": 2776833,
+        "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    ],
+    "raw_artifacts": [
+      {
+        "path": "AlagDatasets/raw/casino/data/casino.json",
+        "bytes": 4300019,
+        "sha256": "4f2c4560a0070906ed018c3f0766e35f8f8f31b36274ebf35b608621915744ab"
+      },
+      {
+        "path": "AlagDatasets/raw/casino/README.md",
+        "bytes": 2061,
+        "sha256": "b52d17f5a0d71a8760a42cc3cb5b02f7c0ba739487a6a703e15f655400d465a6"
+      },
+      {
+        "path": "AlagDatasets/raw/casino/LICENSE",
+        "bytes": 18658,
+        "sha256": "f5b745ef98087f531e719ee8ca6a96809444573ecc7173c6fa68eaad39b3cc3f"
+      },
+      {
+        "path": "AlagDatasets/raw/casino/data/README.md",
+        "bytes": 1590,
+        "sha256": "2cc2a0bfe22e3285ddb4a04a1675dfe68b2609ec561ae0595ebcdd5504344001"
+      },
+      {
+        "path": "AlagDatasets/raw/job-interview/data.zip",
+        "bytes": 4324755,
+        "sha256": "1bfe698a677ed6faaebe2ebdc607d913c7e6e5814c91e471a000c21894ec6dd9"
+      },
+      {
+        "path": "AlagDatasets/raw/job-interview/README.md",
+        "bytes": 2558,
+        "sha256": "b95b22909943ca220f11f8e66b33dd64727808c64909f5f6d8862e5d1748000a"
+      },
+      {
+        "path": "AlagDatasets/raw/job-interview/LICENSE",
+        "bytes": 1107,
+        "sha256": "b1c72068b3d8b1f4dc0a509035aee17848ff129b259d6889a76754512aceb873"
+      },
+      {
+        "path": "AlagDatasets/raw/job-interview/helper/negotiation_ji.py",
+        "bytes": 9337,
+        "sha256": "eb5737a790e9ae678fd828e31c70f762dae7a41efc80812c2cae633e43d7e8e9"
+      },
+      {
+        "path": "AlagDatasets/raw/job-interview/data.json",
+        "bytes": 40712917,
+        "sha256": "989ad5bb86a4c4552e34bfb1af4c31344dd21c9c02900eb218328f3c2126199e"
+      }
+    ],
+    "model_full_hashes_match_pinned_upstream": true,
+    "raw_hashes_match_acquisition": true,
+    "protected_application_count": 173,
+    "protected_application_unchanged": true,
+    "original_tracked_files_count": 130,
+    "original_tracked_sha256": {
+      ".env.example": "0a1f63c8c98105cd1167716645c38b19323617128f9f6251b57d1182237a52f4",
+      ".gitattributes": "d60f352d0db1404c70afb4bb8b2ca3fd1c610572aa40720e8a0b7baa7885418c",
+      ".gitignore": "384e6250b9252a61b58caaf7ae535b55de91bba6dc05d12663440336b5d593af",
+      ".node-version": "73fb1b615e2043a933be1c0895cde4358036acc28d785692509b822aa53c761f",
+      "9. ОЭЗ ППТ Алабуга.pdf": "ff50f0ade59e2060818815284a8be0ccd1f10065a0ce6f46f48b664e4df0d75d",
+      "README.md": "8a0c1213f8eec926daa5735b8246a7e822dabb80d2681dd52e54a480ba0b20f6",
+      "apps/server/package.json": "22fb91e9208a5e2ecb74e3dd167b7393356cf18f2f8d3003d9c2723fd452fb57",
+      "apps/server/src/api-error.ts": "a696e8c4884046f3acf90e4dbeb85653b712aff3d66dd126d3f81e8395a1c3cb",
+      "apps/server/src/app.ts": "df557b3cf37e1029bd588bcf80cbd61768e7c4f9cfb6937ac4e229783c068ab0",
+      "apps/server/src/database.ts": "7017b937c6ca69608f9138f73036ef744affbdf54c7df17c3ccfb90f0dd25080",
+      "apps/server/src/env.ts": "e7ef687028792032c1b721d5f7319130ac6ec6655173e324ffbc9216bc20b490",
+      "apps/server/src/main.ts": "2e4269eb97d1a3040fa8c1e46d8689218a945ab7dcf7d032e63bc5f3a7c07eae",
+      "apps/server/src/migration-g2.ts": "32ceeff52293251f1f04b0f0a796529abcce836db003cbcc7da294e3a9e576e3",
+      "apps/server/src/paths.ts": "a09b83ca947d6ba897c0feb3edcd1078eda2b230851b3b07aeb9349dde1703d4",
+      "apps/server/src/presentation/renderers.ts": "6117180dca87cc6aa49a5c1a3511d2e019f2b8bf53078c46fb81d49a359c5b19",
+      "apps/server/src/repositories/arena-repository.ts": "605f3e0edc31a485cda557fa544c3c6e9aac239b7cdfca59f60fc56595d8db8c",
+      "apps/server/src/routes/g2-routes.ts": "03b346c917f3c13f9654ed0e1a9bb16b8eff87d1059d75f008e3f4caa1eb7db8",
+      "apps/server/src/services/session-service.ts": "a7b15d287d7914262b25e790a1672696357ab04a1be3862fc5fd9169e268a07f",
+      "apps/server/test/app.test.ts": "2d79e12e902c656fc505d6e2812d96c5efc7396955dd1d4ba9970ae51ab9a56a",
+      "apps/server/test/database.test.ts": "834d2bc52b7c1766e9535ffc4b00686fa271c7bbd3816fee8bab30664ce25dbf",
+      "apps/server/test/env.test.ts": "4ebfcfbb291af7e6e84c1b95ee6beb2d2b353c4f3258ad6858d91555f081992b",
+      "apps/server/test/g2.test.ts": "03cb442f4a3a100adcc48b845c8441149da338aa53b8ee0cae9cb84cbb65d48b",
+      "apps/server/test/helpers.ts": "aea7506bb6ebea8c725e9a5299a1938ad6b3a1dd6b0953812bf9977db300ef0e",
+      "apps/server/test/static.test.ts": "7b6bb147c9faef40b9041c40e7143569a0041c9748ff5b10b584369f3321c4b3",
+      "apps/server/tsconfig.build.json": "9c4387034f61e27d695547a0846fd95a6b2f7aafb46b08dd9bae8267ee4a3068",
+      "apps/server/tsconfig.json": "744e355861436723bab9a7d8d260d2ff271c031c84984c180b6c4d643d242e08",
+      "apps/web/index.html": "6f5af4fdbfc41d27269b1e85e9185beacb74bba2cda8054ba5f0a42fee038d5b",
+      "apps/web/package.json": "1b9037a87c1543f99a47d232ebac42e08caf05dc83ba025ac3bd17c62dddbe7b",
+      "apps/web/src/api.ts": "d0f25a2431c9b79e10f8b8ecc113e173ef8d60628cd074b27c118814f680fa92",
+      "apps/web/src/board.tsx": "978ebab8a79497ccfb74bc865e001589f7305547ca46631b6d584977d12be5db",
+      "apps/web/src/main.tsx": "fddda5adb8ac9412f30d8079937444c45641ddb668f43492463737e24c47b88a",
+      "apps/web/src/product.tsx": "bbbe4112c19c5d0014acdde0f6284d88e2cff0c35075ff741e70738ba995b99c",
+      "apps/web/src/style.css": "c50e24eb9c969e581753c5de1b71109c57ab74a24fa1424d1b6c4c4c10f2b9df",
+      "apps/web/tsconfig.json": "10992ce19533c7eb694a5a7f0bb4732faf7728bf8f809d6584f8b56b92a58086",
+      "apps/web/vite.config.ts": "79ec2a73bafa2bf87863cf5d7ac58b6ffab777acda38dda194ae6fe84a12b9f0",
+      "data/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "docs/00_REQUIREMENTS_AND_SCORING_MATRIX.md": "dd380424d50900c4bb3b6550dc69654226bc89eca45e8fffff9ac1435bf27460",
+      "docs/01_PRODUCT_AND_ARCHITECTURE_DECISION.md": "f3535762a93be4fca1322f8f8ab5afc1bc980f3918ef4d5f9f55c1d03f25725d",
+      "docs/02_MASTER_IMPLEMENTATION_PLAN.md": "d514cc920ac66749eaede4e443f589a1dfaa26c5f6afb8f9d7498af595b20e57",
+      "docs/gates/AI_LOCAL_DATASET_ACQUISITION.md": "3f5b67c630cc0f6d420346d4d2cdf17e2052c2b1a1390ec5e4b1c130c2c1038f",
+      "docs/gates/G0_FOUNDATION_REPRODUCIBLE_RUNTIME.md": "3d27d5d022fd8eca384bc0510e493d836b4bb17a2f621a37ec55542de8824b67",
+      "docs/gates/G1_DOMAIN_CONTRACTS_DETERMINISTIC_CORE.md": "5f0f34d139fd4301e36eaae02081318f58929816e1ed692fcc3d9168525d49f4",
+      "docs/gates/G2_S1_VERTICAL_SLICE_NO_API.md": "a8fe35b53d3154bd7c31dd7fcee3f811b233df006d087e127898b9c55316a66a",
+      "docs/gates/LOCAL_QWEN_BASELINE_A01_A16.md": "0d5a43ba67d91bc2ebc291806fa5f1926c401ec0513fc13cac968ed696b67338",
+      "docs/gates/evidence/AI_LOCAL_DATASET_MANIFEST.json": "080a38e3ad8d07846f04ff49f95d7bac5fa2b7a57f02a6597d238976c1906abf",
+      "docs/gates/evidence/G1_MODEL_AUDIT.json": "caea1b89020bf005c616cf25b8fac07bd868de3690e92f56aabd52365006bf8d",
+      "docs/gates/evidence/G1_VERIFICATION.json": "693cac31e1aa011574d59bc9f9697134592fddd73438948afeb983e73425fe41",
+      "docs/gates/evidence/G2_VERIFICATION.json": "1893258cdf89d485c4df099305bf890e0f0f01677ebdd5597685571a7c55fcf0",
+      "docs/gates/evidence/LOCAL_QWEN_BASELINE_A01_A16.json": "c9b3912a572e7612bfec6f77d23c18a60c2567b1ae3a0ea6caf8eda697b2078f",
+      "evals/local-qwen/a01-a16.json": "c32e0b688d0f0a3d7eda547c60cffdcef74c15c95ecfa941e7741adc7be89dc1",
+      "evals/local-qwen/interpretation.schema.json": "0df92dd03436502599f12d6ec245ce8948dd5d4d3e85ca2657d9cd0c79db2f5d",
+      "ml/baseline/README.md": "4d1becd0df467e1e1daa30bee82c14981f1bd4559ad8d782211586f9305ae192",
+      "ml/baseline/config.json": "649201e47bf802557cfbcdd8647f7e61df658696290111b5dc23224edd6dedac",
+      "ml/baseline/freeze_assets.mjs": "d35e6a6fb069c503e5485fba11395d5d0422bed54a65832473ee79b680cb602f",
+      "ml/baseline/integrity.py": "39c2544c125edcccff03d1e6809758cc8b787e7c19464f4ae90be7298f94bfd6",
+      "ml/baseline/lifecycle.py": "63286dd3bc651696295e6f1353f7db223cdca0143d2a30f5095c253b9d2c3834",
+      "ml/baseline/preflight.ps1": "8250b82dfcd0d9e747d3be3f59b64ffd1ef582111bb8d01720cc85ae9c7c3e00",
+      "ml/baseline/report.py": "4080b8785de0d608c36d01f38b12304c8e0da5b51ef3c1fed8a8ea6447794385",
+      "ml/baseline/requirements.txt": "5b53031fdb4eaa2426bbfaedaa672e4a3a17a73c8ba107636c58fdda469c4f3f",
+      "ml/baseline/rescore.py": "d975af818052eab9e50acacd0dfb3972f61e0154625b9d4f590212b0d827f71a",
+      "ml/baseline/run.py": "34e295aea5a583cef9d11ef83b61495c36dcb51a4cae9dda874737b89f6fb429",
+      "ml/baseline/scoring.py": "c512ef147379ef20a881a48d90b36d6c0cf853f3a7696580a8fa78b2af61696c",
+      "ml/baseline/system-prompt.txt": "a4e8b3a6c6bf3b64000abab9d369cd0f76a14889b067a9db19faa159b1066a5b",
+      "ml/baseline/test_lifecycle.py": "b91260e9fb4878964cc3044e10140211d421f933413bcf57e7d6e3a4760a6c85",
+      "ml/baseline/test_scoring.py": "bb2d2636b1673a3ac6ad986697f34072a9ba051726e7680e3637ce7b038a62d2",
+      "ml/baseline/verify_contract.mjs": "71fdf0c08831c66cb82571b7e24fc06be79777f65068f6347eb3161d0a335aff",
+      "package-lock.json": "c370832675efed38366492e3b708d7696336f6d58c31b06a0efafd8cdd6cb6ef",
+      "package.json": "f610edb6fe05ac2ee2ed650a093eaccea8d8e81b6d798645510932e637b885a4",
+      "packages/ai/package.json": "96a028b49454043753e9fc547257c923c7ee94b1eb45f5a6458016f2b7d75339",
+      "packages/ai/src/context.ts": "1b5ce4b64beb2bfb23ec9e072de0bb5a4c1227bff2cfde1f3f73320c48074659",
+      "packages/ai/src/prompt.ts": "5f9ef9ef8f4fdfe0a4bc1e19dab62320483240becd95dbd944356c59e4d95cca",
+      "packages/ai/src/provider.ts": "da87d148f2165902fc2d179ad3979b2e3479108124d16473af8e905e16079582",
+      "packages/ai/tsconfig.build.json": "2c0849acaff0e19d27cb1998e85b41336c36655efcc4e500ae093f4a3d8869e7",
+      "packages/ai/tsconfig.json": "313986a7b265fac0fd68860b151132ccb942e0caf1693b1edfd708c8129cfdda",
+      "packages/contracts/package.json": "460405aaa0e77273a79a89bc15450aea804e038556ee95c412b1f880bade7c43",
+      "packages/contracts/src/action.ts": "25a6c69a251ca940a793135766016b2f3e8a96e0187d131a48e653aed698e8dd",
+      "packages/contracts/src/common.ts": "a2f0769a74949661586f434283a0b4a86e75ec0e60b660279ea3807d4edeaaa9",
+      "packages/contracts/src/event.ts": "6df681f0180e72bb2074c9811d842adabab5ff9c4c0ca8357d71958f9ec9d81a",
+      "packages/contracts/src/g2.ts": "966dca1572ffea45039975476df47f575009a8252d953d9ffac1d0c85d0e4b84",
+      "packages/contracts/src/g3.ts": "74bd9c059678247cc2d63b45b8384de8ba5337c29ab96d44a63df00195c19e0e",
+      "packages/contracts/src/index.ts": "43f039e10c74b70fe4cf1c83424c27591638eb615732467558ca9a65f0905d47",
+      "packages/contracts/src/outcome.ts": "d32e98404e5a13b28cec7ec1d9616624af023c1746bed22faa4ce76035e8aab9",
+      "packages/contracts/src/projection.ts": "597448c88df63a6e4e214a61be7d7c215d6ddb3bbd0503cd3d8ad99c245618ef",
+      "packages/contracts/src/scenario.ts": "78173b403d5abd24f0017751a6cdcd1b6fdd0d38d6278bd9ad616c4fd4844ea5",
+      "packages/contracts/src/session.ts": "1e0876e96ea9bbe17e2362808de62015cd886fb1eb19a782782d892903ac82e7",
+      "packages/contracts/test/schemas.test.ts": "13a54e59da84b59ceeee20395e9f91054b2975f9b480cdbf987cbfdc0463d839",
+      "packages/contracts/tsconfig.json": "b68b23b3066255499404de87fe975afb68c84a602c439165e664b46fed317b71",
+      "packages/domain/package.json": "78b158abcc80b53a764b812ef6f4c1ee06736aa0228ac3fb45cd8ec73e989039",
+      "packages/domain/src/action-validation.ts": "238d7dad5a9d30f9bd5940fbc1679ac9ef14fdfa04d2d9f76beccf80bd919ab5",
+      "packages/domain/src/authority.ts": "87726a2045a14c919e652c7e3ba3e3607146e1c5630ef2f273fc26e18dd5c4c2",
+      "packages/domain/src/constraints.ts": "bcc6a24a694f081507186b7215aebf491bb9032fd7deb8e1c0e993931abe373b",
+      "packages/domain/src/disclosure.ts": "1f04618d526d01191f7cec75d076b9e3065ea3b81251618b18e5b204c466954a",
+      "packages/domain/src/enumerate.ts": "4f3c5570451b46512f4d2350c939d82c4920e72b2eb1bc77d51c98282f815afc",
+      "packages/domain/src/index.ts": "8bb0c497592e93dc8109c1649ba16a5008bd908d6d1a732ab6b20539293628d1",
+      "packages/domain/src/offers.ts": "a799ef2f7e4cf26d188f8b4620d632b7065532eb3a2c41702a5cd79a061c6da7",
+      "packages/domain/src/outcomes.ts": "78bd95d854c82df2f9adcc3e0c8f4c9263e0dbceb5c4a061b316f1d253470797",
+      "packages/domain/src/policy.ts": "bb66fb7c65b2deeefae442508103bf691e31ea8b476e88b0df0e242aa90961f1",
+      "packages/domain/src/projection.ts": "cdf930fa1bc0be6c15311a4cdb478e3254f4f78a250c5b8cb87ce37db81a5159",
+      "packages/domain/src/reducer.ts": "2607ff26c5bec1cf7f6df4db39c6ad55d38e1921baed0976daed3e2d09bd5930",
+      "packages/domain/src/utility.ts": "2580e1cf9295703748d4e0a2c6a65e154fd31101d6010ef000dad4e83863bbcf",
+      "packages/domain/src/validation.ts": "8f684e618bea8ba9c486c67d3c8b3fe6a07dd305b0e856e3313f6e4da99c542f",
+      "packages/domain/test/offers.test.ts": "09cf4097f23a34251bfa072ad762e8a889ff9cca1fe0db422da6d15b465ab679",
+      "packages/domain/test/policy.test.ts": "1e9d936747dc44492f6d81bcfea3f4a342f681c709ac0d5eacd2c439ceb79b2f",
+      "packages/domain/test/projection.test.ts": "a2586ca978480cee7903cacd627d115f9291e2e9a2e0a4776902650784928472",
+      "packages/domain/test/validation.test.ts": "326507dc153b5b0e1447e80dc3e14fd7401b8df97b617a79208cc3b8ec04af59",
+      "packages/domain/tsconfig.build.json": "2c0849acaff0e19d27cb1998e85b41336c36655efcc4e500ae093f4a3d8869e7",
+      "packages/domain/tsconfig.json": "313986a7b265fac0fd68860b151132ccb942e0caf1693b1edfd708c8129cfdda",
+      "packages/scenarios/package.json": "db624754c2ff3cee180b22c23f39eb525681eb90a741d5e56df039057b78e794",
+      "packages/scenarios/src/index.ts": "6242d23d87d08604ba939d71cdb6fbbf01635646a1eda34f1ed2e86240d2b7ef",
+      "packages/scenarios/src/reference-actions.ts": "4e8accf652c4dcceb9df062981d0725d68363dc60895672bf071c62db416e724",
+      "packages/scenarios/src/s1-supply-launch.ts": "a29ee9a1579625bf9863105e573ab61dcd326ff6d995c7087febf14d5b3e2f5a",
+      "packages/scenarios/src/s2-workload-urgent.ts": "a3cd71e10d7088db1e358f27636042e86931d34e9cb59e1311fb9f390853a0a4",
+      "packages/scenarios/test/generate-audit.ts": "080ef50f61e8308771267c762d5e94634b06f9f9d537a4b4e6f6d7f703fd683a",
+      "packages/scenarios/test/goldens.test.ts": "039ac70f4441dc6b2e3d907f3875e86d61b6f06390ffae414bcd4651cd4d9743",
+      "packages/scenarios/test/goldens.ts": "3fef8bf04e08826aad5bfff5c7cb999b5b52f53f3bbde8ee47844501c080ab2c",
+      "packages/scenarios/test/helpers.ts": "a059f59d875e6a8cdbb1e07b78866b575a161725b003d1c8537ed768b94de842",
+      "packages/scenarios/test/models.test.ts": "f0ca3d57c05511ebb3a0b91a40401d97dcc19130702899b5fd6fa9995cbb0308",
+      "packages/scenarios/tsconfig.build.json": "2c0849acaff0e19d27cb1998e85b41336c36655efcc4e500ae093f4a3d8869e7",
+      "packages/scenarios/tsconfig.json": "313986a7b265fac0fd68860b151132ccb942e0caf1693b1edfd708c8129cfdda",
+      "playwright.config.ts": "f2f7230b7b4afe83a5ec049f538235689913814ef533a05c548ec266b6cdaee1",
+      "scripts/check-runtime.mjs": "feff2e770f61d1bb3c7c3ee48af6f87db8be35176759443cba022b5f0f756c95",
+      "scripts/dev.mjs": "f9e0cf041f45e20e9a0ce9efa4fe5d22126337046c48c83156c9feff13165050",
+      "scripts/g2-test-console.cjs": "eeb4ed19872c7209a01e090ace05c1632322876a3dbfa2d5dfb5f5d85cc89c42",
+      "scripts/smoke-production.mjs": "18b908e231c8238bcae4188aec5738f1598d13e77bcc5c35b2ff309cca9476a6",
+      "scripts/start.mjs": "26368bd0ee825fe24189dea3b6c4c4c7a9769347bc301e56b5f9966401e18154",
+      "tests/e2e/g2.spec.ts": "5bcf88dac7296106399696fb96a51700f37130b52dd16450d9ac2b91bfab5afa",
+      "tests/e2e/production.ts": "0e8f3249de48d1215725bff218a086e36df6bda0a18ec91da6c809297bb6ef0c",
+      "tsconfig.base.json": "c8fc62190f0b2951dbfba8db8e40315682506f41e121ed725ba31bd1ac14d7f2",
+      "tsconfig.e2e.json": "2fc21bb983a251a60debb03324655ff789e45d267b0acd21e0868484130e93d7",
+      "vitest.config.ts": "ca8d9147ab7a3345ced0519c835491ce01886ec9d519fe18dc2492c71fddcf8b"
+    },
+    "original_tracked_drift": [],
+    "holdout_sha256_before": "c32e0b688d0f0a3d7eda547c60cffdcef74c15c95ecfa941e7741adc7be89dc1",
+    "holdout_sha256_after": "c32e0b688d0f0a3d7eda547c60cffdcef74c15c95ecfa941e7741adc7be89dc1"
+  },
+  "artifacts": {
+    "ml/data/synthetic_ru/audit.py": {
+      "bytes": 11547,
+      "sha256": "8398d483b6cf2cdf37d1974a42b03d475c72fb8f2d3dff1df1f582b2e4a46b5f"
+    },
+    "ml/data/synthetic_ru/audit_report.json": {
+      "bytes": 28995,
+      "sha256": "dee5ecc3e2efe50e2ce8bf34baab7d9cd8008e82e3590c586307495c7afd571f"
+    },
+    "ml/data/synthetic_ru/compile_sft.py": {
+      "bytes": 3732,
+      "sha256": "a18c3f4d8206719f24964f318c4a8a72d42a8dacd2e618232c3bf92c0f3b4eb1"
+    },
+    "ml/data/synthetic_ru/contexts.json": {
+      "bytes": 761344,
+      "sha256": "7caf6ede5ec31bcc147c4e10dadd74fd5fde1ff58328ebbccf27fb09a7d4b145"
+    },
+    "ml/data/synthetic_ru/contexts.py": {
+      "bytes": 11207,
+      "sha256": "94033f675d7f5d366f4cc7436302cef7faa731c0218c5b07e2ac997d13588965"
+    },
+    "ml/data/synthetic_ru/core.py": {
+      "bytes": 6658,
+      "sha256": "25ddd5177c45c042221c586ed0cf62256fec672492b0fa0ce3b080898c14e1cf"
+    },
+    "ml/data/synthetic_ru/dev.jsonl": {
+      "bytes": 1385933,
+      "sha256": "d9bd77eae003465e0953297d3671c91443735ce6ae2441dc673aea717f7122a4"
+    },
+    "ml/data/synthetic_ru/generate.py": {
+      "bytes": 17640,
+      "sha256": "9db1859f115fee4dfa9b8c1ea958c214abd13ab3b6a0322aa85524056f4be22d"
+    },
+    "ml/data/synthetic_ru/generation_report.json": {
+      "bytes": 11417,
+      "sha256": "b805143c1112358692f9c3cb1db64fc4f5467ee5245e316f7e4406b17000a6a0"
+    },
+    "ml/data/synthetic_ru/internal_test.jsonl": {
+      "bytes": 1433881,
+      "sha256": "ba929ff5528325ce2abe61b4861f6b0dc459c79b7d15d9fc6976c395b4a09f03"
+    },
+    "ml/data/synthetic_ru/linguistic_patterns.json": {
+      "bytes": 2490,
+      "sha256": "d5eeab95abf228c30f9ffeef856076fa751719dafd94a40d2968a4b9d84d47fb"
+    },
+    "ml/data/synthetic_ru/linguistic_patterns.py": {
+      "bytes": 2899,
+      "sha256": "7a20239727e122b38aadcd5d33a01e67662d0c96810e0fa8d9fcb262a7098865"
+    },
+    "ml/data/synthetic_ru/next_gate.json": {
+      "bytes": 3794,
+      "sha256": "1af9257e1b45c76d843028951d07fd0008462e15e236b00248d753eb70e0de25"
+    },
+    "ml/data/synthetic_ru/quality_review.json": {
+      "bytes": 20347,
+      "sha256": "af7c41bef74b2b90454be373e1591fb891fc7f6d332afd816ab793d8c470fc2d"
+    },
+    "ml/data/synthetic_ru/README.md": {
+      "bytes": 3798,
+      "sha256": "a86b89d836462b2a1a459b664ca46cf79a517c2df3ea85b3996d3c5f42d80a40"
+    },
+    "ml/data/synthetic_ru/specification.md": {
+      "bytes": 10405,
+      "sha256": "7b3d5911e5f6d7c3f988ddadedf219abbae98635a8bab3860ac21ebffa8684b1"
+    },
+    "ml/data/synthetic_ru/system-prompt.txt": {
+      "bytes": 1372,
+      "sha256": "1fbd12de32c7e54ad116979bfee966ff6d15d92b02d42556dd07420b880954a5"
+    },
+    "ml/data/synthetic_ru/templates.py": {
+      "bytes": 42651,
+      "sha256": "7f9c11b8b8342975909472870fb1af5439dc7ba2e3dbfc24855ed35aff25d169"
+    },
+    "ml/data/synthetic_ru/test_dataset.py": {
+      "bytes": 11808,
+      "sha256": "95b864bbe11b03383aa9c831bc79ab3be3c528e1cd558953fc32bad6c716bc77"
+    },
+    "ml/data/synthetic_ru/token_statistics.json": {
+      "bytes": 1254,
+      "sha256": "12f131e2b48c214d5f06ac4ce847bb8ae410923615ce273a5a88238d84389975"
+    },
+    "ml/data/synthetic_ru/token_stats.py": {
+      "bytes": 3078,
+      "sha256": "d8cd08c08483dce86798e1b0b27eae20ed8f66a9da6190262037e0b8768e1740"
+    },
+    "ml/data/synthetic_ru/train.jsonl": {
+      "bytes": 10733980,
+      "sha256": "74defddc644eda30227a58adaef41ad31d7a849000852d6a459de4b778770f47"
+    },
+    "ml/data/synthetic_ru/validate.py": {
+      "bytes": 10730,
+      "sha256": "fe7758c7bad2d1aa604ae87a8369d94d00ffe26d7b4ae8d065c8a37779b2090c"
+    },
+    "ml/data/synthetic_ru/verify_contract.mjs": {
+      "bytes": 1490,
+      "sha256": "67b4b4e4221e41fc419d1bf39f02f1fe4efbe64f22192fa765d0df0acd5f0bc3"
+    },
+    "evals/local-qwen/dev-ru-v1.json": {
+      "bytes": 624428,
+      "sha256": "7f1c31449e599fd212e50018595c8c997b4385d17c30c3f9a1f4e5aa011da119"
+    },
+    "ml/data/synthetic_ru/manifest.json": {
+      "bytes": 13013,
+      "sha256": "055c0b7f586dfc860685e7b1dca4bcf466dade863ba4ac669005a8e740418ba7"
+    }
+  },
+  "newly_tracked_artifact_bytes_before_receipts": 15159891,
+  "generated_json_and_jsonl_bytes": 15020876,
+  "size_limits": {
+    "preferred_bytes": 25000000,
+    "hard_review_bytes": 40000000,
+    "git_lfs_used": false
+  },
+  "git": {
+    "branch": "main",
+    "origin": "https://github.com/AiratBastanov/TalkNFace.git",
+    "initial_commit": "91863518605b71d167c97cc631d748b4e6bab085",
+    "initial_status": [],
+    "materialization_commit": "eec23a82a0fadbbd1ddbe73404f2394c1d75f0e3",
+    "materialization_commit_pushed": true,
+    "verified_origin_main": "eec23a82a0fadbbd1ddbe73404f2394c1d75f0e3",
+    "ahead_behind_after_materialization_push": [
+      0,
+      0
+    ],
+    "status_after_materialization_push": [],
+    "staged_paths_reviewed": [
+      "ml/data/synthetic_ru/audit.py",
+      "ml/data/synthetic_ru/audit_report.json",
+      "ml/data/synthetic_ru/compile_sft.py",
+      "ml/data/synthetic_ru/contexts.json",
+      "ml/data/synthetic_ru/contexts.py",
+      "ml/data/synthetic_ru/core.py",
+      "ml/data/synthetic_ru/dev.jsonl",
+      "ml/data/synthetic_ru/generate.py",
+      "ml/data/synthetic_ru/generation_report.json",
+      "ml/data/synthetic_ru/internal_test.jsonl",
+      "ml/data/synthetic_ru/linguistic_patterns.json",
+      "ml/data/synthetic_ru/linguistic_patterns.py",
+      "ml/data/synthetic_ru/next_gate.json",
+      "ml/data/synthetic_ru/quality_review.json",
+      "ml/data/synthetic_ru/README.md",
+      "ml/data/synthetic_ru/specification.md",
+      "ml/data/synthetic_ru/system-prompt.txt",
+      "ml/data/synthetic_ru/templates.py",
+      "ml/data/synthetic_ru/test_dataset.py",
+      "ml/data/synthetic_ru/token_statistics.json",
+      "ml/data/synthetic_ru/token_stats.py",
+      "ml/data/synthetic_ru/train.jsonl",
+      "ml/data/synthetic_ru/validate.py",
+      "ml/data/synthetic_ru/verify_contract.mjs",
+      "evals/local-qwen/dev-ru-v1.json",
+      "ml/data/synthetic_ru/manifest.json"
+    ],
+    "staged_bytes_equal_reviewed_files": true,
+    "model_raw_environment_ignored": true,
+    "model_raw_environment_staged": false,
+    "force_push": false,
+    "global_git_config_changed": false,
+    "command_local_settings": [
+      "safe.directory=C:/Users/BastaPC/Desktop/Alag",
+      "http.sslBackend=openssl"
+    ],
+    "receipt_commit_locator": "git log -1 --format=%H -- docs/gates/LOCAL_DATASET_DESIGN_AND_SYNTHETIC_RU.md",
+    "receipt_delivery": "Receipt committed separately after verified dataset publication; final post-push HEAD and ahead/behind are reported in the terminal response.",
+    "approval_review_incident": {
+      "first_push_rejected": true,
+      "reason": "Automatic reviewer initially did not verify explicit default-branch publication authorization.",
+      "resolution": "Re-read the user-designated request attachment containing explicit commit/push-to-origin/main instructions and exact remote URL; reverified branch/remote/scope. The same normal push was approved and completed. No workaround or indirect publication."
+    }
+  },
+  "scope": {
+    "training": "NOT_STARTED",
+    "lora": "NOT_STARTED",
+    "qlora": "NOT_STARTED",
+    "model_inference": "NOT_RUN",
+    "external_llm_api": "NOT_USED",
+    "model_weights_loaded": false,
+    "model_weights_moved_or_modified": false,
+    "raw_external_datasets_modified": false,
+    "g3_application_integration": "NOT_STARTED",
+    "g1_semantics_changed": false,
+    "g2_behavior_changed": false
+  },
+  "next_gate": {
+    "gate": "LOCAL_QWEN_QLORA_FEASIBILITY_SMOKE",
+    "status": "RECOMMENDATION_ONLY_NOT_EXECUTED",
+    "feasibility": "UNPROVEN_TIGHT_6_GIB_BUDGET",
+    "model": {
+      "name": "Qwen3-4B",
+      "parameters": 4022468096,
+      "ideal_4bit_weight_bytes": 2011234048,
+      "ideal_4bit_weight_GiB": 1.8731,
+      "bf16_weight_GiB": 7.4924,
+      "caveat": "4-bit lower bound excludes unquantized embeddings, quantization metadata, adapters, gradients, activations, optimizer and runtime memory."
+    },
+    "hardware": {
+      "gpu": "NVIDIA GeForce RTX 2060",
+      "VRAM_MiB": 6144,
+      "compute_capability": "7.5",
+      "native_bf16": false,
+      "driver": "610.88"
+    },
+    "runtime": {
+      "python": "3.12.10",
+      "torch": "2.14.0+cu126",
+      "transformers": "5.17.0",
+      "tokenizers": "0.23.2",
+      "accelerate": "1.15.0",
+      "torch_cuda": "12.6",
+      "platform": "Windows x86-64"
+    },
+    "dataset_tokens": {
+      "count": 10000,
+      "median": 869.0,
+      "p90": 1114,
+      "p95": 1186,
+      "p99": 1245,
+      "max": 1421,
+      "fraction_at_most_1536": 1.0
+    },
+    "proposal": {
+      "quantization": "4-bit NF4 with nested quantization, frozen base weights",
+      "compute_dtype": "float16 because this Turing GPU lacks native BF16",
+      "microbatch": 1,
+      "gradient_accumulation": 16,
+      "gradient_checkpointing": true,
+      "use_cache": false,
+      "first_sequence_limit": 1024,
+      "first_data": "Only complete TRAIN examples whose measured full sequences fit; never truncate target JSON.",
+      "later_sequence_limit": "Consider 1280 or 1536 only after measured memory headroom; full corpus max is below 1536.",
+      "packing": false,
+      "attention": "Start with standard attention supported by the installed stack; do not assume FlashAttention support."
+    },
+    "documentation_findings": [
+      "Current bitsandbytes documentation lists Python >=3.10, PyTorch >=2.4 and Windows CUDA 11.8-12.6 builds including sm75; compatibility still needs an actual future install/smoke test.",
+      "Official Transformers documentation recommends NF4 for training four-bit base models; only additional parameters are trained.",
+      "Official PEFT documentation describes preparing quantized models for adapter training.",
+      "Official TRL documentation supports conversational prompt/completion records and completion-only loss; its memory guide documents sequence-length and gradient-checkpointing tradeoffs."
+    ],
+    "expected_training_duration": null,
+    "dependencies_installed": [],
+    "model_loaded": false,
+    "training_started": false,
+    "next_gate_checks": [
+      "Verify compatible wheel versions without altering the frozen base model",
+      "Measure forward/backward peak memory on a small TRAIN-only sample",
+      "Verify non-thinking chat template and completion-only labels",
+      "Stop on OOM or missing kernel; report observed results, not predicted duration"
+    ],
+    "sources": [
+      {
+        "title": "Qwen official model card",
+        "url": "https://huggingface.co/Qwen/Qwen3-4B",
+        "checked_date": "2026-09-17"
+      },
+      {
+        "title": "Transformers bitsandbytes",
+        "url": "https://huggingface.co/docs/transformers/quantization/bitsandbytes",
+        "checked_date": "2026-09-17"
+      },
+      {
+        "title": "bitsandbytes installation",
+        "url": "https://huggingface.co/docs/bitsandbytes/installation",
+        "checked_date": "2026-09-17"
+      },
+      {
+        "title": "PEFT quantization",
+        "url": "https://huggingface.co/docs/peft/developer_guides/quantization",
+        "checked_date": "2026-09-17"
+      },
+      {
+        "title": "TRL SFT format",
+        "url": "https://huggingface.co/docs/trl/sft_trainer",
+        "checked_date": "2026-09-17"
+      },
+      {
+        "title": "TRL memory guidance",
+        "url": "https://huggingface.co/docs/trl/reducing_memory_usage",
+        "checked_date": "2026-09-17"
+      }
+    ]
+  },
+  "limitations": [
+    "Single project-author review; no inter-annotator agreement estimate.",
+    "Synthetic labelled term lists dominate binding examples; not an empirical sample of all Russian negotiation styles.",
+    "Bounded lexical similarity and source isolation cannot mathematically exclude every semantic paraphrase; required task operations necessarily overlap.",
+    "Candidate search is bounded, not exhaustive all-pairs semantic equivalence. Repeated text in distinct public contexts is retained.",
+    "Lexical checks cannot prove absence of all semantic paraphrases; nearest pairs require manual review.",
+    "PASS certifies this bounded corpus/validation procedure, not trained-model quality or 6 GB QLoRA feasibility."
+  ]
+}
