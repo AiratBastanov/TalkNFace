@@ -28,3 +28,6 @@ __pycache__/
 .torch/
 offload/
 inference-cache/
+
+# Portable R&D receipts returned manually from another Windows machine.
+handoff-results/

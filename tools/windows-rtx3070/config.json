@@ -1,0 +1,88 @@
+{
+  "gate": "RTX3070_TARGETED_LORA_MEMORY_SMOKE",
+  "seed": 20260917,
+  "model": "AlagModels/Qwen3-4B",
+  "train": "ml/data/synthetic_ru/train.jsonl",
+  "output": ".tmp/rtx3070-targeted-smoke",
+  "adapter": "AlagModels/adapters/rtx3070-targeted-smoke",
+  "quantization": {
+    "load_in_4bit": true,
+    "bnb_4bit_quant_type": "nf4",
+    "bnb_4bit_use_double_quant": true,
+    "bnb_4bit_compute_dtype": "float16"
+  },
+  "lora": {
+    "r": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "bias": "none",
+    "task_type": "CAUSAL_LM",
+    "target_modules": [
+      "q_proj",
+      "v_proj"
+    ]
+  },
+  "training": {
+    "max_length": 1024,
+    "packing": false,
+    "per_device_train_batch_size": 1,
+    "gradient_accumulation_steps": 4,
+    "max_steps": 2,
+    "gradient_checkpointing": true,
+    "fp16": true,
+    "bf16": false,
+    "tf32": false,
+    "report_to": "none",
+    "dataloader_num_workers": 0,
+    "save_strategy": "no",
+    "eval_strategy": "no",
+    "seed": 20260917,
+    "data_seed": 20260917,
+    "learning_rate": 0.0002,
+    "optim": "paged_adamw_8bit",
+    "completion_only_loss": true,
+    "logging_steps": 1,
+    "logging_nan_inf_filter": false
+  },
+  "subset_rows": 32,
+  "retry_sequence_limit": null,
+  "timeouts_seconds": {
+    "preflight": 120,
+    "load": 300,
+    "microstep": 600,
+    "train": 1800,
+    "reload": 600,
+    "tests": 120
+  },
+  "activation_offload": {
+    "method": "Transformers.gradient_checkpointing_enable",
+    "offload": true,
+    "every_n_layers": 1,
+    "gradient_checkpointing_kwargs": {
+      "use_reentrant": true
+    },
+    "PEFT_prepare_use_gradient_checkpointing": false,
+    "reason": "PEFT forwards kwargs to torch checkpoint; offload is a top-level Transformers argument. Explicit reentrant=True preserves the previous effective checkpoint algorithm."
+  },
+  "host_memory": {
+    "sample_interval_seconds": 0.2,
+    "start_min_available_bytes": 12884901888,
+    "stop_min_available_bytes": 6442450944,
+    "max_pagefile_growth_bytes": 268435456,
+    "preferred_cuda_headroom_bytes": 536870912
+  },
+  "remote_resources": {
+    "physical_vram_min_MiB": 8000,
+    "gpu_index": 0,
+    "gpu_capability": [
+      8,
+      6
+    ],
+    "nvidia_min_free_before_training_MiB": 7168,
+    "cuda_min_free_before_training_MiB": 6656,
+    "disk_before_download_bytes": 32212254720,
+    "disk_before_training_bytes": 5368709120,
+    "minimum_boundary_free_bytes": 268435456,
+    "comfortable_boundary_free_bytes": 536870912
+  }
+}
