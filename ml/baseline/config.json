@@ -1,0 +1,23 @@
+{
+  "version": "local-qwen-baseline-v1",
+  "model_relative_path": "AlagModels/Qwen3-4B",
+  "model_revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+  "dtype": "bfloat16",
+  "enable_thinking": false,
+  "seeds": [101, 202, 303],
+  "generation": {"do_sample": true, "temperature": 0.7, "top_p": 0.8, "top_k": 20, "min_p": 0.0, "max_new_tokens": 512, "num_beams": 1, "repetition_penalty": 1.0, "use_cache": true},
+  "max_input_tokens": 4096,
+  "device_strategy": "auto_cpu_offload",
+  "gpu_weight_budget_mib": 3200,
+  "cpu_weight_budget_gib": 12,
+  "attention_implementation": "eager",
+  "cpu_threads": 8,
+  "seed_control": "Reset Python, NumPy and torch CPU/CUDA RNGs to the case seed immediately before each generation; torch deterministic algorithms; CUBLAS_WORKSPACE_CONFIG=:4096:8; TF32 disabled. Repeatability is scoped to the pinned software/device stack.",
+  "sanity_seed": 17,
+  "sanity_max_new_tokens": 16,
+  "sanity_timeout_seconds": 900,
+  "evaluation_timeout_seconds": 14400,
+  "per_generation_timeout_seconds": 600,
+  "quality_classification": {"promising_min_primary_intent_rate": 0.75, "promising_min_schema_valid_rate": 0.9, "promising_min_critical_commitment_rate": 0.8, "strong": "Each seed >=15/16 intents; critical safety and ambiguity clarification 100%; zero unknown IDs or invented terms. Otherwise promising only if all three minimum rates are met, else weak. Fixed before holdout generation."},
+  "cpu_fallback": "One original-BF16 CPU strategy may be selected after a concrete offload failure; selection is frozen before holdout execution. No quantization or dtype conversion."
+}
