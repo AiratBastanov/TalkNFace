@@ -1,0 +1,54 @@
+{
+  "gate": "LOCAL_QWEN_QLORA_FEASIBILITY_SMOKE",
+  "seed": 20260917,
+  "model": "AlagModels/Qwen3-4B",
+  "train": "ml/data/synthetic_ru/train.jsonl",
+  "output": ".tmp/qlora-smoke",
+  "adapter": "AlagModels/adapters/qlora-feasibility-smoke",
+  "quantization": {
+    "load_in_4bit": true,
+    "bnb_4bit_quant_type": "nf4",
+    "bnb_4bit_use_double_quant": true,
+    "bnb_4bit_compute_dtype": "float16"
+  },
+  "lora": {
+    "r": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "bias": "none",
+    "task_type": "CAUSAL_LM",
+    "target_modules": "all-linear"
+  },
+  "training": {
+    "max_length": 1024,
+    "packing": false,
+    "per_device_train_batch_size": 1,
+    "gradient_accumulation_steps": 4,
+    "max_steps": 2,
+    "gradient_checkpointing": true,
+    "fp16": true,
+    "bf16": false,
+    "tf32": false,
+    "report_to": "none",
+    "dataloader_num_workers": 0,
+    "save_strategy": "no",
+    "eval_strategy": "no",
+    "seed": 20260917,
+    "data_seed": 20260917,
+    "learning_rate": 0.0002,
+    "optim": "paged_adamw_8bit",
+    "completion_only_loss": true,
+    "logging_steps": 1,
+    "logging_nan_inf_filter": false
+  },
+  "subset_rows": 32,
+  "retry_sequence_limit": 768,
+  "timeouts_seconds": {
+    "install": 300,
+    "preflight": 120,
+    "load": 300,
+    "microstep": 600,
+    "train": 1800,
+    "reload": 600
+  }
+}
