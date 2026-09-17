@@ -1,0 +1,37 @@
+{
+  "name": "negotiation-arena",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "packageManager": "npm@11.19.0",
+  "engines": {
+    "node": ">=24.0.0 <25"
+  },
+  "scripts": {
+    "preinstall": "node scripts/check-runtime.mjs",
+    "dev": "node scripts/dev.mjs",
+    "build:packages": "npm run build -w @arena/contracts && npm run build -w @arena/domain && npm run build -w @arena/scenarios",
+    "build": "node scripts/check-runtime.mjs && npm run build:packages && npm run build -w @arena/server && npm run build -w @arena/web",
+    "typecheck": "node scripts/check-runtime.mjs && npm run build:packages && npm run typecheck --workspaces && npm run typecheck:e2e",
+    "typecheck:e2e": "tsc --noEmit -p tsconfig.e2e.json",
+    "test:e2e": "node scripts/check-runtime.mjs && playwright test",
+    "test": "node scripts/check-runtime.mjs && vitest run",
+    "start": "node scripts/start.mjs",
+    "smoke": "node scripts/smoke-production.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@types/better-sqlite3": "9.6.0",
+    "@types/node": "24.13.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.1",
+    "typescript": "7.0.2",
+    "vite": "8.3.0",
+    "vitest": "5.0.1"
+  }
+}

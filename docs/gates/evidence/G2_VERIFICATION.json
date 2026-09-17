@@ -1,0 +1,804 @@
+{
+  "verdict": "G2_S1_VERTICAL_SLICE_NO_API_PASS",
+  "checkedAt": "2026-09-17T06:23:39.332Z",
+  "runtime": {
+    "node": "v24.21.0",
+    "npm": "11.19.0",
+    "platform": "win32",
+    "arch": "x64",
+    "executable": "C:\\Users\\BastaPC\\Desktop\\Alag\\.tools\\node-v24.21.0-win-x64\\node.exe",
+    "betterSqlite3": "12.11.1",
+    "sqlite": "3.53.2"
+  },
+  "createdPaths": [
+    "apps/server/src/api-error.ts",
+    "apps/server/src/migration-g2.ts",
+    "apps/server/src/presentation/renderers.ts",
+    "apps/server/src/repositories/arena-repository.ts",
+    "apps/server/src/routes/g2-routes.ts",
+    "apps/server/src/services/session-service.ts",
+    "apps/server/test/g2.test.ts",
+    "apps/web/src/api.ts",
+    "apps/web/src/board.tsx",
+    "apps/web/src/product.tsx",
+    "docs/gates/G2_S1_VERTICAL_SLICE_NO_API.md",
+    "docs/gates/evidence/G2_VERIFICATION.json",
+    "packages/contracts/src/g2.ts",
+    "playwright.config.ts",
+    "scripts/g2-test-console.cjs",
+    "tests/e2e/g2.spec.ts",
+    "tests/e2e/production.ts",
+    "tsconfig.e2e.json"
+  ],
+  "modifiedPaths": [
+    "README.md",
+    "apps/server/package.json",
+    "apps/server/src/app.ts",
+    "apps/server/src/database.ts",
+    "apps/server/test/database.test.ts",
+    "apps/web/package.json",
+    "apps/web/src/main.tsx",
+    "apps/web/src/style.css",
+    "package-lock.json",
+    "package.json",
+    "packages/contracts/package.json",
+    "scripts/dev.mjs",
+    "scripts/smoke-production.mjs"
+  ],
+  "deletedPaths": [],
+  "protectedHashes": [
+    {
+      "path": "9. ОЭЗ ППТ Алабуга.pdf",
+      "before": "FF50F0ADE59E2060818815284A8BE0CCD1F10065A0CE6F46F48B664E4DF0D75D",
+      "after": "FF50F0ADE59E2060818815284A8BE0CCD1F10065A0CE6F46F48B664E4DF0D75D"
+    },
+    {
+      "path": "docs/01_PRODUCT_AND_ARCHITECTURE_DECISION.md",
+      "before": "F3535762A93BE4FCA1322F8F8AB5AFC1BC980F3918EF4D5F9F55C1D03F25725D",
+      "after": "F3535762A93BE4FCA1322F8F8AB5AFC1BC980F3918EF4D5F9F55C1D03F25725D"
+    },
+    {
+      "path": "docs/00_REQUIREMENTS_AND_SCORING_MATRIX.md",
+      "before": "DD380424D50900C4BB3B6550DC69654226BC89ECA45E8FFFFF9AC1435BF27460",
+      "after": "DD380424D50900C4BB3B6550DC69654226BC89ECA45E8FFFFF9AC1435BF27460"
+    },
+    {
+      "path": "docs/02_MASTER_IMPLEMENTATION_PLAN.md",
+      "before": "D514CC920AC66749EAEDE4E443F589A1DFAA26C5F6AFB8F9D7498AF595B20E57",
+      "after": "D514CC920AC66749EAEDE4E443F589A1DFAA26C5F6AFB8F9D7498AF595B20E57"
+    },
+    {
+      "path": "docs/gates/G1_DOMAIN_CONTRACTS_DETERMINISTIC_CORE.md",
+      "before": "5F0F34D139FD4301E36EAAE02081318F58929816E1ED692FCC3D9168525D49F4",
+      "after": "5F0F34D139FD4301E36EAAE02081318F58929816E1ED692FCC3D9168525D49F4"
+    },
+    {
+      "path": "docs/gates/G0_FOUNDATION_REPRODUCIBLE_RUNTIME.md",
+      "before": "3D27D5D022FD8ECA384BC0510E493D836B4BB17A2F621A37EC55542DE8824B67",
+      "after": "3D27D5D022FD8ECA384BC0510E493D836B4BB17A2F621A37EC55542DE8824B67"
+    },
+    {
+      "path": "docs/gates/evidence/G1_VERIFICATION.json",
+      "before": "693CAC31E1AA011574D59BC9F9697134592FDDD73438948AFEB983E73425FE41",
+      "after": "693CAC31E1AA011574D59BC9F9697134592FDDD73438948AFEB983E73425FE41"
+    },
+    {
+      "path": "docs/gates/evidence/G1_MODEL_AUDIT.json",
+      "before": "CAEA1B89020BF005C616CF25B8FAC07BD868DE3690E92F56AABD52365006BF8D",
+      "after": "CAEA1B89020BF005C616CF25B8FAC07BD868DE3690E92F56AABD52365006BF8D"
+    }
+  ],
+  "g1SourceFilesUnchanged": 40,
+  "sourceVersions": [
+    {
+      "path": "README.md",
+      "sha256": "8A0C1213F8EEC926DAA5735B8246A7E822DABB80D2681DD52E54A480BA0B20F6"
+    },
+    {
+      "path": "apps/server/package.json",
+      "sha256": "22FB91E9208A5E2ECB74E3DD167B7393356CF18F2F8D3003D9C2723FD452FB57"
+    },
+    {
+      "path": "apps/server/src/api-error.ts",
+      "sha256": "A696E8C4884046F3ACF90E4DBEB85653B712AFF3D66DD126D3F81E8395A1C3CB"
+    },
+    {
+      "path": "apps/server/src/app.ts",
+      "sha256": "DF557B3CF37E1029BD588BCF80CBD61768E7C4F9CFB6937AC4E229783C068AB0"
+    },
+    {
+      "path": "apps/server/src/database.ts",
+      "sha256": "7017B937C6CA69608F9138F73036EF744AFFBDF54C7DF17C3CCFB90F0DD25080"
+    },
+    {
+      "path": "apps/server/src/migration-g2.ts",
+      "sha256": "32CEEFF52293251F1F04B0F0A796529ABCCE836DB003CBCC7DA294E3A9E576E3"
+    },
+    {
+      "path": "apps/server/src/presentation/renderers.ts",
+      "sha256": "6117180DCA87CC6AA49A5C1A3511D2E019F2B8BF53078C46FB81D49A359C5B19"
+    },
+    {
+      "path": "apps/server/src/repositories/arena-repository.ts",
+      "sha256": "605F3E0EDC31A485CDA557FA544C3C6E9AAC239B7CDFCA59F60FC56595D8DB8C"
+    },
+    {
+      "path": "apps/server/src/routes/g2-routes.ts",
+      "sha256": "03B346C917F3C13F9654ED0E1A9BB16B8EFF87D1059D75F008E3F4CAA1EB7DB8"
+    },
+    {
+      "path": "apps/server/src/services/session-service.ts",
+      "sha256": "A7B15D287D7914262B25E790A1672696357AB04A1BE3862FC5FD9169E268A07F"
+    },
+    {
+      "path": "apps/server/test/database.test.ts",
+      "sha256": "834D2BC52B7C1766E9535FFC4B00686FA271C7BBD3816FEE8BAB30664CE25DBF"
+    },
+    {
+      "path": "apps/server/test/g2.test.ts",
+      "sha256": "03CB442F4A3A100ADCC48B845C8441149DA338AA53B8EE0CAE9CB84CBB65D48B"
+    },
+    {
+      "path": "apps/web/package.json",
+      "sha256": "1B9037A87C1543F99A47D232EBAC42E08CAF05DC83BA025AC3BD17C62DDDBE7B"
+    },
+    {
+      "path": "apps/web/src/api.ts",
+      "sha256": "D0F25A2431C9B79E10F8B8ECC113E173EF8D60628CD074B27C118814F680FA92"
+    },
+    {
+      "path": "apps/web/src/board.tsx",
+      "sha256": "978EBAB8A79497CCFB74BC865E001589F7305547CA46631B6D584977D12BE5DB"
+    },
+    {
+      "path": "apps/web/src/main.tsx",
+      "sha256": "FDDDA5ADB8AC9412F30D8079937444C45641DDB668F43492463737E24C47B88A"
+    },
+    {
+      "path": "apps/web/src/product.tsx",
+      "sha256": "BBBE4112C19C5D0014ACDDE0F6284D88E2CFF0C35075FF741E70738BA995B99C"
+    },
+    {
+      "path": "apps/web/src/style.css",
+      "sha256": "C50E24EB9C969E581753C5DE1B71109C57AB74A24FA1424D1B6C4C4C10F2B9DF"
+    },
+    {
+      "path": "docs/gates/G2_S1_VERTICAL_SLICE_NO_API.md",
+      "sha256": "A8FE35B53D3154BD7C31DD7FCEE3F811B233DF006D087E127898B9C55316A66A"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "C370832675EFED38366492E3B708D7696336F6D58C31B06A0EFAFD8CDD6CB6EF"
+    },
+    {
+      "path": "package.json",
+      "sha256": "F610EDB6FE05AC2EE2ED650A093EACCEA8D8E81B6D798645510932E637B885A4"
+    },
+    {
+      "path": "packages/contracts/package.json",
+      "sha256": "3933069207B9BF2A06AD2A2C566E878E98A95FB14A7828CD470D2C1AB2BDACF6"
+    },
+    {
+      "path": "packages/contracts/src/g2.ts",
+      "sha256": "966DCA1572FFEA45039975476DF47F575009A8252D953D9FFAC1D0C85D0E4B84"
+    },
+    {
+      "path": "playwright.config.ts",
+      "sha256": "F2F7230B7B4AFE83A5EC049F538235689913814EF533A05C548EC266B6CDAEE1"
+    },
+    {
+      "path": "scripts/dev.mjs",
+      "sha256": "F9E0CF041F45E20E9A0CE9EFA4FE5D22126337046C48C83156C9FEFF13165050"
+    },
+    {
+      "path": "scripts/g2-test-console.cjs",
+      "sha256": "EEB4ED19872C7209A01E090ACE05C1632322876A3DBFA2D5DFB5F5D85CC89C42"
+    },
+    {
+      "path": "scripts/smoke-production.mjs",
+      "sha256": "18B908E231C8238BCAE4188AEC5738F1598D13E77BCC5C35B2FF309CCA9476A6"
+    },
+    {
+      "path": "tests/e2e/g2.spec.ts",
+      "sha256": "5BCF88DAC7296106399696FB96A51700F37130B52DD16450D9AC2B91BFAB5AFA"
+    },
+    {
+      "path": "tests/e2e/production.ts",
+      "sha256": "0E8F3249DE48D1215725BFF218A086E36DF6BDA0A18EC91DA6C809297BB6EF0C"
+    },
+    {
+      "path": "tsconfig.e2e.json",
+      "sha256": "2FC21BB983A251A60DEBB03324655FF789E45D267B0ACD21E0868484130E93D7"
+    }
+  ],
+  "lockfile": {
+    "before": "7CE5CC85C537D687D21F84F72D44BFEDCD38ADCEB5E751496014EAE18189588C",
+    "after": "C370832675EFED38366492E3B708D7696336F6D58C31B06A0EFAFD8CDD6CB6EF",
+    "reversedLockHash": "7CE5CC85C537D687D21F84F72D44BFEDCD38ADCEB5E751496014EAE18189588C",
+    "existingExternalDependenciesUnchanged": true,
+    "added": [
+      {
+        "name": "@playwright/test",
+        "version": "1.63.0",
+        "purpose": "real installed Chrome automation; development only"
+      },
+      {
+        "name": "playwright",
+        "version": "1.63.0",
+        "transitive": true
+      },
+      {
+        "name": "playwright-core",
+        "version": "1.63.0",
+        "transitive": true
+      }
+    ],
+    "newBrowserDownloads": 0
+  },
+  "systemNode": [
+    {
+      "path": "D:/nodejs/node.exe",
+      "sha256": "FDDDBF4581E046B8102815D56208D6A248950BB554570B81519A8A5DACFEE95D",
+      "unchanged": true
+    },
+    {
+      "path": "D:/nodejs/npm.cmd",
+      "sha256": "21B46C69AD6E2F231F02A9E120F4BA6C8E75FEF5A45637103002EAB99F888AB8",
+      "unchanged": true
+    },
+    {
+      "path": "D:/nodejs/node_modules/npm/package.json",
+      "sha256": "972586791BD0E1ED4848ADDBB457889CDC5A45F4A3AFC5911B1CD233F0D87458",
+      "unchanged": true
+    }
+  ],
+  "migrationVersions": [
+    1,
+    2
+  ],
+  "migration1Unchanged": true,
+  "migrationRepeat": "PASS",
+  "legacyG0Migration": "PASS",
+  "tablesAdded": [
+    "scenario_versions",
+    "sessions",
+    "turns"
+  ],
+  "tests": {
+    "passed": 197,
+    "failed": 0,
+    "files": [
+      {
+        "path": "apps/server/test/app.test.ts",
+        "status": "passed",
+        "passed": 2
+      },
+      {
+        "path": "apps/server/test/database.test.ts",
+        "status": "passed",
+        "passed": 3
+      },
+      {
+        "path": "apps/server/test/env.test.ts",
+        "status": "passed",
+        "passed": 15
+      },
+      {
+        "path": "apps/server/test/g2.test.ts",
+        "status": "passed",
+        "passed": 26
+      },
+      {
+        "path": "apps/server/test/static.test.ts",
+        "status": "passed",
+        "passed": 2
+      },
+      {
+        "path": "packages/contracts/test/schemas.test.ts",
+        "status": "passed",
+        "passed": 2
+      },
+      {
+        "path": "packages/scenarios/test/goldens.test.ts",
+        "status": "passed",
+        "passed": 19
+      },
+      {
+        "path": "packages/scenarios/test/models.test.ts",
+        "status": "passed",
+        "passed": 18
+      },
+      {
+        "path": "packages/domain/test/offers.test.ts",
+        "status": "passed",
+        "passed": 14
+      },
+      {
+        "path": "packages/domain/test/policy.test.ts",
+        "status": "passed",
+        "passed": 28
+      },
+      {
+        "path": "packages/domain/test/projection.test.ts",
+        "status": "passed",
+        "passed": 20
+      },
+      {
+        "path": "packages/domain/test/validation.test.ts",
+        "status": "passed",
+        "passed": 48
+      }
+    ]
+  },
+  "api": {
+    "scenarios": "S1_ONLY",
+    "immutablePublication": "PASS",
+    "definitionPinning": "PASS",
+    "createLoad": "PASS",
+    "atomicTurn": "PASS",
+    "faultInjection": "SQLite BEFORE UPDATE sessions trigger after turn INSERT; full rollback and identical retry",
+    "idempotency": "PASS",
+    "idempotencyConflict": "PASS",
+    "staleRevision": "PASS",
+    "physicallyImpossibleOfferConsumesTurn": "PASS",
+    "activeOfferAfterQuestion": "PASS",
+    "activeOfferAcceptance": "PASS",
+    "corruptStateFailClosed": "PASS",
+    "invalidDefinitionFailClosed": "PASS",
+    "transcriptPersistence": "PASS",
+    "restart": "PASS",
+    "replayCleanPrivateState": "PASS",
+    "outcomes": [
+      {
+        "trace": "GS1",
+        "expected": "MUTUAL_GAIN",
+        "actual": "MUTUAL_GAIN",
+        "turns": 5,
+        "batnaComparison": "above"
+      },
+      {
+        "trace": "GS2",
+        "expected": "ACCEPTABLE_PARTIAL",
+        "actual": "ACCEPTABLE_PARTIAL",
+        "turns": 7,
+        "batnaComparison": "above"
+      },
+      {
+        "trace": "GS3",
+        "expected": "NO_AGREEMENT",
+        "actual": "NO_AGREEMENT",
+        "turns": 5,
+        "batnaComparison": "not_exercised"
+      },
+      {
+        "trace": "GS4",
+        "expected": "POOR_AGREEMENT",
+        "actual": "POOR_AGREEMENT",
+        "turns": 5,
+        "batnaComparison": "below"
+      },
+      {
+        "trace": "GS5",
+        "expected": "POOR_AGREEMENT",
+        "actual": "POOR_AGREEMENT",
+        "turns": 2,
+        "batnaComparison": "below"
+      },
+      {
+        "trace": "GS6",
+        "expected": "NO_AGREEMENT",
+        "actual": "NO_AGREEMENT",
+        "turns": 8,
+        "batnaComparison": "not_exercised"
+      },
+      {
+        "trace": "GS7",
+        "expected": "MUTUAL_GAIN",
+        "actual": "MUTUAL_GAIN",
+        "turns": 5,
+        "batnaComparison": "above"
+      }
+    ],
+    "apiTests": 26,
+    "serializedResponsesAudited": 145,
+    "localTurnTiming": {
+      "sample": 57,
+      "p95Ms": 6.3437999999999874,
+      "targetMs": 500,
+      "kind": "local Fastify inject; not production capacity"
+    }
+  },
+  "privacy": {
+    "result": "PASS",
+    "publicDtoRuntimeValidation": "strict Zod",
+    "hiddenOpponentData": "NOT_SERIALIZED",
+    "privateClientAssets": "NONE",
+    "privateFrontendImports": "NONE",
+    "sourceSecretFindings": [],
+    "browserLeakFindings": [],
+    "secretScan": {
+      "textFiles": 127,
+      "textTestArtifacts": 29,
+      "includesReceipt": true,
+      "includesProductionHtmlAndAssets": true
+    },
+    "scope": "actual serialized HTTP/JSON, client assets and source; no production auth certification"
+  },
+  "browser": {
+    "browser": "152.0.7977.84",
+    "channel": "chrome",
+    "routes": [
+      "/admin",
+      "/",
+      "/session/:id/briefing",
+      "/session/:id",
+      "/session/:id/result"
+    ],
+    "cases": [
+      {
+        "name": "GS1",
+        "expected": "MUTUAL_GAIN",
+        "actual": "MUTUAL_GAIN",
+        "refresh": "PASS",
+        "restart": "PASS",
+        "replay": "PASS",
+        "offerEditConfirmation": "PASS"
+      },
+      {
+        "name": "GS3",
+        "expected": "NO_AGREEMENT",
+        "actual": "NO_AGREEMENT",
+        "terminalReason": "opponent_walkaway"
+      },
+      {
+        "name": "active-commitment",
+        "physicalRejection": "PASS",
+        "questionPreservesOffer": "PASS",
+        "refresh": "PASS",
+        "exactAcceptance": "PASS"
+      },
+      {
+        "name": "responsive-360",
+        "expected": "POOR_AGREEMENT",
+        "actual": "POOR_AGREEMENT",
+        "keyboard": "PASS"
+      },
+      {
+        "name": "responsive-390",
+        "expected": "POOR_AGREEMENT",
+        "actual": "POOR_AGREEMENT",
+        "keyboard": "PASS"
+      },
+      {
+        "name": "retry-and-stale-tab",
+        "uncertainRetry": "PASS",
+        "refreshPending": "PASS",
+        "singleCommit": "PASS",
+        "staleTabRecovery": "PASS",
+        "confirmedWalkaway": "PASS"
+      }
+    ],
+    "viewportChecks": [
+      {
+        "width": 1280,
+        "overflow": 0,
+        "screen": "admin"
+      },
+      {
+        "width": 1280,
+        "overflow": 0,
+        "screen": "briefing"
+      },
+      {
+        "width": 1280,
+        "overflow": 0,
+        "screen": "offer"
+      },
+      {
+        "width": 1280,
+        "overflow": 0,
+        "screen": "confirmation"
+      },
+      {
+        "width": 1280,
+        "overflow": 0,
+        "screen": "result"
+      },
+      {
+        "width": 1280,
+        "overflow": 0,
+        "screen": "briefing"
+      },
+      {
+        "width": 1280,
+        "overflow": 0,
+        "screen": "offer"
+      },
+      {
+        "width": 1280,
+        "overflow": 0,
+        "screen": "confirmation"
+      },
+      {
+        "width": 390,
+        "overflow": 0,
+        "screen": "briefing"
+      },
+      {
+        "width": 390,
+        "overflow": 0,
+        "screen": "offer"
+      },
+      {
+        "width": 390,
+        "overflow": 0,
+        "screen": "confirmation"
+      },
+      {
+        "width": 390,
+        "overflow": 0,
+        "screen": "accept-confirmation"
+      },
+      {
+        "width": 390,
+        "overflow": 0,
+        "screen": "accepted-result"
+      },
+      {
+        "width": 360,
+        "overflow": 0,
+        "screen": "admin"
+      },
+      {
+        "width": 360,
+        "overflow": 0,
+        "screen": "briefing"
+      },
+      {
+        "width": 360,
+        "overflow": 0,
+        "screen": "offer"
+      },
+      {
+        "width": 360,
+        "overflow": 0,
+        "screen": "confirmation"
+      },
+      {
+        "width": 360,
+        "overflow": 0,
+        "screen": "poor-result"
+      },
+      {
+        "width": 390,
+        "overflow": 0,
+        "screen": "admin"
+      },
+      {
+        "width": 390,
+        "overflow": 0,
+        "screen": "briefing"
+      },
+      {
+        "width": 390,
+        "overflow": 0,
+        "screen": "offer"
+      },
+      {
+        "width": 390,
+        "overflow": 0,
+        "screen": "confirmation"
+      },
+      {
+        "width": 390,
+        "overflow": 0,
+        "screen": "poor-result"
+      },
+      {
+        "width": 1280,
+        "overflow": 0,
+        "screen": "briefing"
+      }
+    ],
+    "browserResponses": 66,
+    "externalRequests": [],
+    "privacyFailures": [],
+    "browserErrors": [],
+    "production": {
+      "command": "npm start",
+      "runtime": "v24.21.0",
+      "platform": "win32",
+      "starts": 2,
+      "cleanShutdowns": 2,
+      "serverPids": [
+        18216,
+        21784
+      ],
+      "aiCredentials": "NONE",
+      "database": "isolated real SQLite",
+      "shutdown": "real SIGINT handler via test-only stdin adapter",
+      "orphanProcesses": 0
+    },
+    "tests": {
+      "startTime": "2026-09-17T06:07:03.280Z",
+      "duration": 10760.798999999999,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "realApplicationSmoke": "PASS",
+    "refresh": "PASS",
+    "restart": "PASS",
+    "replay": "PASS",
+    "screenshots": [
+      ".tools/g2-result-1280.png",
+      ".tools/g2-result-390.png",
+      ".tools/g2-result-360.png"
+    ],
+    "browserDownload": false,
+    "physicalPhone": "NOT_TESTED"
+  },
+  "responsive": [
+    {
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "result": "PASS"
+    }
+  ],
+  "productionBuild": {
+    "result": "PASS",
+    "assets": [
+      {
+        "path": "apps/web/dist/assets/index-C9p4VMl8.css",
+        "sha256": "13D1952FEDAFBC133C7419C06E8F3664FE5DEAF36791C458FFB71FF83DE21C3E"
+      },
+      {
+        "path": "apps/web/dist/assets/index-CRkf3XXK.js",
+        "sha256": "2281DD9083429F2AE43474EB23425F572E913ABFC5C5C699934D27328AB54B9E"
+      }
+    ],
+    "browserExercisedAsset": "index-CRkf3XXK.js",
+    "cleanCiRebuildSameAsset": true
+  },
+  "foundationSmoke": {
+    "result": "PASS",
+    "starts": 2,
+    "cleanShutdowns": 2,
+    "health": "PASS",
+    "ready": "PASS",
+    "sameOrigin": "PASS",
+    "sentinel": "PASS",
+    "orphanProcesses": 0
+  },
+  "commands": [
+    {
+      "label": "g2-api-gs3",
+      "exitCode": 0,
+      "elapsedMs": 1370,
+      "log": ".tools/logs/g2-api-gs3.log"
+    },
+    {
+      "label": "g2-api-migration",
+      "exitCode": 0,
+      "elapsedMs": 1191,
+      "log": ".tools/logs/g2-api-migration.log"
+    },
+    {
+      "label": "g2-api-tests-affected",
+      "exitCode": 255,
+      "elapsedMs": 270,
+      "log": ".tools/logs/g2-api-tests-affected.log"
+    },
+    {
+      "label": "g2-api-tests-fixed",
+      "exitCode": 1,
+      "elapsedMs": 2784,
+      "log": ".tools/logs/g2-api-tests-fixed.log"
+    },
+    {
+      "label": "g2-api-tests",
+      "exitCode": 1,
+      "elapsedMs": 1749,
+      "log": ".tools/logs/g2-api-tests.log"
+    },
+    {
+      "label": "g2-browser-initial",
+      "exitCode": 1,
+      "elapsedMs": 2148,
+      "log": ".tools/logs/g2-browser-initial.log"
+    },
+    {
+      "label": "g2-browser-start-fixed",
+      "exitCode": 0,
+      "elapsedMs": 11517,
+      "log": ".tools/logs/g2-browser-start-fixed.log"
+    },
+    {
+      "label": "g2-build-final",
+      "exitCode": 0,
+      "elapsedMs": 5553,
+      "log": ".tools/logs/g2-build-final.log"
+    },
+    {
+      "label": "g2-ci",
+      "exitCode": 0,
+      "elapsedMs": 3908,
+      "log": ".tools/logs/g2-ci.log"
+    },
+    {
+      "label": "g2-e2e-typecheck",
+      "exitCode": 0,
+      "elapsedMs": 820,
+      "log": ".tools/logs/g2-e2e-typecheck.log"
+    },
+    {
+      "label": "g2-foundation-smoke",
+      "exitCode": 0,
+      "elapsedMs": 1212,
+      "log": ".tools/logs/g2-foundation-smoke.log"
+    },
+    {
+      "label": "g2-playwright-install",
+      "exitCode": 0,
+      "elapsedMs": 2966,
+      "log": ".tools/logs/g2-playwright-install.log"
+    },
+    {
+      "label": "g2-playwright-metadata",
+      "exitCode": 0,
+      "elapsedMs": 1580,
+      "log": ".tools/logs/g2-playwright-metadata.log"
+    },
+    {
+      "label": "g2-production-build",
+      "exitCode": 0,
+      "elapsedMs": 5367,
+      "log": ".tools/logs/g2-production-build.log"
+    },
+    {
+      "label": "g2-tests-final",
+      "exitCode": 0,
+      "elapsedMs": 6746,
+      "log": ".tools/logs/g2-tests-final.log"
+    },
+    {
+      "label": "g2-typecheck-final",
+      "exitCode": 0,
+      "elapsedMs": 8767,
+      "log": ".tools/logs/g2-typecheck-final.log"
+    },
+    {
+      "label": "g2-typecheck-server",
+      "exitCode": 0,
+      "elapsedMs": 10979,
+      "log": ".tools/logs/g2-typecheck-server.log"
+    },
+    {
+      "label": "g2-typecheck-ui",
+      "exitCode": 0,
+      "elapsedMs": 935,
+      "log": ".tools/logs/g2-typecheck-ui.log"
+    }
+  ],
+  "AI_PROVIDER_ACCESS": "UNCONFIRMED",
+  "AI_INTEGRATION": "NOT_STARTED",
+  "FREE_TEXT_NLU": "NOT_STARTED",
+  "TARGET_LINUX_RUNTIME_SMOKE": "NOT_VERIFIED",
+  "PUBLIC_MULTI_USER_AUTHORIZATION": "NOT_IMPLEMENTED",
+  "scope": {
+    "G2_ONLY": "CONFIRMED",
+    "G3": "NOT_STARTED",
+    "S2_UI": "NOT_STARTED",
+    "G5_GENERATOR": "NOT_STARTED",
+    "G6_FULL_FEEDBACK": "NOT_STARTED",
+    "DEPLOYMENT": "NOT_STARTED"
+  }
+}

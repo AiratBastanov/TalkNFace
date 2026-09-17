@@ -1,0 +1,434 @@
+{
+  "runtime": "v24.21.0",
+  "npm": "11.19.0",
+  "platform": "win32",
+  "protectedHashes": [
+    {
+      "path": "9. ОЭЗ ППТ Алабуга.pdf",
+      "before": "FF50F0ADE59E2060818815284A8BE0CCD1F10065A0CE6F46F48B664E4DF0D75D",
+      "after": "FF50F0ADE59E2060818815284A8BE0CCD1F10065A0CE6F46F48B664E4DF0D75D"
+    },
+    {
+      "path": "docs/00_REQUIREMENTS_AND_SCORING_MATRIX.md",
+      "before": "DD380424D50900C4BB3B6550DC69654226BC89ECA45E8FFFFF9AC1435BF27460",
+      "after": "DD380424D50900C4BB3B6550DC69654226BC89ECA45E8FFFFF9AC1435BF27460"
+    },
+    {
+      "path": "docs/01_PRODUCT_AND_ARCHITECTURE_DECISION.md",
+      "before": "F3535762A93BE4FCA1322F8F8AB5AFC1BC980F3918EF4D5F9F55C1D03F25725D",
+      "after": "F3535762A93BE4FCA1322F8F8AB5AFC1BC980F3918EF4D5F9F55C1D03F25725D"
+    },
+    {
+      "path": "docs/02_MASTER_IMPLEMENTATION_PLAN.md",
+      "before": "D514CC920AC66749EAEDE4E443F589A1DFAA26C5F6AFB8F9D7498AF595B20E57",
+      "after": "D514CC920AC66749EAEDE4E443F589A1DFAA26C5F6AFB8F9D7498AF595B20E57"
+    },
+    {
+      "path": "docs/gates/G0_FOUNDATION_REPRODUCIBLE_RUNTIME.md",
+      "before": "3D27D5D022FD8ECA384BC0510E493D836B4BB17A2F621A37EC55542DE8824B67",
+      "after": "3D27D5D022FD8ECA384BC0510E493D836B4BB17A2F621A37EC55542DE8824B67"
+    },
+    {
+      "path": "package-lock.json",
+      "before": "785ACC78667D7E740865963BF1CAB5B02C89DA441841FA352F7868A4C2C0FDED",
+      "after": "7CE5CC85C537D687D21F84F72D44BFEDCD38ADCEB5E751496014EAE18189588C"
+    }
+  ],
+  "systemNode": [
+    {
+      "path": "D:/nodejs/node.exe",
+      "sha256": "FDDDBF4581E046B8102815D56208D6A248950BB554570B81519A8A5DACFEE95D",
+      "unchanged": true
+    },
+    {
+      "path": "D:/nodejs/npm.cmd",
+      "sha256": "21B46C69AD6E2F231F02A9E120F4BA6C8E75FEF5A45637103002EAB99F888AB8",
+      "unchanged": true
+    },
+    {
+      "path": "D:/nodejs/node_modules/npm/package.json",
+      "sha256": "972586791BD0E1ED4848ADDBB457889CDC5A45F4A3AFC5911B1CD233F0D87458",
+      "unchanged": true
+    }
+  ],
+  "sourceVersions": [
+    {
+      "path": "README.md",
+      "sha256": "09950E1F5174883452D072727EEA6D859A29307D2CF1BDA68B581526CEB7CE84"
+    },
+    {
+      "path": "docs/gates/G1_DOMAIN_CONTRACTS_DETERMINISTIC_CORE.md",
+      "sha256": "5F0F34D139FD4301E36EAAE02081318F58929816E1ED692FCC3D9168525D49F4"
+    },
+    {
+      "path": "docs/gates/evidence/G1_MODEL_AUDIT.json",
+      "sha256": "CAEA1B89020BF005C616CF25B8FAC07BD868DE3690E92F56AABD52365006BF8D"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "7CE5CC85C537D687D21F84F72D44BFEDCD38ADCEB5E751496014EAE18189588C"
+    },
+    {
+      "path": "package.json",
+      "sha256": "C2E69273FFA064595CF176B08D384965A2B45B0EED0C5641877374E82D657F18"
+    },
+    {
+      "path": "packages/contracts/package.json",
+      "sha256": "A66C66FB707A582E7DB7A4E53D89D7D4D40B0831760592B84C0DB939723EC37D"
+    },
+    {
+      "path": "packages/contracts/src/action.ts",
+      "sha256": "25A6C69A251CA940A793135766016B2F3E8A96E0187D131A48E653AED698E8DD"
+    },
+    {
+      "path": "packages/contracts/src/common.ts",
+      "sha256": "A2F0769A74949661586F434283A0B4A86E75EC0E60B660279EA3807D4EDEAAA9"
+    },
+    {
+      "path": "packages/contracts/src/event.ts",
+      "sha256": "6DF681F0180E72BB2074C9811D842ADABAB5FF9C4C0CA8357D71958F9EC9D81A"
+    },
+    {
+      "path": "packages/contracts/src/index.ts",
+      "sha256": "43F039E10C74B70FE4CF1C83424C27591638EB615732467558CA9A65F0905D47"
+    },
+    {
+      "path": "packages/contracts/src/outcome.ts",
+      "sha256": "D32E98404E5A13B28CEC7EC1D9616624AF023C1746BED22FAA4CE76035E8AAB9"
+    },
+    {
+      "path": "packages/contracts/src/projection.ts",
+      "sha256": "597448C88DF63A6E4E214A61BE7D7C215D6DDB3BBD0503CD3D8AD99C245618EF"
+    },
+    {
+      "path": "packages/contracts/src/scenario.ts",
+      "sha256": "78173B403D5ABD24F0017751A6CDCD1B6FDD0D38D6278BD9AD616C4FD4844EA5"
+    },
+    {
+      "path": "packages/contracts/src/session.ts",
+      "sha256": "1E0876E96EA9BBE17E2362808DE62015CD886FB1EB19A782782D892903AC82E7"
+    },
+    {
+      "path": "packages/contracts/test/schemas.test.ts",
+      "sha256": "13A54E59DA84B59CEEEE20395E9F91054B2975F9B480CDBF987CBFDC0463D839"
+    },
+    {
+      "path": "packages/contracts/tsconfig.json",
+      "sha256": "B68B23B3066255499404DE87FE975AFB68C84A602C439165E664B46FED317B71"
+    },
+    {
+      "path": "packages/domain/package.json",
+      "sha256": "78B158ABCC80B53A764B812EF6F4C1EE06736AA0228AC3FB45CD8EC73E989039"
+    },
+    {
+      "path": "packages/domain/src/action-validation.ts",
+      "sha256": "238D7DAD5A9D30F9BD5940FBC1679AC9EF14FDFA04D2D9F76BECCF80BD919AB5"
+    },
+    {
+      "path": "packages/domain/src/authority.ts",
+      "sha256": "87726A2045A14C919E652C7E3BA3E3607146E1C5630EF2F273FC26E18DD5C4C2"
+    },
+    {
+      "path": "packages/domain/src/constraints.ts",
+      "sha256": "BCC6A24A694F081507186B7215AEBF491BB9032FD7DEB8E1C0E993931ABE373B"
+    },
+    {
+      "path": "packages/domain/src/disclosure.ts",
+      "sha256": "1F04618D526D01191F7CEC75D076B9E3065EA3B81251618B18E5B204C466954A"
+    },
+    {
+      "path": "packages/domain/src/enumerate.ts",
+      "sha256": "4F3C5570451B46512F4D2350C939D82C4920E72B2EB1BC77D51C98282F815AFC"
+    },
+    {
+      "path": "packages/domain/src/index.ts",
+      "sha256": "8BB0C497592E93DC8109C1649BA16A5008BD908D6D1A732AB6B20539293628D1"
+    },
+    {
+      "path": "packages/domain/src/offers.ts",
+      "sha256": "A799EF2F7E4CF26D188F8B4620D632B7065532EB3A2C41702A5CD79A061C6DA7"
+    },
+    {
+      "path": "packages/domain/src/outcomes.ts",
+      "sha256": "78BD95D854C82DF2F9ADCC3E0C8F4C9263E0DBCEB5C4A061B316F1D253470797"
+    },
+    {
+      "path": "packages/domain/src/policy.ts",
+      "sha256": "BB66FB7C65B2DEEEFAE442508103BF691E31EA8B476E88B0DF0E242AA90961F1"
+    },
+    {
+      "path": "packages/domain/src/projection.ts",
+      "sha256": "CDF930FA1BC0BE6C15311A4CDB478E3254F4F78A250C5B8CB87CE37DB81A5159"
+    },
+    {
+      "path": "packages/domain/src/reducer.ts",
+      "sha256": "2607FF26C5BEC1CF7F6DF4DB39C6AD55D38E1921BAED0976DAED3E2D09BD5930"
+    },
+    {
+      "path": "packages/domain/src/utility.ts",
+      "sha256": "2580E1CF9295703748D4E0A2C6A65E154FD31101D6010EF000DAD4E83863BBCF"
+    },
+    {
+      "path": "packages/domain/src/validation.ts",
+      "sha256": "8F684E618BEA8BA9C486C67D3C8B3FE6A07DD305B0E856E3313F6E4DA99C542F"
+    },
+    {
+      "path": "packages/domain/test/offers.test.ts",
+      "sha256": "09CF4097F23A34251BFA072AD762E8A889FF9CCA1FE0DB422DA6D15B465AB679"
+    },
+    {
+      "path": "packages/domain/test/policy.test.ts",
+      "sha256": "1E9D936747DC44492F6D81BCFEA3F4A342F681C709AC0D5EACD2C439CEB79B2F"
+    },
+    {
+      "path": "packages/domain/test/projection.test.ts",
+      "sha256": "A2586CA978480CEE7903CACD627D115F9291E2E9A2E0A4776902650784928472"
+    },
+    {
+      "path": "packages/domain/test/validation.test.ts",
+      "sha256": "326507DC153B5B0E1447E80DC3E14FD7401B8DF97B617A79208CC3B8EC04AF59"
+    },
+    {
+      "path": "packages/domain/tsconfig.build.json",
+      "sha256": "2C0849ACAFF0E19D27CB1998E85B41336C36655EFCC4E500AE093F4A3D8869E7"
+    },
+    {
+      "path": "packages/domain/tsconfig.json",
+      "sha256": "313986A7B265FAC0FD68860B151132CCB942E0CAF1693B1EDFD708C8129CFDDA"
+    },
+    {
+      "path": "packages/scenarios/package.json",
+      "sha256": "DB624754C2FF3CEE180B22C23F39EB525681EB90A741D5E56DF039057B78E794"
+    },
+    {
+      "path": "packages/scenarios/src/index.ts",
+      "sha256": "6242D23D87D08604BA939D71CDB6FBBF01635646A1EDA34F1ED2E86240D2B7EF"
+    },
+    {
+      "path": "packages/scenarios/src/reference-actions.ts",
+      "sha256": "4E8ACCF652C4DCCEB9DF062981D0725D68363DC60895672BF071C62DB416E724"
+    },
+    {
+      "path": "packages/scenarios/src/s1-supply-launch.ts",
+      "sha256": "A29EE9A1579625BF9863105E573AB61DCD326FF6D995C7087FEBF14D5B3E2F5A"
+    },
+    {
+      "path": "packages/scenarios/src/s2-workload-urgent.ts",
+      "sha256": "A3CD71E10D7088DB1E358F27636042E86931D34E9CB59E1311FB9F390853A0A4"
+    },
+    {
+      "path": "packages/scenarios/test/generate-audit.ts",
+      "sha256": "080EF50F61E8308771267C762D5E94634B06F9F9D537A4B4E6F6D7F703FD683A"
+    },
+    {
+      "path": "packages/scenarios/test/goldens.test.ts",
+      "sha256": "039AC70F4441DC6B2E3D907F3875E86D61B6F06390FFAE414BCD4651CD4D9743"
+    },
+    {
+      "path": "packages/scenarios/test/goldens.ts",
+      "sha256": "3FEF8BF04E08826AAD5BFFF5C7CB999B5B52F53F3BBDE8EE47844501C080AB2C"
+    },
+    {
+      "path": "packages/scenarios/test/helpers.ts",
+      "sha256": "A059F59D875E6A8CDBB1E07B78866B575A161725B003D1C8537ED768B94DE842"
+    },
+    {
+      "path": "packages/scenarios/test/models.test.ts",
+      "sha256": "F0CA3D57C05511EBB3A0B91A40401D97DCC19130702899B5FD6FA9995CBB0308"
+    },
+    {
+      "path": "packages/scenarios/tsconfig.build.json",
+      "sha256": "2C0849ACAFF0E19D27CB1998E85B41336C36655EFCC4E500AE093F4A3D8869E7"
+    },
+    {
+      "path": "packages/scenarios/tsconfig.json",
+      "sha256": "313986A7B265FAC0FD68860B151132CCB942E0CAF1693B1EDFD708C8129CFDDA"
+    },
+    {
+      "path": "vitest.config.ts",
+      "sha256": "CA8D9147AB7A3345CED0519C835491CE01886EC9D519FE18DC2492C71FDDCF8B"
+    }
+  ],
+  "modified": [
+    "packages/contracts/tsconfig.json",
+    "packages/contracts/package.json",
+    "package.json",
+    "vitest.config.ts",
+    "README.md"
+  ],
+  "deleted": [
+    "packages/contracts/src/index.d.ts"
+  ],
+  "externalDependenciesUnchanged": true,
+  "reversedLockHash": "785ACC78667D7E740865963BF1CAB5B02C89DA441841FA352F7868A4C2C0FDED",
+  "genericScenarioBranches": 0,
+  "forbiddenGenericDependencies": 0,
+  "secretFindings": [],
+  "g0ApplicationSourcesUnchanged": true,
+  "productMigrationsAdded": 0,
+  "negotiationRoutesAdded": 0,
+  "tests": {
+    "passed": 171,
+    "failed": 0,
+    "files": [
+      {
+        "name": "apps/server/test/app.test.ts",
+        "status": "passed",
+        "tests": 2
+      },
+      {
+        "name": "apps/server/test/database.test.ts",
+        "status": "passed",
+        "tests": 3
+      },
+      {
+        "name": "apps/server/test/env.test.ts",
+        "status": "passed",
+        "tests": 15
+      },
+      {
+        "name": "apps/server/test/static.test.ts",
+        "status": "passed",
+        "tests": 2
+      },
+      {
+        "name": "packages/contracts/test/schemas.test.ts",
+        "status": "passed",
+        "tests": 2
+      },
+      {
+        "name": "packages/domain/test/offers.test.ts",
+        "status": "passed",
+        "tests": 14
+      },
+      {
+        "name": "packages/domain/test/policy.test.ts",
+        "status": "passed",
+        "tests": 28
+      },
+      {
+        "name": "packages/domain/test/projection.test.ts",
+        "status": "passed",
+        "tests": 20
+      },
+      {
+        "name": "packages/domain/test/validation.test.ts",
+        "status": "passed",
+        "tests": 48
+      },
+      {
+        "name": "packages/scenarios/test/goldens.test.ts",
+        "status": "passed",
+        "tests": 19
+      },
+      {
+        "name": "packages/scenarios/test/models.test.ts",
+        "status": "passed",
+        "tests": 18
+      }
+    ]
+  },
+  "commands": [
+    {
+      "label": "g1-lock",
+      "exitCode": 0,
+      "elapsedMs": 578,
+      "log": ".tools/logs/g1-lock.log"
+    },
+    {
+      "label": "g1-ci",
+      "exitCode": 0,
+      "elapsedMs": 3901,
+      "log": ".tools/logs/g1-ci.log"
+    },
+    {
+      "label": "g1-typecheck-initial",
+      "exitCode": 2,
+      "elapsedMs": 2618,
+      "log": ".tools/logs/g1-typecheck-initial.log"
+    },
+    {
+      "label": "g1-build-packages",
+      "exitCode": 0,
+      "elapsedMs": 3450,
+      "log": ".tools/logs/g1-build-packages.log"
+    },
+    {
+      "label": "g1-typecheck-with-tests",
+      "exitCode": 0,
+      "elapsedMs": 7655,
+      "log": ".tools/logs/g1-typecheck-with-tests.log"
+    },
+    {
+      "label": "g1-production-build",
+      "exitCode": 0,
+      "elapsedMs": 5015,
+      "log": ".tools/logs/g1-production-build.log"
+    },
+    {
+      "label": "g1-tests",
+      "exitCode": 0,
+      "elapsedMs": 4848,
+      "log": ".tools/logs/g1-tests.log"
+    },
+    {
+      "label": "g1-typecheck-final",
+      "exitCode": 1,
+      "elapsedMs": 7177,
+      "log": ".tools/logs/g1-typecheck-final.log"
+    },
+    {
+      "label": "g1-typecheck-audit-correction",
+      "exitCode": 0,
+      "elapsedMs": 1009,
+      "log": ".tools/logs/g1-typecheck-audit-correction.log"
+    },
+    {
+      "label": "g1-tests-final",
+      "exitCode": 0,
+      "elapsedMs": 4792,
+      "log": ".tools/logs/g1-tests-final.log"
+    },
+    {
+      "label": "g1-model-audit",
+      "exitCode": 0,
+      "elapsedMs": 461,
+      "log": ".tools/logs/g1-model-audit.log"
+    },
+    {
+      "label": "g1-production-build-final",
+      "exitCode": 0,
+      "elapsedMs": 5191,
+      "log": ".tools/logs/g1-production-build-final.log"
+    },
+    {
+      "label": "g1-production-smoke",
+      "exitCode": 0,
+      "elapsedMs": 1084,
+      "log": ".tools/logs/g1-production-smoke.log"
+    },
+    {
+      "label": "g1-typecheck-certified",
+      "exitCode": 0,
+      "elapsedMs": 7327,
+      "log": ".tools/logs/g1-typecheck-certified.log"
+    }
+  ],
+  "productionSmoke": {
+    "result": "PASS",
+    "runtime": "v24.21.0",
+    "platform": "win32",
+    "arch": "x64",
+    "starts": 2,
+    "cleanShutdowns": 2,
+    "sameOriginSpaAndAssets": true,
+    "health": true,
+    "ready": true,
+    "persistedSentinel": true,
+    "nonDestructiveMigration": true,
+    "aiCredentials": "NONE",
+    "orphanProcesses": 0
+  },
+  "TARGET_LINUX_RUNTIME_SMOKE": "NOT_VERIFIED",
+  "AI_PROVIDER_ACCESS": "UNCONFIRMED"
+}

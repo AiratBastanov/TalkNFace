@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "module": "NodeNext",
+    "types": ["node"],
+    "rewriteRelativeImportExtensions": true
+  },
+  "include": ["src", "test", "../../vitest.config.ts"]
+}

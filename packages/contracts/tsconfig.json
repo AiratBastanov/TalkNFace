@@ -1,0 +1,5 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": { "module": "NodeNext", "types": [], "rootDir": "src", "outDir": "dist", "declaration": true, "rewriteRelativeImportExtensions": true },
+  "include": ["src/**/*.ts"]
+}

@@ -1,0 +1,4657 @@
+{
+  "application_protection": {
+    "added_protected_files": [],
+    "after_captured_at_utc": "2026-09-17T08:20:08.843424+00:00",
+    "allowed_changed_files": [
+      ".gitignore"
+    ],
+    "audit_method": "SHA-256 before/after over every workspace file except explicitly excluded directories and the two new receipts",
+    "baseline_gate_state": {
+      "G0": "PASS (preserved; not rerun)",
+      "G1": "PASS (preserved; not rerun)",
+      "G2": "PASS (preserved; not rerun)",
+      "TARGET_LINUX_RUNTIME_SMOKE": "NOT_VERIFIED"
+    },
+    "before_captured_at_utc": "2026-09-17T07:56:22.673136+00:00",
+    "browser_campaign_rerun": false,
+    "changed_files": [
+      ".gitignore"
+    ],
+    "excluded_directories": [
+      ".agents",
+      ".codex",
+      ".git",
+      ".tmp",
+      ".tools",
+      "AlagDatasets",
+      "AlagModels",
+      "__pycache__",
+      "node_modules"
+    ],
+    "files_at_start": 174,
+    "full_application_tests_rerun": false,
+    "git_note": "The workspace has no .git/index. No root repository was initialized; ignore rules were tested with a disposable bare Git directory under .tmp.",
+    "git_repository_present": false,
+    "ignore_verification": {
+      "exit_code": 0,
+      "output": [
+        ".gitignore:14:AlagModels/\tAlagModels/Qwen3-4B/config.json",
+        ".gitignore:15:AlagDatasets/\tAlagDatasets/raw/casino/data/casino.json",
+        ".gitignore:15:AlagDatasets/\tAlagDatasets/raw/job-interview/data.json"
+      ],
+      "stderr": ""
+    },
+    "model_small_file_hash_audit_unchanged": true,
+    "model_stat_audit_unchanged": true,
+    "new_receipt_exclusions": [
+      "docs/gates/AI_LOCAL_DATASET_ACQUISITION.md",
+      "docs/gates/evidence/AI_LOCAL_DATASET_MANIFEST.json"
+    ],
+    "prior_test_baseline_reported_by_user": {
+      "failed": 0,
+      "production_chrome_e2e_passed": 6,
+      "production_chrome_e2e_total": 6,
+      "tests": 197
+    },
+    "protected_application_hashes": [
+      {
+        "after": {
+          "bytes": 80,
+          "sha256": "0a1f63c8c98105cd1167716645c38b19323617128f9f6251b57d1182237a52f4"
+        },
+        "before": {
+          "bytes": 80,
+          "sha256": "0a1f63c8c98105cd1167716645c38b19323617128f9f6251b57d1182237a52f4"
+        },
+        "intentional_change": false,
+        "path": ".env.example",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 166,
+          "sha256": "1a6ffd634c85438561f674d6b0cb9f91914e0219efc885ab8c6ffe1b7df3444a"
+        },
+        "before": {
+          "bytes": 140,
+          "sha256": "c65210631e9dd9f660cc76ed063212c6ecfce7206732a6afe291ca2434553d8f"
+        },
+        "intentional_change": true,
+        "path": ".gitignore",
+        "unchanged": false
+      },
+      {
+        "after": {
+          "bytes": 8,
+          "sha256": "73fb1b615e2043a933be1c0895cde4358036acc28d785692509b822aa53c761f"
+        },
+        "before": {
+          "bytes": 8,
+          "sha256": "73fb1b615e2043a933be1c0895cde4358036acc28d785692509b822aa53c761f"
+        },
+        "intentional_change": false,
+        "path": ".node-version",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 478415,
+          "sha256": "ff50f0ade59e2060818815284a8be0ccd1f10065a0ce6f46f48b664e4df0d75d"
+        },
+        "before": {
+          "bytes": 478415,
+          "sha256": "ff50f0ade59e2060818815284a8be0ccd1f10065a0ce6f46f48b664e4df0d75d"
+        },
+        "intentional_change": false,
+        "path": "9. \u041e\u042d\u0417 \u041f\u041f\u0422 \u0410\u043b\u0430\u0431\u0443\u0433\u0430.pdf",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 15153,
+          "sha256": "8a0c1213f8eec926daa5735b8246a7e822dabb80d2681dd52e54a480ba0b20f6"
+        },
+        "before": {
+          "bytes": 15153,
+          "sha256": "8a0c1213f8eec926daa5735b8246a7e822dabb80d2681dd52e54a480ba0b20f6"
+        },
+        "intentional_change": false,
+        "path": "README.md",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 491,
+          "sha256": "9982cf895a7b48c663a5b8e2d6add29abf62f924837a23666672cb07e5c7027e"
+        },
+        "before": {
+          "bytes": 491,
+          "sha256": "9982cf895a7b48c663a5b8e2d6add29abf62f924837a23666672cb07e5c7027e"
+        },
+        "intentional_change": false,
+        "path": "apps/server/dist/api-error.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 2779,
+          "sha256": "dbcf54622378450696d40b8e95074e7f70c658ae8f9b1e40d48106833a90e487"
+        },
+        "before": {
+          "bytes": 2779,
+          "sha256": "dbcf54622378450696d40b8e95074e7f70c658ae8f9b1e40d48106833a90e487"
+        },
+        "intentional_change": false,
+        "path": "apps/server/dist/app.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1689,
+          "sha256": "93e86b1d22ddb52047a47f163f264d27481e26f9a18df45d08b79fe33c8de740"
+        },
+        "before": {
+          "bytes": 1689,
+          "sha256": "93e86b1d22ddb52047a47f163f264d27481e26f9a18df45d08b79fe33c8de740"
+        },
+        "intentional_change": false,
+        "path": "apps/server/dist/database.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1149,
+          "sha256": "da4f2b07e0fc5a464088641ba2377e78dcfe3e563d6e17229aa03c9cfb65546e"
+        },
+        "before": {
+          "bytes": 1149,
+          "sha256": "da4f2b07e0fc5a464088641ba2377e78dcfe3e563d6e17229aa03c9cfb65546e"
+        },
+        "intentional_change": false,
+        "path": "apps/server/dist/env.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 2008,
+          "sha256": "69f7f6a650054cf55b72191b8de005d15924c330420ffa53f9fde4d104fcfebb"
+        },
+        "before": {
+          "bytes": 2008,
+          "sha256": "69f7f6a650054cf55b72191b8de005d15924c330420ffa53f9fde4d104fcfebb"
+        },
+        "intentional_change": false,
+        "path": "apps/server/dist/main.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1835,
+          "sha256": "133be5a8e58e2675d007e75b984db061a128f3e02594500bca2b8f96b53d2648"
+        },
+        "before": {
+          "bytes": 1835,
+          "sha256": "133be5a8e58e2675d007e75b984db061a128f3e02594500bca2b8f96b53d2648"
+        },
+        "intentional_change": false,
+        "path": "apps/server/dist/migration-g2.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 304,
+          "sha256": "d1d02acb6ecd1b841c69b3fd131d185a5e5e6b60731039caa78ada5d72ad603e"
+        },
+        "before": {
+          "bytes": 304,
+          "sha256": "d1d02acb6ecd1b841c69b3fd131d185a5e5e6b60731039caa78ada5d72ad603e"
+        },
+        "intentional_change": false,
+        "path": "apps/server/dist/paths.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 15815,
+          "sha256": "35a9e50521c5f5c65477ccd75f86fcca861964706de78a833c8b95f53a64fe4e"
+        },
+        "before": {
+          "bytes": 15815,
+          "sha256": "35a9e50521c5f5c65477ccd75f86fcca861964706de78a833c8b95f53a64fe4e"
+        },
+        "intentional_change": false,
+        "path": "apps/server/dist/presentation/renderers.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 6170,
+          "sha256": "7aa86d72df55e46020ca4459d20f27fff5bf9b32c41d0f644e12ae395ef09d8b"
+        },
+        "before": {
+          "bytes": 6170,
+          "sha256": "7aa86d72df55e46020ca4459d20f27fff5bf9b32c41d0f644e12ae395ef09d8b"
+        },
+        "intentional_change": false,
+        "path": "apps/server/dist/repositories/arena-repository.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 3712,
+          "sha256": "d2c09e655d02af27b6cc6cd7bc08a9c456962768ac04c2c51aa2ff29972589ff"
+        },
+        "before": {
+          "bytes": 3712,
+          "sha256": "d2c09e655d02af27b6cc6cd7bc08a9c456962768ac04c2c51aa2ff29972589ff"
+        },
+        "intentional_change": false,
+        "path": "apps/server/dist/routes/g2-routes.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 8514,
+          "sha256": "93109f7dcd40ed0d2b28420a016c4b5ce3b70d2627c368cdbedce83a8e583b71"
+        },
+        "before": {
+          "bytes": 8514,
+          "sha256": "93109f7dcd40ed0d2b28420a016c4b5ce3b70d2627c368cdbedce83a8e583b71"
+        },
+        "intentional_change": false,
+        "path": "apps/server/dist/services/session-service.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 434,
+          "sha256": "22fb91e9208a5e2ecb74e3dd167b7393356cf18f2f8d3003d9c2723fd452fb57"
+        },
+        "before": {
+          "bytes": 434,
+          "sha256": "22fb91e9208a5e2ecb74e3dd167b7393356cf18f2f8d3003d9c2723fd452fb57"
+        },
+        "intentional_change": false,
+        "path": "apps/server/package.json",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 621,
+          "sha256": "a696e8c4884046f3acf90e4dbeb85653b712aff3d66dd126d3f81e8395a1c3cb"
+        },
+        "before": {
+          "bytes": 621,
+          "sha256": "a696e8c4884046f3acf90e4dbeb85653b712aff3d66dd126d3f81e8395a1c3cb"
+        },
+        "intentional_change": false,
+        "path": "apps/server/src/api-error.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 2842,
+          "sha256": "df557b3cf37e1029bd588bcf80cbd61768e7c4f9cfb6937ac4e229783c068ab0"
+        },
+        "before": {
+          "bytes": 2842,
+          "sha256": "df557b3cf37e1029bd588bcf80cbd61768e7c4f9cfb6937ac4e229783c068ab0"
+        },
+        "intentional_change": false,
+        "path": "apps/server/src/app.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1598,
+          "sha256": "7017b937c6ca69608f9138f73036ef744affbdf54c7df17c3ccfb90f0dd25080"
+        },
+        "before": {
+          "bytes": 1598,
+          "sha256": "7017b937c6ca69608f9138f73036ef744affbdf54c7df17c3ccfb90f0dd25080"
+        },
+        "intentional_change": false,
+        "path": "apps/server/src/database.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1229,
+          "sha256": "e7ef687028792032c1b721d5f7319130ac6ec6655173e324ffbc9216bc20b490"
+        },
+        "before": {
+          "bytes": 1229,
+          "sha256": "e7ef687028792032c1b721d5f7319130ac6ec6655173e324ffbc9216bc20b490"
+        },
+        "intentional_change": false,
+        "path": "apps/server/src/env.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1839,
+          "sha256": "2e4269eb97d1a3040fa8c1e46d8689218a945ab7dcf7d032e63bc5f3a7c07eae"
+        },
+        "before": {
+          "bytes": 1839,
+          "sha256": "2e4269eb97d1a3040fa8c1e46d8689218a945ab7dcf7d032e63bc5f3a7c07eae"
+        },
+        "intentional_change": false,
+        "path": "apps/server/src/main.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1838,
+          "sha256": "32ceeff52293251f1f04b0f0a796529abcce836db003cbcc7da294e3a9e576e3"
+        },
+        "before": {
+          "bytes": 1838,
+          "sha256": "32ceeff52293251f1f04b0f0a796529abcce836db003cbcc7da294e3a9e576e3"
+        },
+        "intentional_change": false,
+        "path": "apps/server/src/migration-g2.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 305,
+          "sha256": "a09b83ca947d6ba897c0feb3edcd1078eda2b230851b3b07aeb9349dde1703d4"
+        },
+        "before": {
+          "bytes": 305,
+          "sha256": "a09b83ca947d6ba897c0feb3edcd1078eda2b230851b3b07aeb9349dde1703d4"
+        },
+        "intentional_change": false,
+        "path": "apps/server/src/paths.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 14493,
+          "sha256": "6117180dca87cc6aa49a5c1a3511d2e019f2b8bf53078c46fb81d49a359c5b19"
+        },
+        "before": {
+          "bytes": 14493,
+          "sha256": "6117180dca87cc6aa49a5c1a3511d2e019f2b8bf53078c46fb81d49a359c5b19"
+        },
+        "intentional_change": false,
+        "path": "apps/server/src/presentation/renderers.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 7048,
+          "sha256": "605f3e0edc31a485cda557fa544c3c6e9aac239b7cdfca59f60fc56595d8db8c"
+        },
+        "before": {
+          "bytes": 7048,
+          "sha256": "605f3e0edc31a485cda557fa544c3c6e9aac239b7cdfca59f60fc56595d8db8c"
+        },
+        "intentional_change": false,
+        "path": "apps/server/src/repositories/arena-repository.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 3659,
+          "sha256": "03b346c917f3c13f9654ed0e1a9bb16b8eff87d1059d75f008e3f4caa1eb7db8"
+        },
+        "before": {
+          "bytes": 3659,
+          "sha256": "03b346c917f3c13f9654ed0e1a9bb16b8eff87d1059d75f008e3f4caa1eb7db8"
+        },
+        "intentional_change": false,
+        "path": "apps/server/src/routes/g2-routes.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 8409,
+          "sha256": "a7b15d287d7914262b25e790a1672696357ab04a1be3862fc5fd9169e268a07f"
+        },
+        "before": {
+          "bytes": 8409,
+          "sha256": "a7b15d287d7914262b25e790a1672696357ab04a1be3862fc5fd9169e268a07f"
+        },
+        "intentional_change": false,
+        "path": "apps/server/src/services/session-service.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1569,
+          "sha256": "2d79e12e902c656fc505d6e2812d96c5efc7396955dd1d4ba9970ae51ab9a56a"
+        },
+        "before": {
+          "bytes": 1569,
+          "sha256": "2d79e12e902c656fc505d6e2812d96c5efc7396955dd1d4ba9970ae51ab9a56a"
+        },
+        "intentional_change": false,
+        "path": "apps/server/test/app.test.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 2775,
+          "sha256": "834d2bc52b7c1766e9535ffc4b00686fa271c7bbd3816fee8bab30664ce25dbf"
+        },
+        "before": {
+          "bytes": 2775,
+          "sha256": "834d2bc52b7c1766e9535ffc4b00686fa271c7bbd3816fee8bab30664ce25dbf"
+        },
+        "intentional_change": false,
+        "path": "apps/server/test/database.test.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1509,
+          "sha256": "4ebfcfbb291af7e6e84c1b95ee6beb2d2b353c4f3258ad6858d91555f081992b"
+        },
+        "before": {
+          "bytes": 1509,
+          "sha256": "4ebfcfbb291af7e6e84c1b95ee6beb2d2b353c4f3258ad6858d91555f081992b"
+        },
+        "intentional_change": false,
+        "path": "apps/server/test/env.test.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 23139,
+          "sha256": "03cb442f4a3a100adcc48b845c8441149da338aa53b8ee0cae9cb84cbb65d48b"
+        },
+        "before": {
+          "bytes": 23139,
+          "sha256": "03cb442f4a3a100adcc48b845c8441149da338aa53b8ee0cae9cb84cbb65d48b"
+        },
+        "intentional_change": false,
+        "path": "apps/server/test/g2.test.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 612,
+          "sha256": "aea7506bb6ebea8c725e9a5299a1938ad6b3a1dd6b0953812bf9977db300ef0e"
+        },
+        "before": {
+          "bytes": 612,
+          "sha256": "aea7506bb6ebea8c725e9a5299a1938ad6b3a1dd6b0953812bf9977db300ef0e"
+        },
+        "intentional_change": false,
+        "path": "apps/server/test/helpers.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 2821,
+          "sha256": "7b6bb147c9faef40b9041c40e7143569a0041c9748ff5b10b584369f3321c4b3"
+        },
+        "before": {
+          "bytes": 2821,
+          "sha256": "7b6bb147c9faef40b9041c40e7143569a0041c9748ff5b10b584369f3321c4b3"
+        },
+        "intentional_change": false,
+        "path": "apps/server/test/static.test.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 141,
+          "sha256": "9c4387034f61e27d695547a0846fd95a6b2f7aafb46b08dd9bae8267ee4a3068"
+        },
+        "before": {
+          "bytes": 141,
+          "sha256": "9c4387034f61e27d695547a0846fd95a6b2f7aafb46b08dd9bae8267ee4a3068"
+        },
+        "intentional_change": false,
+        "path": "apps/server/tsconfig.build.json",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 221,
+          "sha256": "744e355861436723bab9a7d8d260d2ff271c031c84984c180b6c4d643d242e08"
+        },
+        "before": {
+          "bytes": 221,
+          "sha256": "744e355861436723bab9a7d8d260d2ff271c031c84984c180b6c4d643d242e08"
+        },
+        "intentional_change": false,
+        "path": "apps/server/tsconfig.json",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 5073,
+          "sha256": "13d1952fedafbc133c7419c06e8f3664fe5deaf36791c458ffb71ff83de21c3e"
+        },
+        "before": {
+          "bytes": 5073,
+          "sha256": "13d1952fedafbc133c7419c06e8f3664fe5deaf36791c458ffb71ff83de21c3e"
+        },
+        "intentional_change": false,
+        "path": "apps/web/dist/assets/index-C9p4VMl8.css",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 344081,
+          "sha256": "2281dd9083429f2ae43474eb23425f572e913abfc5c5c699934d27328ab54b9e"
+        },
+        "before": {
+          "bytes": 344081,
+          "sha256": "2281dd9083429f2ae43474eb23425f572e913abfc5c5c699934d27328ab54b9e"
+        },
+        "intentional_change": false,
+        "path": "apps/web/dist/assets/index-CRkf3XXK.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 418,
+          "sha256": "7f388eca1ac30b39b921afb6e08576c58b5635e65f4d58fc157d9ff4e42c5c0b"
+        },
+        "before": {
+          "bytes": 418,
+          "sha256": "7f388eca1ac30b39b921afb6e08576c58b5635e65f4d58fc157d9ff4e42c5c0b"
+        },
+        "intentional_change": false,
+        "path": "apps/web/dist/index.html",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 320,
+          "sha256": "6f5af4fdbfc41d27269b1e85e9185beacb74bba2cda8054ba5f0a42fee038d5b"
+        },
+        "before": {
+          "bytes": 320,
+          "sha256": "6f5af4fdbfc41d27269b1e85e9185beacb74bba2cda8054ba5f0a42fee038d5b"
+        },
+        "intentional_change": false,
+        "path": "apps/web/index.html",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 277,
+          "sha256": "1b9037a87c1543f99a47d232ebac42e08caf05dc83ba025ac3bd17c62dddbe7b"
+        },
+        "before": {
+          "bytes": 277,
+          "sha256": "1b9037a87c1543f99a47d232ebac42e08caf05dc83ba025ac3bd17c62dddbe7b"
+        },
+        "intentional_change": false,
+        "path": "apps/web/package.json",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1519,
+          "sha256": "d0f25a2431c9b79e10f8b8ecc113e173ef8d60628cd074b27c118814f680fa92"
+        },
+        "before": {
+          "bytes": 1519,
+          "sha256": "d0f25a2431c9b79e10f8b8ecc113e173ef8d60628cd074b27c118814f680fa92"
+        },
+        "intentional_change": false,
+        "path": "apps/web/src/api.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 14033,
+          "sha256": "978ebab8a79497ccfb74bc865e001589f7305547ca46631b6d584977d12be5db"
+        },
+        "before": {
+          "bytes": 14033,
+          "sha256": "978ebab8a79497ccfb74bc865e001589f7305547ca46631b6d584977d12be5db"
+        },
+        "intentional_change": false,
+        "path": "apps/web/src/board.tsx",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 325,
+          "sha256": "fddda5adb8ac9412f30d8079937444c45641ddb668f43492463737e24c47b88a"
+        },
+        "before": {
+          "bytes": 325,
+          "sha256": "fddda5adb8ac9412f30d8079937444c45641ddb668f43492463737e24c47b88a"
+        },
+        "intentional_change": false,
+        "path": "apps/web/src/main.tsx",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 13575,
+          "sha256": "bbbe4112c19c5d0014acdde0f6284d88e2cff0c35075ff741e70738ba995b99c"
+        },
+        "before": {
+          "bytes": 13575,
+          "sha256": "bbbe4112c19c5d0014acdde0f6284d88e2cff0c35075ff741e70738ba995b99c"
+        },
+        "intentional_change": false,
+        "path": "apps/web/src/product.tsx",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 5938,
+          "sha256": "c50e24eb9c969e581753c5de1b71109c57ab74a24fa1424d1b6c4c4c10f2b9df"
+        },
+        "before": {
+          "bytes": 5938,
+          "sha256": "c50e24eb9c969e581753c5de1b71109c57ab74a24fa1424d1b6c4c4c10f2b9df"
+        },
+        "intentional_change": false,
+        "path": "apps/web/src/style.css",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 278,
+          "sha256": "10992ce19533c7eb694a5a7f0bb4732faf7728bf8f809d6584f8b56b92a58086"
+        },
+        "before": {
+          "bytes": 278,
+          "sha256": "10992ce19533c7eb694a5a7f0bb4732faf7728bf8f809d6584f8b56b92a58086"
+        },
+        "intentional_change": false,
+        "path": "apps/web/tsconfig.json",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 280,
+          "sha256": "79ec2a73bafa2bf87863cf5d7ac58b6ffab777acda38dda194ae6fe84a12b9f0"
+        },
+        "before": {
+          "bytes": 280,
+          "sha256": "79ec2a73bafa2bf87863cf5d7ac58b6ffab777acda38dda194ae6fe84a12b9f0"
+        },
+        "intentional_change": false,
+        "path": "apps/web/vite.config.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "before": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "intentional_change": false,
+        "path": "data/.gitkeep",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 50049,
+          "sha256": "dd380424d50900c4bb3b6550dc69654226bc89eca45e8fffff9ac1435bf27460"
+        },
+        "before": {
+          "bytes": 50049,
+          "sha256": "dd380424d50900c4bb3b6550dc69654226bc89eca45e8fffff9ac1435bf27460"
+        },
+        "intentional_change": false,
+        "path": "docs/00_REQUIREMENTS_AND_SCORING_MATRIX.md",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 124955,
+          "sha256": "f3535762a93be4fca1322f8f8ab5afc1bc980f3918ef4d5f9f55c1d03f25725d"
+        },
+        "before": {
+          "bytes": 124955,
+          "sha256": "f3535762a93be4fca1322f8f8ab5afc1bc980f3918ef4d5f9f55c1d03f25725d"
+        },
+        "intentional_change": false,
+        "path": "docs/01_PRODUCT_AND_ARCHITECTURE_DECISION.md",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 102969,
+          "sha256": "d514cc920ac66749eaede4e443f589a1dfaa26c5f6afb8f9d7498af595b20e57"
+        },
+        "before": {
+          "bytes": 102969,
+          "sha256": "d514cc920ac66749eaede4e443f589a1dfaa26c5f6afb8f9d7498af595b20e57"
+        },
+        "intentional_change": false,
+        "path": "docs/02_MASTER_IMPLEMENTATION_PLAN.md",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 25473,
+          "sha256": "3d27d5d022fd8eca384bc0510e493d836b4bb17a2f621a37ec55542de8824b67"
+        },
+        "before": {
+          "bytes": 25473,
+          "sha256": "3d27d5d022fd8eca384bc0510e493d836b4bb17a2f621a37ec55542de8824b67"
+        },
+        "intentional_change": false,
+        "path": "docs/gates/G0_FOUNDATION_REPRODUCIBLE_RUNTIME.md",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 36077,
+          "sha256": "5f0f34d139fd4301e36eaae02081318f58929816e1ed692fcc3d9168525d49f4"
+        },
+        "before": {
+          "bytes": 36077,
+          "sha256": "5f0f34d139fd4301e36eaae02081318f58929816e1ed692fcc3d9168525d49f4"
+        },
+        "intentional_change": false,
+        "path": "docs/gates/G1_DOMAIN_CONTRACTS_DETERMINISTIC_CORE.md",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 40578,
+          "sha256": "a8fe35b53d3154bd7c31dd7fcee3f811b233df006d087e127898b9c55316a66a"
+        },
+        "before": {
+          "bytes": 40578,
+          "sha256": "a8fe35b53d3154bd7c31dd7fcee3f811b233df006d087e127898b9c55316a66a"
+        },
+        "intentional_change": false,
+        "path": "docs/gates/G2_S1_VERTICAL_SLICE_NO_API.md",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 290677,
+          "sha256": "caea1b89020bf005c616cf25b8fac07bd868de3690e92f56aabd52365006bf8d"
+        },
+        "before": {
+          "bytes": 290677,
+          "sha256": "caea1b89020bf005c616cf25b8fac07bd868de3690e92f56aabd52365006bf8d"
+        },
+        "intentional_change": false,
+        "path": "docs/gates/evidence/G1_MODEL_AUDIT.json",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 13659,
+          "sha256": "693cac31e1aa011574d59bc9f9697134592fddd73438948afeb983e73425fe41"
+        },
+        "before": {
+          "bytes": 13659,
+          "sha256": "693cac31e1aa011574d59bc9f9697134592fddd73438948afeb983e73425fe41"
+        },
+        "intentional_change": false,
+        "path": "docs/gates/evidence/G1_VERIFICATION.json",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 21784,
+          "sha256": "1893258cdf89d485c4df099305bf890e0f0f01677ebdd5597685571a7c55fcf0"
+        },
+        "before": {
+          "bytes": 21784,
+          "sha256": "1893258cdf89d485c4df099305bf890e0f0f01677ebdd5597685571a7c55fcf0"
+        },
+        "intentional_change": false,
+        "path": "docs/gates/evidence/G2_VERIFICATION.json",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 103931,
+          "sha256": "c370832675efed38366492e3b708d7696336f6d58c31b06a0efafd8cdd6cb6ef"
+        },
+        "before": {
+          "bytes": 103931,
+          "sha256": "c370832675efed38366492e3b708d7696336f6d58c31b06a0efafd8cdd6cb6ef"
+        },
+        "intentional_change": false,
+        "path": "package-lock.json",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1318,
+          "sha256": "f610edb6fe05ac2ee2ed650a093eaccea8d8e81b6d798645510932e637b885a4"
+        },
+        "before": {
+          "bytes": 1318,
+          "sha256": "f610edb6fe05ac2ee2ed650a093eaccea8d8e81b6d798645510932e637b885a4"
+        },
+        "intentional_change": false,
+        "path": "package.json",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 356,
+          "sha256": "96a028b49454043753e9fc547257c923c7ee94b1eb45f5a6458016f2b7d75339"
+        },
+        "before": {
+          "bytes": 356,
+          "sha256": "96a028b49454043753e9fc547257c923c7ee94b1eb45f5a6458016f2b7d75339"
+        },
+        "intentional_change": false,
+        "path": "packages/ai/package.json",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1976,
+          "sha256": "1b5ce4b64beb2bfb23ec9e072de0bb5a4c1227bff2cfde1f3f73320c48074659"
+        },
+        "before": {
+          "bytes": 1976,
+          "sha256": "1b5ce4b64beb2bfb23ec9e072de0bb5a4c1227bff2cfde1f3f73320c48074659"
+        },
+        "intentional_change": false,
+        "path": "packages/ai/src/context.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 2391,
+          "sha256": "5f9ef9ef8f4fdfe0a4bc1e19dab62320483240becd95dbd944356c59e4d95cca"
+        },
+        "before": {
+          "bytes": 2391,
+          "sha256": "5f9ef9ef8f4fdfe0a4bc1e19dab62320483240becd95dbd944356c59e4d95cca"
+        },
+        "intentional_change": false,
+        "path": "packages/ai/src/prompt.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1630,
+          "sha256": "da87d148f2165902fc2d179ad3979b2e3479108124d16473af8e905e16079582"
+        },
+        "before": {
+          "bytes": 1630,
+          "sha256": "da87d148f2165902fc2d179ad3979b2e3479108124d16473af8e905e16079582"
+        },
+        "intentional_change": false,
+        "path": "packages/ai/src/provider.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 160,
+          "sha256": "2c0849acaff0e19d27cb1998e85b41336c36655efcc4e500ae093f4a3d8869e7"
+        },
+        "before": {
+          "bytes": 160,
+          "sha256": "2c0849acaff0e19d27cb1998e85b41336c36655efcc4e500ae093f4a3d8869e7"
+        },
+        "intentional_change": false,
+        "path": "packages/ai/tsconfig.build.json",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 181,
+          "sha256": "313986a7b265fac0fd68860b151132ccb942e0caf1693b1edfd708c8129cfdda"
+        },
+        "before": {
+          "bytes": 181,
+          "sha256": "313986a7b265fac0fd68860b151132ccb942e0caf1693b1edfd708c8129cfdda"
+        },
+        "intentional_change": false,
+        "path": "packages/ai/tsconfig.json",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 13801,
+          "sha256": "003c54881925ed47b1277c4cad843c84d8314776c2d7837a30d86927476b3ccb"
+        },
+        "before": {
+          "bytes": 13801,
+          "sha256": "003c54881925ed47b1277c4cad843c84d8314776c2d7837a30d86927476b3ccb"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/dist/action.d.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1601,
+          "sha256": "666dfd5fd1fd18b11e6426c9e55dfde5c4d520f40523429d72dc6b5c3a28cefe"
+        },
+        "before": {
+          "bytes": 1601,
+          "sha256": "666dfd5fd1fd18b11e6426c9e55dfde5c4d520f40523429d72dc6b5c3a28cefe"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/dist/action.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1797,
+          "sha256": "96542404527db1b0af3fdc076efe9955825e6edf4af59d0f51c9f60bb24c2aed"
+        },
+        "before": {
+          "bytes": 1797,
+          "sha256": "96542404527db1b0af3fdc076efe9955825e6edf4af59d0f51c9f60bb24c2aed"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/dist/common.d.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1423,
+          "sha256": "c803bb891af8b0635fb190a6591b1e01d5f2559e5dbd19662159b83a51396bbe"
+        },
+        "before": {
+          "bytes": 1423,
+          "sha256": "c803bb891af8b0635fb190a6591b1e01d5f2559e5dbd19662159b83a51396bbe"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/dist/common.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 25627,
+          "sha256": "438e8314bf730381f787fe6d99f02e9b64c6d78e5d2c2ea791622fb951383dd3"
+        },
+        "before": {
+          "bytes": 25627,
+          "sha256": "438e8314bf730381f787fe6d99f02e9b64c6d78e5d2c2ea791622fb951383dd3"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/dist/event.d.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 3166,
+          "sha256": "0d40c7eb463c554f73006f3017fa8af67710a68af8bbecb970255a9638ada308"
+        },
+        "before": {
+          "bytes": 3166,
+          "sha256": "0d40c7eb463c554f73006f3017fa8af67710a68af8bbecb970255a9638ada308"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/dist/event.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 32044,
+          "sha256": "a9dcc30c57e36b31ca28f19c3ece43ed198eeece0ecf67838520de670687466b"
+        },
+        "before": {
+          "bytes": 32044,
+          "sha256": "a9dcc30c57e36b31ca28f19c3ece43ed198eeece0ecf67838520de670687466b"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/dist/g2.d.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 3942,
+          "sha256": "84b10589f2af779bfa3ac179b22b2ddc67403388a64f377928feeba490047c68"
+        },
+        "before": {
+          "bytes": 3942,
+          "sha256": "84b10589f2af779bfa3ac179b22b2ddc67403388a64f377928feeba490047c68"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/dist/g2.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 351,
+          "sha256": "23d5b20aecb3b561d0fb6299611ad0df5530d451a3866388319abecb8d144834"
+        },
+        "before": {
+          "bytes": 351,
+          "sha256": "23d5b20aecb3b561d0fb6299611ad0df5530d451a3866388319abecb8d144834"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/dist/index.d.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 210,
+          "sha256": "8e582ae2e98108aea8210e4601881ed2b337ef621ce9ebf5fec2d1c8bf86a5e4"
+        },
+        "before": {
+          "bytes": 210,
+          "sha256": "8e582ae2e98108aea8210e4601881ed2b337ef621ce9ebf5fec2d1c8bf86a5e4"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/dist/index.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1227,
+          "sha256": "82e9c3c921ed45168e09e5b0cbf35083fc8e52e540a975b882c624bc5190987a"
+        },
+        "before": {
+          "bytes": 1227,
+          "sha256": "82e9c3c921ed45168e09e5b0cbf35083fc8e52e540a975b882c624bc5190987a"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/dist/outcome.d.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 655,
+          "sha256": "4b6b8e6b32b8d67bd74d97029dba93f56d9f9a7ff35a4fcf4b67415099634eb8"
+        },
+        "before": {
+          "bytes": 655,
+          "sha256": "4b6b8e6b32b8d67bd74d97029dba93f56d9f9a7ff35a4fcf4b67415099634eb8"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/dist/outcome.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 5636,
+          "sha256": "e7bbfb3854e66ee1f3b663a14e57f825aa844d937e30baae0fa46c708a63ee2f"
+        },
+        "before": {
+          "bytes": 5636,
+          "sha256": "e7bbfb3854e66ee1f3b663a14e57f825aa844d937e30baae0fa46c708a63ee2f"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/dist/projection.d.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1905,
+          "sha256": "8090bb335eaab3256b18ac0cf33b0d5babaa6641f244725c6f8bb027c163cab9"
+        },
+        "before": {
+          "bytes": 1905,
+          "sha256": "8090bb335eaab3256b18ac0cf33b0d5babaa6641f244725c6f8bb027c163cab9"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/dist/projection.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 29510,
+          "sha256": "91f696b1e90cf1fbc075801a2e6d3c2ddaf0c00353964016558415205f47e65b"
+        },
+        "before": {
+          "bytes": 29510,
+          "sha256": "91f696b1e90cf1fbc075801a2e6d3c2ddaf0c00353964016558415205f47e65b"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/dist/scenario.d.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 5227,
+          "sha256": "2482907afc2d75052f75fb86bc0dd6c4ac1ed00aa26ff9900769ce1b8b7ff344"
+        },
+        "before": {
+          "bytes": 5227,
+          "sha256": "2482907afc2d75052f75fb86bc0dd6c4ac1ed00aa26ff9900769ce1b8b7ff344"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/dist/scenario.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 18263,
+          "sha256": "156a307e888d4090ec03678af3e83f3a6b71181a66f8e8cd5b82be1acd915f4d"
+        },
+        "before": {
+          "bytes": 18263,
+          "sha256": "156a307e888d4090ec03678af3e83f3a6b71181a66f8e8cd5b82be1acd915f4d"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/dist/session.d.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1355,
+          "sha256": "65ad27db3805f473d152ee151907aebe893281c9190d72a860623f9021c7273b"
+        },
+        "before": {
+          "bytes": 1355,
+          "sha256": "65ad27db3805f473d152ee151907aebe893281c9190d72a860623f9021c7273b"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/dist/session.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 446,
+          "sha256": "460405aaa0e77273a79a89bc15450aea804e038556ee95c412b1f880bade7c43"
+        },
+        "before": {
+          "bytes": 446,
+          "sha256": "460405aaa0e77273a79a89bc15450aea804e038556ee95c412b1f880bade7c43"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/package.json",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1692,
+          "sha256": "25a6c69a251ca940a793135766016b2f3e8a96e0187d131a48e653aed698e8dd"
+        },
+        "before": {
+          "bytes": 1692,
+          "sha256": "25a6c69a251ca940a793135766016b2f3e8a96e0187d131a48e653aed698e8dd"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/src/action.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1764,
+          "sha256": "a2f0769a74949661586f434283a0b4a86e75ec0e60b660279ea3807d4edeaaa9"
+        },
+        "before": {
+          "bytes": 1764,
+          "sha256": "a2f0769a74949661586f434283a0b4a86e75ec0e60b660279ea3807d4edeaaa9"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/src/common.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 3290,
+          "sha256": "6df681f0180e72bb2074c9811d842adabab5ff9c4c0ca8357d71958f9ec9d81a"
+        },
+        "before": {
+          "bytes": 3290,
+          "sha256": "6df681f0180e72bb2074c9811d842adabab5ff9c4c0ca8357d71958f9ec9d81a"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/src/event.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 4451,
+          "sha256": "966dca1572ffea45039975476df47f575009a8252d953d9ffac1d0c85d0e4b84"
+        },
+        "before": {
+          "bytes": 4451,
+          "sha256": "966dca1572ffea45039975476df47f575009a8252d953d9ffac1d0c85d0e4b84"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/src/g2.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 3454,
+          "sha256": "74bd9c059678247cc2d63b45b8384de8ba5337c29ab96d44a63df00195c19e0e"
+        },
+        "before": {
+          "bytes": 3454,
+          "sha256": "74bd9c059678247cc2d63b45b8384de8ba5337c29ab96d44a63df00195c19e0e"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/src/g3.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 336,
+          "sha256": "43f039e10c74b70fe4cf1c83424c27591638eb615732467558ca9a65f0905d47"
+        },
+        "before": {
+          "bytes": 336,
+          "sha256": "43f039e10c74b70fe4cf1c83424c27591638eb615732467558ca9a65f0905d47"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/src/index.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 770,
+          "sha256": "d32e98404e5a13b28cec7ec1d9616624af023c1746bed22faa4ce76035e8aab9"
+        },
+        "before": {
+          "bytes": 770,
+          "sha256": "d32e98404e5a13b28cec7ec1d9616624af023c1746bed22faa4ce76035e8aab9"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/src/outcome.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1949,
+          "sha256": "597448c88df63a6e4e214a61be7d7c215d6ddb3bbd0503cd3d8ad99c245618ef"
+        },
+        "before": {
+          "bytes": 1949,
+          "sha256": "597448c88df63a6e4e214a61be7d7c215d6ddb3bbd0503cd3d8ad99c245618ef"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/src/projection.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 5477,
+          "sha256": "78173b403d5abd24f0017751a6cdcd1b6fdd0d38d6278bd9ad616c4fd4844ea5"
+        },
+        "before": {
+          "bytes": 5477,
+          "sha256": "78173b403d5abd24f0017751a6cdcd1b6fdd0d38d6278bd9ad616c4fd4844ea5"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/src/scenario.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1482,
+          "sha256": "1e0876e96ea9bbe17e2362808de62015cd886fb1eb19a782782d892903ac82e7"
+        },
+        "before": {
+          "bytes": 1482,
+          "sha256": "1e0876e96ea9bbe17e2362808de62015cd886fb1eb19a782782d892903ac82e7"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/src/session.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1295,
+          "sha256": "13a54e59da84b59ceeee20395e9f91054b2975f9b480cdbf987cbfdc0463d839"
+        },
+        "before": {
+          "bytes": 1295,
+          "sha256": "13a54e59da84b59ceeee20395e9f91054b2975f9b480cdbf987cbfdc0463d839"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/test/schemas.test.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 232,
+          "sha256": "b68b23b3066255499404de87fe975afb68c84a602c439165e664b46fed317b71"
+        },
+        "before": {
+          "bytes": 232,
+          "sha256": "b68b23b3066255499404de87fe975afb68c84a602c439165e664b46fed317b71"
+        },
+        "intentional_change": false,
+        "path": "packages/contracts/tsconfig.json",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 403,
+          "sha256": "8e24f08c4b09ad36ccf66abddaef695845b4aff698e9b2b3b203f4f7f79dcb95"
+        },
+        "before": {
+          "bytes": 403,
+          "sha256": "8e24f08c4b09ad36ccf66abddaef695845b4aff698e9b2b3b203f4f7f79dcb95"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/dist/action-validation.d.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 3933,
+          "sha256": "e7a20571e443f9b2d8338b83ba9252e7391e3e4bd6fa489ff0468c78350cf05f"
+        },
+        "before": {
+          "bytes": 3933,
+          "sha256": "e7a20571e443f9b2d8338b83ba9252e7391e3e4bd6fa489ff0468c78350cf05f"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/dist/action-validation.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 410,
+          "sha256": "92d57ec3b3b4a3d832d3ce8e2b1d6937fc8e716d4f11e36c163994d0c6942cc9"
+        },
+        "before": {
+          "bytes": 410,
+          "sha256": "92d57ec3b3b4a3d832d3ce8e2b1d6937fc8e716d4f11e36c163994d0c6942cc9"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/dist/authority.d.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1085,
+          "sha256": "1aabdc0e5fc71e015a6f130b7fd24c0c1428204a634b2797632fb75b68b58ea6"
+        },
+        "before": {
+          "bytes": 1085,
+          "sha256": "1aabdc0e5fc71e015a6f130b7fd24c0c1428204a634b2797632fb75b68b58ea6"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/dist/authority.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 474,
+          "sha256": "00b49be2ddb75ec2ef290a1778bdedc43396e6bcc15d45551f5e00db9cb7b305"
+        },
+        "before": {
+          "bytes": 474,
+          "sha256": "00b49be2ddb75ec2ef290a1778bdedc43396e6bcc15d45551f5e00db9cb7b305"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/dist/constraints.d.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1022,
+          "sha256": "accf1876322a57b8cdd17b004eb7a72d3666a4e56b219e07d65dab1224ab11f6"
+        },
+        "before": {
+          "bytes": 1022,
+          "sha256": "accf1876322a57b8cdd17b004eb7a72d3666a4e56b219e07d65dab1224ab11f6"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/dist/constraints.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 367,
+          "sha256": "11632b73b32a22ca906e481bdffbf64ebc8c1e20b775f3a7e6faceb8237022fc"
+        },
+        "before": {
+          "bytes": 367,
+          "sha256": "11632b73b32a22ca906e481bdffbf64ebc8c1e20b775f3a7e6faceb8237022fc"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/dist/disclosure.d.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 801,
+          "sha256": "7afa361a87c314dd0643ba33cb1d2481adc6da6aee6f16b02a1cc9607ad81b28"
+        },
+        "before": {
+          "bytes": 801,
+          "sha256": "7afa361a87c314dd0643ba33cb1d2481adc6da6aee6f16b02a1cc9607ad81b28"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/dist/disclosure.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 905,
+          "sha256": "99820c84967d972092b867b5bb04ffa898130494620c020f93e9de699ce98244"
+        },
+        "before": {
+          "bytes": 905,
+          "sha256": "99820c84967d972092b867b5bb04ffa898130494620c020f93e9de699ce98244"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/dist/enumerate.d.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 3333,
+          "sha256": "3c3c22d2e47111fce3fedcb29f6d5b4d2baa4c824c9edce162c44433a267b387"
+        },
+        "before": {
+          "bytes": 3333,
+          "sha256": "3c3c22d2e47111fce3fedcb29f6d5b4d2baa4c824c9edce162c44433a267b387"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/dist/enumerate.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 386,
+          "sha256": "8bb0c497592e93dc8109c1649ba16a5008bd908d6d1a732ab6b20539293628d1"
+        },
+        "before": {
+          "bytes": 386,
+          "sha256": "8bb0c497592e93dc8109c1649ba16a5008bd908d6d1a732ab6b20539293628d1"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/dist/index.d.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 386,
+          "sha256": "f3ea7462d941a726e84baf7cef236120bb307d2a25cf09d4a816fc00a8a7d61a"
+        },
+        "before": {
+          "bytes": 386,
+          "sha256": "f3ea7462d941a726e84baf7cef236120bb307d2a25cf09d4a816fc00a8a7d61a"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/dist/index.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 418,
+          "sha256": "b2b3cec7209dfefd6ebbdba01540fa2061188486097b81341357c93d45f5eabc"
+        },
+        "before": {
+          "bytes": 418,
+          "sha256": "b2b3cec7209dfefd6ebbdba01540fa2061188486097b81341357c93d45f5eabc"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/dist/offers.d.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1098,
+          "sha256": "f8df64648c9af4be91ca903b3d38af47765b576743de71de6cf0ecfd332d2fb6"
+        },
+        "before": {
+          "bytes": 1098,
+          "sha256": "f8df64648c9af4be91ca903b3d38af47765b576743de71de6cf0ecfd332d2fb6"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/dist/offers.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 229,
+          "sha256": "3ac077746328781c6c59453eaa5d425dc2963685502f1e174ebccf3ef7e3ced7"
+        },
+        "before": {
+          "bytes": 229,
+          "sha256": "3ac077746328781c6c59453eaa5d425dc2963685502f1e174ebccf3ef7e3ced7"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/dist/outcomes.d.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1652,
+          "sha256": "aa913251dcb34e3fc59d14cf2e7f7a7b12c75393e939e4b3a6bd25a461ee0022"
+        },
+        "before": {
+          "bytes": 1652,
+          "sha256": "aa913251dcb34e3fc59d14cf2e7f7a7b12c75393e939e4b3a6bd25a461ee0022"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/dist/outcomes.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1558,
+          "sha256": "68317618e1b870e59090b2a4a6602302574a60d77a251d4f03d621c0f15be526"
+        },
+        "before": {
+          "bytes": 1558,
+          "sha256": "68317618e1b870e59090b2a4a6602302574a60d77a251d4f03d621c0f15be526"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/dist/policy.d.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 5632,
+          "sha256": "2118858926ecbeffad79a12ba5313bc0edf21f72168033e947958d5ff89a1208"
+        },
+        "before": {
+          "bytes": 5632,
+          "sha256": "2118858926ecbeffad79a12ba5313bc0edf21f72168033e947958d5ff89a1208"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/dist/policy.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 392,
+          "sha256": "d9e916c0525c1e02a5538034d52802bb6d1735d42784181fc1b048297c3abe0b"
+        },
+        "before": {
+          "bytes": 392,
+          "sha256": "d9e916c0525c1e02a5538034d52802bb6d1735d42784181fc1b048297c3abe0b"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/dist/projection.d.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 2704,
+          "sha256": "695c120ba63828e5a5e62757a0b7170ffbb250c1863f758a18078670f249e5ca"
+        },
+        "before": {
+          "bytes": 2704,
+          "sha256": "695c120ba63828e5a5e62757a0b7170ffbb250c1863f758a18078670f249e5ca"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/dist/projection.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 703,
+          "sha256": "8b4ae5bf3dd672668137e461ca2792b75ac3977d7be04e05dff79aa490b54746"
+        },
+        "before": {
+          "bytes": 703,
+          "sha256": "8b4ae5bf3dd672668137e461ca2792b75ac3977d7be04e05dff79aa490b54746"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/dist/reducer.d.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 12187,
+          "sha256": "a7965dc443ef32f3fcf38114b9bcfff5a31123e6a02c9c0d4aff423cf0a842c7"
+        },
+        "before": {
+          "bytes": 12187,
+          "sha256": "a7965dc443ef32f3fcf38114b9bcfff5a31123e6a02c9c0d4aff423cf0a842c7"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/dist/reducer.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 292,
+          "sha256": "e102cf2bba9b2740813d3162fee13380592912f1ff38d659a5ac77bb916bec7e"
+        },
+        "before": {
+          "bytes": 292,
+          "sha256": "e102cf2bba9b2740813d3162fee13380592912f1ff38d659a5ac77bb916bec7e"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/dist/utility.d.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 867,
+          "sha256": "1cc8d7f7540efe7f8c5d7562fccd82266a883052e3a8bfead445d131270a0ae0"
+        },
+        "before": {
+          "bytes": 867,
+          "sha256": "1cc8d7f7540efe7f8c5d7562fccd82266a883052e3a8bfead445d131270a0ae0"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/dist/utility.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1286,
+          "sha256": "41cf159b10b5b84177ef1b87795cd2acb8dc2bc6936619928bd55227b2347efb"
+        },
+        "before": {
+          "bytes": 1286,
+          "sha256": "41cf159b10b5b84177ef1b87795cd2acb8dc2bc6936619928bd55227b2347efb"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/dist/validation.d.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 18636,
+          "sha256": "0f3978ba6af6463c22084b5baaad201a058cb8556462c26ac5af1bf0f48a4b8f"
+        },
+        "before": {
+          "bytes": 18636,
+          "sha256": "0f3978ba6af6463c22084b5baaad201a058cb8556462c26ac5af1bf0f48a4b8f"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/dist/validation.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 324,
+          "sha256": "78b158abcc80b53a764b812ef6f4c1ee06736aa0228ac3fb45cd8ec73e989039"
+        },
+        "before": {
+          "bytes": 324,
+          "sha256": "78b158abcc80b53a764b812ef6f4c1ee06736aa0228ac3fb45cd8ec73e989039"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/package.json",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 3979,
+          "sha256": "238d7dad5a9d30f9bd5940fbc1679ac9ef14fdfa04d2d9f76beccf80bd919ab5"
+        },
+        "before": {
+          "bytes": 3979,
+          "sha256": "238d7dad5a9d30f9bd5940fbc1679ac9ef14fdfa04d2d9f76beccf80bd919ab5"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/src/action-validation.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1308,
+          "sha256": "87726a2045a14c919e652c7e3ba3e3607146e1c5630ef2f273fc26e18dd5c4c2"
+        },
+        "before": {
+          "bytes": 1308,
+          "sha256": "87726a2045a14c919e652c7e3ba3e3607146e1c5630ef2f273fc26e18dd5c4c2"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/src/authority.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1325,
+          "sha256": "bcc6a24a694f081507186b7215aebf491bb9032fd7deb8e1c0e993931abe373b"
+        },
+        "before": {
+          "bytes": 1325,
+          "sha256": "bcc6a24a694f081507186b7215aebf491bb9032fd7deb8e1c0e993931abe373b"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/src/constraints.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1014,
+          "sha256": "1f04618d526d01191f7cec75d076b9e3065ea3b81251618b18e5b204c466954a"
+        },
+        "before": {
+          "bytes": 1014,
+          "sha256": "1f04618d526d01191f7cec75d076b9e3065ea3b81251618b18e5b204c466954a"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/src/disclosure.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 3626,
+          "sha256": "4f3c5570451b46512f4d2350c939d82c4920e72b2eb1bc77d51c98282f815afc"
+        },
+        "before": {
+          "bytes": 3626,
+          "sha256": "4f3c5570451b46512f4d2350c939d82c4920e72b2eb1bc77d51c98282f815afc"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/src/enumerate.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 386,
+          "sha256": "8bb0c497592e93dc8109c1649ba16a5008bd908d6d1a732ab6b20539293628d1"
+        },
+        "before": {
+          "bytes": 386,
+          "sha256": "8bb0c497592e93dc8109c1649ba16a5008bd908d6d1a732ab6b20539293628d1"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/src/index.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1408,
+          "sha256": "a799ef2f7e4cf26d188f8b4620d632b7065532eb3a2c41702a5cd79a061c6da7"
+        },
+        "before": {
+          "bytes": 1408,
+          "sha256": "a799ef2f7e4cf26d188f8b4620d632b7065532eb3a2c41702a5cd79a061c6da7"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/src/offers.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1752,
+          "sha256": "78bd95d854c82df2f9adcc3e0c8f4c9263e0dbceb5c4a061b316f1d253470797"
+        },
+        "before": {
+          "bytes": 1752,
+          "sha256": "78bd95d854c82df2f9adcc3e0c8f4c9263e0dbceb5c4a061b316f1d253470797"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/src/outcomes.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 5755,
+          "sha256": "bb66fb7c65b2deeefae442508103bf691e31ea8b476e88b0df0e242aa90961f1"
+        },
+        "before": {
+          "bytes": 5755,
+          "sha256": "bb66fb7c65b2deeefae442508103bf691e31ea8b476e88b0df0e242aa90961f1"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/src/policy.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 2801,
+          "sha256": "cdf930fa1bc0be6c15311a4cdb478e3254f4f78a250c5b8cb87ce37db81a5159"
+        },
+        "before": {
+          "bytes": 2801,
+          "sha256": "cdf930fa1bc0be6c15311a4cdb478e3254f4f78a250c5b8cb87ce37db81a5159"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/src/projection.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 11666,
+          "sha256": "2607ff26c5bec1cf7f6df4db39c6ad55d38e1921baed0976daed3e2d09bd5930"
+        },
+        "before": {
+          "bytes": 11666,
+          "sha256": "2607ff26c5bec1cf7f6df4db39c6ad55d38e1921baed0976daed3e2d09bd5930"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/src/reducer.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1003,
+          "sha256": "2580e1cf9295703748d4e0a2c6a65e154fd31101d6010ef000dad4e83863bbcf"
+        },
+        "before": {
+          "bytes": 1003,
+          "sha256": "2580e1cf9295703748d4e0a2c6a65e154fd31101d6010ef000dad4e83863bbcf"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/src/utility.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 18099,
+          "sha256": "8f684e618bea8ba9c486c67d3c8b3fe6a07dd305b0e856e3313f6e4da99c542f"
+        },
+        "before": {
+          "bytes": 18099,
+          "sha256": "8f684e618bea8ba9c486c67d3c8b3fe6a07dd305b0e856e3313f6e4da99c542f"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/src/validation.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 10381,
+          "sha256": "09cf4097f23a34251bfa072ad762e8a889ff9cca1fe0db422da6d15b465ab679"
+        },
+        "before": {
+          "bytes": 10381,
+          "sha256": "09cf4097f23a34251bfa072ad762e8a889ff9cca1fe0db422da6d15b465ab679"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/test/offers.test.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 14795,
+          "sha256": "1e9d936747dc44492f6d81bcfea3f4a342f681c709ac0d5eacd2c439ceb79b2f"
+        },
+        "before": {
+          "bytes": 14795,
+          "sha256": "1e9d936747dc44492f6d81bcfea3f4a342f681c709ac0d5eacd2c439ceb79b2f"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/test/policy.test.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 5399,
+          "sha256": "a2586ca978480cee7903cacd627d115f9291e2e9a2e0a4776902650784928472"
+        },
+        "before": {
+          "bytes": 5399,
+          "sha256": "a2586ca978480cee7903cacd627d115f9291e2e9a2e0a4776902650784928472"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/test/projection.test.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 8543,
+          "sha256": "326507dc153b5b0e1447e80dc3e14fd7401b8df97b617a79208cc3b8ec04af59"
+        },
+        "before": {
+          "bytes": 8543,
+          "sha256": "326507dc153b5b0e1447e80dc3e14fd7401b8df97b617a79208cc3b8ec04af59"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/test/validation.test.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 160,
+          "sha256": "2c0849acaff0e19d27cb1998e85b41336c36655efcc4e500ae093f4a3d8869e7"
+        },
+        "before": {
+          "bytes": 160,
+          "sha256": "2c0849acaff0e19d27cb1998e85b41336c36655efcc4e500ae093f4a3d8869e7"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/tsconfig.build.json",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 181,
+          "sha256": "313986a7b265fac0fd68860b151132ccb942e0caf1693b1edfd708c8129cfdda"
+        },
+        "before": {
+          "bytes": 181,
+          "sha256": "313986a7b265fac0fd68860b151132ccb942e0caf1693b1edfd708c8129cfdda"
+        },
+        "intentional_change": false,
+        "path": "packages/domain/tsconfig.json",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 130,
+          "sha256": "ee4681ba4c2b1d24aa8a8937a6d5331039632b1f1d05f3800e8fcf36b25557b1"
+        },
+        "before": {
+          "bytes": 130,
+          "sha256": "ee4681ba4c2b1d24aa8a8937a6d5331039632b1f1d05f3800e8fcf36b25557b1"
+        },
+        "intentional_change": false,
+        "path": "packages/scenarios/dist/index.d.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 217,
+          "sha256": "7f5b1cdf4a241719980f677276226e85bfae56bf23b174987cd43aef95158a3e"
+        },
+        "before": {
+          "bytes": 217,
+          "sha256": "7f5b1cdf4a241719980f677276226e85bfae56bf23b174987cd43aef95158a3e"
+        },
+        "intentional_change": false,
+        "path": "packages/scenarios/dist/index.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1074,
+          "sha256": "076eb95dcf720d07703106f06dcfb0892e939054d8939da2c4af047d28886103"
+        },
+        "before": {
+          "bytes": 1074,
+          "sha256": "076eb95dcf720d07703106f06dcfb0892e939054d8939da2c4af047d28886103"
+        },
+        "intentional_change": false,
+        "path": "packages/scenarios/dist/reference-actions.d.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1429,
+          "sha256": "07d3dadc10e48dffaa66b3eea88fd3febfd7bfeef3a8e7c6b676c58f54d07b47"
+        },
+        "before": {
+          "bytes": 1429,
+          "sha256": "07d3dadc10e48dffaa66b3eea88fd3febfd7bfeef3a8e7c6b676c58f54d07b47"
+        },
+        "intentional_change": false,
+        "path": "packages/scenarios/dist/reference-actions.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 105,
+          "sha256": "6e6196c55449abbe848d191ed3db3ce6316c3ba90ac23d779e1cff7fbc4ddae6"
+        },
+        "before": {
+          "bytes": 105,
+          "sha256": "6e6196c55449abbe848d191ed3db3ce6316c3ba90ac23d779e1cff7fbc4ddae6"
+        },
+        "intentional_change": false,
+        "path": "packages/scenarios/dist/s1-supply-launch.d.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 8651,
+          "sha256": "8a8ba2f56a14ee8b107cfee200e637b3329d83c64b90928ae65ebc8807750daa"
+        },
+        "before": {
+          "bytes": 8651,
+          "sha256": "8a8ba2f56a14ee8b107cfee200e637b3329d83c64b90928ae65ebc8807750daa"
+        },
+        "intentional_change": false,
+        "path": "packages/scenarios/dist/s1-supply-launch.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 105,
+          "sha256": "29b8a82109319a6ced88ce93f95a53c75b43ba2365f6a256332cdccbbde9f0f3"
+        },
+        "before": {
+          "bytes": 105,
+          "sha256": "29b8a82109319a6ced88ce93f95a53c75b43ba2365f6a256332cdccbbde9f0f3"
+        },
+        "intentional_change": false,
+        "path": "packages/scenarios/dist/s2-workload-urgent.d.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 10005,
+          "sha256": "5ee46c6447e37b9dbbfda21892105277ad1188c1e8a2de1d62092dbc777a94d5"
+        },
+        "before": {
+          "bytes": 10005,
+          "sha256": "5ee46c6447e37b9dbbfda21892105277ad1188c1e8a2de1d62092dbc777a94d5"
+        },
+        "intentional_change": false,
+        "path": "packages/scenarios/dist/s2-workload-urgent.js",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 399,
+          "sha256": "db624754c2ff3cee180b22c23f39eb525681eb90a741d5e56df039057b78e794"
+        },
+        "before": {
+          "bytes": 399,
+          "sha256": "db624754c2ff3cee180b22c23f39eb525681eb90a741d5e56df039057b78e794"
+        },
+        "intentional_change": false,
+        "path": "packages/scenarios/package.json",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 217,
+          "sha256": "6242d23d87d08604ba939d71cdb6fbbf01635646a1eda34f1ed2e86240d2b7ef"
+        },
+        "before": {
+          "bytes": 217,
+          "sha256": "6242d23d87d08604ba939d71cdb6fbbf01635646a1eda34f1ed2e86240d2b7ef"
+        },
+        "intentional_change": false,
+        "path": "packages/scenarios/src/index.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1984,
+          "sha256": "4e8accf652c4dcceb9df062981d0725d68363dc60895672bf071c62db416e724"
+        },
+        "before": {
+          "bytes": 1984,
+          "sha256": "4e8accf652c4dcceb9df062981d0725d68363dc60895672bf071c62db416e724"
+        },
+        "intentional_change": false,
+        "path": "packages/scenarios/src/reference-actions.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 8421,
+          "sha256": "a29ee9a1579625bf9863105e573ab61dcd326ff6d995c7087febf14d5b3e2f5a"
+        },
+        "before": {
+          "bytes": 8421,
+          "sha256": "a29ee9a1579625bf9863105e573ab61dcd326ff6d995c7087febf14d5b3e2f5a"
+        },
+        "intentional_change": false,
+        "path": "packages/scenarios/src/s1-supply-launch.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 9896,
+          "sha256": "a3cd71e10d7088db1e358f27636042e86931d34e9cb59e1311fb9f390853a0a4"
+        },
+        "before": {
+          "bytes": 9896,
+          "sha256": "a3cd71e10d7088db1e358f27636042e86931d34e9cb59e1311fb9f390853a0a4"
+        },
+        "intentional_change": false,
+        "path": "packages/scenarios/src/s2-workload-urgent.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 4443,
+          "sha256": "080ef50f61e8308771267c762d5e94634b06f9f9d537a4b4e6f6d7f703fd683a"
+        },
+        "before": {
+          "bytes": 4443,
+          "sha256": "080ef50f61e8308771267c762d5e94634b06f9f9d537a4b4e6f6d7f703fd683a"
+        },
+        "intentional_change": false,
+        "path": "packages/scenarios/test/generate-audit.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 5309,
+          "sha256": "039ac70f4441dc6b2e3d907f3875e86d61b6f06390ffae414bcd4651cd4d9743"
+        },
+        "before": {
+          "bytes": 5309,
+          "sha256": "039ac70f4441dc6b2e3d907f3875e86d61b6f06390ffae414bcd4651cd4d9743"
+        },
+        "intentional_change": false,
+        "path": "packages/scenarios/test/goldens.test.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 5533,
+          "sha256": "3fef8bf04e08826aad5bfff5c7cb999b5b52f53f3bbde8ee47844501c080ab2c"
+        },
+        "before": {
+          "bytes": 5533,
+          "sha256": "3fef8bf04e08826aad5bfff5c7cb999b5b52f53f3bbde8ee47844501c080ab2c"
+        },
+        "intentional_change": false,
+        "path": "packages/scenarios/test/goldens.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 1103,
+          "sha256": "a059f59d875e6a8cdbb1e07b78866b575a161725b003d1c8537ed768b94de842"
+        },
+        "before": {
+          "bytes": 1103,
+          "sha256": "a059f59d875e6a8cdbb1e07b78866b575a161725b003d1c8537ed768b94de842"
+        },
+        "intentional_change": false,
+        "path": "packages/scenarios/test/helpers.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 5776,
+          "sha256": "f0ca3d57c05511ebb3a0b91a40401d97dcc19130702899b5fd6fa9995cbb0308"
+        },
+        "before": {
+          "bytes": 5776,
+          "sha256": "f0ca3d57c05511ebb3a0b91a40401d97dcc19130702899b5fd6fa9995cbb0308"
+        },
+        "intentional_change": false,
+        "path": "packages/scenarios/test/models.test.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 160,
+          "sha256": "2c0849acaff0e19d27cb1998e85b41336c36655efcc4e500ae093f4a3d8869e7"
+        },
+        "before": {
+          "bytes": 160,
+          "sha256": "2c0849acaff0e19d27cb1998e85b41336c36655efcc4e500ae093f4a3d8869e7"
+        },
+        "intentional_change": false,
+        "path": "packages/scenarios/tsconfig.build.json",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 181,
+          "sha256": "313986a7b265fac0fd68860b151132ccb942e0caf1693b1edfd708c8129cfdda"
+        },
+        "before": {
+          "bytes": 181,
+          "sha256": "313986a7b265fac0fd68860b151132ccb942e0caf1693b1edfd708c8129cfdda"
+        },
+        "intentional_change": false,
+        "path": "packages/scenarios/tsconfig.json",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 550,
+          "sha256": "f2f7230b7b4afe83a5ec049f538235689913814ef533a05c548ec266b6cdaee1"
+        },
+        "before": {
+          "bytes": 550,
+          "sha256": "f2f7230b7b4afe83a5ec049f538235689913814ef533a05c548ec266b6cdaee1"
+        },
+        "intentional_change": false,
+        "path": "playwright.config.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 212,
+          "sha256": "feff2e770f61d1bb3c7c3ee48af6f87db8be35176759443cba022b5f0f756c95"
+        },
+        "before": {
+          "bytes": 212,
+          "sha256": "feff2e770f61d1bb3c7c3ee48af6f87db8be35176759443cba022b5f0f756c95"
+        },
+        "intentional_change": false,
+        "path": "scripts/check-runtime.mjs",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 2076,
+          "sha256": "f9e0cf041f45e20e9a0ce9efa4fe5d22126337046c48c83156c9feff13165050"
+        },
+        "before": {
+          "bytes": 2076,
+          "sha256": "f9e0cf041f45e20e9a0ce9efa4fe5d22126337046c48c83156c9feff13165050"
+        },
+        "intentional_change": false,
+        "path": "scripts/dev.mjs",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 555,
+          "sha256": "eeb4ed19872c7209a01e090ace05c1632322876a3dbfa2d5dfb5f5d85cc89c42"
+        },
+        "before": {
+          "bytes": 555,
+          "sha256": "eeb4ed19872c7209a01e090ace05c1632322876a3dbfa2d5dfb5f5d85cc89c42"
+        },
+        "intentional_change": false,
+        "path": "scripts/g2-test-console.cjs",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 5733,
+          "sha256": "18b908e231c8238bcae4188aec5738f1598d13e77bcc5c35b2ff309cca9476a6"
+        },
+        "before": {
+          "bytes": 5733,
+          "sha256": "18b908e231c8238bcae4188aec5738f1598d13e77bcc5c35b2ff309cca9476a6"
+        },
+        "intentional_change": false,
+        "path": "scripts/smoke-production.mjs",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 396,
+          "sha256": "26368bd0ee825fe24189dea3b6c4c4c7a9769347bc301e56b5f9966401e18154"
+        },
+        "before": {
+          "bytes": 396,
+          "sha256": "26368bd0ee825fe24189dea3b6c4c4c7a9769347bc301e56b5f9966401e18154"
+        },
+        "intentional_change": false,
+        "path": "scripts/start.mjs",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 16972,
+          "sha256": "5bcf88dac7296106399696fb96a51700f37130b52dd16450d9ac2b91bfab5afa"
+        },
+        "before": {
+          "bytes": 16972,
+          "sha256": "5bcf88dac7296106399696fb96a51700f37130b52dd16450d9ac2b91bfab5afa"
+        },
+        "intentional_change": false,
+        "path": "tests/e2e/g2.spec.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 5339,
+          "sha256": "0e8f3249de48d1215725bff218a086e36df6bda0a18ec91da6c809297bb6ef0c"
+        },
+        "before": {
+          "bytes": 5339,
+          "sha256": "0e8f3249de48d1215725bff218a086e36df6bda0a18ec91da6c809297bb6ef0c"
+        },
+        "intentional_change": false,
+        "path": "tests/e2e/production.ts",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 291,
+          "sha256": "c8fc62190f0b2951dbfba8db8e40315682506f41e121ed725ba31bd1ac14d7f2"
+        },
+        "before": {
+          "bytes": 291,
+          "sha256": "c8fc62190f0b2951dbfba8db8e40315682506f41e121ed725ba31bd1ac14d7f2"
+        },
+        "intentional_change": false,
+        "path": "tsconfig.base.json",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 199,
+          "sha256": "2fc21bb983a251a60debb03324655ff789e45d267b0acd21e0868484130e93d7"
+        },
+        "before": {
+          "bytes": 199,
+          "sha256": "2fc21bb983a251a60debb03324655ff789e45d267b0acd21e0868484130e93d7"
+        },
+        "intentional_change": false,
+        "path": "tsconfig.e2e.json",
+        "unchanged": true
+      },
+      {
+        "after": {
+          "bytes": 279,
+          "sha256": "ca8d9147ab7a3345ced0519c835491ce01886ec9d519fe18dc2492c71fddcf8b"
+        },
+        "before": {
+          "bytes": 279,
+          "sha256": "ca8d9147ab7a3345ced0519c835491ce01886ec9d519fe18dc2492c71fddcf8b"
+        },
+        "intentional_change": false,
+        "path": "vitest.config.ts",
+        "unchanged": true
+      }
+    ],
+    "removed_protected_files": [],
+    "status": "PASS",
+    "unchanged_files": 173,
+    "unexpected_changes": []
+  },
+  "assessment": {
+    "canonical_coverage": [
+      {
+        "casino_state": "DIRECT_MAPPING",
+        "g1_kind_or_field": "question",
+        "job_interview_state": "PARTIAL_MAPPING",
+        "reason": "CaSiNo elicit-pref is the strongest intent-level match; JI has unlabelled text and only paper-described heuristics.",
+        "requested_category": "question / probe interest"
+      },
+      {
+        "casino_state": "PARTIAL_MAPPING",
+        "g1_kind_or_field": "acknowledge",
+        "job_interview_state": "PARTIAL_MAPPING",
+        "reason": "Requires an established acknowledgementFactId; empathy/agreement alone does not supply one.",
+        "requested_category": "acknowledgement"
+      },
+      {
+        "casino_state": "PARTIAL_MAPPING",
+        "g1_kind_or_field": "argument",
+        "job_interview_state": "PARTIAL_MAPPING",
+        "reason": "Reasons and assertions are useful language, but neither dataset binds valid G1 argument IDs.",
+        "requested_category": "argument"
+      },
+      {
+        "casino_state": "PARTIAL_MAPPING",
+        "g1_kind_or_field": "offer",
+        "job_interview_state": "PARTIAL_MAPPING",
+        "reason": "Use language and structured proposal context only after a separately approved mapping design.",
+        "requested_category": "offer"
+      },
+      {
+        "casino_state": "PARTIAL_MAPPING",
+        "g1_kind_or_field": "counter_offer",
+        "job_interview_state": "PARTIAL_MAPPING",
+        "reason": "Neither external strategy set identifies targetOfferId; sequential proposals alone are insufficient.",
+        "requested_category": "counter-offer"
+      },
+      {
+        "casino_state": "PARTIAL_MAPPING",
+        "g1_kind_or_field": "pressure",
+        "job_interview_state": "NO_SAFE_MAPPING",
+        "reason": "Some CaSiNo undermining language may be relevant, but no explicit pressure label exists in either raw corpus.",
+        "requested_category": "pressure"
+      },
+      {
+        "casino_state": "NO_SAFE_MAPPING",
+        "g1_kind_or_field": null,
+        "job_interview_state": "NO_SAFE_MAPPING",
+        "reason": "Requested analysis category is absent as a standalone action in the actual frozen G1 schema.",
+        "requested_category": "objection"
+      },
+      {
+        "casino_state": "PARTIAL_MAPPING",
+        "g1_kind_or_field": "clarification",
+        "job_interview_state": "PARTIAL_MAPPING",
+        "reason": "Preference statements or informative replies require contextual review; no direct clarification label.",
+        "requested_category": "clarification"
+      },
+      {
+        "casino_state": "DIRECT_MAPPING",
+        "g1_kind_or_field": "accept",
+        "job_interview_state": "PARTIAL_MAPPING",
+        "reason": "CaSiNo direct match is a UI event only; JI stores bid acceptance state, not language labels.",
+        "requested_category": "acceptance"
+      },
+      {
+        "casino_state": "DIRECT_MAPPING",
+        "g1_kind_or_field": "walk_away",
+        "job_interview_state": "NO_SAFE_MAPPING",
+        "reason": "CaSiNo direct match is a UI event only; JI terminal status cannot establish utterance intent.",
+        "requested_category": "walk-away"
+      },
+      {
+        "casino_state": "NO_SAFE_MAPPING",
+        "g1_kind_or_field": "tone",
+        "job_interview_state": "NO_SAFE_MAPPING",
+        "reason": "No gold neutral/respectful_firm/accusatory/threat annotations; emotion symbols are not equivalent.",
+        "requested_category": "tone"
+      }
+    ],
+    "deferred_candidates": [
+      {
+        "name": "Deal or No Deal",
+        "reason": "Outside this two-dataset acquisition gate; no evaluation or endorsement performed.",
+        "status": "NOT_DOWNLOADED"
+      },
+      {
+        "name": "CraigslistBargain",
+        "reason": "Outside this two-dataset acquisition gate; no evaluation or endorsement performed.",
+        "status": "NOT_DOWNLOADED"
+      },
+      {
+        "name": "CRA",
+        "reason": "Outside this two-dataset acquisition gate; no evaluation or endorsement performed.",
+        "status": "NOT_DOWNLOADED"
+      },
+      {
+        "name": "Kaggle negotiation datasets",
+        "reason": "Outside this two-dataset acquisition gate; no evaluation or endorsement performed.",
+        "status": "NOT_DOWNLOADED"
+      },
+      {
+        "name": "Synthetic negotiation datasets",
+        "reason": "Outside this two-dataset acquisition gate; no evaluation or endorsement performed.",
+        "status": "NOT_DOWNLOADED"
+      },
+      {
+        "name": "Third-party dataset bundles",
+        "reason": "Outside this two-dataset acquisition gate; no evaluation or endorsement performed.",
+        "status": "NOT_DOWNLOADED"
+      }
+    ],
+    "external_label_and_field_mappings": [
+      {
+        "candidate_canonical_category": "question / probe interest",
+        "external_label_or_field": "elicit-pref",
+        "reason": "Preference probing matches the intent; topic IDs and multi-intent arbitration remain unresolved.",
+        "source": "CaSiNo",
+        "state": "DIRECT_MAPPING"
+      },
+      {
+        "candidate_canonical_category": "argument",
+        "external_label_or_field": "self-need",
+        "reason": "A stated need can motivate an argument, but does not identify a valid G1 argumentId.",
+        "source": "CaSiNo",
+        "state": "PARTIAL_MAPPING"
+      },
+      {
+        "candidate_canonical_category": "argument",
+        "external_label_or_field": "other-need",
+        "reason": "Reasons about another person may support an argument; neither factual truth nor argument binding follows from the label.",
+        "source": "CaSiNo",
+        "state": "PARTIAL_MAPPING"
+      },
+      {
+        "candidate_canonical_category": "argument / clarification",
+        "external_label_or_field": "no-need",
+        "reason": "A preference statement is not necessarily an argument or clarification; turn context matters.",
+        "source": "CaSiNo",
+        "state": "PARTIAL_MAPPING"
+      },
+      {
+        "candidate_canonical_category": "acknowledge",
+        "external_label_or_field": "showing-empathy",
+        "reason": "Empathy does not necessarily acknowledge a specific established fact.",
+        "source": "CaSiNo",
+        "state": "PARTIAL_MAPPING"
+      },
+      {
+        "candidate_canonical_category": "offer / counter_offer",
+        "external_label_or_field": "promote-coordination",
+        "reason": "Cooperation can be proposed without concrete terms or a referenced previous offer.",
+        "source": "CaSiNo",
+        "state": "PARTIAL_MAPPING"
+      },
+      {
+        "candidate_canonical_category": "argument / pressure / objection-like language",
+        "external_label_or_field": "uv-part",
+        "reason": "Undermining a need does not uniquely determine an action or tone.",
+        "source": "CaSiNo",
+        "state": "PARTIAL_MAPPING"
+      },
+      {
+        "candidate_canonical_category": "argument / acknowledge / objection-like language",
+        "external_label_or_field": "vouch-fair",
+        "reason": "A fairness claim may endorse or challenge a proposal; context is required.",
+        "source": "CaSiNo",
+        "state": "PARTIAL_MAPPING"
+      },
+      {
+        "candidate_canonical_category": "none",
+        "external_label_or_field": "small-talk",
+        "reason": "Rapport and greetings do not imply acknowledgement of a G1 fact.",
+        "source": "CaSiNo",
+        "state": "NO_SAFE_MAPPING"
+      },
+      {
+        "candidate_canonical_category": "none",
+        "external_label_or_field": "non-strategic",
+        "reason": "Absence of a listed strategy is not absence of a canonical action; offers and acceptance can occur here.",
+        "source": "CaSiNo",
+        "state": "NO_SAFE_MAPPING"
+      },
+      {
+        "candidate_canonical_category": "offer / counter_offer",
+        "external_label_or_field": "Submit-Deal + allocation task_data",
+        "reason": "Structured event, not a language example; does not distinguish initial from counter-offer or supply internal IDs.",
+        "source": "CaSiNo",
+        "state": "PARTIAL_MAPPING"
+      },
+      {
+        "candidate_canonical_category": "accept",
+        "external_label_or_field": "Accept-Deal",
+        "reason": "Explicit acceptance event only. Binding to the relevant offer and to any natural utterance is future work.",
+        "source": "CaSiNo",
+        "state": "DIRECT_MAPPING"
+      },
+      {
+        "candidate_canonical_category": "walk_away",
+        "external_label_or_field": "Walk-Away",
+        "reason": "Explicit exit event only; it is not a gold label for the preceding utterance.",
+        "source": "CaSiNo",
+        "state": "DIRECT_MAPPING"
+      },
+      {
+        "candidate_canonical_category": "objection",
+        "external_label_or_field": "Reject-Deal",
+        "reason": "G1 has no standalone objection/reject action. Rejection does not imply walk_away.",
+        "source": "CaSiNo",
+        "state": "NO_SAFE_MAPPING"
+      },
+      {
+        "candidate_canonical_category": "tone",
+        "external_label_or_field": "emoticons / satisfaction / personality",
+        "reason": "Emotion, outcome satisfaction and personality are different from G1 tone; do not infer tone from them.",
+        "source": "CaSiNo",
+        "state": "NO_SAFE_MAPPING"
+      },
+      {
+        "candidate_canonical_category": "candidate negotiation intents",
+        "external_label_or_field": "comments[].body with prior turns and role",
+        "reason": "Useful natural language, but no stored action/act labels. Annotation would require a later gate.",
+        "source": "Job Interview raw",
+        "state": "PARTIAL_MAPPING"
+      },
+      {
+        "candidate_canonical_category": "offer / counter_offer",
+        "external_label_or_field": "solutions[].body",
+        "reason": "Structured proposals have five issues; G1 PackageSchema permits two to four. Do not truncate or copy them automatically.",
+        "source": "Job Interview raw",
+        "state": "PARTIAL_MAPPING"
+      },
+      {
+        "candidate_canonical_category": "accept",
+        "external_label_or_field": "solutions[].accepted == true",
+        "reason": "An acceptance state tied to a bid, not an utterance annotation or explicit accepting-speaker event.",
+        "source": "Job Interview raw",
+        "state": "PARTIAL_MAPPING"
+      },
+      {
+        "candidate_canonical_category": "objection / walk_away",
+        "external_label_or_field": "solutions[].accepted == null",
+        "reason": "Null supplies neither an explicit rejection nor an exit intent.",
+        "source": "Job Interview raw",
+        "state": "NO_SAFE_MAPPING"
+      },
+      {
+        "candidate_canonical_category": "accept / walk_away",
+        "external_label_or_field": "completed / aborted / terminated",
+        "reason": "Session status is not an utterance action; status and accepted-bid metadata can disagree.",
+        "source": "Job Interview raw",
+        "state": "NO_SAFE_MAPPING"
+      },
+      {
+        "candidate_canonical_category": "question / probe interest",
+        "external_label_or_field": "inquire",
+        "reason": "Heuristic question patterns can also occur in proposals; labels are absent from raw data.",
+        "source": "Job Interview paper only",
+        "state": "PARTIAL_MAPPING"
+      },
+      {
+        "candidate_canonical_category": "acknowledge / accept",
+        "external_label_or_field": "agree",
+        "reason": "Broad agreement/thanks patterns do not resolve factual acknowledgement versus binding acceptance.",
+        "source": "Job Interview paper only",
+        "state": "PARTIAL_MAPPING"
+      },
+      {
+        "candidate_canonical_category": "offer / counter_offer",
+        "external_label_or_field": "propose",
+        "reason": "Broad numeric/pattern extraction does not establish a valid complete offer.",
+        "source": "Job Interview paper only",
+        "state": "PARTIAL_MAPPING"
+      },
+      {
+        "candidate_canonical_category": "clarification / argument",
+        "external_label_or_field": "inform",
+        "reason": "Reply information is broader than either G1 action; no factual or argument binding follows.",
+        "source": "Job Interview paper only",
+        "state": "PARTIAL_MAPPING"
+      },
+      {
+        "candidate_canonical_category": "objection",
+        "external_label_or_field": "disagree",
+        "reason": "Broad negative patterns and rejection are not a supported standalone G1 action.",
+        "source": "Job Interview paper only",
+        "state": "NO_SAFE_MAPPING"
+      },
+      {
+        "candidate_canonical_category": "none",
+        "external_label_or_field": "greet / unk / sep / end / pad",
+        "reason": "Greetings, unknown markers and sequence-control tags do not map to canonical actions.",
+        "source": "Job Interview paper only",
+        "state": "NO_SAFE_MAPPING"
+      }
+    ],
+    "field_classification": [
+      {
+        "classification": "USEFUL_FOR_NLU",
+        "dataset": "CaSiNo",
+        "fields": "chat_logs[].text (natural-language entries)",
+        "reason": "Primary candidate text; future contextual/manual review and personal-information screening are still needed."
+      },
+      {
+        "classification": "USEFUL_FOR_NLU",
+        "dataset": "CaSiNo",
+        "fields": "chat_logs[].id; array order",
+        "reason": "Local participant aliases and turn sequence provide conversational context; do not mistake id for an utterance ID."
+      },
+      {
+        "classification": "USEFUL_FOR_NLU",
+        "dataset": "CaSiNo",
+        "fields": "annotations[][0:2]",
+        "reason": "Utterance text plus comma-separated strategy labels; preserve original semantics and audit the documented alignment/format defects."
+      },
+      {
+        "classification": "USEFUL_FOR_NLU",
+        "dataset": "CaSiNo",
+        "fields": "chat_logs[].task_data.issue2youget / issue2theyget",
+        "reason": "Three-issue allocation context for later proposal interpretation, with scenario-specific ID mapping required."
+      },
+      {
+        "classification": "USEFUL_FOR_RESEARCH_ONLY",
+        "dataset": "CaSiNo",
+        "fields": "chat_logs[].text (control markers); task_data.data",
+        "reason": "Event evidence and alignment context only; never use the marker as a Russian-language utterance or label a neighboring turn automatically."
+      },
+      {
+        "classification": "USEFUL_FOR_NLU",
+        "dataset": "CaSiNo",
+        "fields": "participant_info.*.value2issue.{High,Medium,Low}",
+        "reason": "Scenario preference grounding when legitimately known at the turn; hidden partner preferences must not leak into inputs."
+      },
+      {
+        "classification": "USEFUL_FOR_NLU",
+        "dataset": "CaSiNo",
+        "fields": "participant_info.*.value2reason.{High,Medium,Low}",
+        "reason": "Potential interest/argument context, subject to personal-detail review and visibility rules; not automatically factual or valid G1 arguments."
+      },
+      {
+        "classification": "USEFUL_FOR_RESEARCH_ONLY",
+        "dataset": "CaSiNo",
+        "fields": "participant_info.*.outcomes.points_scored",
+        "reason": "Post-negotiation utility/outcome research, not input-time action supervision."
+      },
+      {
+        "classification": "USEFUL_FOR_RESEARCH_ONLY",
+        "dataset": "CaSiNo",
+        "fields": "participant_info.*.outcomes.{satisfaction,opponent_likeness}",
+        "reason": "Subjective outcomes; no direct action or tone supervision and potential future-information leakage."
+      },
+      {
+        "classification": "EXCLUDE_FROM_TRAINING_BY_DEFAULT",
+        "dataset": "CaSiNo",
+        "fields": "participant_info.*.demographics.{age,gender,ethnicity,education}",
+        "reason": "Not needed for Russian utterance-to-action parsing; exclude all demographic values by default."
+      },
+      {
+        "classification": "EXCLUDE_FROM_TRAINING_BY_DEFAULT",
+        "dataset": "CaSiNo",
+        "fields": "participant_info.*.personality.svo; personality.big-five.*",
+        "reason": "Exclude SVO and all five personality measurements; do not use them as target labels, input features or tone proxies."
+      },
+      {
+        "classification": "USEFUL_FOR_RESEARCH_ONLY",
+        "dataset": "CaSiNo",
+        "fields": "dialogue_id",
+        "reason": "Provenance, error tracing and later grouping only, outside model-visible examples."
+      },
+      {
+        "classification": "USEFUL_FOR_NLU",
+        "dataset": "Job Interview",
+        "fields": "comments[].body; array order",
+        "reason": "Primary unlabelled negotiation language and local sequence context."
+      },
+      {
+        "classification": "USEFUL_FOR_NLU",
+        "dataset": "Job Interview",
+        "fields": "users[].role",
+        "reason": "Recruiter/worker role is scenario context; avoid carrying user identifiers into inputs."
+      },
+      {
+        "classification": "USEFUL_FOR_NLU",
+        "dataset": "Job Interview",
+        "fields": "solutions[].body.*",
+        "reason": "Proposal slots and candidate values, subject to five-issue incompatibility and documented malformed bids."
+      },
+      {
+        "classification": "USEFUL_FOR_NLU",
+        "dataset": "Job Interview",
+        "fields": "users[].utilities[].{name,type,min,max,options.name,options.names,relatedTo}",
+        "reason": "Issue/value domain and dependency context; future use must respect what the speaker can know."
+      },
+      {
+        "classification": "USEFUL_FOR_RESEARCH_ONLY",
+        "dataset": "Job Interview",
+        "fields": "users[].utilities[].weight; options[].weight",
+        "reason": "Private utility preferences support economic research, not language-intent labels or inaccessible opponent knowledge."
+      },
+      {
+        "classification": "USEFUL_FOR_RESEARCH_ONLY",
+        "dataset": "Job Interview",
+        "fields": "solutions[].accepted; status",
+        "reason": "Outcome/event context, not an utterance label. Null is not false/rejected; final status must not leak into turn-time inputs."
+      },
+      {
+        "classification": "EXCLUDE_FROM_TRAINING_BY_DEFAULT",
+        "dataset": "Job Interview",
+        "fields": "users[].worker_id; users[].assignment_id",
+        "reason": "Crowd-worker and assignment identifiers are unnecessary for NLU. Never expose them to model input; any future grouping must be separate and justified."
+      },
+      {
+        "classification": "EXCLUDE_FROM_TRAINING_BY_DEFAULT",
+        "dataset": "Job Interview",
+        "fields": "id; users[].id; comments[].{id,user_id}; solutions[].{id,user_id}",
+        "reason": "Raw linkable IDs should not enter training examples. Later provenance joins/local speaker aliases can be stored separately."
+      },
+      {
+        "classification": "EXCLUDE_FROM_TRAINING_BY_DEFAULT",
+        "dataset": "Job Interview",
+        "fields": "comments[].created_at; solutions[].created_at",
+        "reason": "Absolute timestamps are unnecessary model features; relative ordering/event alignment may be computed only in a later gate."
+      }
+    ],
+    "g1_contract_review": {
+      "kinds": [
+        "question",
+        "acknowledge",
+        "argument",
+        "offer",
+        "counter_offer",
+        "accept",
+        "pressure",
+        "walk_away",
+        "clarification"
+      ],
+      "package_max_terms": 4,
+      "package_min_terms": 2,
+      "paths": [
+        "packages/contracts/src/action.ts",
+        "packages/contracts/src/common.ts"
+      ],
+      "required_bindings": "Question topic IDs; acknowledgement fact ID; argument ID; offer terms/conditions; counter-offer target ID; acceptance offer ID; bounded evidence references. These are not supplied by external labels.",
+      "standalone_objection_action_present": false,
+      "tone_values": [
+        "neutral",
+        "respectful_firm",
+        "accusatory",
+        "threat"
+      ]
+    },
+    "mapping_is_assessment_only": true,
+    "mapping_state_definitions": {
+      "DIRECT_MAPPING": "Same intent at the stated annotation/event level. This does not imply a complete G1 action payload or a safe label for adjacent dialogue text.",
+      "NO_SAFE_MAPPING": "No reliable label transfer, orthogonal metadata, or no corresponding action in the frozen G1 contract.",
+      "PARTIAL_MAPPING": "Overlapping, broader, contextual or multi-intent evidence; no automatic relabeling is justified."
+    },
+    "normalized_examples_created": 0,
+    "privacy_limit": "Field-level review and Unicode/schema checks are complete. No exhaustive free-text PII screening or redaction was performed; future use of dialogue/reason text requires that review.",
+    "quality_findings": [
+      {
+        "code": "ANNOTATION_ALIGNMENT",
+        "dataset": "CaSiNo",
+        "detail": "Dialogues 35, 428 and 596 each have one unannotated natural-language turn. All 4615 annotation texts exist exactly in their own dialogue, without ambiguous duplicate text, but positional zip alignment would misassign 26 overlapping rows. No repair performed.",
+        "severity": "documented_source_quirk"
+      },
+      {
+        "code": "EMPTY_LABEL_TOKEN",
+        "dataset": "CaSiNo",
+        "detail": "Dialogue 19, annotation index 11 has small-talk,self-need,,vouch-fair. One empty comma-delimited token; 10 recognized nonempty labels and 5858 valid label assignments. Raw bytes retained.",
+        "severity": "documented_source_quirk"
+      },
+      {
+        "code": "NO_UNIVERSAL_ACTION_LABELS",
+        "dataset": "CaSiNo",
+        "detail": "Only 396 dialogues have strategy annotations. Strategy labels are multi-label and are not a complete canonical-action inventory. Control markers are not natural utterances.",
+        "severity": "training_limitation"
+      },
+      {
+        "code": "RAW_VS_PAPER_COUNT",
+        "dataset": "Job Interview",
+        "detail": "3935 raw sessions = 2500 completed + 139 terminated + 1296 aborted. Excluding aborted sessions gives the paper count of 2639; the official helper applies task-dependent filters. No filter or split was applied here.",
+        "severity": "documented_scope_difference"
+      },
+      {
+        "code": "NO_STORED_DIALOGUE_ACT_LABELS",
+        "dataset": "Job Interview",
+        "detail": "The raw schema has no per-utterance dialogue-act annotations. Paper vocabulary comes from heuristic extraction, not supplied gold labels; act frequencies are unavailable. No extractor was run.",
+        "severity": "training_limitation"
+      },
+      {
+        "code": "SHORT_AND_EMPTY_SESSIONS",
+        "dataset": "Job Interview",
+        "detail": "312 sessions have zero comments and 709 have fewer than three. These remain in the immutable raw corpus and raw-session count.",
+        "severity": "documented_source_quirk"
+      },
+      {
+        "code": "MALFORMED_BIDS",
+        "dataset": "Job Interview",
+        "detail": "Four bid records in three sessions: Salary 35.5 appears twice in session index 569; Weekly holiday 4.8 appears once in index 1205; one bid omits Salary in index 1777. The fractional values are within numeric bounds but violate the declared INTEGER type.",
+        "severity": "documented_source_quirk"
+      },
+      {
+        "code": "OUTCOME_AMBIGUITY",
+        "dataset": "Job Interview",
+        "detail": "accepted is true for 2488 bids and null for 4888; no explicit false values. Forty-eight completed sessions have no accepted bid, 26 aborted sessions have accepted bids, and 10 sessions have two accepted bids. Do not derive utterance labels from status or null acceptance.",
+        "severity": "training_limitation"
+      },
+      {
+        "code": "SCHEMA_RANGE_DISAGREEMENT",
+        "dataset": "Job Interview",
+        "detail": "Raw utility limits are Salary 20..50 and Weekly holiday 2..6. The paper lists weekly days off 2..5; helper constructor limits use 20..51 and 2..7 and get_all_bids uses exclusive range stops. Use the observed raw definitions for this audit; do not silently normalize these differences.",
+        "severity": "documented_source_quirk"
+      },
+      {
+        "code": "EXACT_DUPLICATES",
+        "dataset": "Both",
+        "detail": "Exact utterance repetition is a statistic, not automatic corruption. CaSiNo has 302 extra repeated language utterances; JI has 9024. JI also has 18 duplicate nonempty role/text dialogue-sequence groups (84 extra sequences). Any later split must prevent group leakage; none created here.",
+        "severity": "training_limitation"
+      },
+      {
+        "code": "LANGUAGE_AND_DOMAIN_GAP",
+        "dataset": "Both",
+        "detail": "Both sources are English and use different issue vocabularies from Negotiation Arena. Neither is a ready Russian canonical-action corpus. No translation, synthetic generation or target-label conversion was performed.",
+        "severity": "training_limitation"
+      },
+      {
+        "code": "TONE_AND_PRIVACY",
+        "dataset": "Both",
+        "detail": "No G1 tone gold labels exist. CaSiNo emoticons and personal disclosures do not justify tone/personality inference. Demographics, personality, linkable IDs and absolute timestamps are excluded by default as specified in the field review.",
+        "severity": "training_limitation"
+      }
+    ],
+    "training_suitability": {
+      "casino": "Useful for preference probing, needs/reasons, contextual acknowledgement and bargaining language; requires later curation, alignment handling, privacy review and Russian/G1 annotation. Not training-ready.",
+      "job_interview": "Useful for multi-issue proposal language, role/context and structured bid grounding; no supplied dialogue-act labels, five-issue mismatch and session/bid quirks require a separately approved design. Not training-ready."
+    }
+  },
+  "completed_at_utc": "2026-09-17T08:20:08.962120+00:00",
+  "dataset_validation": {
+    "casino": {
+      "acquisition_acceptance_status": "ACCEPTED_WITH_DOCUMENTED_SOURCE_QUIRKS",
+      "alternation_all_entries": {
+        "adjacent_same_speaker_pairs": 167,
+        "dialogues_with_adjacent_same_speaker": 90,
+        "interpretation": "Observed sequence property, not automatic corruption; event/control turns and asynchronous messages can repeat speakers."
+      },
+      "alternation_natural_language": {
+        "adjacent_same_speaker_pairs": 60,
+        "dialogues_with_adjacent_same_speaker": 48,
+        "interpretation": "Observed sequence property, not automatic corruption; event/control turns and asynchronous messages can repeat speakers."
+      },
+      "annotation_labels": {
+        "elicit-pref": 377,
+        "no-need": 196,
+        "non-strategic": 1455,
+        "other-need": 409,
+        "promote-coordination": 579,
+        "self-need": 964,
+        "showing-empathy": 254,
+        "small-talk": 1054,
+        "uv-part": 131,
+        "vouch-fair": 439
+      },
+      "annotation_validation": {
+        "alignment_policy": "Comparison only; no annotation repaired, reassigned, dropped or normalized.",
+        "annotation_rows_with_ambiguous_repeated_text": 0,
+        "annotation_texts_unmatched_by_exact_text": 0,
+        "empty_label_token_count": 1,
+        "exact_text_matches_within_same_dialogue_multiset": 4615,
+        "label_format_issues": [
+          {
+            "annotation_index": 11,
+            "dialogue_id": 19,
+            "empty_tokens": 1,
+            "label_string": "small-talk,self-need,,vouch-fair"
+          }
+        ],
+        "length_mismatch_dialogues": 3,
+        "length_mismatches": [
+          {
+            "annotation_rows": 11,
+            "dialogue_id": 35,
+            "natural_language_utterances": 12
+          },
+          {
+            "annotation_rows": 14,
+            "dialogue_id": 428,
+            "natural_language_utterances": 15
+          },
+          {
+            "annotation_rows": 10,
+            "dialogue_id": 596,
+            "natural_language_utterances": 11
+          }
+        ],
+        "positional_text_mismatches_in_overlap": 26,
+        "text_alignment_details": [
+          {
+            "alignment_operations": [
+              {
+                "annotation_range": [
+                  5,
+                  5
+                ],
+                "operation": "insert",
+                "utterance_range": [
+                  5,
+                  6
+                ]
+              }
+            ],
+            "dialogue_id": 35,
+            "positional_mismatches_in_overlap": 6
+          },
+          {
+            "alignment_operations": [
+              {
+                "annotation_range": [
+                  0,
+                  0
+                ],
+                "operation": "insert",
+                "utterance_range": [
+                  0,
+                  1
+                ]
+              }
+            ],
+            "dialogue_id": 428,
+            "positional_mismatches_in_overlap": 14
+          },
+          {
+            "alignment_operations": [
+              {
+                "annotation_range": [
+                  4,
+                  4
+                ],
+                "operation": "insert",
+                "utterance_range": [
+                  4,
+                  5
+                ]
+              }
+            ],
+            "dialogue_id": 596,
+            "positional_mismatches_in_overlap": 6
+          }
+        ],
+        "text_alignment_mismatch_dialogues": 3,
+        "unknown_labels": [],
+        "utterances_unmatched_by_exact_annotation_in_annotated_dialogues": 3
+      },
+      "control_event_labels": {
+        "Accept-Deal": 1005,
+        "Reject-Deal": 167,
+        "Submit-Deal": 1181,
+        "Walk-Away": 25
+      },
+      "counts": {
+        "annotated_dialogues": 396,
+        "annotation_label_assignments": 5858,
+        "annotation_rows": 4615,
+        "control_events": 2378,
+        "dialogues": 1030,
+        "natural_language_utterances": 11919,
+        "natural_language_utterances_in_annotated_dialogues": 4618,
+        "natural_language_utterances_in_unannotated_dialogues": 7301,
+        "utterance_entries_including_control_events": 14297
+      },
+      "dataset": "CaSiNo",
+      "dialogues_with_any_validation_or_alignment_issue": 4,
+      "duplicate_dialogue_ids": {
+        "duplicate_groups": 0,
+        "extra_occurrences_after_first": 0,
+        "occurrences_in_duplicate_groups": 0,
+        "total": 1030,
+        "unique": 1030
+      },
+      "empty_utterances": 0,
+      "exact_duplicate_dialogue_sequences": {
+        "duplicate_groups": 0,
+        "extra_occurrences_after_first": 0,
+        "occurrences_in_duplicate_groups": 0,
+        "total": 1030,
+        "unique": 1030
+      },
+      "exact_duplicate_full_records": {
+        "duplicate_groups": 0,
+        "extra_occurrences_after_first": 0,
+        "occurrences_in_duplicate_groups": 0,
+        "total": 1030,
+        "unique": 1030
+      },
+      "exact_duplicate_utterances_all_entries": {
+        "duplicate_groups": 106,
+        "extra_occurrences_after_first": 2676,
+        "occurrences_in_duplicate_groups": 2782,
+        "total": 14297,
+        "unique": 11621
+      },
+      "exact_duplicate_utterances_natural_language": {
+        "duplicate_groups": 102,
+        "extra_occurrences_after_first": 302,
+        "occurrences_in_duplicate_groups": 404,
+        "total": 11919,
+        "unique": 11617
+      },
+      "issue_mentions_in_preference_fields": {
+        "Firewood": 2060,
+        "Food": 2060,
+        "Water": 2060
+      },
+      "labels_per_annotation_histogram": {
+        "1": 3647,
+        "2": 735,
+        "3": 192,
+        "4": 40,
+        "5": 1
+      },
+      "malformed_dialogue_or_annotation_records": 1,
+      "non_ascii_symbol_codepoint_frequency": {
+        "U+1F621 POUTING FACE": 44,
+        "U+1F62E FACE WITH OPEN MOUTH": 139,
+        "U+1F642 SLIGHTLY SMILING FACE": 1595,
+        "U+2600 BLACK SUN WITH RAYS": 1,
+        "U+2639 WHITE FROWNING FACE": 268
+      },
+      "offer_allocation_value_frequency": {
+        "0": 1175,
+        "1": 2368,
+        "2": 2368,
+        "3": 1175
+      },
+      "parsing": {
+        "duplicate_object_key_occurrences": 0,
+        "encoding": "UTF-8",
+        "json_parse": "PASS",
+        "parse_errors": [],
+        "strict_decode": "PASS",
+        "unexpected_binary_nul_bytes": 0,
+        "utf8_bom": false
+      },
+      "raw_json_path": "AlagDatasets/raw/casino/data/casino.json",
+      "schema_inventory": {
+        "$": {
+          "list": 1
+        },
+        "$[]": {
+          "dict": 1030
+        },
+        "$[].annotations": {
+          "list": 1030
+        },
+        "$[].annotations[]": {
+          "list": 4615
+        },
+        "$[].annotations[][]": {
+          "str": 9230
+        },
+        "$[].chat_logs": {
+          "list": 1030
+        },
+        "$[].chat_logs[]": {
+          "dict": 14297
+        },
+        "$[].chat_logs[].id": {
+          "str": 14297
+        },
+        "$[].chat_logs[].task_data": {
+          "dict": 14297
+        },
+        "$[].chat_logs[].task_data.data": {
+          "str": 1197
+        },
+        "$[].chat_logs[].task_data.issue2theyget": {
+          "dict": 1181
+        },
+        "$[].chat_logs[].task_data.issue2theyget.Firewood": {
+          "str": 1181
+        },
+        "$[].chat_logs[].task_data.issue2theyget.Food": {
+          "str": 1181
+        },
+        "$[].chat_logs[].task_data.issue2theyget.Water": {
+          "str": 1181
+        },
+        "$[].chat_logs[].task_data.issue2youget": {
+          "dict": 1181
+        },
+        "$[].chat_logs[].task_data.issue2youget.Firewood": {
+          "str": 1181
+        },
+        "$[].chat_logs[].task_data.issue2youget.Food": {
+          "str": 1181
+        },
+        "$[].chat_logs[].task_data.issue2youget.Water": {
+          "str": 1181
+        },
+        "$[].chat_logs[].text": {
+          "str": 14297
+        },
+        "$[].dialogue_id": {
+          "int": 1030
+        },
+        "$[].participant_info": {
+          "dict": 1030
+        },
+        "$[].participant_info.*": {
+          "dict": 2060
+        },
+        "$[].participant_info.*.demographics": {
+          "dict": 2060
+        },
+        "$[].participant_info.*.demographics.age": {
+          "int": 2060
+        },
+        "$[].participant_info.*.demographics.education": {
+          "str": 2060
+        },
+        "$[].participant_info.*.demographics.ethnicity": {
+          "str": 2060
+        },
+        "$[].participant_info.*.demographics.gender": {
+          "str": 2060
+        },
+        "$[].participant_info.*.outcomes": {
+          "dict": 2060
+        },
+        "$[].participant_info.*.outcomes.opponent_likeness": {
+          "str": 2060
+        },
+        "$[].participant_info.*.outcomes.points_scored": {
+          "int": 2060
+        },
+        "$[].participant_info.*.outcomes.satisfaction": {
+          "str": 2060
+        },
+        "$[].participant_info.*.personality": {
+          "dict": 2060
+        },
+        "$[].participant_info.*.personality.big-five": {
+          "dict": 2060
+        },
+        "$[].participant_info.*.personality.big-five.agreeableness": {
+          "float": 2060
+        },
+        "$[].participant_info.*.personality.big-five.conscientiousness": {
+          "float": 2060
+        },
+        "$[].participant_info.*.personality.big-five.emotional-stability": {
+          "float": 2060
+        },
+        "$[].participant_info.*.personality.big-five.extraversion": {
+          "float": 2060
+        },
+        "$[].participant_info.*.personality.big-five.openness-to-experiences": {
+          "float": 2060
+        },
+        "$[].participant_info.*.personality.svo": {
+          "str": 2060
+        },
+        "$[].participant_info.*.value2issue": {
+          "dict": 2060
+        },
+        "$[].participant_info.*.value2issue.High": {
+          "str": 2060
+        },
+        "$[].participant_info.*.value2issue.Low": {
+          "str": 2060
+        },
+        "$[].participant_info.*.value2issue.Medium": {
+          "str": 2060
+        },
+        "$[].participant_info.*.value2reason": {
+          "dict": 2060
+        },
+        "$[].participant_info.*.value2reason.High": {
+          "str": 2060
+        },
+        "$[].participant_info.*.value2reason.Low": {
+          "str": 2060
+        },
+        "$[].participant_info.*.value2reason.Medium": {
+          "str": 2060
+        }
+      },
+      "schema_violations": {
+        "empty_annotation_label_token": 1
+      },
+      "speaker_alias_frequency": {
+        "mturk_agent_1": 7137,
+        "mturk_agent_2": 7160
+      },
+      "unicode": {
+        "lone_surrogate_codepoints": 0,
+        "nul_characters": 0,
+        "other_unexpected_control_characters": 0,
+        "replacement_characters": 0
+      }
+    },
+    "duplicate_definition": "Exact decoded strings, case/spacing preserved. extra_occurrences_after_first = total - unique. No deduplication performed.",
+    "job_interview": {
+      "acquisition_acceptance_status": "ACCEPTED_WITH_DOCUMENTED_SOURCE_QUIRKS",
+      "alternation_natural_language": {
+        "adjacent_same_speaker_pairs": 12909,
+        "dialogues_with_adjacent_same_speaker": 3089,
+        "interpretation": "Observed sequence property, not automatic corruption; event/control turns and asynchronous messages can repeat speakers."
+      },
+      "chronology": {
+        "comment_adjacent_timestamp_inversions": 0,
+        "solution_adjacent_timestamp_inversions": 0
+      },
+      "counts": {
+        "annotated_dialogues": 0,
+        "dialogues": 3935,
+        "dialogues_with_fewer_than_3_comments": 709,
+        "dialogues_with_no_comments": 312,
+        "natural_language_utterances": 39636,
+        "non_aborted_dialogues": 2639,
+        "structured_solutions": 7376,
+        "utterances_with_stored_dialogue_act_labels": 0
+      },
+      "dataset": "Job Interview Negotiation",
+      "dialogue_act_annotations": {
+        "available_in_raw": false,
+        "basis": "Exhaustive raw key/type inventory contains no utterance dialogue-act labels. Paper section 5.1/Table 4 describes heuristic extraction.",
+        "extractor_executed": false,
+        "frequencies": null,
+        "frequency_status": "NOT_AVAILABLE_IN_RAW; not inferred or generated",
+        "observed_labels": {},
+        "paper_rule_based_vocabulary": [
+          "greet",
+          "disagree",
+          "agree",
+          "inquire",
+          "propose",
+          "inform",
+          "unk"
+        ],
+        "paper_structural_tags": [
+          "sep",
+          "end",
+          "pad"
+        ]
+      },
+      "dialogue_status_and_accepted_solution_count": [
+        {
+          "accepted_solutions": 0,
+          "dialogues": 1270,
+          "status": "aborted"
+        },
+        {
+          "accepted_solutions": 1,
+          "dialogues": 24,
+          "status": "aborted"
+        },
+        {
+          "accepted_solutions": 2,
+          "dialogues": 2,
+          "status": "aborted"
+        },
+        {
+          "accepted_solutions": 0,
+          "dialogues": 48,
+          "status": "completed"
+        },
+        {
+          "accepted_solutions": 1,
+          "dialogues": 2444,
+          "status": "completed"
+        },
+        {
+          "accepted_solutions": 2,
+          "dialogues": 8,
+          "status": "completed"
+        },
+        {
+          "accepted_solutions": 0,
+          "dialogues": 139,
+          "status": "terminated"
+        }
+      ],
+      "discrete_options": {
+        "Company": [
+          "Amazon",
+          "Apple",
+          "Facebook",
+          "Google"
+        ],
+        "Position": [
+          "Designer",
+          "Engineer",
+          "Manager",
+          "Sales"
+        ],
+        "Workplace": [
+          "Beijing",
+          "Seoul",
+          "Sydney",
+          "Tokyo"
+        ]
+      },
+      "duplicate_comment_ids": {
+        "duplicate_groups": 0,
+        "extra_occurrences_after_first": 0,
+        "occurrences_in_duplicate_groups": 0,
+        "total": 39636,
+        "unique": 39636
+      },
+      "duplicate_comment_ids_within_dialogue": 0,
+      "duplicate_dialogue_ids": {
+        "duplicate_groups": 0,
+        "extra_occurrences_after_first": 0,
+        "occurrences_in_duplicate_groups": 0,
+        "total": 3935,
+        "unique": 3935
+      },
+      "duplicate_solution_ids": {
+        "duplicate_groups": 0,
+        "extra_occurrences_after_first": 0,
+        "occurrences_in_duplicate_groups": 0,
+        "total": 7376,
+        "unique": 7376
+      },
+      "duplicate_user_ids_within_dialogue": 0,
+      "empty_dialogues_by_status": {
+        "aborted": 285,
+        "completed": 18,
+        "terminated": 9
+      },
+      "empty_utterances": 0,
+      "exact_duplicate_dialogue_sequences_including_empty": {
+        "duplicate_groups": 19,
+        "extra_occurrences_after_first": 395,
+        "occurrences_in_duplicate_groups": 414,
+        "total": 3935,
+        "unique": 3540
+      },
+      "exact_duplicate_full_records": {
+        "duplicate_groups": 0,
+        "extra_occurrences_after_first": 0,
+        "occurrences_in_duplicate_groups": 0,
+        "total": 3935,
+        "unique": 3935
+      },
+      "exact_duplicate_nonempty_dialogue_sequences": {
+        "duplicate_groups": 18,
+        "extra_occurrences_after_first": 84,
+        "occurrences_in_duplicate_groups": 102,
+        "total": 3623,
+        "unique": 3539
+      },
+      "exact_duplicate_utterances_natural_language": {
+        "duplicate_groups": 1639,
+        "extra_occurrences_after_first": 9024,
+        "occurrences_in_duplicate_groups": 10663,
+        "total": 39636,
+        "unique": 30612
+      },
+      "integer_issue_ranges": [
+        {
+          "issue": "Salary",
+          "max": 50,
+          "min": 20,
+          "occurrences": 7870
+        },
+        {
+          "issue": "Weekly holiday",
+          "max": 6,
+          "min": 2,
+          "occurrences": 7870
+        }
+      ],
+      "malformed_solution_record_count": 4,
+      "malformed_structural_or_value_records": 3,
+      "parsing": {
+        "duplicate_object_key_occurrences": 0,
+        "encoding": "UTF-8",
+        "json_parse": "PASS",
+        "parse_errors": [],
+        "strict_decode": "PASS",
+        "unexpected_binary_nul_bytes": 0,
+        "utf8_bom": false
+      },
+      "raw_json_path": "AlagDatasets/raw/job-interview/data.json",
+      "roles": {
+        "recruiter": 3935,
+        "worker": 3935
+      },
+      "schema_inventory": {
+        "$": {
+          "list": 1
+        },
+        "$[]": {
+          "dict": 3935
+        },
+        "$[].comments": {
+          "list": 3935
+        },
+        "$[].comments[]": {
+          "dict": 39636
+        },
+        "$[].comments[].body": {
+          "str": 39636
+        },
+        "$[].comments[].created_at": {
+          "str": 39636
+        },
+        "$[].comments[].id": {
+          "str": 39636
+        },
+        "$[].comments[].user_id": {
+          "str": 39636
+        },
+        "$[].id": {
+          "str": 3935
+        },
+        "$[].solutions": {
+          "list": 3935
+        },
+        "$[].solutions[]": {
+          "dict": 7376
+        },
+        "$[].solutions[].accepted": {
+          "NoneType": 4888,
+          "bool": 2488
+        },
+        "$[].solutions[].body": {
+          "dict": 7376
+        },
+        "$[].solutions[].body.Company": {
+          "str": 7376
+        },
+        "$[].solutions[].body.Position": {
+          "str": 7376
+        },
+        "$[].solutions[].body.Salary": {
+          "float": 2,
+          "int": 7373
+        },
+        "$[].solutions[].body.Weekly holiday": {
+          "float": 1,
+          "int": 7375
+        },
+        "$[].solutions[].body.Workplace": {
+          "str": 7376
+        },
+        "$[].solutions[].created_at": {
+          "str": 7376
+        },
+        "$[].solutions[].id": {
+          "str": 7376
+        },
+        "$[].solutions[].user_id": {
+          "str": 7376
+        },
+        "$[].status": {
+          "str": 3935
+        },
+        "$[].users": {
+          "list": 3935
+        },
+        "$[].users[]": {
+          "dict": 7870
+        },
+        "$[].users[].assignment_id": {
+          "NoneType": 178,
+          "str": 7692
+        },
+        "$[].users[].id": {
+          "str": 7870
+        },
+        "$[].users[].role": {
+          "str": 7870
+        },
+        "$[].users[].utilities": {
+          "list": 7870
+        },
+        "$[].users[].utilities[]": {
+          "dict": 39350
+        },
+        "$[].users[].utilities[].max": {
+          "int": 15740
+        },
+        "$[].users[].utilities[].min": {
+          "int": 15740
+        },
+        "$[].users[].utilities[].name": {
+          "str": 39350
+        },
+        "$[].users[].utilities[].options": {
+          "list": 23610
+        },
+        "$[].users[].utilities[].options[]": {
+          "dict": 188880
+        },
+        "$[].users[].utilities[].options[].name": {
+          "str": 62960
+        },
+        "$[].users[].utilities[].options[].names": {
+          "dict": 125920
+        },
+        "$[].users[].utilities[].options[].names.Company": {
+          "str": 125920
+        },
+        "$[].users[].utilities[].options[].names.Position": {
+          "str": 125920
+        },
+        "$[].users[].utilities[].options[].weight": {
+          "float": 94440,
+          "int": 94440
+        },
+        "$[].users[].utilities[].relatedTo": {
+          "str": 7870
+        },
+        "$[].users[].utilities[].type": {
+          "str": 39350
+        },
+        "$[].users[].utilities[].weight": {
+          "float": 39350
+        },
+        "$[].users[].worker_id": {
+          "str": 7870
+        }
+      },
+      "schema_violations": {
+        "invalid_solution_issue_set": 1,
+        "noninteger_solution_value:Salary": 2,
+        "noninteger_solution_value:Weekly holiday": 1
+      },
+      "short_dialogues_by_status": {
+        "aborted": 647,
+        "completed": 38,
+        "terminated": 24
+      },
+      "solution_acceptance_by_status": [
+        {
+          "accepted": null,
+          "solutions": 699,
+          "status": "aborted"
+        },
+        {
+          "accepted": true,
+          "solutions": 28,
+          "status": "aborted"
+        },
+        {
+          "accepted": null,
+          "solutions": 3888,
+          "status": "completed"
+        },
+        {
+          "accepted": true,
+          "solutions": 2460,
+          "status": "completed"
+        },
+        {
+          "accepted": null,
+          "solutions": 301,
+          "status": "terminated"
+        }
+      ],
+      "solution_accepted_frequency": {
+        "null": 4888,
+        "true": 2488
+      },
+      "solution_issue_keysets": [
+        {
+          "issues": [
+            "Company",
+            "Position",
+            "Salary",
+            "Weekly holiday",
+            "Workplace"
+          ],
+          "solutions": 7375
+        },
+        {
+          "issues": [
+            "Company",
+            "Position",
+            "Weekly holiday",
+            "Workplace"
+          ],
+          "solutions": 1
+        }
+      ],
+      "solution_validation_issues": [
+        {
+          "accepted": null,
+          "dialogue_index": 569,
+          "issue": "Salary",
+          "problem": "noninteger_value",
+          "solution_index": 2,
+          "value": 35.5
+        },
+        {
+          "accepted": true,
+          "dialogue_index": 569,
+          "issue": "Salary",
+          "problem": "noninteger_value",
+          "solution_index": 4,
+          "value": 35.5
+        },
+        {
+          "accepted": true,
+          "dialogue_index": 1205,
+          "issue": "Weekly holiday",
+          "problem": "noninteger_value",
+          "solution_index": 3,
+          "value": 4.8
+        },
+        {
+          "dialogue_index": 1777,
+          "missing_issues": [
+            "Salary"
+          ],
+          "problem": "missing_issue",
+          "solution_index": 4
+        }
+      ],
+      "solutions_by_status": {
+        "aborted": 727,
+        "completed": 6348,
+        "terminated": 301
+      },
+      "status_frequency": {
+        "aborted": 1296,
+        "completed": 2500,
+        "terminated": 139
+      },
+      "unicode": {
+        "lone_surrogate_codepoints": 0,
+        "nul_characters": 0,
+        "other_unexpected_control_characters": 0,
+        "replacement_characters": 0
+      },
+      "utility_dependencies": [
+        {
+          "issue": "Position",
+          "occurrences": 7870,
+          "related_to": "Company"
+        }
+      ],
+      "utility_types": {
+        "DISCRETE": 23610,
+        "INTEGER": 15740
+      },
+      "utility_weight_sum_range": [
+        0.9999999999999999,
+        1.0000000000000002
+      ],
+      "utterances_by_status": {
+        "aborted": 6455,
+        "completed": 31384,
+        "terminated": 1797
+      }
+    },
+    "method": "Python standard library, strict UTF-8/JSON, aggregate-only inspection of exact source bytes; no raw mutation",
+    "verified_at_utc": "2026-09-17T08:12:03.934784+00:00"
+  },
+  "final_status": "AI_LOCAL_DATASET_ACQUISITION_PASS",
+  "gate": "AI_LOCAL_DATASET_ACQUISITION",
+  "manifest_path": "docs/gates/evidence/AI_LOCAL_DATASET_MANIFEST.json",
+  "model_verification": {
+    "all_model_files_size_mtime_unchanged": true,
+    "config": {
+      "architectures": [
+        "Qwen3ForCausalLM"
+      ],
+      "attention_bias": false,
+      "attention_dropout": 0.0,
+      "bos_token_id": 151643,
+      "eos_token_id": 151645,
+      "head_dim": 128,
+      "hidden_act": "silu",
+      "hidden_size": 2560,
+      "initializer_range": 0.02,
+      "intermediate_size": 9728,
+      "max_position_embeddings": 40960,
+      "max_window_layers": 36,
+      "model_type": "qwen3",
+      "num_attention_heads": 32,
+      "num_hidden_layers": 36,
+      "num_key_value_heads": 8,
+      "rms_norm_eps": 1e-06,
+      "rope_scaling": null,
+      "rope_theta": 1000000,
+      "sliding_window": null,
+      "tie_word_embeddings": true,
+      "torch_dtype": "bfloat16",
+      "transformers_version": "4.51.0",
+      "use_cache": true,
+      "use_sliding_window": false,
+      "vocab_size": 151936
+    },
+    "dtypes": {
+      "BF16": 398
+    },
+    "file_inventory_before": {
+      ".cache/huggingface/.gitignore": {
+        "bytes": 1,
+        "mtime_ns": 1789629359627046900
+      },
+      ".cache/huggingface/CACHEDIR.TAG": {
+        "bytes": 195,
+        "mtime_ns": 1789629359521843100
+      },
+      ".cache/huggingface/download/.gitattributes.metadata": {
+        "bytes": 104,
+        "mtime_ns": 1789629360194955300
+      },
+      ".cache/huggingface/download/LICENSE.metadata": {
+        "bytes": 104,
+        "mtime_ns": 1789629360194955300
+      },
+      ".cache/huggingface/download/README.md.metadata": {
+        "bytes": 104,
+        "mtime_ns": 1789629359782565300
+      },
+      ".cache/huggingface/download/config.json.metadata": {
+        "bytes": 103,
+        "mtime_ns": 1789629360130709100
+      },
+      ".cache/huggingface/download/generation_config.json.metadata": {
+        "bytes": 104,
+        "mtime_ns": 1789629360085824700
+      },
+      ".cache/huggingface/download/merges.txt.metadata": {
+        "bytes": 104,
+        "mtime_ns": 1789629360407769000
+      },
+      ".cache/huggingface/download/model-00001-of-00003.safetensors.metadata": {
+        "bytes": 128,
+        "mtime_ns": 1789629482376095500
+      },
+      ".cache/huggingface/download/model-00002-of-00003.safetensors.metadata": {
+        "bytes": 127,
+        "mtime_ns": 1789629484489032000
+      },
+      ".cache/huggingface/download/model-00003-of-00003.safetensors.metadata": {
+        "bytes": 128,
+        "mtime_ns": 1789629402596074400
+      },
+      ".cache/huggingface/download/model.safetensors.index.json.metadata": {
+        "bytes": 104,
+        "mtime_ns": 1789629360360173400
+      },
+      ".cache/huggingface/download/tokenizer.json.metadata": {
+        "bytes": 128,
+        "mtime_ns": 1789629368101522400
+      },
+      ".cache/huggingface/download/tokenizer_config.json.metadata": {
+        "bytes": 103,
+        "mtime_ns": 1789629360459851100
+      },
+      ".cache/huggingface/download/vocab.json.metadata": {
+        "bytes": 104,
+        "mtime_ns": 1789629360651546600
+      },
+      ".cache/huggingface/trees/1cfa9a7208912126459214e8b04321603b3df60c.json": {
+        "bytes": 2283,
+        "mtime_ns": 1789629359514723300
+      },
+      ".gitattributes": {
+        "bytes": 1570,
+        "mtime_ns": 1789629360169130700
+      },
+      "LICENSE": {
+        "bytes": 11343,
+        "mtime_ns": 1789629360169130700
+      },
+      "README.md": {
+        "bytes": 16857,
+        "mtime_ns": 1789629359780557200
+      },
+      "config.json": {
+        "bytes": 726,
+        "mtime_ns": 1789629360128813600
+      },
+      "generation_config.json": {
+        "bytes": 239,
+        "mtime_ns": 1789629360083819400
+      },
+      "merges.txt": {
+        "bytes": 1671853,
+        "mtime_ns": 1789629360405698100
+      },
+      "model-00001-of-00003.safetensors": {
+        "bytes": 3957900840,
+        "mtime_ns": 1789629482372965200
+      },
+      "model-00002-of-00003.safetensors": {
+        "bytes": 3987450520,
+        "mtime_ns": 1789629484484761000
+      },
+      "model-00003-of-00003.safetensors": {
+        "bytes": 99630640,
+        "mtime_ns": 1789629402589648400
+      },
+      "model.safetensors.index.json": {
+        "bytes": 32819,
+        "mtime_ns": 1789629360358099600
+      },
+      "tokenizer.json": {
+        "bytes": 11422654,
+        "mtime_ns": 1789629368096979400
+      },
+      "tokenizer_config.json": {
+        "bytes": 9732,
+        "mtime_ns": 1789629360457075600
+      },
+      "vocab.json": {
+        "bytes": 2776833,
+        "mtime_ns": 1789629360649966600
+      }
+    },
+    "format": "Original Hugging Face safetensors (BF16), not GGUF",
+    "generation_config": {
+      "bos_token_id": 151643,
+      "do_sample": true,
+      "eos_token_id": [
+        151645,
+        151643
+      ],
+      "pad_token_id": 151643,
+      "temperature": 0.6,
+      "top_k": 20,
+      "top_p": 0.95,
+      "transformers_version": "4.51.0"
+    },
+    "inference_performed": false,
+    "license": "Apache-2.0",
+    "license_verified": true,
+    "limitations": [
+      "Structural validation does not verify every tensor payload byte; large shard SHA-256 values are upstream metadata only.",
+      "No hardware/runtime compatibility or inference quality verdict is made."
+    ],
+    "local_model_path": "C:\\Users\\BastaPC\\Desktop\\Alag\\AlagModels\\Qwen3-4B",
+    "missing_or_empty_shards": [],
+    "model_shard_count": 3,
+    "model_shard_hashes_computed": false,
+    "official_metadata_evidence": {
+      "bytes": 10490,
+      "download_date_basis": "mtime of previously successful download, reused without redownload",
+      "downloaded_at_utc": "2026-09-17T08:00:22.162805+00:00",
+      "http_status": 200,
+      "relative_local_path": "AlagDatasets/manifests/upstream/qwen3-4b/official-model.json",
+      "sha256": "cc89ed4d4f8700ee248a1aa2d33191678ca1de3f18872d63314cd8490be28b45",
+      "source_url": "https://huggingface.co/api/models/Qwen/Qwen3-4B/revision/1cfa9a7208912126459214e8b04321603b3df60c?blobs=true",
+      "tls_validation": true
+    },
+    "parameter_count_from_shapes": 4022468096,
+    "root_files_size_bytes_excluding_cache": 8060926626,
+    "shards": [
+      {
+        "bytes": 3957900840,
+        "file": "model-00001-of-00003.safetensors",
+        "header_and_offsets_valid": true,
+        "header_bytes": 20008,
+        "matches_official_size": true,
+        "tensor_count": 174,
+        "tensor_payload_bytes": 3957880832,
+        "upstream_lfs_sha256_not_locally_recomputed": "328a91d3122359d5547f9d79521205bc0a46e1f79a792dfe650e99fc2d651223"
+      },
+      {
+        "bytes": 3987450520,
+        "file": "model-00002-of-00003.safetensors",
+        "header_and_offsets_valid": true,
+        "header_bytes": 25240,
+        "matches_official_size": true,
+        "tensor_count": 219,
+        "tensor_payload_bytes": 3987425280,
+        "upstream_lfs_sha256_not_locally_recomputed": "6cd087b316306a68c562436b5492edbcf6e16c6dba3a1308279caa5a58e21ca5"
+      },
+      {
+        "bytes": 99630640,
+        "file": "model-00003-of-00003.safetensors",
+        "header_and_offsets_valid": true,
+        "header_bytes": 560,
+        "matches_official_size": true,
+        "tensor_count": 5,
+        "tensor_payload_bytes": 99630080,
+        "upstream_lfs_sha256_not_locally_recomputed": "e4bf436957184f4eeb86a80e9db394503f1f56446b2e6b7edeac5b81470f4ca1"
+      }
+    ],
+    "small_file_hashes": [
+      {
+        "bytes": 1570,
+        "matches_official_content": true,
+        "official_git_blob_sha1": "52373fe24473b1aa44333d318f578ae6bf04b49b",
+        "path": "AlagModels/Qwen3-4B/.gitattributes",
+        "sha256": "34448b82c17d60fec9b65b1f093c115ddbaadc04beb1b0140b6bfed2e012a930",
+        "verification_method": "Git blob SHA-1"
+      },
+      {
+        "bytes": 726,
+        "matches_official_content": true,
+        "official_git_blob_sha1": "e49eccdc32f36da9c09cfa0e737084f9e0105e5e",
+        "path": "AlagModels/Qwen3-4B/config.json",
+        "sha256": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a",
+        "verification_method": "Git blob SHA-1"
+      },
+      {
+        "bytes": 239,
+        "matches_official_content": true,
+        "official_git_blob_sha1": "20a8a9156fc8c3f25295ca067f61fdf120d517c5",
+        "path": "AlagModels/Qwen3-4B/generation_config.json",
+        "sha256": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+        "verification_method": "Git blob SHA-1"
+      },
+      {
+        "bytes": 11343,
+        "matches_official_content": true,
+        "official_git_blob_sha1": "6634c8cc3133b3848ec74b9f275acaaa1ea618ab",
+        "path": "AlagModels/Qwen3-4B/LICENSE",
+        "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+        "verification_method": "Git blob SHA-1"
+      },
+      {
+        "bytes": 1671853,
+        "matches_official_content": true,
+        "official_git_blob_sha1": "31349551d90c7606f325fe0f11bbb8bd5fa0d7c7",
+        "path": "AlagModels/Qwen3-4B/merges.txt",
+        "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+        "verification_method": "Git blob SHA-1"
+      },
+      {
+        "bytes": 32819,
+        "matches_official_content": true,
+        "official_git_blob_sha1": "95c0a0059df040d75dc6c396b174382cf61d2f91",
+        "path": "AlagModels/Qwen3-4B/model.safetensors.index.json",
+        "sha256": "6dc0981b8829fead746441f68f38f24c5ca4a3a66351f652c26c6df0efc43ab2",
+        "verification_method": "Git blob SHA-1"
+      },
+      {
+        "bytes": 16857,
+        "matches_official_content": true,
+        "official_git_blob_sha1": "2de5ee7eee214bb55ea33ec7505c5838a7adf7f6",
+        "path": "AlagModels/Qwen3-4B/README.md",
+        "sha256": "71add1cd091c309b1cb1a6b943f2476eb2b004124b3bd1d32dcd0b24cc1abc47",
+        "verification_method": "Git blob SHA-1"
+      },
+      {
+        "bytes": 11422654,
+        "matches_official_content": true,
+        "official_git_blob_sha1": "cd71f61a15a522601badb3dc960d800d9cb3766c",
+        "path": "AlagModels/Qwen3-4B/tokenizer.json",
+        "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "verification_method": "LFS SHA-256"
+      },
+      {
+        "bytes": 9732,
+        "matches_official_content": true,
+        "official_git_blob_sha1": "417d038a63fa3de29cfde265caedae14d1a58d92",
+        "path": "AlagModels/Qwen3-4B/tokenizer_config.json",
+        "sha256": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+        "verification_method": "Git blob SHA-1"
+      },
+      {
+        "bytes": 2776833,
+        "matches_official_content": true,
+        "official_git_blob_sha1": "4783fe10ac3adce15ac8f358ef5462739852c569",
+        "path": "AlagModels/Qwen3-4B/vocab.json",
+        "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+        "verification_method": "Git blob SHA-1"
+      }
+    ],
+    "source_repository": "https://huggingface.co/Qwen/Qwen3-4B",
+    "source_revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+    "source_revision_evidence": "HF download metadata agrees across 12 files; official revision API confirms metadata and file sizes",
+    "status": "STRUCTURAL_PASS",
+    "tensor_count": 398,
+    "tensor_payload_bytes": 8044936192,
+    "tokenizer": {
+      "added_tokens": 26,
+      "chat_template_present": true,
+      "class": "Qwen2Tokenizer",
+      "configuration_parses": true,
+      "files": [
+        "tokenizer.json",
+        "tokenizer_config.json",
+        "vocab.json",
+        "merges.txt"
+      ],
+      "model_type": "BPE",
+      "tokenization_performed": false,
+      "tokenizer_json_parses": true,
+      "vocab_json_parses": true,
+      "vocabulary_entries": 151643
+    },
+    "total_local_size_bytes_including_cache": 8060930550,
+    "verified_at_utc": "2026-09-17T08:02:15.387717+00:00",
+    "weight_files_size_bytes": 8044982000,
+    "weights_loaded": false
+  },
+  "next_gate_boundary": "Use the untouched Qwen3-4B for a separately authorized, fixed holdout baseline before any fine-tuning. Keep acquisition data disconnected. Do not derive training content from A01-A16 or tune against hidden expectations.",
+  "next_recommended_gate": "LOCAL_QWEN_BASELINE_A01_A16",
+  "provenance_metadata_artifacts": [
+    {
+      "bytes": 5296,
+      "dataset_name": "CaSiNo",
+      "downloaded_at_utc": "2026-09-17T07:58:49.030298+00:00",
+      "http_status": 200,
+      "purpose": "provenance metadata",
+      "redirects_followed": 0,
+      "relative_local_path": "AlagDatasets/manifests/upstream/casino/repository.json",
+      "resolved_source_revision": "2f6ed4a6a55110152a7699fbaa8150d6036314be",
+      "sha256": "abb678edb7d04a660418c6ac31c73c84ccde3a7e9073e403b4814387365a0084",
+      "source_repository": "https://github.com/kushalchawla/CaSiNo",
+      "source_url": "https://api.github.com/repos/kushalchawla/CaSiNo",
+      "tls_validation": true
+    },
+    {
+      "bytes": 4901,
+      "dataset_name": "CaSiNo",
+      "downloaded_at_utc": "2026-09-17T07:58:50.062162+00:00",
+      "http_status": 200,
+      "purpose": "provenance metadata",
+      "redirects_followed": 0,
+      "relative_local_path": "AlagDatasets/manifests/upstream/casino/commit.json",
+      "resolved_source_revision": "2f6ed4a6a55110152a7699fbaa8150d6036314be",
+      "sha256": "a990e78caedc9bb923cd3940faa898a968c9ac48e99d5859d3a19d434437c57c",
+      "source_repository": "https://github.com/kushalchawla/CaSiNo",
+      "source_url": "https://api.github.com/repos/kushalchawla/CaSiNo/commits/main",
+      "tls_validation": true
+    },
+    {
+      "bytes": 4083,
+      "dataset_name": "CaSiNo",
+      "downloaded_at_utc": "2026-09-17T07:58:50.833379+00:00",
+      "http_status": 200,
+      "purpose": "provenance metadata",
+      "redirects_followed": 0,
+      "relative_local_path": "AlagDatasets/manifests/upstream/casino/tree.json",
+      "resolved_source_revision": "2f6ed4a6a55110152a7699fbaa8150d6036314be",
+      "sha256": "ebbdfc5354de0661bab26becafbad1b681068cea39cef5b54fd20ba45be43741",
+      "source_repository": "https://github.com/kushalchawla/CaSiNo",
+      "source_url": "https://api.github.com/repos/kushalchawla/CaSiNo/git/trees/2f6ed4a6a55110152a7699fbaa8150d6036314be?recursive=1",
+      "tls_validation": true
+    },
+    {
+      "bytes": 3132,
+      "dataset_name": "CaSiNo",
+      "downloaded_at_utc": "2026-09-17T08:04:13.863822+00:00",
+      "http_status": 200,
+      "purpose": "immutable GitHub blob API envelope",
+      "redirects_followed": 0,
+      "relative_local_path": "AlagDatasets/manifests/upstream/casino/blob-d6998b5b21f6b703e888ca8a730a40f9cd84a42b.json",
+      "resolved_source_revision": "2f6ed4a6a55110152a7699fbaa8150d6036314be",
+      "sha256": "0a4efa37ae7fcab68a0d648ec2ee0462f7882760d7cd1f926b3b191688e878de",
+      "source_repository": "https://github.com/kushalchawla/CaSiNo",
+      "source_url": "https://api.github.com/repos/kushalchawla/CaSiNo/git/blobs/d6998b5b21f6b703e888ca8a730a40f9cd84a42b",
+      "tls_validation": true
+    },
+    {
+      "bytes": 26003,
+      "dataset_name": "CaSiNo",
+      "downloaded_at_utc": "2026-09-17T08:04:14.716950+00:00",
+      "http_status": 200,
+      "purpose": "immutable GitHub blob API envelope",
+      "redirects_followed": 0,
+      "relative_local_path": "AlagDatasets/manifests/upstream/casino/blob-10fabd90118f7ce38bb2e4753e105e744442a429.json",
+      "resolved_source_revision": "2f6ed4a6a55110152a7699fbaa8150d6036314be",
+      "sha256": "3752ca6a71feb29350a19c5662677a0f1480d90f4b1f0bed626ff07b5d454571",
+      "source_repository": "https://github.com/kushalchawla/CaSiNo",
+      "source_url": "https://api.github.com/repos/kushalchawla/CaSiNo/git/blobs/10fabd90118f7ce38bb2e4753e105e744442a429",
+      "tls_validation": true
+    },
+    {
+      "bytes": 2484,
+      "dataset_name": "CaSiNo",
+      "downloaded_at_utc": "2026-09-17T08:04:15.575964+00:00",
+      "http_status": 200,
+      "purpose": "immutable GitHub blob API envelope",
+      "redirects_followed": 0,
+      "relative_local_path": "AlagDatasets/manifests/upstream/casino/blob-6c3aaac71438c4eacd5e93c38b80fbaa99ceb1e2.json",
+      "resolved_source_revision": "2f6ed4a6a55110152a7699fbaa8150d6036314be",
+      "sha256": "739e83f59b9ff2f9040b3bf34841dac883e41a925bfb04a7978647d1c0895542",
+      "source_repository": "https://github.com/kushalchawla/CaSiNo",
+      "source_url": "https://api.github.com/repos/kushalchawla/CaSiNo/git/blobs/6c3aaac71438c4eacd5e93c38b80fbaa99ceb1e2",
+      "tls_validation": true
+    },
+    {
+      "bytes": 6138,
+      "dataset_name": "Job Interview Negotiation",
+      "downloaded_at_utc": "2026-09-17T08:04:16.443628+00:00",
+      "http_status": 200,
+      "purpose": "provenance metadata",
+      "redirects_followed": 0,
+      "relative_local_path": "AlagDatasets/manifests/upstream/job-interview/repository.json",
+      "resolved_source_revision": "d4c2bf63b4da95b342fd952065f9ad3e97179134",
+      "sha256": "173f4e89187303eef083efdb15bac514f359e3a4055b7e46d7848c96cbd75bd1",
+      "source_repository": "https://github.com/gucci-j/negotiation-breakdown-detection",
+      "source_url": "https://api.github.com/repos/gucci-j/negotiation-breakdown-detection",
+      "tls_validation": true
+    },
+    {
+      "bytes": 137774,
+      "dataset_name": "Job Interview Negotiation",
+      "downloaded_at_utc": "2026-09-17T08:04:17.536026+00:00",
+      "http_status": 200,
+      "purpose": "provenance metadata",
+      "redirects_followed": 0,
+      "relative_local_path": "AlagDatasets/manifests/upstream/job-interview/commit.json",
+      "resolved_source_revision": "d4c2bf63b4da95b342fd952065f9ad3e97179134",
+      "sha256": "22273a92967617201d42769d456c9fb077bff72b557b0c82a0000f5715f95cd9",
+      "source_repository": "https://github.com/gucci-j/negotiation-breakdown-detection",
+      "source_url": "https://api.github.com/repos/gucci-j/negotiation-breakdown-detection/commits/main",
+      "tls_validation": true
+    },
+    {
+      "bytes": 46608,
+      "dataset_name": "Job Interview Negotiation",
+      "downloaded_at_utc": "2026-09-17T08:04:18.519305+00:00",
+      "http_status": 200,
+      "purpose": "provenance metadata",
+      "redirects_followed": 0,
+      "relative_local_path": "AlagDatasets/manifests/upstream/job-interview/tree.json",
+      "resolved_source_revision": "d4c2bf63b4da95b342fd952065f9ad3e97179134",
+      "sha256": "9a01fe7e9bd4ec8df927657c056d0a5ec80b28af98415c6369f52b324ce15336",
+      "source_repository": "https://github.com/gucci-j/negotiation-breakdown-detection",
+      "source_url": "https://api.github.com/repos/gucci-j/negotiation-breakdown-detection/git/trees/d4c2bf63b4da95b342fd952065f9ad3e97179134?recursive=1",
+      "tls_validation": true
+    },
+    {
+      "bytes": 5958867,
+      "dataset_name": "Job Interview Negotiation",
+      "downloaded_at_utc": "2026-09-17T08:04:19.899239+00:00",
+      "http_status": 200,
+      "purpose": "immutable GitHub blob API envelope",
+      "redirects_followed": 0,
+      "relative_local_path": "AlagDatasets/manifests/upstream/job-interview/blob-a2b88eaf578ca4702848f652df0708e9d28c26c6.json",
+      "resolved_source_revision": "d4c2bf63b4da95b342fd952065f9ad3e97179134",
+      "sha256": "e126a3bec584b60388731c1bbfef3829fde008dd32df91a591698e8ae0646b5f",
+      "source_repository": "https://github.com/gucci-j/negotiation-breakdown-detection",
+      "source_url": "https://api.github.com/repos/gucci-j/negotiation-breakdown-detection/git/blobs/a2b88eaf578ca4702848f652df0708e9d28c26c6",
+      "tls_validation": true
+    },
+    {
+      "bytes": 3838,
+      "dataset_name": "Job Interview Negotiation",
+      "downloaded_at_utc": "2026-09-17T08:04:20.755445+00:00",
+      "http_status": 200,
+      "purpose": "immutable GitHub blob API envelope",
+      "redirects_followed": 0,
+      "relative_local_path": "AlagDatasets/manifests/upstream/job-interview/blob-2a13ebebdb3ca7596ecfd1b722674bef0da85598.json",
+      "resolved_source_revision": "d4c2bf63b4da95b342fd952065f9ad3e97179134",
+      "sha256": "19f7aa6bda9bfd265df234c1315aa8ef9f8e8587f0becbc83bfd9da974638a1b",
+      "source_repository": "https://github.com/gucci-j/negotiation-breakdown-detection",
+      "source_url": "https://api.github.com/repos/gucci-j/negotiation-breakdown-detection/git/blobs/2a13ebebdb3ca7596ecfd1b722674bef0da85598",
+      "tls_validation": true
+    },
+    {
+      "bytes": 1838,
+      "dataset_name": "Job Interview Negotiation",
+      "downloaded_at_utc": "2026-09-17T08:04:21.704746+00:00",
+      "http_status": 200,
+      "purpose": "immutable GitHub blob API envelope",
+      "redirects_followed": 0,
+      "relative_local_path": "AlagDatasets/manifests/upstream/job-interview/blob-06123446da7b356eb6df9a31795e0be7a6c17fcc.json",
+      "resolved_source_revision": "d4c2bf63b4da95b342fd952065f9ad3e97179134",
+      "sha256": "10fe94329da9572d71adad26bb7c2555aa6474bc1803e51dbf0dd00bf684c673",
+      "source_repository": "https://github.com/gucci-j/negotiation-breakdown-detection",
+      "source_url": "https://api.github.com/repos/gucci-j/negotiation-breakdown-detection/git/blobs/06123446da7b356eb6df9a31795e0be7a6c17fcc",
+      "tls_validation": true
+    },
+    {
+      "bytes": 13180,
+      "dataset_name": "Job Interview Negotiation",
+      "downloaded_at_utc": "2026-09-17T08:04:22.512142+00:00",
+      "http_status": 200,
+      "purpose": "immutable GitHub blob API envelope",
+      "redirects_followed": 0,
+      "relative_local_path": "AlagDatasets/manifests/upstream/job-interview/blob-db0d1cd63323c6f80d7b06fdfbffd213a76ba704.json",
+      "resolved_source_revision": "d4c2bf63b4da95b342fd952065f9ad3e97179134",
+      "sha256": "34f96f08caed7847a64ed39074b27bdc4226920548e193a53ecf55b8ec56ce5d",
+      "source_repository": "https://github.com/gucci-j/negotiation-breakdown-detection",
+      "source_url": "https://api.github.com/repos/gucci-j/negotiation-breakdown-detection/git/blobs/db0d1cd63323c6f80d7b06fdfbffd213a76ba704",
+      "tls_validation": true
+    }
+  ],
+  "raw_artifacts": [
+    {
+      "acquisition_method": "original HTTPS prefix plus one validated 206 byte-range completion, combined before acceptance",
+      "bytes": 4300019,
+      "dataset_name": "CaSiNo",
+      "declared_license": "CC-BY-4.0",
+      "downloaded_at_utc": "2026-09-17T08:04:12.877275+00:00",
+      "git_blob_sha1": "274ec883059fd79f4c453d7a895a80dec5321eaf",
+      "immutable_policy": "exclusive creation; read-only attribute; post-inspection SHA-256 audit",
+      "matches_upstream_git_tree": true,
+      "paper_reference": "https://aclanthology.org/2021.naacl-main.254/",
+      "range_completion": {
+        "bytes": 105715,
+        "content_range": "bytes 4194304-4300018/4300019",
+        "end": 4300018,
+        "http_status": 206,
+        "start": 4194304,
+        "tail_sha256": "8e5615b0fde7cb24b14947e5ac697e4f3ecb55ecc4de4060152d38330b7419d4"
+      },
+      "relative_local_path": "AlagDatasets/raw/casino/data/casino.json",
+      "resolved_source_revision": "2f6ed4a6a55110152a7699fbaa8150d6036314be",
+      "sha256": "4f2c4560a0070906ed018c3f0766e35f8f8f31b36274ebf35b608621915744ab",
+      "source_repository": "https://github.com/kushalchawla/CaSiNo",
+      "source_url": "https://raw.githubusercontent.com/kushalchawla/CaSiNo/2f6ed4a6a55110152a7699fbaa8150d6036314be/data/casino.json",
+      "tls_validation": true,
+      "upstream_relative_path": "data/casino.json"
+    },
+    {
+      "acquisition_method": "GitHub blob API base64 transport decoded without content changes",
+      "bytes": 2061,
+      "canonical_raw_source_url": "https://raw.githubusercontent.com/kushalchawla/CaSiNo/2f6ed4a6a55110152a7699fbaa8150d6036314be/README.md",
+      "dataset_name": "CaSiNo",
+      "declared_license": "CC-BY-4.0",
+      "downloaded_at_utc": "2026-09-17T08:04:13.863822+00:00",
+      "git_blob_sha1": "d6998b5b21f6b703e888ca8a730a40f9cd84a42b",
+      "http_status": 200,
+      "immutable_policy": "exclusive creation; read-only attribute; post-inspection SHA-256 audit",
+      "matches_upstream_git_tree": true,
+      "paper_reference": "https://aclanthology.org/2021.naacl-main.254/",
+      "redirects_followed": 0,
+      "relative_local_path": "AlagDatasets/raw/casino/README.md",
+      "resolved_source_revision": "2f6ed4a6a55110152a7699fbaa8150d6036314be",
+      "sha256": "b52d17f5a0d71a8760a42cc3cb5b02f7c0ba739487a6a703e15f655400d465a6",
+      "source_repository": "https://github.com/kushalchawla/CaSiNo",
+      "source_url": "https://api.github.com/repos/kushalchawla/CaSiNo/git/blobs/d6998b5b21f6b703e888ca8a730a40f9cd84a42b",
+      "tls_validation": true,
+      "transport_envelope_path": "AlagDatasets/manifests/upstream/casino/blob-d6998b5b21f6b703e888ca8a730a40f9cd84a42b.json",
+      "upstream_relative_path": "README.md"
+    },
+    {
+      "acquisition_method": "GitHub blob API base64 transport decoded without content changes",
+      "bytes": 18658,
+      "canonical_raw_source_url": "https://raw.githubusercontent.com/kushalchawla/CaSiNo/2f6ed4a6a55110152a7699fbaa8150d6036314be/LICENSE",
+      "dataset_name": "CaSiNo",
+      "declared_license": "CC-BY-4.0",
+      "downloaded_at_utc": "2026-09-17T08:04:14.716950+00:00",
+      "git_blob_sha1": "10fabd90118f7ce38bb2e4753e105e744442a429",
+      "http_status": 200,
+      "immutable_policy": "exclusive creation; read-only attribute; post-inspection SHA-256 audit",
+      "matches_upstream_git_tree": true,
+      "paper_reference": "https://aclanthology.org/2021.naacl-main.254/",
+      "redirects_followed": 0,
+      "relative_local_path": "AlagDatasets/raw/casino/LICENSE",
+      "resolved_source_revision": "2f6ed4a6a55110152a7699fbaa8150d6036314be",
+      "sha256": "f5b745ef98087f531e719ee8ca6a96809444573ecc7173c6fa68eaad39b3cc3f",
+      "source_repository": "https://github.com/kushalchawla/CaSiNo",
+      "source_url": "https://api.github.com/repos/kushalchawla/CaSiNo/git/blobs/10fabd90118f7ce38bb2e4753e105e744442a429",
+      "tls_validation": true,
+      "transport_envelope_path": "AlagDatasets/manifests/upstream/casino/blob-10fabd90118f7ce38bb2e4753e105e744442a429.json",
+      "upstream_relative_path": "LICENSE"
+    },
+    {
+      "acquisition_method": "GitHub blob API base64 transport decoded without content changes",
+      "bytes": 1590,
+      "canonical_raw_source_url": "https://raw.githubusercontent.com/kushalchawla/CaSiNo/2f6ed4a6a55110152a7699fbaa8150d6036314be/data/README.md",
+      "dataset_name": "CaSiNo",
+      "declared_license": "CC-BY-4.0",
+      "downloaded_at_utc": "2026-09-17T08:04:15.575964+00:00",
+      "git_blob_sha1": "6c3aaac71438c4eacd5e93c38b80fbaa99ceb1e2",
+      "http_status": 200,
+      "immutable_policy": "exclusive creation; read-only attribute; post-inspection SHA-256 audit",
+      "matches_upstream_git_tree": true,
+      "paper_reference": "https://aclanthology.org/2021.naacl-main.254/",
+      "redirects_followed": 0,
+      "relative_local_path": "AlagDatasets/raw/casino/data/README.md",
+      "resolved_source_revision": "2f6ed4a6a55110152a7699fbaa8150d6036314be",
+      "sha256": "2cc2a0bfe22e3285ddb4a04a1675dfe68b2609ec561ae0595ebcdd5504344001",
+      "source_repository": "https://github.com/kushalchawla/CaSiNo",
+      "source_url": "https://api.github.com/repos/kushalchawla/CaSiNo/git/blobs/6c3aaac71438c4eacd5e93c38b80fbaa99ceb1e2",
+      "tls_validation": true,
+      "transport_envelope_path": "AlagDatasets/manifests/upstream/casino/blob-6c3aaac71438c4eacd5e93c38b80fbaa99ceb1e2.json",
+      "upstream_relative_path": "data/README.md"
+    },
+    {
+      "acquisition_method": "GitHub blob API base64 transport decoded without content changes",
+      "bytes": 4324755,
+      "canonical_raw_source_url": "https://raw.githubusercontent.com/gucci-j/negotiation-breakdown-detection/d4c2bf63b4da95b342fd952065f9ad3e97179134/data.zip",
+      "dataset_name": "Job Interview Negotiation",
+      "declared_license": "MIT",
+      "downloaded_at_utc": "2026-09-17T08:04:19.899239+00:00",
+      "git_blob_sha1": "a2b88eaf578ca4702848f652df0708e9d28c26c6",
+      "http_status": 200,
+      "immutable_policy": "exclusive creation; read-only attribute; post-inspection SHA-256 audit",
+      "matches_upstream_git_tree": true,
+      "paper_reference": "https://aclanthology.org/2021.eacl-main.63/",
+      "redirects_followed": 0,
+      "relative_local_path": "AlagDatasets/raw/job-interview/data.zip",
+      "resolved_source_revision": "d4c2bf63b4da95b342fd952065f9ad3e97179134",
+      "sha256": "1bfe698a677ed6faaebe2ebdc607d913c7e6e5814c91e471a000c21894ec6dd9",
+      "source_repository": "https://github.com/gucci-j/negotiation-breakdown-detection",
+      "source_url": "https://api.github.com/repos/gucci-j/negotiation-breakdown-detection/git/blobs/a2b88eaf578ca4702848f652df0708e9d28c26c6",
+      "tls_validation": true,
+      "transport_envelope_path": "AlagDatasets/manifests/upstream/job-interview/blob-a2b88eaf578ca4702848f652df0708e9d28c26c6.json",
+      "upstream_relative_path": "data.zip"
+    },
+    {
+      "acquisition_method": "GitHub blob API base64 transport decoded without content changes",
+      "bytes": 2558,
+      "canonical_raw_source_url": "https://raw.githubusercontent.com/gucci-j/negotiation-breakdown-detection/d4c2bf63b4da95b342fd952065f9ad3e97179134/README.md",
+      "dataset_name": "Job Interview Negotiation",
+      "declared_license": "MIT",
+      "downloaded_at_utc": "2026-09-17T08:04:20.755445+00:00",
+      "git_blob_sha1": "2a13ebebdb3ca7596ecfd1b722674bef0da85598",
+      "http_status": 200,
+      "immutable_policy": "exclusive creation; read-only attribute; post-inspection SHA-256 audit",
+      "matches_upstream_git_tree": true,
+      "paper_reference": "https://aclanthology.org/2021.eacl-main.63/",
+      "redirects_followed": 0,
+      "relative_local_path": "AlagDatasets/raw/job-interview/README.md",
+      "resolved_source_revision": "d4c2bf63b4da95b342fd952065f9ad3e97179134",
+      "sha256": "b95b22909943ca220f11f8e66b33dd64727808c64909f5f6d8862e5d1748000a",
+      "source_repository": "https://github.com/gucci-j/negotiation-breakdown-detection",
+      "source_url": "https://api.github.com/repos/gucci-j/negotiation-breakdown-detection/git/blobs/2a13ebebdb3ca7596ecfd1b722674bef0da85598",
+      "tls_validation": true,
+      "transport_envelope_path": "AlagDatasets/manifests/upstream/job-interview/blob-2a13ebebdb3ca7596ecfd1b722674bef0da85598.json",
+      "upstream_relative_path": "README.md"
+    },
+    {
+      "acquisition_method": "GitHub blob API base64 transport decoded without content changes",
+      "bytes": 1107,
+      "canonical_raw_source_url": "https://raw.githubusercontent.com/gucci-j/negotiation-breakdown-detection/d4c2bf63b4da95b342fd952065f9ad3e97179134/LICENSE",
+      "dataset_name": "Job Interview Negotiation",
+      "declared_license": "MIT",
+      "downloaded_at_utc": "2026-09-17T08:04:21.704746+00:00",
+      "git_blob_sha1": "06123446da7b356eb6df9a31795e0be7a6c17fcc",
+      "http_status": 200,
+      "immutable_policy": "exclusive creation; read-only attribute; post-inspection SHA-256 audit",
+      "matches_upstream_git_tree": true,
+      "paper_reference": "https://aclanthology.org/2021.eacl-main.63/",
+      "redirects_followed": 0,
+      "relative_local_path": "AlagDatasets/raw/job-interview/LICENSE",
+      "resolved_source_revision": "d4c2bf63b4da95b342fd952065f9ad3e97179134",
+      "sha256": "b1c72068b3d8b1f4dc0a509035aee17848ff129b259d6889a76754512aceb873",
+      "source_repository": "https://github.com/gucci-j/negotiation-breakdown-detection",
+      "source_url": "https://api.github.com/repos/gucci-j/negotiation-breakdown-detection/git/blobs/06123446da7b356eb6df9a31795e0be7a6c17fcc",
+      "tls_validation": true,
+      "transport_envelope_path": "AlagDatasets/manifests/upstream/job-interview/blob-06123446da7b356eb6df9a31795e0be7a6c17fcc.json",
+      "upstream_relative_path": "LICENSE"
+    },
+    {
+      "acquisition_method": "GitHub blob API base64 transport decoded without content changes",
+      "bytes": 9337,
+      "canonical_raw_source_url": "https://raw.githubusercontent.com/gucci-j/negotiation-breakdown-detection/d4c2bf63b4da95b342fd952065f9ad3e97179134/helper/negotiation_ji.py",
+      "dataset_name": "Job Interview Negotiation",
+      "declared_license": "MIT",
+      "downloaded_at_utc": "2026-09-17T08:04:22.512142+00:00",
+      "git_blob_sha1": "db0d1cd63323c6f80d7b06fdfbffd213a76ba704",
+      "http_status": 200,
+      "immutable_policy": "exclusive creation; read-only attribute; post-inspection SHA-256 audit",
+      "matches_upstream_git_tree": true,
+      "paper_reference": "https://aclanthology.org/2021.eacl-main.63/",
+      "redirects_followed": 0,
+      "relative_local_path": "AlagDatasets/raw/job-interview/helper/negotiation_ji.py",
+      "resolved_source_revision": "d4c2bf63b4da95b342fd952065f9ad3e97179134",
+      "sha256": "eb5737a790e9ae678fd828e31c70f762dae7a41efc80812c2cae633e43d7e8e9",
+      "source_repository": "https://github.com/gucci-j/negotiation-breakdown-detection",
+      "source_url": "https://api.github.com/repos/gucci-j/negotiation-breakdown-detection/git/blobs/db0d1cd63323c6f80d7b06fdfbffd213a76ba704",
+      "tls_validation": true,
+      "transport_envelope_path": "AlagDatasets/manifests/upstream/job-interview/blob-db0d1cd63323c6f80d7b06fdfbffd213a76ba704.json",
+      "upstream_relative_path": "helper/negotiation_ji.py"
+    },
+    {
+      "acquisition_method": "byte-preserving ZIP member extraction",
+      "archive_member": "data.json",
+      "archive_path": "AlagDatasets/raw/job-interview/data.zip",
+      "archive_sha256": "1bfe698a677ed6faaebe2ebdc607d913c7e6e5814c91e471a000c21894ec6dd9",
+      "bytes": 40712917,
+      "dataset_name": "Job Interview Negotiation",
+      "declared_license": "MIT",
+      "downloaded_at_utc": "2026-09-17T08:04:19.899239+00:00",
+      "extracted_at_utc": "2026-09-17T08:05:14.513488+00:00",
+      "immutable_policy": "exclusive creation; read-only attribute; post-inspection SHA-256 audit",
+      "matches_archive_member": true,
+      "paper_reference": "https://aclanthology.org/2021.eacl-main.63/",
+      "relative_local_path": "AlagDatasets/raw/job-interview/data.json",
+      "resolved_source_revision": "d4c2bf63b4da95b342fd952065f9ad3e97179134",
+      "sha256": "989ad5bb86a4c4552e34bfb1af4c31344dd21c9c02900eb218328f3c2126199e",
+      "source_repository": "https://github.com/gucci-j/negotiation-breakdown-detection",
+      "source_url": "https://api.github.com/repos/gucci-j/negotiation-breakdown-detection/git/blobs/a2b88eaf578ca4702848f652df0708e9d28c26c6"
+    }
+  ],
+  "raw_integrity_audit": {
+    "files": [
+      {
+        "bytes_after_inspection": 4300019,
+        "content_kind": "UTF-8 text",
+        "matches_acquisition": true,
+        "path": "AlagDatasets/raw/casino/data/casino.json",
+        "read_only": true,
+        "sha256_after_inspection": "4f2c4560a0070906ed018c3f0766e35f8f8f31b36274ebf35b608621915744ab"
+      },
+      {
+        "bytes_after_inspection": 2061,
+        "content_kind": "UTF-8 text",
+        "matches_acquisition": true,
+        "path": "AlagDatasets/raw/casino/README.md",
+        "read_only": true,
+        "sha256_after_inspection": "b52d17f5a0d71a8760a42cc3cb5b02f7c0ba739487a6a703e15f655400d465a6"
+      },
+      {
+        "bytes_after_inspection": 18658,
+        "content_kind": "UTF-8 text",
+        "matches_acquisition": true,
+        "path": "AlagDatasets/raw/casino/LICENSE",
+        "read_only": true,
+        "sha256_after_inspection": "f5b745ef98087f531e719ee8ca6a96809444573ecc7173c6fa68eaad39b3cc3f"
+      },
+      {
+        "bytes_after_inspection": 1590,
+        "content_kind": "UTF-8 text",
+        "matches_acquisition": true,
+        "path": "AlagDatasets/raw/casino/data/README.md",
+        "read_only": true,
+        "sha256_after_inspection": "2cc2a0bfe22e3285ddb4a04a1675dfe68b2609ec561ae0595ebcdd5504344001"
+      },
+      {
+        "bytes_after_inspection": 4324755,
+        "content_kind": "ZIP archive; CRC verified; approved data and inert AppleDouble metadata only",
+        "matches_acquisition": true,
+        "path": "AlagDatasets/raw/job-interview/data.zip",
+        "read_only": true,
+        "sha256_after_inspection": "1bfe698a677ed6faaebe2ebdc607d913c7e6e5814c91e471a000c21894ec6dd9"
+      },
+      {
+        "bytes_after_inspection": 2558,
+        "content_kind": "UTF-8 text",
+        "matches_acquisition": true,
+        "path": "AlagDatasets/raw/job-interview/README.md",
+        "read_only": true,
+        "sha256_after_inspection": "b95b22909943ca220f11f8e66b33dd64727808c64909f5f6d8862e5d1748000a"
+      },
+      {
+        "bytes_after_inspection": 1107,
+        "content_kind": "UTF-8 text",
+        "matches_acquisition": true,
+        "path": "AlagDatasets/raw/job-interview/LICENSE",
+        "read_only": true,
+        "sha256_after_inspection": "b1c72068b3d8b1f4dc0a509035aee17848ff129b259d6889a76754512aceb873"
+      },
+      {
+        "bytes_after_inspection": 9337,
+        "content_kind": "UTF-8 text; optional helper source inspected, never executed",
+        "matches_acquisition": true,
+        "path": "AlagDatasets/raw/job-interview/helper/negotiation_ji.py",
+        "read_only": true,
+        "sha256_after_inspection": "eb5737a790e9ae678fd828e31c70f762dae7a41efc80812c2cae633e43d7e8e9"
+      },
+      {
+        "bytes_after_inspection": 40712917,
+        "content_kind": "UTF-8 text",
+        "matches_acquisition": true,
+        "path": "AlagDatasets/raw/job-interview/data.json",
+        "read_only": true,
+        "sha256_after_inspection": "989ad5bb86a4c4552e34bfb1af4c31344dd21c9c02900eb218328f3c2126199e"
+      }
+    ],
+    "immutable_policy": "Raw artifacts are read-only, created without overwrite, and byte hashes match acquisition. Later gates must re-verify these hashes and write derivatives outside raw.",
+    "status": "PASS",
+    "unexpected_binary_files": [],
+    "unexpected_raw_files": []
+  },
+  "receipt_path": "docs/gates/AI_LOCAL_DATASET_ACQUISITION.md",
+  "schema_version": "1.0.0",
+  "scope": {
+    "a01_a16": {
+      "contents_inspected_for_training": false,
+      "holdout_preserved": true,
+      "labels_copied_to_dataset": false,
+      "prompts_or_models_tuned": false,
+      "training_examples_or_paraphrases_created": 0,
+      "verification_method": "Existing files were hashed only; no holdout content used in assessments."
+    },
+    "additional_datasets_downloaded": false,
+    "administrator_privileges_used": false,
+    "baseline_inference": "NOT_STARTED",
+    "external_llm_api_used": false,
+    "free_text_nlu": "NOT_STARTED",
+    "g3_application_integration": "NOT_STARTED",
+    "global_path_modified": false,
+    "historical_training_environments_downloaded": false,
+    "lora_qlora": "NOT_STARTED",
+    "ml_dependencies_installed": false,
+    "model_redownloaded_moved_or_modified": false,
+    "normalization": "NOT_STARTED",
+    "raw_data_rewritten_after_acquisition": false,
+    "splits": "NOT_CREATED",
+    "synthetic_russian_data": "NOT_STARTED",
+    "system_software_installed": false,
+    "tls_validation_disabled": false,
+    "tokenization": "NOT_STARTED",
+    "training": "NOT_STARTED",
+    "translation": "NOT_STARTED"
+  },
+  "sources": [
+    {
+      "archived": false,
+      "dataset_name": "CaSiNo",
+      "default_branch": "main",
+      "license": "CC-BY-4.0",
+      "license_api_spdx": "CC-BY-4.0",
+      "license_evidence_path": "AlagDatasets/raw/casino/LICENSE",
+      "license_file_verified": true,
+      "paper": "https://aclanthology.org/2021.naacl-main.254/",
+      "repository": "kushalchawla/CaSiNo",
+      "revision": "2f6ed4a6a55110152a7699fbaa8150d6036314be",
+      "slug": "casino",
+      "source_repository": "https://github.com/kushalchawla/CaSiNo",
+      "upstream_commit_date": "2021-09-07T22:48:55Z"
+    },
+    {
+      "archived": true,
+      "dataset_name": "Job Interview Negotiation",
+      "default_branch": "main",
+      "license": "MIT",
+      "license_api_spdx": "MIT",
+      "license_evidence_path": "AlagDatasets/raw/job-interview/LICENSE",
+      "license_file_verified": true,
+      "paper": "https://aclanthology.org/2021.eacl-main.63/",
+      "repository": "gucci-j/negotiation-breakdown-detection",
+      "revision": "d4c2bf63b4da95b342fd952065f9ad3e97179134",
+      "slug": "job-interview",
+      "source_repository": "https://github.com/gucci-j/negotiation-breakdown-detection",
+      "upstream_commit_date": "2021-10-21T11:04:43Z"
+    }
+  ],
+  "transport_incidents": [
+    {
+      "correction": "Python urllib HTTPS, already demonstrated working; certificate validation retained",
+      "error": "SEC_E_NO_CREDENTIALS (0x8009030e), curl exit 35 before any acquisition",
+      "mechanism": "Windows curl/Schannel"
+    },
+    {
+      "correction": "Use official GitHub blob API, already verified working for repository metadata; verify decoded bytes against pinned tree",
+      "error": "Socket read timeout after 4194304 of 4300019 bytes; partial file never accepted as raw data",
+      "mechanism": "raw.githubusercontent.com via urllib",
+      "quarantined_bytes": 4194304,
+      "quarantined_path": "AlagDatasets/reports/failed-downloads/casino.json.download-part",
+      "quarantined_sha256": "ad6e848b9399a6ca55404625585ad5e1d704a23bfe28581a2dcb4c75bcd608ea"
+    },
+    {
+      "correction": "A single HTTP Range request retrieved only the 105715 missing bytes from the original pinned raw URL. HTTP 206/Content-Range validated; combined bytes match authoritative Git blob SHA-1.",
+      "error": "Read timeout after 5242880 envelope bytes; no data accepted",
+      "mechanism": "GitHub blob API large response",
+      "quarantined_bytes": 5242880,
+      "quarantined_path": "AlagDatasets/reports/failed-downloads/casino-api-envelope.json.download-part",
+      "quarantined_sha256": "ee32acd18895564c8f03e46a0462a85185af68d884738588578048fcb3581627"
+    }
+  ],
+  "verification_limitations": [
+    "No tensor-payload checksum or model inference was performed.",
+    "English-language/source identity is supported by author papers and source/schema review; no language detector or exhaustive semantic review was run.",
+    "No exhaustive dialogue-text privacy scan, translation, normalized action annotation, splitting or training was performed."
+  ],
+  "verification_scripts": [
+    {
+      "bytes": 12990,
+      "path": "AlagDatasets/reports/acquire_sources.py",
+      "sha256": "c8cf6c40712ebc6a2bf0e3e567f78ff297039a3cadc3ab5922a3a927cbad6f44"
+    },
+    {
+      "bytes": 16681,
+      "path": "AlagDatasets/reports/assessments.py",
+      "sha256": "bfd9fc86a6c27500f8bed2a30a2155f548db442bf77518237ba881e6632bb99f"
+    },
+    {
+      "bytes": 5358,
+      "path": "AlagDatasets/reports/gate_support.py",
+      "sha256": "0f922ee64763f7677f77c5987936528fc4a0c9e8e2d01006588ad4bd58f96500"
+    },
+    {
+      "bytes": 24740,
+      "path": "AlagDatasets/reports/validate_datasets.py",
+      "sha256": "c43ac2223ad2ca533a1c658bd839bb9a08d6e58c0a1d3cb1c55d8c98b67a06f2"
+    },
+    {
+      "bytes": 9004,
+      "path": "AlagDatasets/reports/verify_model.py",
+      "sha256": "99df5272a760c4a8458336033bf4e4553be96665c266b44a39d396dfbb321ee7"
+    },
+    {
+      "bytes": 28858,
+      "path": "AlagDatasets/reports/write_evidence.py",
+      "sha256": "9800d56d4b8b594f502cc3b79030cd5bb86d04e8ad617bd959303743a0214477"
+    }
+  ],
+  "workspace": "C:\\Users\\BastaPC\\Desktop\\Alag",
+  "zip_safety": {
+    "appledouble_header_verified": true,
+    "archive_path": "AlagDatasets/raw/job-interview/data.zip",
+    "crc_test": "PASS",
+    "entries": [
+      {
+        "compressed_bytes": 4324220,
+        "compression_method": 8,
+        "crc32": "ff8f48d0",
+        "name": "data.json",
+        "uncompressed_bytes": 40712917,
+        "unix_mode": "0o100600"
+      },
+      {
+        "compressed_bytes": 0,
+        "compression_method": 0,
+        "crc32": "00000000",
+        "name": "__MACOSX/",
+        "uncompressed_bytes": 0,
+        "unix_mode": "0o40775"
+      },
+      {
+        "compressed_bytes": 93,
+        "compression_method": 8,
+        "crc32": "8d18e84a",
+        "name": "__MACOSX/._data.json",
+        "uncompressed_bytes": 176,
+        "unix_mode": "0o100600"
+      }
+    ],
+    "extracted_files": [
+      "data.json"
+    ],
+    "extraction_root": "C:\\Users\\BastaPC\\Desktop\\Alag\\AlagDatasets\\raw\\job-interview",
+    "inspection_note": "Initial data.json-only allowlist paused extraction for review of macOS metadata; verified AppleDouble and skipped it.",
+    "rejected_entries": [],
+    "skipped_members": [
+      "__MACOSX/",
+      "__MACOSX/._data.json"
+    ],
+    "status": "PASS"
+  }
+}

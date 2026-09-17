@@ -1,0 +1,11 @@
+{
+  "name": "@arena/web",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": { "@arena/contracts": "0.0.0", "react": "19.3.0", "react-dom": "19.3.0" }
+}
