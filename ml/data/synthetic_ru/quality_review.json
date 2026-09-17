@@ -1,0 +1,510 @@
+{
+  "status": "PASS",
+  "reviewer": "Codex project author; not independent human annotators",
+  "selection": {
+    "train": [
+      "ru-7d8d119c06697119",
+      "ru-cb3672994aac752e",
+      "ru-ce624dd35e9ae216",
+      "ru-7b0c8e9cccb43267",
+      "ru-f362ec5f238f1d77",
+      "ru-13eb61c6e8c8a0be",
+      "ru-55341d66937d835a",
+      "ru-c07e286cf8b4ca95",
+      "ru-07509963ae205ac9",
+      "ru-c1d600988ced6729",
+      "ru-e10e80e64ac7cf76",
+      "ru-873b073ebeae79e2",
+      "ru-1bcab49a5893e51f",
+      "ru-9f8e3f8102d2f45a",
+      "ru-9ff6d91512f5cd5e",
+      "ru-22cac7483a550fbc",
+      "ru-e475563a9cb9f0cd",
+      "ru-75e5786bbc0ca399",
+      "ru-bc792ed942f34a59",
+      "ru-239eab8db969ec67",
+      "ru-9e1dc68c4af07ec6",
+      "ru-a4b71ce6f58143ce",
+      "ru-32d9e59ae278267a",
+      "ru-0183f3c11a1645a0",
+      "ru-5a5da8d60b416d02"
+    ],
+    "dev": [
+      "ru-d9c9d413fc4ca1ae",
+      "ru-8f05d72b2d9ef7bc",
+      "ru-58160c8467300dd2",
+      "ru-af74675df0c3274e",
+      "ru-ed5bef0c8fb8428a",
+      "ru-72f1eed2fed615b7",
+      "ru-299256199422891a",
+      "ru-79650b9adf7e27c4",
+      "ru-83b6433d98e777e8",
+      "ru-1b46538191203fc7",
+      "ru-56ddcc9fc348a025",
+      "ru-bc8149050165da05",
+      "ru-e1f324fa299ba520",
+      "ru-79c582207da5117e",
+      "ru-8f221bf75264ba2c",
+      "ru-4c3f2287b8ac3ae8",
+      "ru-fe215f4ba3972db3",
+      "ru-21bb06b2783a9a32",
+      "ru-14d4785c61968dfb",
+      "ru-a937574fd780b6ec",
+      "ru-a3caacbc7e255bd9",
+      "ru-a6a554b4a8a16d5f",
+      "ru-f48e7268d2522d9d",
+      "ru-f02c15c384b4f6f1",
+      "ru-d19429a27ce53be3"
+    ],
+    "internal_test": [
+      "ru-f83a7899d258017b",
+      "ru-2ee40f48c7effce1",
+      "ru-4bce6373ef34a9ee",
+      "ru-33f8b0d25d8be4ad",
+      "ru-436ef595e9987223",
+      "ru-777c794faeeb1313",
+      "ru-b744f804b06f2fce",
+      "ru-e5f8b44ff99722db",
+      "ru-218beb76cdcbef86",
+      "ru-8c9ff1c99aaab8a1",
+      "ru-27c57ebb20a0b1c1",
+      "ru-235f8cde1b213fd3",
+      "ru-c5af378b6eb96334",
+      "ru-b1e56b5f28b91e6f",
+      "ru-b4c5495355687506",
+      "ru-65dd23a42c94c111",
+      "ru-0a6d31e54c6731bb",
+      "ru-72bac78c890d53ce",
+      "ru-6a6721b695fb9a3f",
+      "ru-d46eac8fbb8d27f2",
+      "ru-2f06715cc08a1037",
+      "ru-2290c484478725af",
+      "ru-54fa61cc3aa52f01",
+      "ru-ea55e89dfe3f2a51",
+      "ru-86447437b9dcc5fe"
+    ],
+    "intent:argument": [
+      "ru-c936c15d1f28ca94",
+      "ru-8ab7803f97a239e7",
+      "ru-ba9d30fc0c2e06d0",
+      "ru-f6b58aec9f694384",
+      "ru-33a2c3cd1a11bb5d"
+    ],
+    "intent:ask_question": [
+      "ru-ccbffbfabfa8ce57",
+      "ru-93816055d015daea",
+      "ru-b8dfbbff1476df82",
+      "ru-9455f340b467a5b7",
+      "ru-ec3eff8305a1f1c2"
+    ],
+    "intent:clarification": [
+      "ru-62bbd36b11067858",
+      "ru-8d79bef85b56a3ea",
+      "ru-86447437b9dcc5fe",
+      "ru-00c4cedd7b9bc234",
+      "ru-894979c381870c84"
+    ],
+    "intent:close_attempt": [
+      "ru-e21227029ae9944c",
+      "ru-4e003ede5f862aea",
+      "ru-8e835af3b80f3671",
+      "ru-9bc81cf39be51e60",
+      "ru-1f4b1c0999525723"
+    ],
+    "intent:concession": [
+      "ru-30f8554ef11bbfa4",
+      "ru-28b5c0e01a5a39e7",
+      "ru-4a732e9145b6e88a",
+      "ru-c0273f898f0e470c",
+      "ru-6981a83295f2ece3"
+    ],
+    "intent:counter_offer": [
+      "ru-d13f625c9ef52717",
+      "ru-ed8f596d406728b4",
+      "ru-53855ea22d856cc0",
+      "ru-dc5ee43a9edebdbf",
+      "ru-78c95d1352106fe8"
+    ],
+    "intent:empathy": [
+      "ru-021a8b2625ad211f",
+      "ru-aae449c75711f373",
+      "ru-e685911345be6771",
+      "ru-8afb91659a23c11b",
+      "ru-7a571c7a24b64419"
+    ],
+    "intent:objection": [
+      "ru-710be598f91699b5",
+      "ru-bb13a965935baa4a",
+      "ru-62f30ed1709fd168",
+      "ru-a464d96a68a30d4d",
+      "ru-46a49fde8fe223dc"
+    ],
+    "intent:offer": [
+      "ru-3f3fa0ad0ccddada",
+      "ru-807ffd2c1ba3ea62",
+      "ru-d926200ff4e18c11",
+      "ru-edc3283b017c9ab6",
+      "ru-1fb83be79a42e4f4"
+    ],
+    "intent:pressure": [
+      "ru-8623b06ca9f068e4",
+      "ru-ae0e04b4ca5574ba",
+      "ru-2a794d6482857c0a",
+      "ru-dce9fa232a5651ce",
+      "ru-994f45a1c45b5220"
+    ],
+    "intent:probe_interest": [
+      "ru-7805b5e01aad6c24",
+      "ru-32bd59bb6bc70430",
+      "ru-382757f5fa4c08fc",
+      "ru-cd35b31be8cd60d7",
+      "ru-5f21bd9cb8748550"
+    ],
+    "intent:reveal_information": [
+      "ru-90e738c6504793dd",
+      "ru-02a46960f1741236",
+      "ru-ba9925aacff94aff",
+      "ru-1e8b99c68ce5d894",
+      "ru-42de99009a3648e4"
+    ],
+    "intent:walk_away": [
+      "ru-3af8576ed6841fb1",
+      "ru-e5877cd046cc3447",
+      "ru-2306047b4aa7da14",
+      "ru-cb5426a580316616",
+      "ru-d3084c5e5bb6fd7d"
+    ],
+    "safety_families": [
+      "ru-91491d41b37a5ed6",
+      "ru-98ee7a52aa616fa4",
+      "ru-d6b13fa5a3fdb805",
+      "ru-8e3a858161926273",
+      "ru-786cea07f5123ec7",
+      "ru-e6d52b456bfe3282",
+      "ru-3d9ec6a823f1d964",
+      "ru-23fc37b744690f72",
+      "ru-d46eac8fbb8d27f2",
+      "ru-5f9e24740c0e9974",
+      "ru-51d2d14229541616",
+      "ru-c1e96c5b56701b62",
+      "ru-dd7eb5566cdb0e2c",
+      "ru-920943a69860ead2",
+      "ru-be9eeeb52d78dab2"
+    ]
+  },
+  "unique_sampled_records": 153,
+  "reviewed_dimensions": [
+    "Russian meaning and naturalness",
+    "intent and commitment cue",
+    "public ID/term binding",
+    "negation and alternatives",
+    "condition and inheritance",
+    "fact versus acknowledgement versus argument",
+    "evidence support",
+    "privacy"
+  ],
+  "train_random": 25,
+  "dev_random": 25,
+  "internal_test_random": 25,
+  "per_intent": 5,
+  "safety_families": 15,
+  "holdout_nearest_per_case_review": [
+    {
+      "holdoutId": "A01",
+      "rowId": "ru-6b7402cad75d85c5",
+      "decision": "retain independently authored construction",
+      "reason": "Nearest candidate is a missing-reference edit in project scope, not a logistics availability question."
+    },
+    {
+      "holdoutId": "A02",
+      "rowId": "ru-68350af42c354cda",
+      "decision": "retain independently authored construction",
+      "reason": "Broad preference language is required by the contract. Concern, causal motivation and reciprocal tradeoff constructions were authored from separate semantic recipes before holdout text access; they are not a rewritten priority question. Same public topic alone is not derivation."
+    },
+    {
+      "holdoutId": "A03",
+      "rowId": "ru-ed338f6aa3647e7e",
+      "decision": "retain independently authored construction",
+      "reason": "Nearest candidate asks when information will be available; it contains no materials/prepayment argument."
+    },
+    {
+      "holdoutId": "A04",
+      "rowId": "ru-3d7a1ef6ae77af63",
+      "decision": "retain independently authored construction",
+      "reason": "Independently generated package uses a different public catalogue and calendar delivery choices. No holdout package or value was used as a seed."
+    },
+    {
+      "holdoutId": "A05",
+      "rowId": "ru-96e8f7f8459bf38f",
+      "decision": "retain independently authored construction",
+      "reason": "Nearest candidate asks about motivation; it does not reproduce the compound price alternatives/negated prepayment construction."
+    },
+    {
+      "holdoutId": "A06",
+      "rowId": "ru-592d43de27212b3f",
+      "decision": "retain independently authored construction",
+      "reason": "Explicit single-term editing and retained terms are required general contract operations. Construction, issue marking and active public fixture were authored from that rule before audit. This is necessary task overlap, with no shared normalized tokens in the nearest pair; not a number-edited descendant."
+    },
+    {
+      "holdoutId": "A07",
+      "rowId": "ru-89d3baf5d400fd75",
+      "decision": "retain independently authored construction",
+      "reason": "Highest neighbour asks about a procedure, not a conditional concession. Other neighbours differ in conditions or concern whole independently generated packages."
+    },
+    {
+      "holdoutId": "A08",
+      "rowId": "ru-fd5475c729556044",
+      "decision": "retain independently authored construction",
+      "reason": "Both contain a personal threat, as required by the frozen prompt. The candidate demands agreement on a named service issue and threatens negotiator replacement; the holdout targets pricing and employment. The construction was independently authored, not derived."
+    },
+    {
+      "holdoutId": "A09",
+      "rowId": "ru-19faf0896f4d544f",
+      "decision": "retain independently authored construction",
+      "reason": "Candidate rejects one catalogue option while explicitly continuing discussion; it does not assert an economic limit and alternative supplier."
+    },
+    {
+      "holdoutId": "A10",
+      "rowId": "ru-5d1fd0da39da92f2",
+      "decision": "retain independently authored construction",
+      "reason": "Candidate expresses concern/empathy without the holdout factual workload content or acknowledgement binding."
+    },
+    {
+      "holdoutId": "A11",
+      "rowId": "ru-c31bcd653de9a53d",
+      "decision": "retain independently authored construction",
+      "reason": "Candidate probes desired outcomes on a topic; no workload-feasibility assertion or deadline is copied."
+    },
+    {
+      "holdoutId": "A12",
+      "rowId": "ru-b925ed6bd4515199",
+      "decision": "retain independently authored construction",
+      "reason": "Candidate has an unresolved offer referent, rather than asking the meaning of a quantified delivery term."
+    },
+    {
+      "holdoutId": "A13",
+      "rowId": "ru-0dde16685d701cae",
+      "decision": "retain independently authored construction",
+      "reason": "Candidate requests catalogue options in project scope; no alternative-supplier assertion is reproduced."
+    },
+    {
+      "holdoutId": "A14",
+      "rowId": "ru-47b5a1247e533187",
+      "decision": "retain independently authored construction",
+      "reason": "Nearest lexical candidate asks about motivation; acceptance examples come from independent explicit current-package constructions."
+    },
+    {
+      "holdoutId": "A15",
+      "rowId": "ru-1d03b769220b43d2",
+      "decision": "retain independently authored construction",
+      "reason": "Final exit is a required intent. The candidate closes a named fictional rent discussion, with separately authored discourse and context; no holdout wording or conditional disagreement prefix is used."
+    },
+    {
+      "holdoutId": "A16",
+      "rowId": "ru-fcc67820ffb4099a",
+      "decision": "retain independently authored construction",
+      "reason": "Candidate requests a fabricated strategy score; it does not reproduce the combined instruction/hidden-price/numeric-score payload. All safety families were authored independently and targets contain no private fields."
+    }
+  ],
+  "holdout_top_family_review": [
+    {
+      "rowId": "ru-68350af42c354cda",
+      "holdoutId": "A02",
+      "decision": "retain",
+      "reason": "Broad preference language is required by the contract. Concern, causal motivation and reciprocal tradeoff constructions were authored from separate semantic recipes before holdout text access; they are not a rewritten priority question. Same public topic alone is not derivation."
+    },
+    {
+      "rowId": "ru-fd5475c729556044",
+      "holdoutId": "A08",
+      "decision": "retain",
+      "reason": "Both contain a personal threat, as required by the frozen prompt. The candidate demands agreement on a named service issue and threatens negotiator replacement; the holdout targets pricing and employment. The construction was independently authored, not derived."
+    },
+    {
+      "rowId": "ru-e78989b9a0b916e8",
+      "holdoutId": "A02",
+      "decision": "retain",
+      "reason": "Broad preference language is required by the contract. Concern, causal motivation and reciprocal tradeoff constructions were authored from separate semantic recipes before holdout text access; they are not a rewritten priority question. Same public topic alone is not derivation."
+    },
+    {
+      "rowId": "ru-223d2ae5271cc1c0",
+      "holdoutId": "A02",
+      "decision": "retain",
+      "reason": "Broad preference language is required by the contract. Concern, causal motivation and reciprocal tradeoff constructions were authored from separate semantic recipes before holdout text access; they are not a rewritten priority question. Same public topic alone is not derivation."
+    },
+    {
+      "rowId": "ru-89d3baf5d400fd75",
+      "holdoutId": "A07",
+      "decision": "retain",
+      "reason": "Highest neighbour asks about a procedure, not a conditional concession. Other neighbours differ in conditions or concern whole independently generated packages."
+    },
+    {
+      "rowId": "ru-05ed066b09fbe297",
+      "holdoutId": "A07",
+      "decision": "retain",
+      "reason": "Highest neighbour asks about a procedure, not a conditional concession. Other neighbours differ in conditions or concern whole independently generated packages."
+    },
+    {
+      "rowId": "ru-5d1fd0da39da92f2",
+      "holdoutId": "A10",
+      "decision": "retain",
+      "reason": "Candidate expresses concern/empathy without the holdout factual workload content or acknowledgement binding."
+    },
+    {
+      "rowId": "ru-47b5a1247e533187",
+      "holdoutId": "A14",
+      "decision": "retain",
+      "reason": "Nearest lexical candidate asks about motivation; acceptance examples come from independent explicit current-package constructions."
+    },
+    {
+      "rowId": "ru-268a389c443dbd39",
+      "holdoutId": "A07",
+      "decision": "retain",
+      "reason": "Highest neighbour asks about a procedure, not a conditional concession. Other neighbours differ in conditions or concern whole independently generated packages."
+    },
+    {
+      "rowId": "ru-592d43de27212b3f",
+      "holdoutId": "A06",
+      "decision": "retain",
+      "reason": "Explicit single-term editing and retained terms are required general contract operations. Construction, issue marking and active public fixture were authored from that rule before audit. This is necessary task overlap, with no shared normalized tokens in the nearest pair; not a number-edited descendant."
+    },
+    {
+      "rowId": "ru-cbe401f032efc7c2",
+      "holdoutId": "A06",
+      "decision": "retain",
+      "reason": "Explicit single-term editing and retained terms are required general contract operations. Construction, issue marking and active public fixture were authored from that rule before audit. This is necessary task overlap, with no shared normalized tokens in the nearest pair; not a number-edited descendant."
+    },
+    {
+      "rowId": "ru-dc97f4ce20520b3e",
+      "holdoutId": "A07",
+      "decision": "retain",
+      "reason": "Highest neighbour asks about a procedure, not a conditional concession. Other neighbours differ in conditions or concern whole independently generated packages."
+    },
+    {
+      "rowId": "ru-c6408d28e6916832",
+      "holdoutId": "A07",
+      "decision": "retain",
+      "reason": "Highest neighbour asks about a procedure, not a conditional concession. Other neighbours differ in conditions or concern whole independently generated packages."
+    },
+    {
+      "rowId": "ru-1b90ea64d63bbb29",
+      "holdoutId": "A07",
+      "decision": "retain",
+      "reason": "Highest neighbour asks about a procedure, not a conditional concession. Other neighbours differ in conditions or concern whole independently generated packages."
+    },
+    {
+      "rowId": "ru-81bc4b208758e504",
+      "holdoutId": "A06",
+      "decision": "retain",
+      "reason": "Explicit single-term editing and retained terms are required general contract operations. Construction, issue marking and active public fixture were authored from that rule before audit. This is necessary task overlap, with no shared normalized tokens in the nearest pair; not a number-edited descendant."
+    },
+    {
+      "rowId": "ru-1d03b769220b43d2",
+      "holdoutId": "A15",
+      "decision": "retain",
+      "reason": "Final exit is a required intent. The candidate closes a named fictional rent discussion, with separately authored discourse and context; no holdout wording or conditional disagreement prefix is used."
+    },
+    {
+      "rowId": "ru-264fb35b4f2510dd",
+      "holdoutId": "A06",
+      "decision": "retain",
+      "reason": "Explicit single-term editing and retained terms are required general contract operations. Construction, issue marking and active public fixture were authored from that rule before audit. This is necessary task overlap, with no shared normalized tokens in the nearest pair; not a number-edited descendant."
+    },
+    {
+      "rowId": "ru-6b7402cad75d85c5",
+      "holdoutId": "A01",
+      "decision": "retain",
+      "reason": "Nearest candidate is a missing-reference edit in project scope, not a logistics availability question."
+    },
+    {
+      "rowId": "ru-b925ed6bd4515199",
+      "holdoutId": "A12",
+      "decision": "retain",
+      "reason": "Candidate has an unresolved offer referent, rather than asking the meaning of a quantified delivery term."
+    },
+    {
+      "rowId": "ru-4047c2f1d8d7a433",
+      "holdoutId": "A07",
+      "decision": "retain",
+      "reason": "Highest neighbour asks about a procedure, not a conditional concession. Other neighbours differ in conditions or concern whole independently generated packages."
+    }
+  ],
+  "cross_split_review": [
+    {
+      "leftId": "ru-2a5e52971b9a5a47",
+      "rightId": "ru-559a812d528e5bfb",
+      "token_bigram_jaccard": 0.3,
+      "character_trigram_jaccard": 0.697987,
+      "sameContext": false,
+      "sameFamily": false,
+      "decision": "retain",
+      "reason": "One utterance makes the concession conditional on a reciprocal term; the other is unconditional. Different contexts and independently authored families; targets preserve this material distinction."
+    }
+  ],
+  "removed_surface_families": [
+    {
+      "family": "dev.offer.memo",
+      "reason": "Three nearest cross-split pairs reused the same whole package under closely related request frames. Whole family quarantined; quota reassigned within DEV; thresholds unchanged."
+    }
+  ],
+  "generator_failures_reviewed": [
+    {
+      "kind": "duplicate_text_context",
+      "count": 1,
+      "ids": [
+        "ru-0856620c1746cc26",
+        "ru-84f6998449aae8e8"
+      ],
+      "cause": "contrast context stride revisited one context",
+      "fix": "coprime stride 11; all pairs regenerated"
+    },
+    {
+      "kind": "duplicate_id",
+      "count": 21,
+      "cause": "two internal concession recipes reused a family name",
+      "fix": "unique null_draft recipe name and fail-fast duplicate-family guard",
+      "failed_ids": [
+        "ru-f7b4084f5f6c4473",
+        "ru-23dc2608db2834da",
+        "ru-b4e8fc1fdf453f44",
+        "ru-2f5e856fcbe3f9fd",
+        "ru-0411777465699b00",
+        "ru-3115a977066ec90b",
+        "ru-180744a6a94b4865",
+        "ru-05d812736819c30c",
+        "ru-09969fdd0ba5b586",
+        "ru-0e0cf983db6df160",
+        "ru-470b80a4326eb4a7",
+        "ru-fb9e8f2b70e089a4",
+        "ru-efd6f1025c142bf3",
+        "ru-7eb442d9ec92e27f",
+        "ru-b65304e732e6169a",
+        "ru-ecc0b77d85e82219",
+        "ru-5233bf48a61cc35b",
+        "ru-6ee9ab9ef36b590d",
+        "ru-5298bcf2c743cdcf",
+        "ru-72fdb52b895b62c1",
+        "ru-f659d7b7e8352ef7"
+      ]
+    },
+    {
+      "kind": "reporting_NameError",
+      "count": 1,
+      "cause": "report used an out-of-scope recipes variable",
+      "fix": "report calls families()"
+    }
+  ],
+  "source_fixes": [
+    "Lowercase sentence starts after comma/colon wrappers",
+    "Bind explicit pressure/empathy topics; keep unlinked fact-only topics null",
+    "Add null-draft and absent-reference explicit-term cases",
+    "Disjoint TRAIN/DEV/INTERNAL_TEST contexts",
+    "Quarantine whole cross-split family, not individual rows"
+  ],
+  "generator_validation_failures_remaining": 0,
+  "individual_generated_rows_edited": false,
+  "limitations": [
+    "Single project-author review; no inter-annotator agreement estimate.",
+    "Synthetic labelled term lists dominate binding examples; not an empirical sample of all Russian negotiation styles.",
+    "Bounded lexical similarity and source isolation cannot mathematically exclude every semantic paraphrase; required task operations necessarily overlap."
+  ]
+}

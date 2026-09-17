@@ -1,0 +1,54 @@
+{
+  "method": "Overlapping case-insensitive bounded regex counts; research patterns, not dialogue-act labels",
+  "patterns": {
+    "preference_probing": "\\b(?:what|which).{0,65}\\b(?:prefer|important|need|priority|want)\\b",
+    "bargaining_proposal": "\\b(?:how about|would you|i can offer|i could offer|can we|i propose)\\b",
+    "need_or_reason": "\\b(?:because|i need|we need|due to|so that)\\b",
+    "coordination": "\\b(?:work together|both of us|we can|let us|let\\'s|agreement|agree on)\\b",
+    "concession_structure": "\\b(?:willing to|in return|compromise|instead|if you|in exchange)\\b",
+    "multi_issue_link": "\\b(?:and|but|if|while)\\b.{0,100}\\b(?:and|but|if|while)\\b"
+  },
+  "sources": [
+    {
+      "dataset": "CaSiNo",
+      "source_repository": "https://github.com/kushalchawla/CaSiNo",
+      "revision": "2f6ed4a6a55110152a7699fbaa8150d6036314be",
+      "paper": "https://aclanthology.org/2021.naacl-main.254/",
+      "source_license": "CC-BY-4.0",
+      "raw_sha256": "4f2c4560a0070906ed018c3f0766e35f8f8f31b36274ebf35b608621915744ab",
+      "utterances_scanned": 11919,
+      "categories": {
+        "preference_probing": 449,
+        "bargaining_proposal": 1111,
+        "need_or_reason": 1373,
+        "coordination": 711,
+        "concession_structure": 1053,
+        "multi_issue_link": 2356
+      }
+    },
+    {
+      "dataset": "Job Interview Negotiation",
+      "source_repository": "https://github.com/gucci-j/negotiation-breakdown-detection",
+      "revision": "d4c2bf63b4da95b342fd952065f9ad3e97179134",
+      "paper": "https://aclanthology.org/2021.eacl-main.63/",
+      "source_license": "MIT",
+      "raw_sha256": "989ad5bb86a4c4552e34bfb1af4c31344dd21c9c02900eb218328f3c2126199e",
+      "utterances_scanned": 39636,
+      "categories": {
+        "preference_probing": 406,
+        "bargaining_proposal": 1613,
+        "need_or_reason": 462,
+        "coordination": 949,
+        "concession_structure": 1063,
+        "multi_issue_link": 722
+      }
+    }
+  ],
+  "source_text_stored": false,
+  "source_labels_converted": false,
+  "translations_created": 0,
+  "raw_conversation_ids_stored": false,
+  "influence": "Pattern categories motivated independently authored probing, reason, exchange and multi-issue constructions; no source utterance was shown to the author or copied.",
+  "limitations": "Regexes are coarse linguistic indicators, not exhaustive or gold strategy annotation. Counts may overlap.",
+  "synthetic_license_status": "NOT_ASSIGNED"
+}

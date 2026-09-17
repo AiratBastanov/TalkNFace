@@ -1,0 +1,99 @@
+{
+  "gate": "LOCAL_QWEN_QLORA_FEASIBILITY_SMOKE",
+  "status": "RECOMMENDATION_ONLY_NOT_EXECUTED",
+  "feasibility": "UNPROVEN_TIGHT_6_GIB_BUDGET",
+  "model": {
+    "name": "Qwen3-4B",
+    "parameters": 4022468096,
+    "ideal_4bit_weight_bytes": 2011234048,
+    "ideal_4bit_weight_GiB": 1.8731,
+    "bf16_weight_GiB": 7.4924,
+    "caveat": "4-bit lower bound excludes unquantized embeddings, quantization metadata, adapters, gradients, activations, optimizer and runtime memory."
+  },
+  "hardware": {
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "VRAM_MiB": 6144,
+    "compute_capability": "7.5",
+    "native_bf16": false,
+    "driver": "610.88"
+  },
+  "runtime": {
+    "python": "3.12.10",
+    "torch": "2.14.0+cu126",
+    "transformers": "5.17.0",
+    "tokenizers": "0.23.2",
+    "accelerate": "1.15.0",
+    "torch_cuda": "12.6",
+    "platform": "Windows x86-64"
+  },
+  "dataset_tokens": {
+    "count": 10000,
+    "median": 869.0,
+    "p90": 1114,
+    "p95": 1186,
+    "p99": 1245,
+    "max": 1421,
+    "fraction_at_most_1536": 1.0
+  },
+  "proposal": {
+    "quantization": "4-bit NF4 with nested quantization, frozen base weights",
+    "compute_dtype": "float16 because this Turing GPU lacks native BF16",
+    "microbatch": 1,
+    "gradient_accumulation": 16,
+    "gradient_checkpointing": true,
+    "use_cache": false,
+    "first_sequence_limit": 1024,
+    "first_data": "Only complete TRAIN examples whose measured full sequences fit; never truncate target JSON.",
+    "later_sequence_limit": "Consider 1280 or 1536 only after measured memory headroom; full corpus max is below 1536.",
+    "packing": false,
+    "attention": "Start with standard attention supported by the installed stack; do not assume FlashAttention support."
+  },
+  "documentation_findings": [
+    "Current bitsandbytes documentation lists Python >=3.10, PyTorch >=2.4 and Windows CUDA 11.8-12.6 builds including sm75; compatibility still needs an actual future install/smoke test.",
+    "Official Transformers documentation recommends NF4 for training four-bit base models; only additional parameters are trained.",
+    "Official PEFT documentation describes preparing quantized models for adapter training.",
+    "Official TRL documentation supports conversational prompt/completion records and completion-only loss; its memory guide documents sequence-length and gradient-checkpointing tradeoffs."
+  ],
+  "expected_training_duration": null,
+  "dependencies_installed": [],
+  "model_loaded": false,
+  "training_started": false,
+  "next_gate_checks": [
+    "Verify compatible wheel versions without altering the frozen base model",
+    "Measure forward/backward peak memory on a small TRAIN-only sample",
+    "Verify non-thinking chat template and completion-only labels",
+    "Stop on OOM or missing kernel; report observed results, not predicted duration"
+  ],
+  "sources": [
+    {
+      "title": "Qwen official model card",
+      "url": "https://huggingface.co/Qwen/Qwen3-4B",
+      "checked_date": "2026-09-17"
+    },
+    {
+      "title": "Transformers bitsandbytes",
+      "url": "https://huggingface.co/docs/transformers/quantization/bitsandbytes",
+      "checked_date": "2026-09-17"
+    },
+    {
+      "title": "bitsandbytes installation",
+      "url": "https://huggingface.co/docs/bitsandbytes/installation",
+      "checked_date": "2026-09-17"
+    },
+    {
+      "title": "PEFT quantization",
+      "url": "https://huggingface.co/docs/peft/developer_guides/quantization",
+      "checked_date": "2026-09-17"
+    },
+    {
+      "title": "TRL SFT format",
+      "url": "https://huggingface.co/docs/trl/sft_trainer",
+      "checked_date": "2026-09-17"
+    },
+    {
+      "title": "TRL memory guidance",
+      "url": "https://huggingface.co/docs/trl/reducing_memory_usage",
+      "checked_date": "2026-09-17"
+    }
+  ]
+}

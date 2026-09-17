@@ -1,0 +1,57 @@
+{
+  "tokenizer": "existing AlagModels/Qwen3-4B",
+  "weights_opened": false,
+  "network_used": false,
+  "enable_thinking": false,
+  "add_generation_prompt": false,
+  "chat_template_included": true,
+  "sequence": "system + user + assistant completion including chat special tokens",
+  "method": "nearest-rank percentiles; exact tokenization, no truncation",
+  "all": {
+    "count": 10000,
+    "median": 869.0,
+    "p90": 1114,
+    "p95": 1186,
+    "p99": 1245,
+    "max": 1421,
+    "fraction_at_most_1536": 1.0
+  },
+  "by_split": {
+    "train": {
+      "count": 8000,
+      "median": 870.0,
+      "p90": 1126,
+      "p95": 1188,
+      "p99": 1253,
+      "max": 1421,
+      "fraction_at_most_1536": 1.0
+    },
+    "dev": {
+      "count": 1000,
+      "median": 867.0,
+      "p90": 1088,
+      "p95": 1162,
+      "p99": 1213,
+      "max": 1264,
+      "fraction_at_most_1536": 1.0
+    },
+    "internal_test": {
+      "count": 1000,
+      "median": 870.0,
+      "p90": 1084,
+      "p95": 1172,
+      "p99": 1214,
+      "max": 1267,
+      "fraction_at_most_1536": 1.0
+    },
+    "tuning_eval": {
+      "count": 304,
+      "median": 866.0,
+      "p90": 1096,
+      "p95": 1180,
+      "p99": 1245,
+      "max": 1258,
+      "fraction_at_most_1536": 1.0
+    }
+  }
+}

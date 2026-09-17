@@ -1,0 +1,452 @@
+{
+  "seed": 20260917,
+  "generatorVersion": "ru-v1.0.0",
+  "families": 230,
+  "rejectedCandidates": [
+    {
+      "family": "dev.ask_question.documentation",
+      "case_index": 33,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.probe_interest.ranking",
+      "case_index": 24,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.probe_interest.worry",
+      "case_index": 22,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.probe_interest.worry",
+      "case_index": 33,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.argument.premise",
+      "case_index": 18,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.argument.premise",
+      "case_index": 26,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.argument.premise",
+      "case_index": 29,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.argument.premise",
+      "case_index": 38,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.argument.premise",
+      "case_index": 41,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.argument.premise",
+      "case_index": 42,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.argument.premise",
+      "case_index": 45,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.argument.premise",
+      "case_index": 48,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.argument.premise",
+      "case_index": 50,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.argument.premise",
+      "case_index": 51,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.argument.premise",
+      "case_index": 54,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.argument.memo",
+      "case_index": 18,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.argument.memo",
+      "case_index": 31,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.argument.memo",
+      "case_index": 44,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.offer.unresolved",
+      "case_index": 24,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.counter_offer.gap",
+      "case_index": 19,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.counter_offer.unresolved",
+      "case_index": 12,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.counter_offer.unresolved",
+      "case_index": 13,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.counter_offer.unresolved",
+      "case_index": 16,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.counter_offer.unresolved",
+      "case_index": 20,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.counter_offer.unresolved",
+      "case_index": 21,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.objection.separate",
+      "case_index": 38,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.objection.boundary",
+      "case_index": 32,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.pressure.last_round",
+      "case_index": 20,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.empathy.burden",
+      "case_index": 21,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.empathy.burden",
+      "case_index": 22,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.empathy.burden",
+      "case_index": 26,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.reveal_information.own_calendar",
+      "case_index": 25,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.close_attempt.protocol",
+      "case_index": 14,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.close_attempt.protocol",
+      "case_index": 20,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.close_attempt.protocol",
+      "case_index": 22,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.close_attempt.protocol",
+      "case_index": 23,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.close_attempt.protocol",
+      "case_index": 27,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.close_attempt.protocol",
+      "case_index": 29,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.walk_away.withdrawal",
+      "case_index": 22,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.walk_away.withdrawal",
+      "case_index": 24,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.walk_away.withdrawal",
+      "case_index": 26,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.walk_away.withdrawal",
+      "case_index": 32,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "dev.walk_away.final_notice",
+      "case_index": 21,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.ask_question.availability",
+      "case_index": 28,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.ask_question.route",
+      "case_index": 24,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.ask_question.route",
+      "case_index": 36,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.ask_question.route",
+      "case_index": 38,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.ask_question.route",
+      "case_index": 39,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.ask_question.route",
+      "case_index": 40,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.ask_question.route",
+      "case_index": 43,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.ask_question.route",
+      "case_index": 44,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.ask_question.route",
+      "case_index": 48,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.probe_interest.success",
+      "case_index": 28,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.argument.rationale",
+      "case_index": 23,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.argument.rationale",
+      "case_index": 25,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.argument.rationale",
+      "case_index": 37,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.argument.rationale",
+      "case_index": 43,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.argument.recorded_reason",
+      "case_index": 29,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.argument.recorded_reason",
+      "case_index": 34,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.argument.recorded_reason",
+      "case_index": 43,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.argument.recorded_reason",
+      "case_index": 44,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.counter_offer.approximation",
+      "case_index": 13,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.counter_offer.unresolved",
+      "case_index": 11,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.concession.null_draft",
+      "case_index": 21,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.objection.not_assent",
+      "case_index": 24,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.pressure.condition_exit",
+      "case_index": 21,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.pressure.condition_exit",
+      "case_index": 25,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.reveal_information.own_work",
+      "case_index": 21,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.reveal_information.public_note",
+      "case_index": 20,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.reveal_information.public_note",
+      "case_index": 21,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.reveal_information.public_note",
+      "case_index": 25,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.close_attempt.resolve",
+      "case_index": 11,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.close_attempt.resolve",
+      "case_index": 20,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.close_attempt.resolve",
+      "case_index": 22,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.close_attempt.resolve",
+      "case_index": 25,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.close_attempt.resolve",
+      "case_index": 26,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.close_attempt.assent",
+      "case_index": 11,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.close_attempt.assent",
+      "case_index": 17,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.close_attempt.assent",
+      "case_index": 20,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.close_attempt.assent",
+      "case_index": 21,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.close_attempt.assent",
+      "case_index": 24,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.close_attempt.assent",
+      "case_index": 25,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.walk_away.cease",
+      "case_index": 22,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.walk_away.cease",
+      "case_index": 23,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "internal_test.walk_away.close_file",
+      "case_index": 22,
+      "reason": "duplicate_text_context"
+    },
+    {
+      "family": "tuning_eval.close_attempt.ratify",
+      "case_index": 10,
+      "reason": "duplicate_text_context"
+    }
+  ],
+  "validation": {
+    "rows": 10304,
+    "schema_and_semantic_valid": 10304,
+    "errors": [],
+    "unknownIds": [],
+    "duplicates": {},
+    "groupLeakage": [],
+    "counts": {
+      "train": 8000,
+      "dev": 1000,
+      "internal_test": 1000,
+      "tuning_eval": 304
+    }
+  },
+  "internal_test_lock_sha256": "ba929ff5528325ce2abe61b4861f6b0dc459c79b7d15d9fc6976c395b4a09f03"
+}
