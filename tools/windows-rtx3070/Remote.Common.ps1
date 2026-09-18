@@ -72,6 +72,92 @@ function Quote-NativeArgument([string]$Value) {
     return '"' + $escaped + '"'
 }
 
+function Get-PythonInvocation {
+    param([ValidateSet('Launcher','Interpreter')][string]$Mode, [string]$Executable, [string[]]$Arguments)
+    $leaf = [IO.Path]::GetFileName($Executable)
+    if ($Mode -eq 'Launcher') {
+        if ($leaf -ine 'py.exe') { throw 'Launcher mode requires py.exe, never python.exe.' }
+        return @{ Executable = $Executable; Arguments = @('-3.12') + $Arguments }
+    }
+    if ($leaf -ine 'python.exe') { throw 'Resolved interpreter mode requires the exact python.exe path.' }
+    foreach ($argument in $Arguments) {
+        if ($argument -match '^-(?:[23](?:[.\-]|$)|V:)') { throw 'Never pass a launcher selector to python.exe.' }
+    }
+    return @{ Executable = $Executable; Arguments = @($Arguments) }
+}
+
+function ConvertTo-NativeArguments([string]$Executable, [string[]]$Arguments) {
+    $leaf = [IO.Path]::GetFileName($Executable)
+    if ($leaf -ieq 'python.exe') {
+        $null = Get-PythonInvocation -Mode Interpreter -Executable $Executable -Arguments $Arguments
+    }
+    # The legacy launcher parses selectors from the raw command line. Quoting
+    # "-3.12" makes it reach python.exe instead. Paths/payloads still need quoting.
+    return (($Arguments | ForEach-Object {
+        if ($leaf -ieq 'py.exe' -and $_ -match '^-(?:[23](?:\.\d+)*(?:-(?:32|64))?|V:[A-Za-z0-9_./-]+)$') { $_ }
+        else { Quote-NativeArgument $_ }
+    }) -join ' ')
+}
+
+function Invoke-PythonProbe([string]$Executable, [string[]]$Arguments) {
+    $info = [Diagnostics.ProcessStartInfo]::new()
+    $info.FileName = $Executable
+    $info.Arguments = ConvertTo-NativeArguments -Executable $Executable -Arguments $Arguments
+    $info.UseShellExecute = $false
+    $info.CreateNoWindow = $true
+    $info.RedirectStandardOutput = $true
+    $info.RedirectStandardError = $true
+    # Never let an inherited launcher preference trigger an installation.
+    foreach ($name in @('PYLAUNCHER_ALLOW_INSTALL','PYLAUNCHER_ALWAYS_INSTALL','PYLAUNCHER_DRYRUN')) {
+        $info.EnvironmentVariables.Remove($name)
+    }
+    $process = [Diagnostics.Process]::new()
+    $process.StartInfo = $info
+    try {
+        $null = $process.Start()
+        $stdout = $process.StandardOutput.ReadToEndAsync()
+        $stderr = $process.StandardError.ReadToEndAsync()
+        if (-not $process.WaitForExit(15000)) { Stop-OwnedTree $process.Id; throw 'Python identity probe timed out; no setup started.' }
+        $output = $stdout.GetAwaiter().GetResult()
+        $errorText = $stderr.GetAwaiter().GetResult()
+        if ($process.ExitCode -ne 0) { throw "Python identity probe failed (exit $($process.ExitCode)): $errorText" }
+        return $output.Trim()
+    } finally { $process.Dispose() }
+}
+
+function Assert-FrozenPythonIdentity($Identity) {
+    if ($Identity.version -cne '3.12.10' -or $Identity.bits -ne 64) {
+        throw 'Python must be exactly 3.12.10 x64. Do not change the pinned version or reinstall a working launcher.'
+    }
+    if (-not [IO.Path]::IsPathRooted($Identity.executable) -or [IO.Path]::GetFileName($Identity.executable) -ine 'python.exe') {
+        throw 'Python did not report an absolute python.exe interpreter path.'
+    }
+}
+
+function Resolve-FrozenPython([string]$LauncherPath = '') {
+    if (-not $LauncherPath) {
+        $launcher = Get-Command py -CommandType Application -ErrorAction SilentlyContinue
+        if (-not $launcher) { throw 'Python launcher not found. Follow README; do not replace an existing working system launcher.' }
+        $LauncherPath = $launcher.Source
+    }
+    # JSON escapes Unicode paths, avoiding console-codepage corruption on PS 5.1.
+    $probe = 'import json,platform,struct,sys; print(json.dumps(dict(executable=sys.executable,version=platform.python_version(),bits=struct.calcsize(chr(80))*8)))'
+    $command = Get-PythonInvocation -Mode Launcher -Executable $LauncherPath -Arguments @('-B','-c',$probe)
+    $selected = Invoke-PythonProbe @command | ConvertFrom-Json
+    Assert-FrozenPythonIdentity $selected
+    if (-not (Test-Path -LiteralPath $selected.executable -PathType Leaf)) { throw 'Resolved Python interpreter does not exist.' }
+    $command = Get-PythonInvocation -Mode Interpreter -Executable $selected.executable -Arguments @('--version')
+    if ((Invoke-PythonProbe @command) -cne 'Python 3.12.10') { throw 'Resolved interpreter version check failed; setup stopped.' }
+    $command = Get-PythonInvocation -Mode Interpreter -Executable $selected.executable -Arguments @('-B','-c',$probe)
+    $verified = Invoke-PythonProbe @command | ConvertFrom-Json
+    Assert-FrozenPythonIdentity $verified
+    if (-not [string]::Equals([IO.Path]::GetFullPath($selected.executable), [IO.Path]::GetFullPath($verified.executable), [StringComparison]::OrdinalIgnoreCase)) {
+        throw 'Resolved interpreter identity changed; setup stopped.'
+    }
+    Write-Host "Verified Python 3.12.10 x64: $($verified.executable)"
+    return [string]$verified.executable
+}
+
 function Stop-OwnedTree([int]$OwnerPid) {
     $children = @(Get-CimInstance Win32_Process -Filter "ParentProcessId=$OwnerPid" -ErrorAction SilentlyContinue)
     foreach ($child in $children) { Stop-OwnedTree -OwnerPid ([int]$child.ProcessId) }
@@ -90,7 +176,7 @@ function Invoke-Bounded([string]$Executable, [string[]]$Arguments, [int]$Timeout
     $stamp = [DateTime]::UtcNow.ToString('yyyyMMddTHHmmssfff')
     $stdout = Join-Path $script:ScratchRoot "$Name-$stamp.stdout.log"
     $stderr = Join-Path $script:ScratchRoot "$Name-$stamp.stderr.log"
-    $quoted = ($Arguments | ForEach-Object { Quote-NativeArgument $_ }) -join ' '
+    $quoted = ConvertTo-NativeArguments -Executable $Executable -Arguments $Arguments
     $process = Start-Process -FilePath $Executable -ArgumentList $quoted -WorkingDirectory $script:RepoRoot -WindowStyle Hidden -PassThru -RedirectStandardOutput $stdout -RedirectStandardError $stderr
     # Windows PowerShell 5.1 otherwise may expose a null ExitCode after a fast
     # child exits. Keep the native handle open until its exit code is consumed.

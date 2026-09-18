@@ -1,0 +1,379 @@
+{
+  "gate": "WINDOWS_RTX3070_PYTHON_LAUNCHER_CORRECTION",
+  "verdict": "WINDOWS_RTX3070_PYTHON_LAUNCHER_CORRECTION_PASS",
+  "recorded_utc": "2026-09-18T13:36:57.356240+00:00",
+  "scope": "Launcher/interpreter argument routing and safe pre-install venv recovery; no training/runtime architecture change.",
+  "remote_evidence": {
+    "provenance": "User-reported observations; not executed remotely by this correction",
+    "OS": "Windows 10 Pro 19045",
+    "GPU": "NVIDIA GeForce RTX 3070 Ti",
+    "physical_VRAM_MiB": 8192,
+    "script_00": "PASS",
+    "launcher": "C:\\Windows\\py.exe",
+    "where_and_Get_Command_agree": true,
+    "launcher_python_version": "3.12.10",
+    "direct_interpreter_python_version": "3.12.10",
+    "interpreter_location": "Per-user Python312 under a Cyrillic username",
+    "failed_phase": "01-setup",
+    "error": "Unknown option: -3",
+    "exit_code": 2,
+    "attempted_second_launcher_MSI_error": "0x80070659",
+    "installer_state": "launcher_AllUsers = Present",
+    "working_system_launcher_replacement_required": false
+  },
+  "root_cause": {
+    "original_commit": "ef1fc27a1f0bcb934e9003dc4f44faf11ce3b631",
+    "path": [
+      "01-setup-python-env.ps1",
+      "Invoke-Bounded",
+      "Quote-NativeArgument",
+      "py.exe raw command line",
+      "python.exe rejects forwarded launcher selector"
+    ],
+    "detail": "The generic native wrapper quoted every argument, including the launcher selector. The launcher forwarded quoted -3.12 to Python instead of consuming it. The helper also reselected the launcher for venv creation.",
+    "original_raw_arguments": "\"-3.12\" \"--version\"",
+    "reproduced_before_editing": true,
+    "direct_launcher_result": {
+      "stdout": "Python 3.12.10",
+      "exit_code": 0
+    },
+    "old_wrapper_result": {
+      "stderr_first_line": "Unknown option: -3",
+      "exit_code": 2
+    },
+    "not_a_Python_installation_failure": true,
+    "historical_receipt_rewritten": false
+  },
+  "correction": {
+    "launcher_command": [
+      "py.exe",
+      "-3.12",
+      "--version"
+    ],
+    "resolved_version_command": [
+      "<resolved python.exe>",
+      "--version"
+    ],
+    "launcher_venv_command_for_regression": [
+      "py.exe",
+      "-3.12",
+      "-m",
+      "venv",
+      "<venv>"
+    ],
+    "actual_venv_command": [
+      "<resolved sys.executable>",
+      "-m",
+      "venv",
+      "<repository>/.venv-qlora-remote"
+    ],
+    "resolve_once": true,
+    "verify_direct_version_and_bitness_and_path": true,
+    "required_python": "3.12.10",
+    "required_bits": 64,
+    "rejected_interpreter_arguments": [
+      "-3",
+      "-3.12",
+      "-V:..."
+    ],
+    "Unicode_transport": "json.dumps default ASCII escape encoding; native Unicode executable/path arguments",
+    "probe_watchdog_seconds": 15,
+    "launcher_install_preferences_disabled_in_child_only": [
+      "PYLAUNCHER_ALLOW_INSTALL",
+      "PYLAUNCHER_ALWAYS_INSTALL",
+      "PYLAUNCHER_DRYRUN"
+    ],
+    "script_05_packaging_fallback": "Uses same direct interpreter resolver; former faulty selector routing removed"
+  },
+  "incomplete_environment": {
+    "absent": "Exclusive directory creation, owner nonce anchored in folder and scratch journal before bootstrap",
+    "recognized_completed": "Preserve and run existing exact pinned package/version check, now explicitly including x64",
+    "recognized_preinstall_partial": "Resume same resolved-interpreter venv command without --clear or deletion; matching nonce/owner/path/stage required",
+    "unrecognized_or_legacy_unmarked": "Fail closed, preserve folder, request script 05 diagnostics and owner review",
+    "package_install_started": "Persist marker before pip; refuse automatic bootstrap recovery",
+    "reparse_or_unexpected_contents": "Fail closed",
+    "automatic_directory_deletion": false,
+    "legacy_completed_env_supported": true
+  },
+  "validation": {
+    "new_regressions": {
+      "passed": true,
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "real_ML_environments_created": 0,
+      "packages_installed": 0,
+      "Qwen_loads": 0,
+      "training": 0,
+      "evaluation": 0,
+      "fixtures_only": true
+    },
+    "new_names": [
+      "test_launcher_and_interpreter_version_and_venv_command_matrix",
+      "test_interpreter_rejects_every_launcher_selector",
+      "test_exact_version_and_bitness_fail_closed",
+      "test_resolve_system_launcher_to_cyrillic_interpreter_once",
+      "test_powershell_51_real_interpreter_quoting_without_selector",
+      "test_real_interpreter_version_probe",
+      "test_script_01_passes_only_resolved_interpreter_to_setup",
+      "test_new_venv_command_uses_validated_interpreter_never_launcher",
+      "test_owned_preinstall_failure_resumes_without_deletion",
+      "test_unowned_partial_and_unknown_files_are_preserved",
+      "test_ownership_mismatch_and_package_install_started_refuse_recovery",
+      "test_completed_legacy_environment_reuses_check_without_install",
+      "test_reused_environment_checks_bitness_as_well_as_exact_versions",
+      "test_recovery_refuses_wrong_path_and_package_evidence",
+      "test_changed_scripts_syntax_and_bootstrap_paths"
+    ],
+    "new_timing": {
+      "seconds": 5.329,
+      "watchdog_seconds": 120,
+      "exit_code": 0
+    },
+    "shared_helper_checks": {
+      "passed": true,
+      "tests": 3,
+      "seconds": 5.0,
+      "names": [
+        "test_powershell_syntax_and_all_dry_runs_are_read_only",
+        "test_native_process_quoting_spaces_and_nonzero",
+        "test_native_watchdog_stops_only_its_child"
+      ]
+    },
+    "total_tests": 18,
+    "new_log_sha256": "8d071905a05d36a2b866607f4bd8c739e4dfd38fab890bee5bc76abd4e6de985",
+    "shared_log_sha256": "cde123518c4b5ae73fba5112adce942caf7b9ba00143be9f6250b849e2f22869",
+    "corrected_actual_probes": {
+      "passed": true,
+      "powershell": "5.1.26100.9444",
+      "launcher_location": "Existing local per-user launcher (no new installation)",
+      "interpreter_version": "3.12.10",
+      "bits": 64,
+      "direct_interpreter_version_exit_code": 0,
+      "launcher_version_exit_code": 0,
+      "venv_created": false,
+      "ML_work": false,
+      "proof_sha256": "7a98324ffbcae435f67f6e000b20fcef667b8a8e3fa6aeffc8ae3133c1dd4f4d"
+    },
+    "system_launcher_and_Cyrillic_path": "Explicit command/resolution fixtures; native PS 5.1 subprocess with Cyrillic/space payload path",
+    "test_isolation": "No venv or ML installation subprocess executed; bootstrap/setup/CUDA stages use fixtures"
+  },
+  "integrity": {
+    "passed": true,
+    "unchanged_existing_files": 313,
+    "protected_manifest_sha256": "594f258f0a116f2f7fa64b9891fd294beabd8846e3bcfeb23caa6d29ca05ee88",
+    "existing_changes": {
+      "tools/windows-rtx3070/01-setup-python-env.ps1": {
+        "before": {
+          "bytes": 1612,
+          "sha256": "99530f7b4ad8059362b65f384bf2738035a0e27d8eaaed52d7d9ccfc5c7966fe"
+        },
+        "after": {
+          "bytes": 1158,
+          "sha256": "a6570bb9f709ecda21057e057fa7ae78ca2df04ef78614952b5d2b8d6a61e6b7"
+        }
+      },
+      "tools/windows-rtx3070/05-package-result.ps1": {
+        "before": {
+          "bytes": 2443,
+          "sha256": "f735d340a5446e584817b91ddb59ee46ddb65cd0f271345d1ef46ac10debdf60"
+        },
+        "after": {
+          "bytes": 2474,
+          "sha256": "1450fd1795d888221e834b002d3dd1c2062a373465d5d3b4712fea26ddfde5a4"
+        }
+      },
+      "tools/windows-rtx3070/environment.py": {
+        "before": {
+          "bytes": 5906,
+          "sha256": "ac5d305dca6a460f03b444ca3171d1f43a7781fc23a65c9b2cccf569dfd399c5"
+        },
+        "after": {
+          "bytes": 10225,
+          "sha256": "adb414d51116afd05f394ad39a1502d5e719dc1557d7638071bc43ed4eec2d07"
+        }
+      },
+      "tools/windows-rtx3070/README.md": {
+        "before": {
+          "bytes": 20995,
+          "sha256": "cd2a744e93d9ae4d33cf86f1870b1d67a6400aba68c1f3b0a78b0244ec88b11e"
+        },
+        "after": {
+          "bytes": 24098,
+          "sha256": "ecc88a0f535818d95c1a8aa48cfb00b7859e93c29a67bf4dd703930d028982d9"
+        }
+      },
+      "tools/windows-rtx3070/Remote.Common.ps1": {
+        "before": {
+          "bytes": 7474,
+          "sha256": "d442d900603c636c0f2bc9f2aa2e88e2f0936bb8f67506991f61306e57c23b97"
+        },
+        "after": {
+          "bytes": 12397,
+          "sha256": "0fbe26066fe5eb878fe3cdfa62856e61c51a1c33703a94dd089b6f4f3603f11d"
+        }
+      }
+    },
+    "critical_protected_hashes": {
+      "AlagModels/Qwen3-4B/model-00001-of-00003.safetensors": {
+        "bytes": 3957900840,
+        "sha256": "328a91d3122359d5547f9d79521205bc0a46e1f79a792dfe650e99fc2d651223"
+      },
+      "AlagModels/Qwen3-4B/model-00002-of-00003.safetensors": {
+        "bytes": 3987450520,
+        "sha256": "6cd087b316306a68c562436b5492edbcf6e16c6dba3a1308279caa5a58e21ca5"
+      },
+      "AlagModels/Qwen3-4B/model-00003-of-00003.safetensors": {
+        "bytes": 99630640,
+        "sha256": "e4bf436957184f4eeb86a80e9db394503f1f56446b2e6b7edeac5b81470f4ca1"
+      },
+      "docs/gates/WINDOWS_RTX3070_TARGETED_LORA_HANDOFF_PREPARATION.md": {
+        "bytes": 13503,
+        "sha256": "4b7aee0b029f0f254837111492bad56b99f82f73b3460b8bcf602a213ed4daaa"
+      },
+      "docs/gates/evidence/WINDOWS_RTX3070_TARGETED_LORA_HANDOFF_PREPARATION.json": {
+        "bytes": 150722,
+        "sha256": "c21156213906556d5ea01a3b1239e34a8887c6669578c985e6a024c85b5e2b56"
+      },
+      "evals/local-qwen/a01-a16.json": {
+        "bytes": 77953,
+        "sha256": "c32e0b688d0f0a3d7eda547c60cffdcef74c15c95ecfa941e7741adc7be89dc1"
+      },
+      "evals/local-qwen/dev-ru-v1.json": {
+        "bytes": 624428,
+        "sha256": "7f1c31449e599fd212e50018595c8c997b4385d17c30c3f9a1f4e5aa011da119"
+      },
+      "ml/data/synthetic_ru/dev.jsonl": {
+        "bytes": 1385933,
+        "sha256": "d9bd77eae003465e0953297d3671c91443735ce6ae2441dc673aea717f7122a4"
+      },
+      "ml/data/synthetic_ru/internal_test.jsonl": {
+        "bytes": 1433881,
+        "sha256": "ba929ff5528325ce2abe61b4861f6b0dc459c79b7d15d9fc6976c395b4a09f03"
+      },
+      "ml/data/synthetic_ru/train.jsonl": {
+        "bytes": 10733980,
+        "sha256": "74defddc644eda30227a58adaef41ad31d7a849000852d6a459de4b778770f47"
+      },
+      "tools/windows-rtx3070/config.json": {
+        "bytes": 2481,
+        "sha256": "760ca765962a192adf8795cbf8e33bef4e6beb458ce27bac6cb3730228b0cfb1"
+      },
+      "tools/windows-rtx3070/model-lock.json": {
+        "bytes": 1555,
+        "sha256": "40dc9540c9045a17d9f898336f19322917590e27ecfee7f57511a7a17ad0b1c0"
+      },
+      "tools/windows-rtx3070/requirements-torch.txt": {
+        "bytes": 119,
+        "sha256": "0cb24ea2e4924587add51bc920996e78f2c293e9cd5df63682523cdd05235023"
+      },
+      "tools/windows-rtx3070/requirements.txt": {
+        "bytes": 5863,
+        "sha256": "6fd50e0d4e1245fd1555e13d378e7eec9836a9b66d1fee3b734b97e3259e03c2"
+      },
+      "tools/windows-rtx3070/runtime-lock.json": {
+        "bytes": 20193,
+        "sha256": "3fdb4d2c5c731e13aec27e6ebd063096456d4c770ea4c55fdf65ddf8187c4755"
+      }
+    },
+    "environment_inventories_unchanged": true,
+    "environments": {
+      ".venv-ml": {
+        "exists": true,
+        "files": 30244,
+        "inventory_sha256": "2046675d41594830c94d4c70494c3e855bfc6176a55380be5073892507a218fa"
+      },
+      ".venv-qlora-smoke": {
+        "exists": true,
+        "files": 36483,
+        "inventory_sha256": "fb0ac55edded7d375a659944586927a9cdd6a328ecf38d01870aa86dca158251"
+      },
+      ".venv-qlora-remote": {
+        "exists": false,
+        "files": 0,
+        "inventory_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    },
+    "historical_completed_receipts_unchanged": true,
+    "pins_unchanged": true
+  },
+  "execution": {
+    "Qwen_loads": 0,
+    "inference_calls": 0,
+    "training_campaigns": 0,
+    "evaluation_campaigns": 0,
+    "CUDA_operations": 0,
+    "ML_environment_installs": 0,
+    "system_Python_installs": 0,
+    "driver_changes": 0,
+    "PATH_changes": 0,
+    "registry_policy_changes": 0,
+    "remote_executions": 0,
+    "G3_started": false
+  },
+  "isolation": {
+    "DEV_content_exposure": 0,
+    "INTERNAL_TEST_content_exposure": 0,
+    "tuning_eval_content_exposure": 0,
+    "A01_A16_content_exposure": 0,
+    "protected_file_read_mode": "Byte-only hashes outside workers; no model/data deserialization"
+  },
+  "generated_or_corrected_source": {
+    "tools/windows-rtx3070/01-setup-python-env.ps1": {
+      "bytes": 1158,
+      "sha256": "a6570bb9f709ecda21057e057fa7ae78ca2df04ef78614952b5d2b8d6a61e6b7"
+    },
+    "tools/windows-rtx3070/05-package-result.ps1": {
+      "bytes": 2474,
+      "sha256": "1450fd1795d888221e834b002d3dd1c2062a373465d5d3b4712fea26ddfde5a4"
+    },
+    "tools/windows-rtx3070/environment.py": {
+      "bytes": 10225,
+      "sha256": "adb414d51116afd05f394ad39a1502d5e719dc1557d7638071bc43ed4eec2d07"
+    },
+    "tools/windows-rtx3070/README.md": {
+      "bytes": 24098,
+      "sha256": "ecc88a0f535818d95c1a8aa48cfb00b7859e93c29a67bf4dd703930d028982d9"
+    },
+    "tools/windows-rtx3070/Remote.Common.ps1": {
+      "bytes": 12397,
+      "sha256": "0fbe26066fe5eb878fe3cdfa62856e61c51a1c33703a94dd089b6f4f3603f11d"
+    },
+    "tools/windows-rtx3070/test_python_launcher.py": {
+      "bytes": 16391,
+      "sha256": "c763d3b9f9bad94d57bfb11569cbf7889412208e889a09848d1e2624a883d555"
+    }
+  },
+  "official_source": {
+    "url": "https://docs.python.org/3.12/using/windows.html#python-launcher-for-windows",
+    "findings": "Launcher version selectors differ from interpreter options; existing system launcher may select per-user Python; optional install-on-demand launcher variables are documented."
+  },
+  "REAL_APPLICATION_SMOKE": {
+    "status": "NOT_APPLICABLE_WITH_REASON",
+    "reason": "R&D bootstrap tooling only; application behavior and G1/G2 source unchanged"
+  },
+  "git": {
+    "initial_branch": "main",
+    "initial_clean": true,
+    "origin": "https://github.com/AiratBastanov/TalkNFace.git",
+    "initial_HEAD": "ef1fc27a1f0bcb934e9003dc4f44faf11ce3b631",
+    "initial_ahead": 0,
+    "initial_behind": 0,
+    "normal_push_required": true,
+    "force_push": false,
+    "commit_message": "fix(ai): correct Windows Python launcher handoff",
+    "delivery_commit_locator": "git log -1 --format=%H -- docs/gates/WINDOWS_RTX3070_PYTHON_LAUNCHER_CORRECTION.md",
+    "delivery_verification": "After committing: verify actual remote main equals HEAD and origin/main; clean tree; ahead/behind 0/0. Report exact commit in final response."
+  },
+  "remote_next_action": {
+    "working_directory": "Clean existing repository clone",
+    "commands": [
+      "git pull --ff-only",
+      "powershell -NoProfile -ExecutionPolicy Bypass -File .\\tools\\windows-rtx3070\\01-setup-python-env.ps1"
+    ],
+    "do_not_install_another_launcher": true,
+    "unrecognized_partial_directory": "Preserve it, run script 05, send diagnostics; do not blindly delete",
+    "starts_Qwen_training": false
+  },
+  "stop": "STOP ? REMOTE TRAINING SMOKE NOT STARTED."
+}

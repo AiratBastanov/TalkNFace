@@ -9,7 +9,8 @@ try {
     if (Test-Path -LiteralPath $script:PythonExe -PathType Leaf) {
         Invoke-Bounded -Executable $script:PythonExe -Arguments @('-B',(Join-Path $PSScriptRoot 'package_result.py')) -Timeout 120 -Name '05-package'
     } elseif (Get-Command py -ErrorAction SilentlyContinue) {
-        Invoke-Bounded -Executable (Get-Command py).Source -Arguments @('-3.12','-B',(Join-Path $PSScriptRoot 'package_result.py')) -Timeout 120 -Name '05-package'
+        $resolvedPython = Resolve-FrozenPython
+        Invoke-Bounded -Executable $resolvedPython -Arguments @('-B',(Join-Path $PSScriptRoot 'package_result.py')) -Timeout 120 -Name '05-package'
     } else {
         # No Python was installed: still return a minimal, safe diagnostic archive.
         $output = Join-Path $script:RepoRoot 'handoff-results'

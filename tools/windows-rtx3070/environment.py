@@ -7,6 +7,7 @@ import re
 import struct
 import subprocess
 import sys
+import uuid
 from urllib.parse import urlparse
 from common import ROOT, HERE, SCRATCH, VENV, read_json, write_json
 
@@ -22,8 +23,8 @@ def package_check():
     mismatches = {k: {'expected': v, 'installed': installed.get(k)} for k, v in expected.items() if installed.get(k) != v}
     extra = sorted(set(installed) - set(expected))
     check = subprocess.run([sys.executable, '-B', '-m', 'pip', '--isolated', 'check'], capture_output=True, text=True, timeout=60)
-    result = {'passed': platform.python_version() == lock['python'] and not mismatches and not extra and check.returncode == 0,
-              'python': platform.python_version(), 'versions': installed, 'mismatches': mismatches,
+    result = {'passed': platform.python_version() == lock['python'] and struct.calcsize('P') == 8 and not mismatches and not extra and check.returncode == 0,
+              'python': platform.python_version(), 'bits': struct.calcsize('P') * 8, 'versions': installed, 'mismatches': mismatches,
               'unexpected_packages': extra, 'pip_check_returncode': check.returncode,
               'pip_check': check.stdout.strip(), 'pip_check_stderr': check.stderr.strip()}
     return result
@@ -60,24 +61,86 @@ def validate_reports():
                'note': 'Already matching ensurepip bootstrap packages may not appear in pip install reports; all package versions are checked separately.'})
 
 
+OWNER = 'tools/windows-rtx3070/01-setup-python-env.ps1'
+OWNER_FILE = '.rtx3070-handoff-owner.json'
+
+
+def prepare_private_venv():
+    """Resume only our positively identified pre-install bootstrap; never delete.
+
+    The old implementation wrote ownership only after venv creation, so an old
+    unmarked partial directory cannot safely be attributed to this gate.
+    """
+    target = ROOT / '.venv-qlora-remote'
+    if VENV != target or VENV.parent.resolve() != ROOT.resolve() or VENV.is_symlink() or VENV.is_junction():
+        raise RuntimeError('Unsafe venv path or reparse point; no directory will be changed.')
+    owned_path = SCRATCH / 'environment-created.json'
+    ready_path = SCRATCH / 'environment-ready.json'
+    owned = read_json(owned_path) if owned_path.exists() else {}
+    recognized = owned.get('created_by') == OWNER and owned.get('python') == '3.12.10'
+    python = VENV / 'Scripts/python.exe'
+    if ready_path.exists():
+        ready = read_json(ready_path); lock = read_json(HERE / 'runtime-lock.json')
+        if not (VENV.is_dir() and python.is_file() and recognized and ready.get('passed')
+                and ready.get('python') == lock['python'] and ready.get('packages') == lock['packages']):
+            raise RuntimeError('Completed-environment ownership or identity is inconsistent. Preserve it and send script 05 diagnostics.')
+        return True  # setup() verifies all installed versions; never reinstalls.
+    if VENV.exists():
+        anchor = VENV / OWNER_FILE
+        if not (VENV.is_dir() and recognized and owned.get('nonce') and anchor.is_file()
+                and read_json(anchor) == {'owner': OWNER, 'nonce': owned['nonce']}
+                and owned.get('path') == str(VENV.resolve())
+                and owned.get('stage') in ('creating_venv', 'venv_ready')
+                and owned.get('package_installation_started') is False):
+            raise RuntimeError('Unrecognized or post-install incomplete .venv-qlora-remote. Nothing deleted or reinstalled. '
+                               'Keep the directory, run script 05, and ask the project owner to review it; do not delete it blindly.')
+        if any(SCRATCH.glob('pip-*-report.json')) or (SCRATCH / 'wheel-provenance.json').exists():
+            raise RuntimeError('Package-install evidence exists; automatic pre-install recovery refused. Keep files and send script 05 diagnostics.')
+        # Do not follow junctions or overwrite unrelated contents on recovery.
+        allowed_top = {'Scripts', 'Lib', 'Include', 'pyvenv.cfg', OWNER_FILE}
+        for path in VENV.rglob('*'):
+            if path.is_symlink() or path.is_junction() or path.relative_to(VENV).parts[0] not in allowed_top:
+                raise RuntimeError('Unexpected contents/reparse point in incomplete environment; preserve it for review.')
+        site = VENV / 'Lib/site-packages'
+        if site.exists() and any(p.name not in ('pip', 'pip-25.0.1.dist-info') for p in site.iterdir()):
+            raise RuntimeError('Non-bootstrap packages found; automatic recovery refused before touching files.')
+    else:
+        if owned or any(SCRATCH.glob('pip-*-report.json')):
+            raise RuntimeError('Stale environment/install markers exist without the venv. Preserve evidence and contact the project owner.')
+        VENV.mkdir()  # exclusive creation; never adopt an arbitrary user folder
+        owned = {'created_by': OWNER, 'python': '3.12.10', 'path': str(VENV.resolve()),
+                 'nonce': uuid.uuid4().hex, 'stage': 'creating_venv', 'package_installation_started': False}
+        write_json(VENV / OWNER_FILE, {'owner': OWNER, 'nonce': owned['nonce']})
+        write_json(owned_path, owned)
+    if owned['stage'] == 'creating_venv':
+        # sys.executable is the exact interpreter resolved/validated by script 01.
+        # No launcher selector, --clear, directory deletion or package installation.
+        subprocess.run([sys.executable, '-m', 'venv', str(VENV)], check=True, timeout=120)
+        if not python.is_file() or not (VENV / 'pyvenv.cfg').is_file():
+            raise RuntimeError('venv creation did not produce the expected interpreter/config; preserve bootstrap evidence.')
+        owned['stage'] = 'venv_ready'
+        write_json(owned_path, owned)
+    if not python.is_file() or not (VENV / 'pyvenv.cfg').is_file():
+        raise RuntimeError('Owned environment is missing its interpreter/config; preserve it for review.')
+    return False
+
+
 def setup():
     assert platform.python_version() == '3.12.10' and struct.calcsize('P') == 8, 'Use Python 3.12.10 x64'
     assert os.name == 'nt', 'Windows only'
     SCRATCH.mkdir(parents=True, exist_ok=True)
     assert not (SCRATCH / 'campaign-started.json').exists(), 'Do not alter environment after a campaign'
     python = VENV / 'Scripts/python.exe'
-    owned = SCRATCH / 'environment-created.json'
-    if VENV.exists() and not owned.exists():
-        raise RuntimeError('An unrecognized .venv-qlora-remote already exists. Keep it unchanged and contact the project owner.')
-    if not VENV.exists():
-        subprocess.run(['py', '-3.12', '-m', 'venv', str(VENV)], check=True, timeout=120)
-        write_json(owned, {'created_by': 'tools/windows-rtx3070/01-setup-python-env.ps1', 'python': '3.12.10'})
     # A completed installation is verified, never automatically reinstalled.
-    if (SCRATCH / 'environment-ready.json').exists():
+    if prepare_private_venv():
         subprocess.run([str(python), '-B', str(HERE / 'environment.py'), 'check'], check=True, timeout=120)
         print('Existing verified private environment reused.')
         return
     lock = read_json(HERE / 'runtime-lock.json')
+    owned_path = SCRATCH / 'environment-created.json'
+    owned = read_json(owned_path)
+    owned.update(stage='package_installation', package_installation_started=True)
+    write_json(owned_path, owned)  # a later failure must never trigger bootstrap recovery
     for phase, requirements, index in [('torch', 'requirements-torch.txt', lock['torch_index']),
                                         ('packages', 'requirements.txt', lock['package_index'])]:
         command = [str(python), '-B', '-m', 'pip', '--isolated', '--disable-pip-version-check', 'install',
