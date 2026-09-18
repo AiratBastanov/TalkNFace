@@ -8,7 +8,7 @@ DECISION = ROOT / 'docs/gates/evidence/LOCAL_QWEN_QLORA_MEMORY_ARCHITECTURE_DECI
 
 
 def git(*args):
-    return subprocess.check_output(['git', '-C', str(ROOT), *args], text=True).strip()
+    return subprocess.check_output(['git', '-C', str(ROOT), *args], encoding='utf-8', errors='strict').strip()
 
 
 def assert_git_safe():
