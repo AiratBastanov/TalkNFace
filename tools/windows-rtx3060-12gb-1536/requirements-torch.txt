@@ -1,0 +1,2 @@
+--only-binary=:all:
+torch==2.14.0+cu126 --hash=sha256:11a492e40dfd18597fdb8271879a3a09496a23140deb81a6b5a005d9cff7312b

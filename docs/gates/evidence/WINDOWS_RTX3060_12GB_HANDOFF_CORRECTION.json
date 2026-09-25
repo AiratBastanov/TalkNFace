@@ -1,0 +1,764 @@
+{
+  "gate": "WINDOWS_RTX3060_12GB_HANDOFF_CORRECTION",
+  "verdict": "WINDOWS_RTX3060_12GB_HANDOFF_CORRECTION_PASS",
+  "recorded_utc": "2026-09-25T11:10:07.113557+00:00",
+  "scope": "Source correction and validated handoff delivery; not a hardware/quality certification",
+  "initial_git": {
+    "branch": "main",
+    "head": "9fd7f2cd14c22c111c1d99d6e9c29eb5554575b2",
+    "origin": "https://github.com/AiratBastanov/TalkNFace.git",
+    "ahead_behind_after_fetch": "0\t0"
+  },
+  "initial_changes": {
+    "staged": "",
+    "unstaged": "",
+    "untracked_nul": "?? tools/windows-rtx3060-12gb-1536/00-preflight.ps1\u0000?? tools/windows-rtx3060-12gb-1536/01-setup-python-env.ps1\u0000?? tools/windows-rtx3060-12gb-1536/02-download-and-verify-model.ps1\u0000?? tools/windows-rtx3060-12gb-1536/03-prepare-smoke.ps1\u0000?? tools/windows-rtx3060-12gb-1536/04-run-targeted-memory-smoke.ps1\u0000?? tools/windows-rtx3060-12gb-1536/05-package-result.ps1\u0000?? tools/windows-rtx3060-12gb-1536/README.md\u0000?? tools/windows-rtx3060-12gb-1536/Remote.Common.ps1\u0000?? tools/windows-rtx3060-12gb-1536/cheap_checks.py\u0000?? tools/windows-rtx3060-12gb-1536/common.py\u0000?? tools/windows-rtx3060-12gb-1536/config.json\u0000?? tools/windows-rtx3060-12gb-1536/configuration.py\u0000?? tools/windows-rtx3060-12gb-1536/control.py\u0000?? tools/windows-rtx3060-12gb-1536/environment.py\u0000?? tools/windows-rtx3060-12gb-1536/model-lock.json\u0000?? tools/windows-rtx3060-12gb-1536/model_files.py\u0000?? tools/windows-rtx3060-12gb-1536/monitor.py\u0000?? tools/windows-rtx3060-12gb-1536/offload.py\u0000?? tools/windows-rtx3060-12gb-1536/package_result.py\u0000?? tools/windows-rtx3060-12gb-1536/prepare_smoke_data.py\u0000?? tools/windows-rtx3060-12gb-1536/requirements-torch.txt\u0000?? tools/windows-rtx3060-12gb-1536/requirements.txt\u0000?? tools/windows-rtx3060-12gb-1536/runner.py\u0000?? tools/windows-rtx3060-12gb-1536/runtime-lock.json\u0000?? tools/windows-rtx3060-12gb-1536/runtime_checks.py\u0000?? tools/windows-rtx3060-12gb-1536/test_handoff.py\u0000?? tools/windows-rtx3060-12gb-1536/test_python_launcher.py\u0000?? tools/windows-rtx3060-12gb-1536/train_smoke.py\u0000?? tools/windows-rtx3060-12gb-1536/verdict.py\u0000?? tools/windows-rtx3060-12gb-1536/verify_adapter.py\u0000"
+  },
+  "recovery": {
+    "backup": ".tmp/rtx3060-handoff-recovery/20260925T101013Z",
+    "files": 47,
+    "git_visible_files": 30,
+    "ignored_pyc_files": 17,
+    "inventory": [
+      {
+        "path": "00-preflight.ps1",
+        "size": 821,
+        "sha256": "3c64d955414ba2831f0a47c14384f1de62a3a724b3df75a7dd32315f41a19be2",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "01-setup-python-env.ps1",
+        "size": 203,
+        "sha256": "69dcd9bc1b7b0b6eceb133fab3ffb2f67157f0415158805931516f4b580bec10",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "02-download-and-verify-model.ps1",
+        "size": 201,
+        "sha256": "8c2798b47b3b9b2c6ac6cd7bcedc8a92e0a37f943810a20748ddcdc8b0af1a37",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "03-prepare-smoke.ps1",
+        "size": 904,
+        "sha256": "f5947cb373c49939208a65751c6bc9e56200353a2404b94bb4f31275aeec387a",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "04-run-targeted-memory-smoke.ps1",
+        "size": 1253,
+        "sha256": "9ae32cb196cf56d118b7f88558454166076332bb0f7f33e30bf9579c8142c5b9",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "05-package-result.ps1",
+        "size": 808,
+        "sha256": "fea6c4320290b6937425531ccd90124631397c055b636035a0d70b9fbed030d6",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "__pycache__/cheap_checks.cpython-312.pyc",
+        "size": 6580,
+        "sha256": "3fc2ac40fd346a65b9917cad5944af7b6067a5b3080892df16fcc545944fa148",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "__pycache__/common.cpython-312.pyc",
+        "size": 10663,
+        "sha256": "5d66cd6dcfe3373080a81355a629068d80ef5020f7d354a0c3fb9dc55c3ba7fb",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "__pycache__/configuration.cpython-312.pyc",
+        "size": 7129,
+        "sha256": "2e0f182a67eb46be8e7c60a9399c07adad54eb446252aa1d343349e316058c5c",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "__pycache__/control.cpython-312.pyc",
+        "size": 6735,
+        "sha256": "5defb9c4f07028d1a9d4a2012ebc6ac95fbc2b6ea229291a9f7b6ec73fe392a9",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "__pycache__/environment.cpython-312.pyc",
+        "size": 14597,
+        "sha256": "9b84632df5b363bd8acc05ee36617b8052123daf8552cc5361e53eec91ca9bad",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "__pycache__/model_files.cpython-312.pyc",
+        "size": 5183,
+        "sha256": "08f68a71b165b6d651edea3793c787b567c7a9fb1eb448122d275eff43494f0f",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "__pycache__/monitor.cpython-312.pyc",
+        "size": 23484,
+        "sha256": "b444e624dffdf212fad0b6cd9c41d31f784b5ea7ddd9845ef2fa8629e138d94e",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "__pycache__/offload.cpython-312.pyc",
+        "size": 10975,
+        "sha256": "e1151bbcf3ec950d9c0562864286aee15c0a2728c21ae0b0330a7f9db3fecb32",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "__pycache__/package_result.cpython-312.pyc",
+        "size": 15546,
+        "sha256": "9f55bcfa72aebdd8b4d9a8d55198ffea0c5d2633cf1f5cdab058c9372cd0a883",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "__pycache__/prepare_smoke_data.cpython-312.pyc",
+        "size": 11272,
+        "sha256": "d9cc3800824e34106044f67b38b56c175b07b06f62081a2dbd54d62e5bb1d20c",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "__pycache__/runner.cpython-312.pyc",
+        "size": 15128,
+        "sha256": "055816dd4f436df3389e53794089297fde27a1ac837236d0e9cdbaa59e74f303",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "__pycache__/runtime_checks.cpython-312.pyc",
+        "size": 8269,
+        "sha256": "4a733d20842aa20c7584e4845c6bf70e5f493718dde108bb61b548c7b5ded653",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "__pycache__/test_handoff.cpython-312.pyc",
+        "size": 41330,
+        "sha256": "3f76475911813ade520daea2ef6875ce5219491ad26849acec1637611909c193",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "__pycache__/test_python_launcher.cpython-312.pyc",
+        "size": 28174,
+        "sha256": "c90aef937f02e7eec057f264b2be8a9996c9b340d392e88804f55b56ece93564",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "__pycache__/train_smoke.cpython-312.pyc",
+        "size": 29433,
+        "sha256": "23cc1f50335d38528838a77b5c92977793b3cf9aef3264f314f501fcee53c12e",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "__pycache__/verdict.cpython-312.pyc",
+        "size": 6911,
+        "sha256": "97f721b95bea9eb1d34ef1fac6b84f3c8650d6b6e381a623efc80d6e1e9dc177",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "__pycache__/verify_adapter.cpython-312.pyc",
+        "size": 5693,
+        "sha256": "5cf728bfdc1efd2f8a92ea1e774ddecf2da39a124e5eca284231ef9a51ce9d6c",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "cheap_checks.py",
+        "size": 3660,
+        "sha256": "1ea599fb780a2df763a3f32ea962a39252bafa2aeae83065665141b4c2ae0757",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "common.py",
+        "size": 5813,
+        "sha256": "bdb6cdc1c63746c8a44c6e56356bb5df6eb288316878a0fa57cd480ed5e9bc2f",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "config.json",
+        "size": 4337,
+        "sha256": "137c57c691df8a7feb1c270247a7cf81c7068b55861d2b4c6960835d169eb31b",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "configuration.py",
+        "size": 3013,
+        "sha256": "e65cf5c412d8486785d46e262fe4eb9070421558b351d623737be626c434052c",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "control.py",
+        "size": 4510,
+        "sha256": "f6e2eb6e0c7960253734cbc0524ab1ef55f4eabaf8dd09b3839cff38be9fbbc4",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "environment.py",
+        "size": 10225,
+        "sha256": "adb414d51116afd05f394ad39a1502d5e719dc1557d7638071bc43ed4eec2d07",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "model-lock.json",
+        "size": 1555,
+        "sha256": "40dc9540c9045a17d9f898336f19322917590e27ecfee7f57511a7a17ad0b1c0",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "model_files.py",
+        "size": 3557,
+        "sha256": "2438c7d11e91f129e3d032a8afab31c362cb6d6d7232fbb08b0dcf43f8d089db",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "monitor.py",
+        "size": 12020,
+        "sha256": "bc2cc14d701fe50583f6cbfe896309a2574025ccba97199c47ffa909746525ab",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "offload.py",
+        "size": 6785,
+        "sha256": "5b7e6d17d0771cd834e3bdc0e5546029e7c12f27515fcfd07f5bf4599f5fd090",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "package_result.py",
+        "size": 10007,
+        "sha256": "0d6a0f516d871b90560de484ff4280b5f8fd4698290eeeab84cec1a57b51285f",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "prepare_smoke_data.py",
+        "size": 7194,
+        "sha256": "7b7dd54a9a04cc34acf7df38792f8d8b6f27552451aecced374e6da0d42558f0",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "README.md",
+        "size": 1107,
+        "sha256": "da95b11f072265d1eeb57dd56d353e527474947258c66d14bbeacbdffae40b29",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "Remote.Common.ps1",
+        "size": 12422,
+        "sha256": "07752fee79496fa8ea0e31b82a80e601dd1110884a158d936da9cc3481be32ad",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "requirements-torch.txt",
+        "size": 119,
+        "sha256": "0cb24ea2e4924587add51bc920996e78f2c293e9cd5df63682523cdd05235023",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "requirements.txt",
+        "size": 5863,
+        "sha256": "6fd50e0d4e1245fd1555e13d378e7eec9836a9b66d1fee3b734b97e3259e03c2",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "runner.py",
+        "size": 9550,
+        "sha256": "4f52c1979cce976adf885149e3be66bad5a622e4a179f99f102c7ebed4fd3ac6",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "runtime-lock.json",
+        "size": 20193,
+        "sha256": "3fdb4d2c5c731e13aec27e6ebd063096456d4c770ea4c55fdf65ddf8187c4755",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "runtime_checks.py",
+        "size": 5357,
+        "sha256": "210993bbf80d67e6f956b31d239f0c1f3fcd738e6ea1b19ca58e3317adf55d56",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "test_handoff.py",
+        "size": 23832,
+        "sha256": "01e0fb06c2b079418058bf1e9823df057a7b769ef21f0b86128ca40572017574",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "test_python_launcher.py",
+        "size": 16391,
+        "sha256": "c763d3b9f9bad94d57bfb11569cbf7889412208e889a09848d1e2624a883d555",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "train_smoke.py",
+        "size": 17519,
+        "sha256": "b1c1f2cfd2277382380387604ad5905bd04079d9ac46a314277fd9449ce10c44",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "verdict.py",
+        "size": 4064,
+        "sha256": "825f1ef01b1a7a78d9f12a6f1a2114d9585eed17351e74865f9357669a12385a",
+        "identified_failed_installer_output": true
+      },
+      {
+        "path": "verify_adapter.py",
+        "size": 2879,
+        "sha256": "dd4504e7893e8d9cbafa1562c700a0771efbe1045142a96bde15a7641e041066",
+        "identified_failed_installer_output": true
+      }
+    ],
+    "all_identified": true,
+    "initial_runtime_markers": [],
+    "initial_result_exists": false,
+    "unrelated_user_changes_overwritten": false
+  },
+  "root_cause": {
+    "error": "control.py hardware-policy anchor not found.",
+    "expected_loop": [
+      "quantization",
+      "lora",
+      "activation_offload",
+      "host_memory",
+      "remote_resources"
+    ],
+    "actual_accepted_loop": [
+      "seed",
+      "model",
+      "train",
+      "quantization",
+      "lora",
+      "activation_offload",
+      "host_memory",
+      "remote_resources"
+    ],
+    "failed_after_copy_and_config_before_git_add": true,
+    "external_materializer_obsolete": true
+  },
+  "fixes": [
+    "real fresh private environment and tiny CUDA/NF4 validation",
+    "pinned local TAR import and explicit bounded download fallback",
+    "script-relative paths and matching RepoRoot",
+    "accepted selection schema and complete TRAIN measurement",
+    "single config hardware policy without 8-GB admission",
+    "durable one-shot admission and OS concurrency lock",
+    "finite supervision, native exit propagation, UTF-8 Git/NUL filenames",
+    "sanitized exact-manifest ZIP and independent verifier"
+  ],
+  "tests": {
+    "passed": true,
+    "tests": 74,
+    "groups": [
+      {
+        "group": "test_handoff",
+        "returncode": 0,
+        "tests": 19,
+        "seconds": 0.485,
+        "budget_seconds": 180,
+        "passed": true
+      },
+      {
+        "group": "test_setup_model",
+        "returncode": 0,
+        "tests": 20,
+        "seconds": 1.172,
+        "budget_seconds": 180,
+        "passed": true
+      },
+      {
+        "group": "test_python_launcher",
+        "returncode": 0,
+        "tests": 11,
+        "seconds": 12.437,
+        "budget_seconds": 180,
+        "passed": true
+      },
+      {
+        "group": "test_workflow_result",
+        "returncode": 0,
+        "tests": 24,
+        "seconds": 0.734,
+        "budget_seconds": 180,
+        "passed": true
+      }
+    ],
+    "Qwen_checkpoint_loads": 0,
+    "inference_calls": 0,
+    "training_campaigns": 0,
+    "package_installs": 0,
+    "fixtures_for_install_and_GPU": true,
+    "real_PowerShell_51": true
+  },
+  "real_owner_checks": {
+    "tokenizer_compiler": {
+      "passed": true,
+      "selection": {
+        "source_rows_measured": 8000,
+        "eligible_rows": 8000,
+        "configured_max_length": 1536,
+        "observed_max_length": 1421,
+        "rows_above_limit": 0,
+        "truncated_rows": 0,
+        "selected_ids": [
+          "ru-101097e2caa08bca",
+          "ru-c1344351f6451952",
+          "ru-d155a1febcff9845",
+          "ru-e13f047069c1023b",
+          "ru-39800cca10f33f2d",
+          "ru-d8b16190146174fa",
+          "ru-09b7959ad2d7a907",
+          "ru-0b013a53b325414b"
+        ],
+        "optimizer_step_1_ids": [
+          "ru-101097e2caa08bca",
+          "ru-c1344351f6451952",
+          "ru-d155a1febcff9845",
+          "ru-e13f047069c1023b"
+        ],
+        "optimizer_step_2_ids": [
+          "ru-39800cca10f33f2d",
+          "ru-d8b16190146174fa",
+          "ru-09b7959ad2d7a907",
+          "ru-0b013a53b325414b"
+        ],
+        "reload_id": "ru-57fef17440f98841",
+        "selected_lengths": [
+          1396,
+          1393,
+          1391,
+          1388,
+          1421,
+          1408,
+          1406,
+          1402
+        ],
+        "optimizer_step_1_lengths": [
+          1396,
+          1393,
+          1391,
+          1388
+        ],
+        "optimizer_step_2_lengths": [
+          1421,
+          1408,
+          1406,
+          1402
+        ],
+        "reload_length": 1387,
+        "top9_by_length": [
+          {
+            "rank": 1,
+            "id": "ru-39800cca10f33f2d",
+            "length": 1421
+          },
+          {
+            "rank": 2,
+            "id": "ru-d8b16190146174fa",
+            "length": 1408
+          },
+          {
+            "rank": 3,
+            "id": "ru-09b7959ad2d7a907",
+            "length": 1406
+          },
+          {
+            "rank": 4,
+            "id": "ru-0b013a53b325414b",
+            "length": 1402
+          },
+          {
+            "rank": 5,
+            "id": "ru-101097e2caa08bca",
+            "length": 1396
+          },
+          {
+            "rank": 6,
+            "id": "ru-c1344351f6451952",
+            "length": 1393
+          },
+          {
+            "rank": 7,
+            "id": "ru-d155a1febcff9845",
+            "length": 1391
+          },
+          {
+            "rank": 8,
+            "id": "ru-e13f047069c1023b",
+            "length": 1388
+          },
+          {
+            "rank": 9,
+            "id": "ru-57fef17440f98841",
+            "length": 1387
+          }
+        ],
+        "all_length_min": 663,
+        "all_length_median": 870.0,
+        "all_length_max": 1421,
+        "selection_algorithm": "Tokenize all 8000 TRAIN records exactly; sort by (-length,id); ranks 5-8 step1, ranks 1-4 step2, rank9 reload; no truncation."
+      },
+      "seconds": 57.6880000000001,
+      "tokenizer_hashes_unchanged": true,
+      "audit": {
+        "phase": "owner-tokenizer-only",
+        "reads": [
+          ".tmp/rtx3060-handoff-validation/owner-tokenizer-a12b95d83be646d78c47c89f46dba27e/train-contexts.json",
+          "AlagModels/Qwen3-4B/config.json",
+          "AlagModels/Qwen3-4B/generation_config.json",
+          "AlagModels/Qwen3-4B/merges.txt",
+          "AlagModels/Qwen3-4B/model.safetensors.index.json",
+          "AlagModels/Qwen3-4B/tokenizer.json",
+          "AlagModels/Qwen3-4B/tokenizer_config.json",
+          "AlagModels/Qwen3-4B/vocab.json",
+          "evals/local-qwen/interpretation.schema.json",
+          "ml/baseline/__pycache__/scoring.cpython-312.pyc",
+          "ml/data/synthetic_ru/__pycache__/compile_sft.cpython-312.pyc",
+          "ml/data/synthetic_ru/__pycache__/core.cpython-312.pyc",
+          "ml/data/synthetic_ru/__pycache__/validate.cpython-312.pyc",
+          "ml/data/synthetic_ru/system-prompt.txt",
+          "ml/data/synthetic_ru/train.jsonl",
+          "tools/windows-rtx3060-12gb-1536/owner_tokenizer_check.py",
+          "tools/windows-rtx3060-12gb-1536/prepare_smoke_data.py"
+        ],
+        "denied": [],
+        "evaluation_file_reads": [],
+        "network_allowed": false,
+        "limitation": "Python audit hooks cover Python opens; native safetensors model reads are separately hash-audited."
+      },
+      "Qwen_checkpoint_loads": 0,
+      "inference_calls": 0,
+      "optimizer_updates": 0,
+      "training_campaigns": 0,
+      "evaluation_calls": 0,
+      "owner_hardware_pass_claimed": false,
+      "prepared_ready_created": false
+    },
+    "meta_and_labels": {
+      "passed": true,
+      "complete_records_checked": 9,
+      "prompt_ignored": true,
+      "canonical_JSON_and_EOS_supervised": true,
+      "structure": {
+        "target_counts": {
+          "q_proj": 36,
+          "v_proj": 36
+        },
+        "A_tensors": 72,
+        "B_tensors": 72,
+        "trainable_parameters": 2949120,
+        "adapter_dtypes": [
+          "torch.float32"
+        ],
+        "parameter_bytes": 11796480
+      },
+      "Qwen_checkpoint_loads": 0,
+      "forward_calls": 0,
+      "optimizer_updates": 0
+    },
+    "model_files": {
+      "passed": true,
+      "files_verified": 10
+    },
+    "actual_tar_import": {
+      "passed": true,
+      "transport_sha256": "d69f99b94dd0e5346f5882f6ed327bee925d060659648fb75877c1c0d5fce09a",
+      "transport_checksum_checked": true,
+      "seconds": 20.20300000000134,
+      "Qwen_checkpoint_loads": 0,
+      "published_to_model_directory": false
+    },
+    "actual_owner_gpu": {
+      "name": "NVIDIA GeForce RTX 2060",
+      "physical_MiB": 6144,
+      "capability": [
+        7,
+        5
+      ],
+      "rejected_checks": [
+        "desktop_RTX3060_name",
+        "physical_capacity",
+        "capability"
+      ],
+      "hardware_PASS_claimed": false,
+      "WMI_sandbox_access_denied_then_readonly_unsandboxed_check": true
+    }
+  },
+  "historical_sources": {
+    "files": 61,
+    "unchanged": true,
+    "sha256": {
+      "tools/windows-rtx3070/00-preflight.ps1": "666fe3be76754c7435a562e0005f964b15a81fee1ed7e82acd645cb7a58602ea",
+      "tools/windows-rtx3070/01-setup-python-env.ps1": "a6570bb9f709ecda21057e057fa7ae78ca2df04ef78614952b5d2b8d6a61e6b7",
+      "tools/windows-rtx3070/02-download-and-verify-model.ps1": "c07c9db151088aee816e4cff508b617821ea2bd11ec46de074ab9e4af9a49ec4",
+      "tools/windows-rtx3070/03-prepare-smoke.ps1": "0a74f3373b6eb62bcf502f77088246e1d5523bc9acf8b8aecec2b5993da8c39d",
+      "tools/windows-rtx3070/04-run-targeted-memory-smoke.ps1": "0e25ba469138b07d9d90208be4da83d34f3ec43ac58714345f02237aedbc8515",
+      "tools/windows-rtx3070/05-package-result.ps1": "1450fd1795d888221e834b002d3dd1c2062a373465d5d3b4712fea26ddfde5a4",
+      "tools/windows-rtx3070/cheap_checks.py": "47198ff11c1c545d01e025e4a1ed2fbe08f4c5ffa09f4888b3d0481a447a3c3f",
+      "tools/windows-rtx3070/common.py": "c1066421c88a03dce7c65768fdbb66c8616fa7b5de9385123bf226b1db1afc6d",
+      "tools/windows-rtx3070/config.json": "760ca765962a192adf8795cbf8e33bef4e6beb458ce27bac6cb3730228b0cfb1",
+      "tools/windows-rtx3070/configuration.py": "0084255f0acbc0d515606facbba2bfbb030b6abe1088043105031bf31c85d5e9",
+      "tools/windows-rtx3070/control.py": "cd1fc30c20d3bf085625313b16a0e3a09a3ca549f09338e8688b5801e0d675f5",
+      "tools/windows-rtx3070/environment.py": "adb414d51116afd05f394ad39a1502d5e719dc1557d7638071bc43ed4eec2d07",
+      "tools/windows-rtx3070/model-lock.json": "40dc9540c9045a17d9f898336f19322917590e27ecfee7f57511a7a17ad0b1c0",
+      "tools/windows-rtx3070/model_files.py": "2438c7d11e91f129e3d032a8afab31c362cb6d6d7232fbb08b0dcf43f8d089db",
+      "tools/windows-rtx3070/monitor.py": "bc2cc14d701fe50583f6cbfe896309a2574025ccba97199c47ffa909746525ab",
+      "tools/windows-rtx3070/offload.py": "5b7e6d17d0771cd834e3bdc0e5546029e7c12f27515fcfd07f5bf4599f5fd090",
+      "tools/windows-rtx3070/package_result.py": "079bcf6389eb256d02c8f4b5df42aaf5dcbc9a7137e5efd896ef19661220a0da",
+      "tools/windows-rtx3070/prepare_smoke_data.py": "90d21634e44c2b5042cb11801a9de9dae8a830c7e29988d087b20c1c4c7c1899",
+      "tools/windows-rtx3070/README.md": "ecc88a0f535818d95c1a8aa48cfb00b7859e93c29a67bf4dd703930d028982d9",
+      "tools/windows-rtx3070/Remote.Common.ps1": "0fbe26066fe5eb878fe3cdfa62856e61c51a1c33703a94dd089b6f4f3603f11d",
+      "tools/windows-rtx3070/requirements-torch.txt": "0cb24ea2e4924587add51bc920996e78f2c293e9cd5df63682523cdd05235023",
+      "tools/windows-rtx3070/requirements.txt": "6fd50e0d4e1245fd1555e13d378e7eec9836a9b66d1fee3b734b97e3259e03c2",
+      "tools/windows-rtx3070/runner.py": "c45a5b52048ae477f6e34b23d9a9ada33cad262212471d8259ebb6682956c39d",
+      "tools/windows-rtx3070/runtime-lock.json": "3fdb4d2c5c731e13aec27e6ebd063096456d4c770ea4c55fdf65ddf8187c4755",
+      "tools/windows-rtx3070/runtime_checks.py": "210993bbf80d67e6f956b31d239f0c1f3fcd738e6ea1b19ca58e3317adf55d56",
+      "tools/windows-rtx3070/test_handoff.py": "158425fbe94de2f8bde529f68bc1408701f2f4e95e8b8ee6a12c168e0a90df32",
+      "tools/windows-rtx3070/test_python_launcher.py": "c763d3b9f9bad94d57bfb11569cbf7889412208e889a09848d1e2624a883d555",
+      "tools/windows-rtx3070/train_smoke.py": "b18ee58d6833434db7345db28b0522b3ee03df677c324a33f2755bce4b7afe09",
+      "tools/windows-rtx3070/verdict.py": "9f1708ea299b5c39ef6b0377ff94c2070a02291cefb2c31f37f225ab2eb134ca",
+      "tools/windows-rtx3070/verify_adapter.py": "f382e3a9fa7a356436d16b08564090f3005f4158533e1463303bc7dcce427532",
+      "tools/windows-rtx3070-1536/00-preflight.ps1": "3c64d955414ba2831f0a47c14384f1de62a3a724b3df75a7dd32315f41a19be2",
+      "tools/windows-rtx3070-1536/01-setup-python-env.ps1": "69dcd9bc1b7b0b6eceb133fab3ffb2f67157f0415158805931516f4b580bec10",
+      "tools/windows-rtx3070-1536/02-download-and-verify-model.ps1": "8c2798b47b3b9b2c6ac6cd7bcedc8a92e0a37f943810a20748ddcdc8b0af1a37",
+      "tools/windows-rtx3070-1536/03-prepare-smoke.ps1": "f5947cb373c49939208a65751c6bc9e56200353a2404b94bb4f31275aeec387a",
+      "tools/windows-rtx3070-1536/04-run-targeted-memory-smoke.ps1": "9ae32cb196cf56d118b7f88558454166076332bb0f7f33e30bf9579c8142c5b9",
+      "tools/windows-rtx3070-1536/05-package-result.ps1": "2d70e492a481637139f7f4f569a3de8cfe73e5a888c3abe9b1b8eaaea62a819a",
+      "tools/windows-rtx3070-1536/cheap_checks.py": "1ea599fb780a2df763a3f32ea962a39252bafa2aeae83065665141b4c2ae0757",
+      "tools/windows-rtx3070-1536/common.py": "db17595965bbcb2b084d7de063e4338712448cc75c41c0447e8f0e87f94ec308",
+      "tools/windows-rtx3070-1536/config.json": "5efe4343185ee28334f18e681085eed593a659b9d81b9be63401a5680d80154b",
+      "tools/windows-rtx3070-1536/configuration.py": "56a5ee051d5420b1ce9c14db8e1b74b094bfe5937d8b60d8694dc533d34bffb7",
+      "tools/windows-rtx3070-1536/control.py": "aad72c8bb7ccd282b14b6fb6f2bebf4cfa7431cee6c5352b3a52dd63ad028f71",
+      "tools/windows-rtx3070-1536/environment.py": "adb414d51116afd05f394ad39a1502d5e719dc1557d7638071bc43ed4eec2d07",
+      "tools/windows-rtx3070-1536/model-lock.json": "40dc9540c9045a17d9f898336f19322917590e27ecfee7f57511a7a17ad0b1c0",
+      "tools/windows-rtx3070-1536/model_files.py": "2438c7d11e91f129e3d032a8afab31c362cb6d6d7232fbb08b0dcf43f8d089db",
+      "tools/windows-rtx3070-1536/monitor.py": "bc2cc14d701fe50583f6cbfe896309a2574025ccba97199c47ffa909746525ab",
+      "tools/windows-rtx3070-1536/offload.py": "5b7e6d17d0771cd834e3bdc0e5546029e7c12f27515fcfd07f5bf4599f5fd090",
+      "tools/windows-rtx3070-1536/package_result.py": "7065549a1c22aa0c3105924a9120cc033282928c3597357d8f68192cdc16251e",
+      "tools/windows-rtx3070-1536/prepare_smoke_data.py": "7b7dd54a9a04cc34acf7df38792f8d8b6f27552451aecced374e6da0d42558f0",
+      "tools/windows-rtx3070-1536/README.md": "da95b11f072265d1eeb57dd56d353e527474947258c66d14bbeacbdffae40b29",
+      "tools/windows-rtx3070-1536/Remote.Common.ps1": "14e5c3e87f8859d5447ba06bd184e56c94218a30eac91f20fcaa06896179f6a8",
+      "tools/windows-rtx3070-1536/requirements-torch.txt": "0cb24ea2e4924587add51bc920996e78f2c293e9cd5df63682523cdd05235023",
+      "tools/windows-rtx3070-1536/requirements.txt": "6fd50e0d4e1245fd1555e13d378e7eec9836a9b66d1fee3b734b97e3259e03c2",
+      "tools/windows-rtx3070-1536/RUN-1536-REMOTE.ps1": "8ededd9a65a72a93525f57137a35bbd869884847d3be5e7ccc3857289658a3ba",
+      "tools/windows-rtx3070-1536/runner.py": "4b80efd710ee62b30479a555f28ba7fb0179ac84d9304b0d19fb2c8c14af9369",
+      "tools/windows-rtx3070-1536/runtime-lock.json": "3fdb4d2c5c731e13aec27e6ebd063096456d4c770ea4c55fdf65ddf8187c4755",
+      "tools/windows-rtx3070-1536/runtime_checks.py": "210993bbf80d67e6f956b31d239f0c1f3fcd738e6ea1b19ca58e3317adf55d56",
+      "tools/windows-rtx3070-1536/test_handoff.py": "158425fbe94de2f8bde529f68bc1408701f2f4e95e8b8ee6a12c168e0a90df32",
+      "tools/windows-rtx3070-1536/test_python_launcher.py": "c763d3b9f9bad94d57bfb11569cbf7889412208e889a09848d1e2624a883d555",
+      "tools/windows-rtx3070-1536/train_smoke.py": "f5a732f0d7920f301bde770b3867d6f9d85617279212ad8e391cfcff73c5c13c",
+      "tools/windows-rtx3070-1536/verdict.py": "4763b23568f45be0da3765fb5a206d295c45eb4900dafb38710d33a803542146",
+      "tools/windows-rtx3070-1536/verify_adapter.py": "dd4504e7893e8d9cbafa1562c700a0771efbe1045142a96bde15a7641e041066"
+    }
+  },
+  "locks_unchanged": {
+    "model-lock.json": "40dc9540c9045a17d9f898336f19322917590e27ecfee7f57511a7a17ad0b1c0",
+    "runtime-lock.json": "3fdb4d2c5c731e13aec27e6ebd063096456d4c770ea4c55fdf65ddf8187c4755",
+    "requirements.txt": "6fd50e0d4e1245fd1555e13d378e7eec9836a9b66d1fee3b734b97e3259e03c2",
+    "requirements-torch.txt": "0cb24ea2e4924587add51bc920996e78f2c293e9cd5df63682523cdd05235023"
+  },
+  "hardware_policy": {
+    "physical_vram_min_MiB": 12000,
+    "gpu_index": 0,
+    "gpu_capability": [
+      8,
+      6
+    ],
+    "nvidia_min_free_before_training_MiB": 10800,
+    "cuda_min_free_before_training_MiB": 10500,
+    "disk_before_download_bytes": 32212254720,
+    "disk_before_training_bytes": 5368709120,
+    "minimum_boundary_free_bytes": 268435456,
+    "comfortable_boundary_free_bytes": 536870912,
+    "cuda_capacity_min_MiB": 12000,
+    "gpu_name_pattern": "^(?:nvidia\\s+)?(?:geforce\\s+)?rtx\\s*3060$"
+  },
+  "host_memory_policy": {
+    "sample_interval_seconds": 0.2,
+    "start_min_available_bytes": 12884901888,
+    "stop_min_available_bytes": 6442450944,
+    "max_pagefile_growth_bytes": 268435456,
+    "preferred_cuda_headroom_bytes": 536870912
+  },
+  "historical_transport": {
+    "requested_path": "%USERPROFILE%/Desktop/Qwen3-4B.tar",
+    "exists": false,
+    "expected_sha256": "30fab06f571f6b7f0b62342045bd6b10c2d65de2eda8caebc32e7baf56cfd697",
+    "current_sha256": null
+  },
+  "new_transport": {
+    "archive": "transfer/Qwen3-4B.tar",
+    "bytes": 8060907520,
+    "sha256": "d69f99b94dd0e5346f5882f6ed327bee925d060659648fb75877c1c0d5fce09a",
+    "model_files_verified": true,
+    "deadline_seconds": 600,
+    "Qwen_checkpoint_loads": 0,
+    "root": ".tmp/rtx3060-12gb-targeted-1536-smoke",
+    "created_at_explicit_user_request": true
+  },
+  "source_sha256": {
+    "tools/windows-rtx3060-12gb-1536/00-preflight.ps1": "0372506281724c4288c165cbfa14dc9cca26a29683967a9b605fb5f27d6fac0d",
+    "tools/windows-rtx3060-12gb-1536/01-setup-python-env.ps1": "e525eb5dcb758becea553cf46c96961381270988689493afa057ba30f8499caa",
+    "tools/windows-rtx3060-12gb-1536/02-download-and-verify-model.ps1": "9a35feec99a047873bcc5387313a2eb84053f315b74bcfca695e1b0bb217e78f",
+    "tools/windows-rtx3060-12gb-1536/03-prepare-smoke.ps1": "cea5f2f98e8cfe61812a4b78da09c64b4e7f20b431a8b5cf549873931dc58506",
+    "tools/windows-rtx3060-12gb-1536/04-run-targeted-memory-smoke.ps1": "bbdde7fc5832c4b7b3693600727a7a09954e75f2485145e81d0499db834b79d2",
+    "tools/windows-rtx3060-12gb-1536/05-package-result.ps1": "ff88ceef5f50bc3daac62c9c4ec73bd929789760b8af8a4ac370ac08f48bfc1a",
+    "tools/windows-rtx3060-12gb-1536/cheap_checks.py": "ae785844f0d920739c747d93cecde74bad2c2b9bbe4d7d347444180b796a9cf6",
+    "tools/windows-rtx3060-12gb-1536/common.py": "0e0c753690fd138fda041e783f434e1a447c7aa8502d5e90bb5c7dcef46d4f88",
+    "tools/windows-rtx3060-12gb-1536/config.json": "04c360125801f35769cb28eaefe88e3c135757c5bd68dec454f532fc53e5cbfc",
+    "tools/windows-rtx3060-12gb-1536/configuration.py": "e65cf5c412d8486785d46e262fe4eb9070421558b351d623737be626c434052c",
+    "tools/windows-rtx3060-12gb-1536/control.py": "dfe47203d9a92b181eac7f6b9ce173f2a8e11edf3c81a6d2518ee3e70c895ed7",
+    "tools/windows-rtx3060-12gb-1536/create_model_archive.py": "9f385f682fbb164a71968567b5e8115bc9e19e6f4af08aee83dfbda2b31cd143",
+    "tools/windows-rtx3060-12gb-1536/environment.py": "b4b225a43e0b0a25bf8e86e390fea4e6a28a65683359c58a084087a5664d659c",
+    "tools/windows-rtx3060-12gb-1536/model-lock.json": "40dc9540c9045a17d9f898336f19322917590e27ecfee7f57511a7a17ad0b1c0",
+    "tools/windows-rtx3060-12gb-1536/model_files.py": "145192e5037b26bdec8dd5e4950395b9ca14301f5cdc241d8c5168947b6a383f",
+    "tools/windows-rtx3060-12gb-1536/monitor.py": "3bd86eb6b8b7d9bb67c98078aafea98a2c9d84011a0f5b3578cade285edc4557",
+    "tools/windows-rtx3060-12gb-1536/offload.py": "5b7e6d17d0771cd834e3bdc0e5546029e7c12f27515fcfd07f5bf4599f5fd090",
+    "tools/windows-rtx3060-12gb-1536/OWNER_HANDOFF_RU.md": "98c4afeda37d61d1927dbb963449cf0c5224e7675dc7f777a750fbc69c6ca8e4",
+    "tools/windows-rtx3060-12gb-1536/owner_tokenizer_check.py": "2e2076156052f6dc03b8bf7df4d66efdf79b29502cc328779f67697059ef0d07",
+    "tools/windows-rtx3060-12gb-1536/package_result.py": "e3f64d99c476b80ca9f5da88a37864b8634fabb302c0528ef76b47153307730c",
+    "tools/windows-rtx3060-12gb-1536/policy.py": "4eb76c7e12dbbcdce2c3ed615324306031d0a5e751cd3f0117fb039c1745cb44",
+    "tools/windows-rtx3060-12gb-1536/prepare_smoke_data.py": "3421d3bce314e44a0018f94c0efec4db033daeae2b570614a5a82a6e3ed17461",
+    "tools/windows-rtx3060-12gb-1536/README.md": "270c5ce90e286a7f3af76fddc3556a89e490dfd07552c3fa1870f5a75ab28c92",
+    "tools/windows-rtx3060-12gb-1536/recovery.py": "18ee2b3ffbac8558d130f1073081cdd5f4cc30182aeb7e0638b0e92c39a02980",
+    "tools/windows-rtx3060-12gb-1536/Remote.Common.ps1": "e82e2d7a7062240965e3065276cd6b4da7c506e14e66d28331e09a77c21720e7",
+    "tools/windows-rtx3060-12gb-1536/requirements-torch.txt": "0cb24ea2e4924587add51bc920996e78f2c293e9cd5df63682523cdd05235023",
+    "tools/windows-rtx3060-12gb-1536/requirements.txt": "6fd50e0d4e1245fd1555e13d378e7eec9836a9b66d1fee3b734b97e3259e03c2",
+    "tools/windows-rtx3060-12gb-1536/RUN-RTX3060-12GB-REMOTE.ps1": "c1c9b7e527f299ff82165d2f1d651a5fbf43c2af6bd46f2ff67798d438b42537",
+    "tools/windows-rtx3060-12gb-1536/run_owner_tests.py": "9d3b56341be7fdbae510f02a89c788604ce71b1cd75c92aa43acbec28a027b8b",
+    "tools/windows-rtx3060-12gb-1536/runner.py": "12593cfb9a62b366d0e9e753212022b4ce5c434d54d92a84de95eb42f66ecd0e",
+    "tools/windows-rtx3060-12gb-1536/runtime-lock.json": "3fdb4d2c5c731e13aec27e6ebd063096456d4c770ea4c55fdf65ddf8187c4755",
+    "tools/windows-rtx3060-12gb-1536/runtime_checks.py": "9db982d1a4cea74b57a54208f5597cfc7f85e6b90cc939a88acf4d2f802d05e0",
+    "tools/windows-rtx3060-12gb-1536/selection.py": "6fe28b2c9d22387f25af696957ee1fd28aa53b8a15f79e68be85b91a5512349b",
+    "tools/windows-rtx3060-12gb-1536/START_HERE_RU.md": "5eb4d5d3ceb2c54fa617dfa2ab381c943fd44f68e97fac276fd895a2e443c39c",
+    "tools/windows-rtx3060-12gb-1536/state.py": "b6af2c9ae8e541ff63d37727f010eb369cf8a52441a67eddf9b0c1923c6f1050",
+    "tools/windows-rtx3060-12gb-1536/test_handoff.py": "bdc15e20e58eaabea0789b4b4072952cfa8a4143cf53d03cdfbbc17f24220352",
+    "tools/windows-rtx3060-12gb-1536/test_python_launcher.py": "7c78b54bc79d75707175cabe15e8cf581ade679f632dacd8a726ecb4c45207a0",
+    "tools/windows-rtx3060-12gb-1536/test_setup_model.py": "c999c7cc5aa250f147886ad7aad41cf9d2b5f9a889de7a4decf2253654b86556",
+    "tools/windows-rtx3060-12gb-1536/test_support.py": "906a7539974f76cf56dbf5bf38bea11b1cd4ad193a1dedb5784259c035e31154",
+    "tools/windows-rtx3060-12gb-1536/test_workflow_result.py": "52df9aa8a419e2d432990bbc60182adc6e00a6e2a6eab1ecc3c34bf994f63e16",
+    "tools/windows-rtx3060-12gb-1536/train_smoke.py": "84c6db130dcdabd01d572b4d59ff25bcfca0b6b9e47a87538d89a49aea0cd34c",
+    "tools/windows-rtx3060-12gb-1536/verdict.py": "c209eb3af848d387faceb41744b0032fa208fa146c27076d10ddc78b5ff97d99",
+    "tools/windows-rtx3060-12gb-1536/verify_adapter.py": "61db1b298bd8407245327b5744d01baa82caec8f8b62763f3a534a315f637404",
+    "tools/windows-rtx3060-12gb-1536/verify_result.py": "c2a64c181f8919f320b3ee90f06a1ca7ed818d07b99d7c8b3253af4ba3c1328a"
+  },
+  "execution": {
+    "remote_RTX3060": "NOT RUN",
+    "owner_Qwen_checkpoint_loads": 0,
+    "owner_inference_calls": 0,
+    "owner_training_campaigns": 0,
+    "owner_optimizer_updates": 0,
+    "quality_evaluation": "NOT RUN",
+    "full_training_started": false,
+    "G3_application_integration_started": false
+  },
+  "REAL_APPLICATION_SMOKE": {
+    "status": "NOT_APPLICABLE_WITH_REASON",
+    "reason": "isolated training/handoff infrastructure; no application behavior changed"
+  },
+  "delivery": {
+    "branch": "main",
+    "origin": "https://github.com/AiratBastanov/TalkNFace.git",
+    "method": "Explicit source/test/doc staging; normal commit and push; delivered revision identified by Git history",
+    "post_push_checks": [
+      "HEAD == origin/main",
+      "ahead/behind 0/0",
+      "clean intended worktree"
+    ]
+  },
+  "stop": "STOP — RTX3060 HARDWARE SMOKE AND FULL TRAINING NOT RUN ON OWNER PC."
+}
