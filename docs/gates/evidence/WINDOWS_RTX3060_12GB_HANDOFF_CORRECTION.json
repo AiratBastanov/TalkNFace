@@ -1,7 +1,7 @@
 {
   "gate": "WINDOWS_RTX3060_12GB_HANDOFF_CORRECTION",
   "verdict": "WINDOWS_RTX3060_12GB_HANDOFF_CORRECTION_PASS",
-  "recorded_utc": "2026-09-25T11:10:07.113557+00:00",
+  "recorded_utc": "2026-09-25T11:15:15.214377+00:00",
   "scope": "Source correction and validated handoff delivery; not a hardware/quality certification",
   "initial_git": {
     "branch": "main",
@@ -342,13 +342,13 @@
   ],
   "tests": {
     "passed": true,
-    "tests": 74,
+    "tests": 75,
     "groups": [
       {
         "group": "test_handoff",
         "returncode": 0,
-        "tests": 19,
-        "seconds": 0.485,
+        "tests": 20,
+        "seconds": 0.656,
         "budget_seconds": 180,
         "passed": true
       },
@@ -356,7 +356,7 @@
         "group": "test_setup_model",
         "returncode": 0,
         "tests": 20,
-        "seconds": 1.172,
+        "seconds": 0.969,
         "budget_seconds": 180,
         "passed": true
       },
@@ -364,7 +364,7 @@
         "group": "test_python_launcher",
         "returncode": 0,
         "tests": 11,
-        "seconds": 12.437,
+        "seconds": 12.36,
         "budget_seconds": 180,
         "passed": true
       },
@@ -372,7 +372,7 @@
         "group": "test_workflow_result",
         "returncode": 0,
         "tests": 24,
-        "seconds": 0.734,
+        "seconds": 0.796,
         "budget_seconds": 180,
         "passed": true
       }
@@ -701,7 +701,7 @@
     "tools/windows-rtx3060-12gb-1536/common.py": "0e0c753690fd138fda041e783f434e1a447c7aa8502d5e90bb5c7dcef46d4f88",
     "tools/windows-rtx3060-12gb-1536/config.json": "04c360125801f35769cb28eaefe88e3c135757c5bd68dec454f532fc53e5cbfc",
     "tools/windows-rtx3060-12gb-1536/configuration.py": "e65cf5c412d8486785d46e262fe4eb9070421558b351d623737be626c434052c",
-    "tools/windows-rtx3060-12gb-1536/control.py": "dfe47203d9a92b181eac7f6b9ce173f2a8e11edf3c81a6d2518ee3e70c895ed7",
+    "tools/windows-rtx3060-12gb-1536/control.py": "7e482d6aa5b11a916bd83405aaaf218add2967c3c8565aa29148058a54de302b",
     "tools/windows-rtx3060-12gb-1536/create_model_archive.py": "9f385f682fbb164a71968567b5e8115bc9e19e6f4af08aee83dfbda2b31cd143",
     "tools/windows-rtx3060-12gb-1536/environment.py": "b4b225a43e0b0a25bf8e86e390fea4e6a28a65683359c58a084087a5664d659c",
     "tools/windows-rtx3060-12gb-1536/model-lock.json": "40dc9540c9045a17d9f898336f19322917590e27ecfee7f57511a7a17ad0b1c0",
@@ -726,7 +726,7 @@
     "tools/windows-rtx3060-12gb-1536/selection.py": "6fe28b2c9d22387f25af696957ee1fd28aa53b8a15f79e68be85b91a5512349b",
     "tools/windows-rtx3060-12gb-1536/START_HERE_RU.md": "5eb4d5d3ceb2c54fa617dfa2ab381c943fd44f68e97fac276fd895a2e443c39c",
     "tools/windows-rtx3060-12gb-1536/state.py": "b6af2c9ae8e541ff63d37727f010eb369cf8a52441a67eddf9b0c1923c6f1050",
-    "tools/windows-rtx3060-12gb-1536/test_handoff.py": "bdc15e20e58eaabea0789b4b4072952cfa8a4143cf53d03cdfbbc17f24220352",
+    "tools/windows-rtx3060-12gb-1536/test_handoff.py": "d097551ed56c4915c8fa3a1c826127bed6494bdc2be942662ad7c825e8396331",
     "tools/windows-rtx3060-12gb-1536/test_python_launcher.py": "7c78b54bc79d75707175cabe15e8cf581ade679f632dacd8a726ecb4c45207a0",
     "tools/windows-rtx3060-12gb-1536/test_setup_model.py": "c999c7cc5aa250f147886ad7aad41cf9d2b5f9a889de7a4decf2253654b86556",
     "tools/windows-rtx3060-12gb-1536/test_support.py": "906a7539974f76cf56dbf5bf38bea11b1cd4ad193a1dedb5784259c035e31154",

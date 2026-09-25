@@ -9,8 +9,9 @@ BASE_TOOL = ROOT / 'tools/windows-rtx3070'
 BASE_CONFIG_SHA256 = '760ca765962a192adf8795cbf8e33bef4e6beb458ce27bac6cb3730228b0cfb1'
 
 
-def git(*args):
-    return subprocess.check_output(['git', '-C', str(ROOT), *args], encoding='utf-8', errors='strict', timeout=30)
+def git(*args, input=None):
+    return subprocess.check_output(['git', '-C', str(ROOT), *args], input=input,
+                                   encoding='utf-8', errors='strict', timeout=30)
 
 
 def assert_git_safe():
@@ -23,7 +24,7 @@ def assert_git_safe():
     paths = ['.venv-qlora-remote/pyvenv.cfg', '.tmp/rtx3060-12gb-targeted-1536-smoke/data-1536.json',
              'AlagModels/adapters/rtx3060-12gb-targeted-1536-smoke/1536/adapter_model.safetensors',
              'handoff-results/RTX3060_12GB_TARGETED_LORA_1536_ENVELOPE_RESULT.zip']
-    ignored = git('check-ignore', '-z', *paths).split('\0')[:-1]
+    ignored = git('check-ignore', '-z', '--stdin', input='\0'.join(paths) + '\0').split('\0')[:-1]
     assert set(ignored) == set(paths), 'New 1536 runtime/output paths must stay ignored'
     return {'commit': git('rev-parse', 'HEAD').rstrip('\r\n'), 'origin': git('remote', 'get-url', 'origin').rstrip('\r\n'), 'clean': True, 'ignored_paths': paths}
 

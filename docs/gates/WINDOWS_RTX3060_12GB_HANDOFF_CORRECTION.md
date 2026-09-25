@@ -20,11 +20,13 @@
 
 | Группа | unittest cases | Что реально / что fixture |
 |---|---:|---|
-| source/recovery/policy/selection | 19 | Реальный backup и исходники; GPU/verdict — fixtures |
+| source/recovery/policy/selection | 20 | Реальный backup, исходники и Git-команды preflight; GPU/verdict — fixtures |
 | environment/model | 20 | Настоящие малые TAR/файлы; pip/venv install boundaries — mocks |
 | Windows PowerShell 5.1 | 11 | Реальный parser, процессы, Unicode/пробелы, exit/timeout, DryRun; orchestration install/GPU — mocks |
 | campaign/result verifier | 24 | Реальная межпроцессная блокировка и ZIP; training/reload — fixtures, явно не hardware evidence |
-| **Итого** | **74 PASS, 0 FAIL** | По 180 секунд на focused group; без package install/Qwen execution |
+| **Итого** | **75 PASS, 0 FAIL** | По 180 секунд на focused group; без package install/Qwen execution |
+
+Финальная проверка чистого checkout выявила ошибку Git-вызова: `check-ignore -z` требует `--stdin`. Исправлены NUL-разделённые stdin/output, добавлена регрессия с реальным Git и повторно проверен production preflight. Тесты Git не заменяют аппаратную проверку RTX3060.
 
 Дополнительно выполнены реальные проверки принятым owner-окружением:
 

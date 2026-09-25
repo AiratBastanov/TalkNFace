@@ -55,8 +55,21 @@ class SourceTests(unittest.TestCase):
         paths=['.tmp/rtx3060-12gb-targeted-1536-smoke/marker.json','.venv-qlora-remote/pyvenv.cfg',
                'AlagModels/adapters/rtx3060-12gb-targeted-1536-smoke/1536/x',
                'handoff-results/RTX3060_12GB_TARGETED_LORA_1536_ENVELOPE_RESULT.zip']
-        result=subprocess.run(['git','check-ignore',*paths],cwd=ROOT,check=True,capture_output=True,encoding='utf-8',timeout=20)
-        self.assertEqual(set(result.stdout.splitlines()),set(paths))
+        result=control.git('check-ignore','-z','--stdin',input='\0'.join(paths)+'\0')
+        self.assertEqual(set(result.split('\0')[:-1]),set(paths))
+
+    def test_production_git_preflight_executes_real_native_commands(self):
+        native_git=control.git
+        def allow_in_progress_task_edits(*args,**kwargs):
+            # The test can run before commit. Every other production Git command,
+            # including check-ignore's NUL stdin/output, executes against Git.
+            if args==('status','--porcelain=v1','--untracked-files=all'): return ''
+            return native_git(*args,**kwargs)
+        with patch('control.git',side_effect=allow_in_progress_task_edits):
+            result=control.assert_git_safe()
+        self.assertEqual(result['commit'],native_git('rev-parse','HEAD').rstrip('\r\n'))
+        self.assertEqual(len(result['ignored_paths']),4)
+        self.assertTrue(result['clean'])
 
     def test_workers_reject_historical_writes_and_holdouts(self):
         guard=AccessGuard('fixture')
