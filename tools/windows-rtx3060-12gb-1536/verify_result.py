@@ -10,6 +10,7 @@ from state import GATE
 from verdict import PREFIX, decide, audit_ok
 from policy import hardware_checks
 from selection import validate_selection
+from source_identity import source_identity
 
 
 def unique_json(raw):
@@ -44,36 +45,13 @@ def inspect_zip(path):
     return evidence, manifest
 
 
-def git(*args):
-    return subprocess.check_output(['git','-C',str(ROOT),*args], encoding='utf-8', errors='strict', timeout=30)
-
-
-def source_identity(e):
-    o = e['outcome']; integrity = o['integrity']; ready = e['prepared']
-    assert integrity['passed'] is True and integrity['before'] == integrity['after']
-    assert ready['git']['clean'] is True and integrity['git']['clean'] is True
-    assert ready['git']['origin'] == integrity['git']['origin'] == 'https://github.com/AiratBastanov/TalkNFace.git'
-    assert o['repository_commit'] == ready['git']['commit'] == integrity['git']['commit'] == git('rev-parse','HEAD').rstrip('\r\n')
-    tracked = git('ls-files','-z').split('\0')[:-1]  # Never strip filename whitespace.
-    pins = read_json(HERE / 'model-lock.json')['files']
-    model_paths = {'AlagModels/Qwen3-4B/'+n:pin for n,pin in pins.items()}
-    assert set(integrity['before']) == set(tracked) | set(model_paths)
-    for name in tracked:
-        p = ROOT / name
-        assert integrity['before'][name] == {'bytes':p.stat().st_size,'sha256':sha256(p)}, 'Source mismatch: '+name
-    for name, pin in model_paths.items(): assert integrity['before'][name] == pin
-    assert e['controls']['configuration'] == read_json(HERE / 'config.json')
-    assert e['controls']['decision_sha256'] == sha256(ROOT / 'docs/gates/evidence/LOCAL_QWEN_QLORA_MEMORY_ARCHITECTURE_DECISION.json')
-    assert ready['configuration_sha256'] == sha256(HERE / 'config.json')
-    return True
-
-
 def verify_evidence(e, source_check=source_identity):
     required = {'schema_version','gate','fixture_only','outcome','selection','prepared','campaign','runtime',
                 'campaign_reservation','worker_entry','model_load_entry',
                 'wheel_provenance','cuda_backend','model_hash_verification','prepare_audit','tests','controls',
                 'last_error_phase','full_training_started','REAL_APPLICATION_SMOKE','isolation_contract','excluded'}
-    if set(e) != required or e['schema_version'] != 2 or e['gate'] != GATE:
+    if e.get('schema_version') == 3: required.add('source_provenance')
+    if set(e) != required or e['schema_version'] not in (2, 3) or e['gate'] != GATE:
         raise ValueError('Missing/unknown evidence schema or gate')
     from package_result import sanitize
     assert sanitize(e) == e, 'Unsanitized/private diagnostic payload'

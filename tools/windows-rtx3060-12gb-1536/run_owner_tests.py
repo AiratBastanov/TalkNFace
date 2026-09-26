@@ -11,7 +11,7 @@ from common import ROOT, HERE, write_json
 def main():
     output=ROOT/'.tmp/rtx3060-handoff-validation'; output.mkdir(parents=True,exist_ok=True)
     groups=[]
-    for name in ('test_handoff','test_setup_model','test_python_launcher','test_workflow_result'):
+    for name in ('test_handoff','test_setup_model','test_python_launcher','test_workflow_result','test_source_identity'):
         start=time.monotonic(); log=output/(name+'.log')
         print(f'ACTIVE: {name}; fixed budget=180s; log={log}',flush=True)
         with log.open('w',encoding='utf-8') as stream:

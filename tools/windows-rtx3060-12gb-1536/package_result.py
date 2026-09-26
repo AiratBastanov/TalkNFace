@@ -5,17 +5,63 @@ from pathlib import Path
 import re
 import shutil
 import zipfile
+from urllib.parse import urlsplit
 from common import HERE, ROOT, SCRATCH, read_json, sha256, reject_reparse
 from state import GATE, OperationLock, process_active
 
 ARCHIVE = 'RTX3060_12GB_TARGETED_LORA_1536_ENVELOPE_RESULT.zip'
 RESULTS = ROOT / 'handoff-results'
 PRIVATE_KEYS = {'prompt','completion','input_ids','labels','messages','public_context','json','rows','reload_row'}
-SECRET_KEYS = {'token','access_token','hf_token','authorization','password','secret','credentials'}
+SECRET_KEYS = {'token','access_token','refresh_token','hf_token','api_key','client_secret',
+               'authorization','password','secret','credentials','cookie'}
 OMIT_KEYS = {'error','message','pip_check','pip_check_stderr'}  # arbitrary exception/log text is not portable evidence
 
 
+URL = re.compile(r'(?i)\b[a-z][a-z0-9+.-]*://[^\s<>\"\']+')
+TOKEN = re.compile(r'\b(?:hf_[A-Za-z0-9]+|gh[pousr]_[A-Za-z0-9]+|github_pat_[A-Za-z0-9_]+)')
+
+
 def scrub_text(text, root=ROOT):
+    # Parse URL spans before filesystem paths. Never expose userinfo, query or
+    # fragment payloads, including username-only credentials and non-HTTP URLs.
+    def url(value):
+        try:
+            parsed = urlsplit(value)
+            if (parsed.scheme.lower() not in ('https', 'http') or not parsed.hostname
+                    or not parsed.netloc.isascii() or any(c in parsed.netloc for c in '@%\\')
+                    or parsed.query or parsed.fragment or TOKEN.search(value)):
+                return '<redacted-url>'
+            parsed.port  # Reject malformed ports too.
+            return value
+        except ValueError:
+            return '<redacted-url>'
+
+    def paths(value):
+        value = value.replace(str(root), '<repository>').replace(root.as_posix(), '<repository>')
+        # Boundary prevents matching the trailing letter of a scheme. UNC,
+        # drive, home and absolute POSIX paths remain private (spaces included).
+        return re.sub(r'(?<![\w:/\\])(?:[a-zA-Z]:[\\/]|\\\\|//|/|~[\\/])[^\r\n\"\'<>]*',
+                      '<local-path>', value)
+
+    pieces = []; cursor = 0
+    for match in URL.finditer(text):
+        pieces.extend((paths(text[cursor:match.start()]), url(match.group())))
+        cursor = match.end()
+    pieces.append(paths(text[cursor:]))
+    text = ''.join(pieces)
+    text = TOKEN.sub('<redacted-token>', text)
+    text = re.sub(r'(?i)Bearer\s+(?!<redacted>)\S+', 'Bearer <redacted>', text)
+    text = re.sub(r'(?i)\b(token|access_token|api_key|password|secret|authorization)\s*[:=]\s*(?!<redacted>)[^\s,;<>]+',
+                  r'\1=<redacted>', text)
+    return text
+
+
+def legacy_scrub_text(text, root=ROOT):
+    """Original lossy projection, ONLY for binding to the immutable old receipt.
+
+    This intentionally reproduces the defect; never use it for new payloads or
+    to infer/repair an origin. Actual Git identity is validated separately.
+    """
     text = text.replace(str(root), '<repository>').replace(root.as_posix(), '<repository>')
     text = re.sub(r'(?i)[a-z]:[\\/][^\r\n\"\']*', '<local-path>', text)
     text = re.sub(r'hf_[A-Za-z0-9]+', '<redacted-token>', text)
@@ -25,17 +71,17 @@ def scrub_text(text, root=ROOT):
     return text
 
 
-def sanitize(value, root=ROOT):
+def sanitize(value, root=ROOT, *, scrubber=scrub_text):
     if isinstance(value, dict):
         result = {}
         for key, item in value.items():
             if key.lower() in SECRET_KEYS: result[key] = '<redacted>'; continue
             if key in PRIVATE_KEYS: raise ValueError('Example content cannot enter a result: ' + key)
             if key in OMIT_KEYS: continue
-            result[key] = sanitize(item, root)
+            result[key] = sanitize(item, root, scrubber=scrubber)
         return result
-    if isinstance(value, list): return [sanitize(v, root) for v in value]
-    if isinstance(value, str): return scrub_text(value, root)
+    if isinstance(value, list): return [sanitize(v, root, scrubber=scrubber) for v in value]
+    if isinstance(value, str): return scrubber(value, root)
     return value
 
 
@@ -92,7 +138,14 @@ def package(scratch=SCRATCH, output=RESULTS, root=ROOT):
     scratch, output = Path(scratch), Path(output)
     reject_reparse(output); reject_reparse(scratch)
     assert_workers_exited(scratch)
-    e = sanitize(evidence_for(scratch), root)
+    raw = evidence_for(scratch)
+    provenance = None
+    if raw['campaign'] and raw['campaign'].get('status') == 'completed':
+        from source_identity import certify_packaging
+        provenance = certify_packaging(raw, scratch, output, root)
+    e = sanitize(raw, root)
+    if provenance is not None:
+        e.update(schema_version=3, source_provenance=provenance)
     payload = {'RESULT.txt': result_text(e).encode('utf-8'),
                'evidence.json': (json.dumps(e, ensure_ascii=True, indent=2, allow_nan=False)+'\n').encode('utf-8')}
     if any(len(data)>16*2**20 for data in payload.values()): raise ValueError('Diagnostic size limit exceeded')
@@ -104,11 +157,15 @@ def package(scratch=SCRATCH, output=RESULTS, root=ROOT):
     if archive.exists():
         existing, _ = inspect_zip(archive)
         if existing == e:
-            print('Existing identical result reused: ' + str(archive), flush=True); return archive
+            print('Existing identical result reused: ' + str(archive), flush=True)
+            print('SHA256: ' + sha256(archive), flush=True)
+            return archive
         history = scratch / 'packaged-history'; history.mkdir(parents=True, exist_ok=True)
         backup = history / (sha256(archive) + '.zip')
+        reject_reparse(backup)
         if not backup.exists(): shutil.copy2(archive, backup)
         assert sha256(backup) == sha256(archive), 'Result backup verification failed'
+        print('PRESERVED previous result: ' + str(backup) + '; SHA256: ' + sha256(backup), flush=True)
     temporary = scratch / ('result-' + __import__('uuid').uuid4().hex + '.zip')
     with zipfile.ZipFile(temporary, 'x', compression=zipfile.ZIP_DEFLATED) as z:
         for n,b in payload.items(): z.writestr(n,b)
@@ -119,5 +176,14 @@ def package(scratch=SCRATCH, output=RESULTS, root=ROOT):
     return archive
 
 
+def main():
+    from verify_result import verify
+    with OperationLock():
+        archive = package()
+        result = verify(archive)
+        print(json.dumps(result, ensure_ascii=True, indent=2), flush=True)
+    return 0 if result['certified_training_pass'] else 2
+
+
 if __name__ == '__main__':
-    with OperationLock(): package()
+    raise SystemExit(main())

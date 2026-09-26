@@ -235,26 +235,8 @@ class ArchiveVerifierTests(unittest.TestCase):
         e=self.synthetic_evidence(); del e['full_training_started']
         with self.assertRaises(ValueError): verify_result.verify_evidence(e)
 
-    def test_source_hash_coverage_and_commit_identity_are_actually_verified(self):
-        with temporary() as tmp:
-            root=Path(tmp); source=root/' leading source.txt'; source.write_text('fixture source',encoding='utf-8')
-            decision=root/'docs/gates/evidence/LOCAL_QWEN_QLORA_MEMORY_ARCHITECTURE_DECISION.json'
-            write_json(decision,{'fixture':'byte-only'})
-            names=[source.relative_to(root).as_posix(),decision.relative_to(root).as_posix()]
-            pins={n:{'bytes':(root/n).stat().st_size,'sha256':sha256(root/n)} for n in names}
-            pins.update({'AlagModels/Qwen3-4B/'+n:p for n,p in read_json(HERE/'model-lock.json')['files'].items()})
-            identity={'commit':'a'*40,'origin':'https://github.com/AiratBastanov/TalkNFace.git','clean':True}
-            e={'outcome':{'repository_commit':'a'*40,'integrity':{'passed':True,'before':pins,'after':copy.deepcopy(pins),'git':identity}},
-               'prepared':{'git':identity,'configuration_sha256':sha256(HERE/'config.json')},
-               'controls':{'configuration':read_json(HERE/'config.json'),'decision_sha256':sha256(decision)}}
-            def git(*args): return 'a'*40+'\n' if args[0]=='rev-parse' else '\0'.join(names)+'\0'
-            with patch('verify_result.ROOT',root),patch('verify_result.git',side_effect=git):
-                self.assertTrue(verify_result.source_identity(e))
-                source.write_text('changed source',encoding='utf-8')
-                with self.assertRaises(AssertionError): verify_result.source_identity(e)
-                source.write_text('fixture source',encoding='utf-8')
-                e['outcome']['repository_commit']='b'*40
-                with self.assertRaises(AssertionError): verify_result.source_identity(e)
+    # Source identity now has real Git histories (including later tooling commits)
+    # in test_source_identity.py, replacing the old mocked HEAD/ls-files test.
 
     def test_package_reuse_and_replacement_preserve_old_zip(self):
         with temporary() as tmp:

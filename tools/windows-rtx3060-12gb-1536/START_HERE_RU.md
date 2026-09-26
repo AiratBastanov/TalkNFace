@@ -1,5 +1,19 @@
 # Проверка RTX 3060 12 ГБ на компьютере друга
 
+**Уже выполненная кампания `1c270adba77545720fa33bcee0e24f7d6f46e55d`: только исправление упаковки и сертификации.** GPU-обучение повторять нельзя. В существующем checkout с исходными `.tmp`, адаптером и ZIP выполните:
+
+```powershell
+git pull --ff-only
+if ($LASTEXITCODE -ne 0) { throw 'git pull failed' }
+powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\windows-rtx3060-12gb-1536\RUN-RTX3060-12GB-REMOTE.ps1 -RepoRoot . -PackageOnly
+```
+
+Эта команда вызывает только фазу 05 и verifier: без CUDA, загрузки модели, подготовки TRAIN или фазы 04. Она проверяет исторический training commit отдельно от нового packaging commit, реальный origin и чистоту Git, исходные доказательства и отсутствие изменений training/model/data/config в истории исправления. Ожидаются `archive_integrity: PASS`, `certified_training_pass: true` и исходный training verdict `RTX3060_12GB_TARGETED_LORA_1536_ENVELOPE_SMOKE_PASS`. Полное обучение остаётся **NOT STARTED**.
+
+Старый ZIP автоматически сохраняется в `.tmp/rtx3060-12gb-targeted-1536-smoke/packaged-history/<SHA256>.zip` с проверкой хеша и сообщением `PRESERVED`. Новый результат и SHA256 печатаются в консоль. Отправьте новый `handoff-results/RTX3060_12GB_TARGETED_LORA_1536_ENVELOPE_RESULT.zip`. Не удаляйте `campaign-started.json`, не меняйте исходные JSON, модель или адаптер. Если проверка не прошла, сохраните вывод и файлы; это не разрешение повторить обучение.
+
+**Ниже сохранена историческая инструкция первоначального запуска. Для уже выполненной кампании её команды подготовки и обучения не применяются.**
+
 Codex не нужен. Нужны Windows 10/11 x86-64, **настольная RTX 3060 12 ГБ** (не 8 ГБ, не Ti, не Laptop), Git для Windows, **Python 3.12.10 x64** и рабочий драйвер NVIDIA. Установите отсутствующие Git/Python/драйвер вручную. Для Python включите компонент launcher `py`; менять PATH необязательно. Скрипты не устанавливают системные компоненты, CUDA Toolkit, Visual Studio, WSL или Docker, не меняют pagefile, права, реестр и постоянную execution policy.
 
 Откройте обычный **64-разрядный Windows PowerShell**, без прав администратора. Желательно иметь 30 ГиБ свободного места на диске проекта. Перед кампанией закройте игры и программы, использующие GPU: нужно >=10800 МиБ свободной VRAM по nvidia-smi, >=10500 МиБ по CUDA и >=12 ГиБ доступной физической RAM. Скрипт сам проверит модель GPU, обе ёмкости >=12000 МиБ и compute capability 8.6.
