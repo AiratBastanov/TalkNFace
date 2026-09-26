@@ -35,4 +35,6 @@ Schema 3 adds `source_provenance` without replacing the historical training comm
 
 Focused correction regressions (stdlib/CPU and PowerShell fixtures only): `python -B -m unittest discover -s tools/windows-rtx3060-12gb-1536 -p test_source_identity.py -v`. Also run `test_workflow_result.py` and `test_python_launcher.py` through unittest. The owner suite includes these tests and has a 180-second limit per group.
 
+For the current checkout only, byte comparison accepts the frozen Git `text=auto eol=lf` conversion when Git classifies the indexed file as LF text. This handles clean Windows CRLF worktrees without editing them. Binary files, historical evidence hashes and any content difference remain strict; no external clean/smudge filters run. This does not change the Git-history proof or the original training snapshot.
+
 Owner regressions: `python -B tools/windows-rtx3060-12gb-1536/run_owner_tests.py` (180 seconds per group; no installs or ML execution). `owner_tokenizer_check.py` is an optional real tokenizer/compiler check using an already accepted environment, without weights, CUDA work or campaign readiness. The correction receipt distinguishes real owner checks from fixtures and remote execution.

@@ -83,8 +83,12 @@ class SourceIdentityTests(unittest.TestCase):
             p = self.root / source.TOOL / name; p.parent.mkdir(parents=True, exist_ok=True)
             p.write_bytes((HERE / name).read_bytes())
         write_json(self.root / source.DECISION, {'fixture': 'only byte hashing'})
+        decision = self.root / source.DECISION
+        decision.write_bytes(decision.read_bytes().replace(b'\r\n', b'\n'))
         (self.root / ' leading source.txt').write_bytes(b'fixture training source\n')
-        (self.root / '.gitignore').write_text('.scratch/\n.results/\n', encoding='utf-8')
+        (self.root / 'binary.bin').write_bytes(b'fixture\x00\n')
+        (self.root / '.gitattributes').write_bytes(b'* text=auto eol=lf\n')
+        (self.root / '.gitignore').write_bytes(b'.scratch/\n.results/\n')
         self.commit('fixture training')
         self.training_commit = self.git.text('rev-parse', 'HEAD')
         self.scratch = self.root / '.scratch'; self.scratch.mkdir()
@@ -187,6 +191,28 @@ class SourceIdentityTests(unittest.TestCase):
     def test_assume_unchanged_cannot_hide_source_changes(self):
         self.command('update-index', '--assume-unchanged', '--', ' leading source.txt')
         (self.root / ' leading source.txt').write_text('dirty', encoding='utf-8')
+        self.assert_rejected()
+
+    def test_git_declared_crlf_conversion_keeps_clean_identity(self):
+        (self.root / ' leading source.txt').write_bytes(b'fixture training source\r\n')
+        self.command('add', '--', ' leading source.txt')  # Same Git blob; refresh the fixture's index stat.
+        self.assertTrue(source.source_identity(self.e, self.root))
+        self.assertEqual(source.verify_checkout(self.git, self.training_commit), [' leading source.txt'])
+
+    def test_crlf_plus_hidden_content_change_fails(self):
+        self.command('update-index', '--assume-unchanged', '--', ' leading source.txt')
+        (self.root / ' leading source.txt').write_bytes(b'fixture changed content\r\n')
+        self.assert_rejected()
+
+    def test_binary_content_never_receives_eol_normalization(self):
+        self.command('update-index', '--assume-unchanged', '--', 'binary.bin')
+        (self.root / 'binary.bin').write_bytes(b'fixture\x00\r\n')
+        self.assert_rejected()
+
+    def test_historical_snapshot_never_receives_eol_normalization(self):
+        p = source.pin(b'fixture training source\r\n')
+        self.e['outcome']['integrity']['before'][' leading source.txt'] = p
+        self.e['outcome']['integrity']['after'][' leading source.txt'] = p
         self.assert_rejected()
 
     def test_malformed_missing_and_redacted_source_identity_fail(self):

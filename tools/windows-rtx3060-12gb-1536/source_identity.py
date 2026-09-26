@@ -181,6 +181,34 @@ def legacy_digest(e, root=ROOT):
     return digest(sanitize(original, root, scrubber=legacy_scrub_text))
 
 
+def verify_checkout(git, commit):
+    """Compare actual contents too, including files hidden by index flags.
+
+    Git's explicit text=auto/eol=lf policy permits CRLF worktrees. Accept only
+    that conversion for index-classified LF text, never arbitrary clean/smudge
+    filters, binary normalization or normalization of the historical snapshot.
+    """
+    text_lf = set()
+    for row in git.raw('ls-files', '--eol', '-z').split(b'\0')[:-1]:
+        metadata, name = row.split(b'\t', 1)
+        fields = metadata.decode('ascii').split()
+        if fields[0] == 'i/lf' and fields[2:] == ['attr/text=auto', 'eol=lf']:
+            text_lf.add(name.decode('utf-8'))
+    normalized = []
+    for name, expected in git.blobs(git.tree(commit)).items():
+        path = git.root / name
+        reject_reparse(path)
+        max_size = len(expected) + (expected.count(b'\n') if name in text_lf else 0)
+        require(len(expected) <= path.stat().st_size <= max_size, 'Checkout size mismatch: ' + name)
+        actual = path.read_bytes()
+        if actual == expected:
+            continue
+        require(name in text_lf and actual.replace(b'\r\n', b'\n') == expected,
+                'Current checkout contents differ from Git: ' + name)
+        normalized.append(name)
+    return normalized
+
+
 def collect_provenance(e, root=ROOT):
     ready = GitIdentity.parse(e['prepared']['git'])
     after = GitIdentity.parse(e['outcome']['integrity']['git'])
@@ -190,12 +218,8 @@ def collect_provenance(e, root=ROOT):
     current = git.identity()
     historical_snapshot(e, git)
     proof = tooling_proof(git, ready.commit, current['commit'])
-    # status alone does not catch assume-unchanged/skip-worktree or EOL drift.
-    for name, raw in git.blobs(git.tree(current['commit'])).items():
-        path = Path(root) / name
-        reject_reparse(path)
-        require(path.stat().st_size == len(raw) and sha256(path) == pin(raw)['sha256'],
-                'Current checkout bytes differ from Git: ' + name)
+    # status alone does not catch assume-unchanged/skip-worktree.
+    verify_checkout(git, current['commit'])
     require(legacy_digest(e, root) == ORIGINAL_EVIDENCE_SHA256,
             'Completed campaign differs from the immutable original result')
     require(current == git.identity(), 'Git state changed during certification')
