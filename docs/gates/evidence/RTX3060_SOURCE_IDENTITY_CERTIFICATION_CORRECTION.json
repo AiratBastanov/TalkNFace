@@ -1,0 +1,263 @@
+{
+  "schema_version": 1,
+  "verdict": "RTX3060_SOURCE_IDENTITY_CERTIFICATION_CORRECTION_PASS",
+  "scope": "Packaging/verifier correction; remote certification of existing raw evidence still pending",
+  "gpu_campaign_rerun": false,
+  "new_training_campaigns": 0,
+  "real_phase04_invocations": 0,
+  "model_or_adapter_weights_modified": false,
+  "full_training_started": false,
+  "full_training_status": "NOT STARTED",
+  "evaluation_started": false,
+  "training_source_commit": "1c270adba77545720fa33bcee0e24f7d6f46e55d",
+  "packaging_verifier_correction_commit": "8cab2c3aae1bdfdc87d1d9c68326c9564d629852",
+  "implementation_commits": [
+    "8712861a731e46a53f8c99ba86e7987cdea11631",
+    "8cab2c3aae1bdfdc87d1d9c68326c9564d629852"
+  ],
+  "receipt_commit_resolution": "git log -1 --format=%H -- docs/gates/evidence/RTX3060_SOURCE_IDENTITY_CERTIFICATION_CORRECTION.json",
+  "authoritative_origin": "https://github.com/AiratBastanov/TalkNFace.git",
+  "original_result_zip": {
+    "name": "RTX3060_12GB_TARGETED_LORA_1536_ENVELOPE_RESULT.zip",
+    "bytes": 60659,
+    "sha256": "07d2abfc00d188a469b1a18e6bc370c7040aa0e7a22f091ffc553ecff68e2cbf",
+    "modified": false
+  },
+  "original_evidence_canonical_sha256": "e8a2314894204b10ddadc5372fea4d34887f66842c9a8cd8413e9269c8d12906",
+  "root_cause": {
+    "function": "package_result.scrub_text",
+    "class": "Unbounded drive-letter regex matches the final s of https",
+    "matched_substring": "s://github.com/AiratBastanov/TalkNFace.git",
+    "reproduced_output": "http<local-path>",
+    "UNC_matcher_was_cause": false,
+    "additional_impact": "Wheel HTTPS URLs also erased",
+    "second_defect": "Old verifier required historical training commit and all historical source hashes to equal current HEAD/worktree after tooling corrections"
+  },
+  "correction": {
+    "url_and_filesystem_parsing_distinct": true,
+    "source_identity_from_original_raw_Git_records_and_actual_checkout": true,
+    "historical_commit_never_replaced_with_HEAD": true,
+    "new_evidence_schema": 3,
+    "historical_hashes_byte_exact": true,
+    "current_checkout_only_EOL_policy": "Only index LF text with text=auto eol=lf may use CRLF; no binary or historical normalization",
+    "original_legacy_projection_used_only_for_digest_binding": true,
+    "original_archive_and_raw_evidence_preserved": true,
+    "package_only_runs_verifier_and_propagates_failure": true
+  },
+  "files_changed": [
+    "docs/gates/RTX3060_SOURCE_IDENTITY_CERTIFICATION_CORRECTION.md",
+    "docs/gates/evidence/RTX3060_SOURCE_IDENTITY_CERTIFICATION_CORRECTION.json",
+    "tools/windows-rtx3060-12gb-1536/README.md",
+    "tools/windows-rtx3060-12gb-1536/START_HERE_RU.md",
+    "tools/windows-rtx3060-12gb-1536/package_result.py",
+    "tools/windows-rtx3060-12gb-1536/run_owner_tests.py",
+    "tools/windows-rtx3060-12gb-1536/source_identity.py",
+    "tools/windows-rtx3060-12gb-1536/test_source_identity.py",
+    "tools/windows-rtx3060-12gb-1536/test_workflow_result.py",
+    "tools/windows-rtx3060-12gb-1536/verify_result.py"
+  ],
+  "regressions": {
+    "passed": true,
+    "tests": 74,
+    "groups": [
+      {
+        "group": "test_source_identity",
+        "returncode": 0,
+        "tests": 40,
+        "seconds": 22.688,
+        "budget_seconds": 180,
+        "passed": true
+      },
+      {
+        "group": "test_workflow_result",
+        "returncode": 0,
+        "tests": 23,
+        "seconds": 0.781,
+        "budget_seconds": 180,
+        "passed": true
+      },
+      {
+        "group": "test_python_launcher",
+        "returncode": 0,
+        "tests": 11,
+        "seconds": 13.078,
+        "budget_seconds": 180,
+        "passed": true
+      }
+    ],
+    "GPU_model_loads": 0,
+    "real_training_campaigns": 0,
+    "fixture_only_data": true,
+    "real_PowerShell_51_parsing_and_dispatch": true,
+    "git_diff_check": "PASS"
+  },
+  "load_bearing_proof": {
+    "training_source_commit": "1c270adba77545720fa33bcee0e24f7d6f46e55d",
+    "packaging_commit": "8cab2c3aae1bdfdc87d1d9c68326c9564d629852",
+    "training_tree_sha256": "c0f2cfe8a7c0b68e5c2515d0758e056b38662215e71c663fa1b8a51d7227348a",
+    "protected_tree_sha256": "e6bec130c1205e0cc8307c065714cee2e7eddb1972b40b3ba73f4eb71fbf8bcd",
+    "protected_paths": 313,
+    "load_bearing_changes": [],
+    "allowed_correction_paths": [
+      "docs/gates/RTX3060_SOURCE_IDENTITY_CERTIFICATION_CORRECTION.md",
+      "docs/gates/evidence/RTX3060_SOURCE_IDENTITY_CERTIFICATION_CORRECTION.json",
+      "tools/windows-rtx3060-12gb-1536/README.md",
+      "tools/windows-rtx3060-12gb-1536/START_HERE_RU.md",
+      "tools/windows-rtx3060-12gb-1536/package_result.py",
+      "tools/windows-rtx3060-12gb-1536/run_owner_tests.py",
+      "tools/windows-rtx3060-12gb-1536/source_identity.py",
+      "tools/windows-rtx3060-12gb-1536/test_source_identity.py",
+      "tools/windows-rtx3060-12gb-1536/test_workflow_result.py",
+      "tools/windows-rtx3060-12gb-1536/verify_result.py"
+    ],
+    "commits": [
+      {
+        "commit": "8712861a731e46a53f8c99ba86e7987cdea11631",
+        "parent": "1c270adba77545720fa33bcee0e24f7d6f46e55d",
+        "changed_paths": [
+          "tools/windows-rtx3060-12gb-1536/README.md",
+          "tools/windows-rtx3060-12gb-1536/START_HERE_RU.md",
+          "tools/windows-rtx3060-12gb-1536/package_result.py",
+          "tools/windows-rtx3060-12gb-1536/run_owner_tests.py",
+          "tools/windows-rtx3060-12gb-1536/source_identity.py",
+          "tools/windows-rtx3060-12gb-1536/test_source_identity.py",
+          "tools/windows-rtx3060-12gb-1536/test_workflow_result.py",
+          "tools/windows-rtx3060-12gb-1536/verify_result.py"
+        ]
+      },
+      {
+        "commit": "8cab2c3aae1bdfdc87d1d9c68326c9564d629852",
+        "parent": "8712861a731e46a53f8c99ba86e7987cdea11631",
+        "changed_paths": [
+          "tools/windows-rtx3060-12gb-1536/README.md",
+          "tools/windows-rtx3060-12gb-1536/source_identity.py",
+          "tools/windows-rtx3060-12gb-1536/test_source_identity.py"
+        ]
+      }
+    ],
+    "actual_git": {
+      "commit": "8cab2c3aae1bdfdc87d1d9c68326c9564d629852",
+      "origin": "https://github.com/AiratBastanov/TalkNFace.git",
+      "clean": true
+    },
+    "historical_tracked_files": 319,
+    "historical_snapshot_entries": 329,
+    "historical_snapshot_mismatches": [],
+    "current_checkout_git_content_mismatches": [],
+    "declared_git_eol_only_paths": [
+      "docs/gates/AI_LOCAL_DATASET_ACQUISITION.md",
+      "docs/gates/LOCAL_QWEN_QLORA_HOST_RAM_OFFLOAD_CORRECTION.md",
+      "docs/gates/evidence/LOCAL_QWEN_QLORA_FEASIBILITY_SMOKE.json",
+      "docs/gates/evidence/LOCAL_QWEN_QLORA_HOST_RAM_OFFLOAD_CORRECTION.json",
+      "docs/gates/evidence/LOCAL_QWEN_QLORA_MEMORY_ARCHITECTURE_DECISION.json",
+      "docs/gates/evidence/LOCAL_QWEN_TARGETED_LORA_MEMORY_SMOKE.json",
+      "ml/qlora_offload_smoke/config.json",
+      "ml/qwen_targeted_lora_memory_smoke/common.py",
+      "ml/qwen_targeted_lora_memory_smoke/config.json",
+      "ml/qwen_targeted_lora_memory_smoke/prepare_smoke_data.py",
+      "ml/qwen_targeted_lora_memory_smoke/train_smoke.py",
+      "ml/qwen_targeted_lora_memory_smoke/verify_adapter.py",
+      "tools/windows-rtx3070-1536/RUN-1536-REMOTE.ps1",
+      "tools/windows-rtx3070-1536/Remote.Common.ps1"
+    ],
+    "original_result_verification": {
+      "archive_integrity": "PASS",
+      "training_gate": "NOT_CERTIFIED",
+      "certified_training_pass": false,
+      "failed_checks": [
+        "source_identity"
+      ]
+    },
+    "unchanged_training_git_blob_pins": {
+      "tools/windows-rtx3060-12gb-1536/train_smoke.py": {
+        "bytes": 18585,
+        "sha256": "84c6db130dcdabd01d572b4d59ff25bcfca0b6b9e47a87538d89a49aea0cd34c"
+      },
+      "tools/windows-rtx3060-12gb-1536/config.json": {
+        "bytes": 2681,
+        "sha256": "04c360125801f35769cb28eaefe88e3c135757c5bd68dec454f532fc53e5cbfc"
+      },
+      "tools/windows-rtx3060-12gb-1536/model-lock.json": {
+        "bytes": 1555,
+        "sha256": "40dc9540c9045a17d9f898336f19322917590e27ecfee7f57511a7a17ad0b1c0"
+      },
+      "tools/windows-rtx3060-12gb-1536/runtime-lock.json": {
+        "bytes": 20193,
+        "sha256": "3fdb4d2c5c731e13aec27e6ebd063096456d4c770ea4c55fdf65ddf8187c4755"
+      },
+      "tools/windows-rtx3060-12gb-1536/selection.py": {
+        "bytes": 1241,
+        "sha256": "6fe28b2c9d22387f25af696957ee1fd28aa53b8a15f79e68be85b91a5512349b"
+      },
+      "tools/windows-rtx3060-12gb-1536/offload.py": {
+        "bytes": 6785,
+        "sha256": "5b7e6d17d0771cd834e3bdc0e5546029e7c12f27515fcfd07f5bf4599f5fd090"
+      },
+      "tools/windows-rtx3060-12gb-1536/Remote.Common.ps1": {
+        "bytes": 17928,
+        "sha256": "e82e2d7a7062240965e3065276cd6b4da7c506e14e66d28331e09a77c21720e7"
+      },
+      "tools/windows-rtx3060-12gb-1536/RUN-RTX3060-12GB-REMOTE.ps1": {
+        "bytes": 2134,
+        "sha256": "c1c9b7e527f299ff82165d2f1d651a5fbf43c2af6bd46f2ff67798d438b42537"
+      },
+      "ml/data/synthetic_ru/train.jsonl": {
+        "bytes": 10733980,
+        "sha256": "74defddc644eda30227a58adaef41ad31d7a849000852d6a459de4b778770f47"
+      },
+      "docs/gates/evidence/LOCAL_QWEN_QLORA_MEMORY_ARCHITECTURE_DECISION.json": {
+        "bytes": 230346,
+        "sha256": "f2e9a9200be7eb2cc3d5b6032d68b8be8ea5bd4c3205f5e6d698be57bccbf48b"
+      }
+    }
+  },
+  "observed_original_hardware_evidence": {
+    "training_verdict": "RTX3060_12GB_TARGETED_LORA_1536_ENVELOPE_SMOKE_PASS",
+    "optimizer_updates": 2,
+    "optimizer_boundary_free_MiB": [
+      3933.0,
+      1160.6484375
+    ],
+    "external_min_free_MiB": 1002.0,
+    "cuda_oom": false,
+    "monitor_stop_reason": null,
+    "worker_returncode": 0,
+    "adapter_changed_tensors": 144,
+    "reload_passed": true,
+    "reload_fresh_process": true,
+    "reload_tensor_equality": true,
+    "reload_logits_finite": true,
+    "full_training_started": false
+  },
+  "friend_postrun_git_attestation": {
+    "source": "User-provided independent friend verification; raw remote records are checked by PackageOnly",
+    "branch": "main",
+    "HEAD": "1c270adba77545720fa33bcee0e24f7d6f46e55d",
+    "origin": "https://github.com/AiratBastanov/TalkNFace.git",
+    "clean": true,
+    "ahead_behind": [
+      0,
+      0
+    ]
+  },
+  "remote_action": {
+    "status": "PENDING_EXISTING_CAMPAIGN_REPACKAGING",
+    "commands": [
+      "git pull --ff-only",
+      "powershell -NoProfile -ExecutionPolicy Bypass -File .\\tools\\windows-rtx3060-12gb-1536\\RUN-RTX3060-12GB-REMOTE.ps1 -RepoRoot . -PackageOnly"
+    ],
+    "phases": [
+      5
+    ],
+    "GPU_queries": false,
+    "model_loads": false,
+    "training": false,
+    "output": "handoff-results/RTX3060_12GB_TARGETED_LORA_1536_ENVELOPE_RESULT.zip",
+    "sha256_printed": true,
+    "previous_archive_preserved_at": ".tmp/rtx3060-12gb-targeted-1536-smoke/packaged-history/<sha256>.zip",
+    "expected_archive_integrity": "PASS",
+    "expected_training_gate": "RTX3060_12GB_TARGETED_LORA_1536_ENVELOPE_SMOKE_PASS",
+    "expected_certified_training_pass": true,
+    "corrected_real_result_zip_created_on_owner": false
+  }
+}
