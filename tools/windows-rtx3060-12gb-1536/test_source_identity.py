@@ -56,6 +56,34 @@ def structural_diff(a, b, path=''):
     return [path] if type(a) is not type(b) or a != b else []
 
 
+def materialize_diagnostics(scratch, e):
+    """Write isolated diagnostic inputs for the real evidence_for() reader.
+
+    This is not a copy of private datasets or a new hardware result. Real-input
+    tests label archive-derived stand-ins; end-to-end tests use fixture pins.
+    """
+    fields = {'outcome.json': 'outcome', 'prepared-ready.json': 'prepared',
+              'campaign-ledger.json': 'campaign', 'campaign-started.json': 'campaign_reservation',
+              'worker-started.json': 'worker_entry', 'model-load-started.json': 'model_load_entry',
+              'package-integrity.json': 'runtime', 'wheel-provenance.json': 'wheel_provenance',
+              'cuda-backend.json': 'cuda_backend', 'model-verification.json': 'model_hash_verification',
+              'prepare-1536-audit.json': 'prepare_audit', 'tests.json': 'tests', 'frozen-controls.json': 'controls'}
+    for filename, key in fields.items():
+        write_json(scratch / filename, e[key])
+    write_json(scratch / 'data-1536.json', {'selection': e['selection']})
+    write_json(scratch / 'last-phase-error.json', {'phase': e['last_error_phase']})
+
+
+def record_package_failure(scratch):
+    # Execute only this diagnostic writer from the unchanged wrapper helper.
+    # No phase, Python environment resolver, hardware probe or worker is called.
+    result = powershell('. ' + quote(HERE / 'Remote.Common.ps1') +
+                        '; $script:ScratchRoot = ' + quote(scratch) +
+                        "; Write-PhaseFailure '5' 'Synthetic PackageOnly failure'")
+    if result.returncode:
+        raise AssertionError(result.stdout + result.stderr)
+
+
 class PrivacyTests(unittest.TestCase):
     def test_canonical_origin_preserved_exactly(self):
         self.assertEqual(package.scrub_text(source.ORIGIN), source.ORIGIN)
@@ -289,6 +317,39 @@ class ImmutableZipTests(unittest.TestCase):
             for row in value['wheel_provenance']['wheels_installed_this_setup']: row.pop('url')
             return value
         self.assertEqual(campaign_fields(self.old), campaign_fields(self.new))
+
+
+    def test_real_input_production_reader_exposes_and_binds_phase05_drift(self):
+        with temporary() as tmp:
+            scratch = Path(tmp)
+            # Four files use exact supplement bytes. Other diagnostics use ZIP
+            # stand-ins, not a claim that all current remote scratch was captured.
+            materialize_diagnostics(scratch, self.completed)
+            with zipfile.ZipFile(self.paths[2]) as archive:
+                for name in RAW_FILE_PINS:
+                    (scratch / name).write_bytes(archive.read(name))
+            baseline = package.evidence_for(scratch)
+            self.assertEqual(baseline, self.completed)
+            self.assertEqual(source.legacy_digest(baseline, self.remote_root), source.ORIGINAL_EVIDENCE_SHA256)
+            record_package_failure(scratch)
+            actual = package.evidence_for(scratch)
+            self.assertEqual(structural_diff(actual, self.completed), ['last_error_phase'])
+            self.assertEqual((baseline['last_error_phase'], actual['last_error_phase']), ('4', '5'))
+            self.assertEqual(structural_diff(package.legacy_sanitize(actual, self.remote_root), self.old),
+                             ['last_error_phase'])
+            self.assertEqual(source.legacy_digest(actual, self.remote_root),
+                             '3375114d6a2b22d1da7d14709573e21e86b507ab0fa597f1466d0a000be30a2c')
+            self.assertEqual(source.sanitized_digest(actual, self.remote_root),
+                             '76bfc6796c21d5bd765ad1289a41be4b7dccdee018bd17ec4bbadb912946589f')
+            before = {p.name: sha256(p) for p in scratch.iterdir()}
+            bound = source.bind_completed_campaign(actual, self.old, self.remote_root)
+            self.assertEqual(bound, baseline)
+            self.assertEqual(package.legacy_sanitize(bound, self.remote_root), self.old)
+            self.assertEqual(package.sanitize(bound, self.remote_root), source.campaign_payload(self.new))
+            self.assertEqual(source.legacy_digest(bound, self.remote_root), source.ORIGINAL_EVIDENCE_SHA256)
+            self.assertEqual(source.sanitized_digest(bound, self.remote_root), source.SANITIZED_EVIDENCE_SHA256)
+            self.assertEqual(actual['last_error_phase'], '5')
+            self.assertEqual(before, {p.name: sha256(p) for p in scratch.iterdir()})
 
 
 class SourceIdentityTests(unittest.TestCase):
@@ -538,6 +599,127 @@ class SourceIdentityTests(unittest.TestCase):
     def test_original_zip_cannot_be_substituted(self):
         self.original.write_bytes(b'not the original')
         with self.assertRaises(ValueError): source.certify_packaging(self.e, self.scratch, self.output, self.root)
+
+    def production_scratch(self):
+        """An isolated scratch/Git fixture, with every production input present.
+
+        The production reader sets fixture_only=False. Its certificate is valid
+        ONLY under these locally patched fixture pins, never the real campaign
+        pins. No fixture archive is retained or delivered as hardware evidence.
+        """
+        e = copy.deepcopy(self.e)
+        e['last_error_phase'] = '4'
+        e['campaign_reservation']['supervisor_pid'] = 555555
+        materialize_diagnostics(self.scratch, e)
+        actual = package.evidence_for(self.scratch)
+        old = package.legacy_sanitize(actual, self.root)
+        archive_fixtures.ArchiveVerifierTests().write_archive(self.original, old)
+        constants = patch.multiple(source, ORIGINAL_EVIDENCE_SHA256=source.digest(old),
+                                   SANITIZED_EVIDENCE_SHA256=source.sanitized_digest(actual, self.root),
+                                   ORIGINAL_ZIP_SHA256=sha256(self.original))
+        constants.start(); self.addCleanup(constants.stop)
+        return actual, old
+
+    def test_production_repackage_after_phase05_failure_is_certified_and_readonly(self):
+        baseline, old = self.production_scratch()
+        self.correction()
+        original_hash = sha256(self.original)
+        # No mock of evidence_for, certify_packaging, Git, digests or verifier.
+        # Only the generated supervisor PID is treated as already exited.
+        with patch.object(package, 'process_active', return_value=False):
+            archive = package.package(self.scratch, self.output, self.root)
+            first_hash = sha256(archive)
+            record_package_failure(self.scratch)
+            actual = package.evidence_for(self.scratch)
+            self.assertEqual(structural_diff(actual, baseline), ['last_error_phase'])
+            self.assertNotEqual(source.legacy_digest(actual, self.root), source.digest(old))
+            self.correction(value='fixture PackageOnly integration correction\n')
+            before = {p.name: sha256(p) for p in self.scratch.iterdir() if p.is_file()}
+            archive = package.package(self.scratch, self.output, self.root)
+            published, _ = verifier.inspect_zip(archive)
+            result = verifier.verify_evidence(published,
+                source_check=lambda value: source.source_identity(value, self.root))
+            self.assertEqual(result, {'archive_integrity': 'PASS',
+                'training_gate': 'RTX3060_12GB_TARGETED_LORA_1536_ENVELOPE_SMOKE_PASS',
+                'certified_training_pass': True, 'failed_checks': []})
+            self.assertEqual(published['schema_version'], 3)
+            self.assertEqual(source.campaign_payload(published), package.sanitize(baseline, self.root))
+            self.assertEqual(published['last_error_phase'], '4')
+            self.assertEqual(package.evidence_for(self.scratch)['last_error_phase'], '5')
+            corrected_hash = sha256(archive)
+            self.assertNotEqual(first_hash, corrected_hash)
+            self.assertEqual(package.package(self.scratch, self.output, self.root), archive)
+            self.assertEqual(sha256(archive), corrected_hash)
+            self.assertEqual(before, {p.name: sha256(p) for p in self.scratch.iterdir() if p.is_file()})
+        for pin in (original_hash, first_hash):
+            self.assertEqual(sha256(self.scratch / 'packaged-history' / (pin + '.zip')), pin)
+        # The same fixture publication cannot pass the real immutable campaign pin.
+        self.assertNotEqual(source.digest(source.campaign_payload(published)),
+                            'd5ba0e4a5ab44d76b957abfa92e4795eb61ddee3594e37288dd6a712c737ecd7')
+
+    def test_phase05_recovery_does_not_hide_campaign_or_url_mutations(self):
+        baseline, _ = self.production_scratch()
+        mutations = (
+            ('outcome', 'training', 'steps', 0, 'loss'),
+            ('outcome', 'training', 'steps', 0, 'memory', 'free_bytes'),
+            ('outcome', 'training', 'adapter', 'files', 'adapter_config.json', 'sha256'),
+            ('outcome', 'repository_commit'), ('selection', 'selected_lengths', 0),
+            ('model_hash_verification', 'revision'), ('controls', 'decision_sha256'),
+            ('campaign', 'nonce'), ('wheel_provenance', 'wheels_installed_this_setup', 0, 'url'),
+        )
+        for path in mutations:
+            with self.subTest(path=path):
+                e = copy.deepcopy(baseline); e['last_error_phase'] = '5'
+                parent = e
+                for key in path[:-1]: parent = parent[key]
+                value = parent[path[-1]]
+                parent[path[-1]] = value + 1 if isinstance(value, (int, float)) else (
+                    'https://example.org/changed.whl' if path[-1] == 'url' else 'changed')
+                materialize_diagnostics(self.scratch, e)
+                with patch.object(package, 'process_active', return_value=False), self.assertRaises(ValueError):
+                    package.package(self.scratch, self.output, self.root)
+                self.assertEqual(sha256(self.original), source.ORIGINAL_ZIP_SHA256)
+
+    def test_phase05_recovery_requires_exact_original_zip(self):
+        self.production_scratch()
+        record_package_failure(self.scratch)
+        self.original.write_bytes(b'substituted original fixture')
+        with patch.object(package, 'process_active', return_value=False), self.assertRaisesRegex(ValueError, 'Original result ZIP'):
+            package.package(self.scratch, self.output, self.root)
+
+    def test_phase05_recovery_keeps_prepared_artifact_hashes_strict(self):
+        self.production_scratch()
+        record_package_failure(self.scratch)
+        # This private prepared file is not projected into evidence_for().
+        (self.scratch / 'train-contexts.json').write_bytes(b'{"changed":true}')
+        with patch.object(package, 'process_active', return_value=False), self.assertRaisesRegex(ValueError, 'Prepared artifact changed'):
+            package.package(self.scratch, self.output, self.root)
+
+    def test_only_exact_phase05_diagnostic_can_use_original_phase(self):
+        baseline, old = self.production_scratch()
+        for phase in (None, '0', '1', '2', '3', '6', '04', '05', 4, 5, True):
+            with self.subTest(phase=phase), self.assertRaises(ValueError):
+                source.bind_completed_campaign(dict(baseline, last_error_phase=phase), old, self.root)
+        changed = dict(old, last_error_phase='5')
+        with self.assertRaisesRegex(ValueError, 'Original evidence digest mismatch'):
+            source.bind_completed_campaign(dict(baseline, last_error_phase='5'), changed, self.root)
+
+    def test_phase05_binding_requires_raw_completed_campaign(self):
+        baseline, old = self.production_scratch()
+        for schema, status in ((3, 'completed'), (2, 'active')):
+            e = dict(baseline, schema_version=schema, last_error_phase='5',
+                     campaign=dict(baseline['campaign'], status=status))
+            with self.assertRaisesRegex(ValueError, 'Expected raw completed campaign'):
+                source.bind_completed_campaign(e, old, self.root)
+
+    def test_direct_raw_and_published_digest_checks_do_not_ignore_error_phase(self):
+        self.correction()
+        raw = dict(self.e, last_error_phase='5')
+        with self.assertRaisesRegex(ValueError, 'Completed campaign differs'):
+            source.collect_provenance(raw, self.root)
+        published = self.corrected_evidence()
+        published['last_error_phase'] = '5'
+        self.assert_rejected(published)
 
     def test_actual_repack_preserves_original_raw_campaign_and_reuses_safely(self):
         self.correction()

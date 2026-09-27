@@ -268,8 +268,30 @@ def source_identity(e, root=ROOT):
     return True
 
 
+def bind_completed_campaign(e, old, root=ROOT):
+    """Separate a later packaging failure from the original campaign receipt.
+
+    The unchanged PowerShell wrapper overwrites last-phase-error.json with
+    phase '5' when PackageOnly fails. That live diagnostic is not the error
+    phase captured at campaign completion. Recover ONLY that historical field
+    from the authenticated original; every other campaign field must still
+    match both immutable projections. Never alter the caller or scratch files.
+    """
+    require(digest(old) == ORIGINAL_EVIDENCE_SHA256, 'Original evidence digest mismatch')
+    require(e['schema_version'] == 2 and e['campaign']['status'] == 'completed',
+            'Expected raw completed campaign')
+    campaign = dict(e)
+    if campaign['last_error_phase'] == '5':
+        campaign['last_error_phase'] = old['last_error_phase']
+    require(legacy_digest(campaign, root) == digest(old),
+            'Raw completed evidence contradicts the original result')
+    require(sanitized_digest(campaign, root) == SANITIZED_EVIDENCE_SHA256,
+            'Completed campaign differs from the verified sanitized result')
+    return campaign
+
+
 def certify_packaging(e, scratch, output, root=ROOT):
-    """Read original raw records and old ZIP. Never repair historical identity."""
+    """Return the bound campaign and provenance; preserve all input records."""
     from package_result import ARCHIVE
     from verify_result import inspect_zip
     from common import read_json
@@ -278,8 +300,7 @@ def certify_packaging(e, scratch, output, root=ROOT):
     require(original is not None, 'Original result ZIP missing or SHA256 mismatch; preserve evidence')
     reject_reparse(original)
     old, _ = inspect_zip(original)
-    require(digest(old) == ORIGINAL_EVIDENCE_SHA256 and legacy_digest(e, root) == digest(old),
-            'Raw completed evidence contradicts the original result')
+    e = bind_completed_campaign(e, old, root)
     # These pins were captured before phase 04, and are unchanged in the old ZIP.
     for name, expected in e['prepared']['files'].items():
         require(name in {'data-1536.json', 'frozen-controls.json', 'module-control.json',
@@ -292,4 +313,4 @@ def certify_packaging(e, scratch, output, root=ROOT):
     require(GitIdentity.parse(before['git']) == GitIdentity.parse(e['prepared']['git']),
             'Raw pre-campaign Git identity contradicts preparation')
     require(before['files'] == e['outcome']['integrity']['before'], 'Raw integrity snapshot changed')
-    return collect_provenance(e, root)
+    return e, collect_provenance(e, root)

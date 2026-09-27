@@ -164,7 +164,9 @@ def package(scratch=SCRATCH, output=RESULTS, root=ROOT):
     provenance = None
     if raw['campaign'] and raw['campaign'].get('status') == 'completed':
         from source_identity import certify_packaging
-        provenance = certify_packaging(raw, scratch, output, root)
+        # Certification binds the historical campaign diagnostic separately
+        # from a later phase-05 failure, without changing any scratch record.
+        raw, provenance = certify_packaging(raw, scratch, output, root)
     e = sanitize(raw, root)
     if provenance is not None:
         e.update(schema_version=3, source_provenance=provenance)
