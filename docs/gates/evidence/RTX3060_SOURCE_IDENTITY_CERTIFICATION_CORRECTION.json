@@ -1,7 +1,7 @@
 {
-  "schema_version": 1,
-  "verdict": "RTX3060_SOURCE_IDENTITY_CERTIFICATION_CORRECTION_PASS",
-  "scope": "Packaging/verifier correction; remote certification of existing raw evidence still pending",
+  "schema_version": 2,
+  "verdict": "RTX3060_LEGACY_PROJECTION_CERTIFICATION_CORRECTION_PASS",
+  "scope": "Frozen legacy/raw and sanitized-archive certification correction, verified using actual remote raw evidence; friend PackageOnly still pending",
   "gpu_campaign_rerun": false,
   "new_training_campaigns": 0,
   "real_phase04_invocations": 0,
@@ -10,10 +10,11 @@
   "full_training_status": "NOT STARTED",
   "evaluation_started": false,
   "training_source_commit": "1c270adba77545720fa33bcee0e24f7d6f46e55d",
-  "packaging_verifier_correction_commit": "8cab2c3aae1bdfdc87d1d9c68326c9564d629852",
+  "packaging_verifier_correction_commit": "a41776bf55a6e7c9c13aae7904d7c04f9bfcb882",
   "implementation_commits": [
     "8712861a731e46a53f8c99ba86e7987cdea11631",
-    "8cab2c3aae1bdfdc87d1d9c68326c9564d629852"
+    "8cab2c3aae1bdfdc87d1d9c68326c9564d629852",
+    "a41776bf55a6e7c9c13aae7904d7c04f9bfcb882"
   ],
   "receipt_commit_resolution": "git log -1 --format=%H -- docs/gates/evidence/RTX3060_SOURCE_IDENTITY_CERTIFICATION_CORRECTION.json",
   "authoritative_origin": "https://github.com/AiratBastanov/TalkNFace.git",
@@ -31,7 +32,24 @@
     "reproduced_output": "http<local-path>",
     "UNC_matcher_was_cause": false,
     "additional_impact": "Wheel HTTPS URLs also erased",
-    "second_defect": "Old verifier required historical training commit and all historical source hashes to equal current HEAD/worktree after tooling corrections"
+    "second_defect": "Old verifier required historical training commit and all historical source hashes to equal current HEAD/worktree after tooling corrections",
+    "legacy_followup": {
+      "confirmed_raw_wheel": {
+        "name": "hf-xet",
+        "version": "1.6.0",
+        "url": "https://files.pythonhosted.org/packages/98/b7/8c59a66d15205024662f1d66968136f13893f96df1ddc5087e2e281fc95f/hf_xet-1.6.0-cp38-abi3-win_amd64.whl",
+        "sha256": "fb4fadde1b2b70bf4c0c14a6dccbe7194b1c28947fefd5bbe3fed9d940676c3b"
+      },
+      "modern_match": "TOKEN.search matches hf_xet in the actual public wheel filename",
+      "legacy_value": "http<local-path>",
+      "modern_value": "<redacted-url>",
+      "actual_failure": "Verifier applied the legacy sanitizer to an already lossy schema-3 URL redaction",
+      "public_wheel_urls_already_correctly_reprojected": 59,
+      "remaining_legacy_projection_mismatches": 1,
+      "proposed_modern_url_shielding_hypothesis_confirmed": false,
+      "additional_frozen_traversal_gap": "Legacy digest shared the expanded modern secret-key set; now frozen independently",
+      "why_owner_fixtures_missed_it": "Original synthetic evidence left wheel_provenance null; Git-origin tests never exercised a lossy wheel URL through packaging and verification"
+    }
   },
   "correction": {
     "url_and_filesystem_parsing_distinct": true,
@@ -42,58 +60,87 @@
     "current_checkout_only_EOL_policy": "Only index LF text with text=auto eol=lf may use CRLF; no binary or historical normalization",
     "original_legacy_projection_used_only_for_digest_binding": true,
     "original_archive_and_raw_evidence_preserved": true,
-    "package_only_runs_verifier_and_propagates_failure": true
+    "package_only_runs_verifier_and_propagates_failure": true,
+    "exact_frozen_schema2_traversal": true,
+    "legacy_engine_independent_of_modern_sanitize": true,
+    "modern_sanitizer_unchanged": true,
+    "raw_packaging_requires_both_legacy_and_sanitized_pins": true,
+    "schema3_verifier_requires_exact_verified_sanitized_pin": true,
+    "source_provenance_schema": 2,
+    "raw_URL_reconstruction_or_lock_substitution": false,
+    "hardcoded_wheel_positions": false,
+    "legacy_values_emitted_into_schema3": false,
+    "correction_allowlist_expanded": false
   },
   "files_changed": [
-    "docs/gates/RTX3060_SOURCE_IDENTITY_CERTIFICATION_CORRECTION.md",
-    "docs/gates/evidence/RTX3060_SOURCE_IDENTITY_CERTIFICATION_CORRECTION.json",
-    "tools/windows-rtx3060-12gb-1536/README.md",
-    "tools/windows-rtx3060-12gb-1536/START_HERE_RU.md",
     "tools/windows-rtx3060-12gb-1536/package_result.py",
-    "tools/windows-rtx3060-12gb-1536/run_owner_tests.py",
     "tools/windows-rtx3060-12gb-1536/source_identity.py",
     "tools/windows-rtx3060-12gb-1536/test_source_identity.py",
-    "tools/windows-rtx3060-12gb-1536/test_workflow_result.py",
-    "tools/windows-rtx3060-12gb-1536/verify_result.py"
+    "docs/gates/RTX3060_SOURCE_IDENTITY_CERTIFICATION_CORRECTION.md",
+    "docs/gates/evidence/RTX3060_SOURCE_IDENTITY_CERTIFICATION_CORRECTION.json"
   ],
   "regressions": {
     "passed": true,
-    "tests": 74,
+    "tests": 94,
     "groups": [
       {
         "group": "test_source_identity",
         "returncode": 0,
-        "tests": 40,
-        "seconds": 22.688,
+        "tests": 60,
+        "seconds": 36.156,
         "budget_seconds": 180,
-        "passed": true
+        "passed": true,
+        "skips": 0
       },
       {
         "group": "test_workflow_result",
         "returncode": 0,
         "tests": 23,
-        "seconds": 0.781,
+        "seconds": 0.734,
         "budget_seconds": 180,
-        "passed": true
+        "passed": true,
+        "skips": 0
       },
       {
         "group": "test_python_launcher",
         "returncode": 0,
         "tests": 11,
-        "seconds": 13.078,
+        "seconds": 12.328,
         "budget_seconds": 180,
-        "passed": true
+        "passed": true,
+        "skips": 0
       }
     ],
+    "real_raw_evidence_used": true,
+    "gpu_training_rerun": false,
+    "full_training_started": false,
+    "new_source_privacy_tests": 20,
     "GPU_model_loads": 0,
     "real_training_campaigns": 0,
-    "fixture_only_data": true,
     "real_PowerShell_51_parsing_and_dispatch": true,
-    "git_diff_check": "PASS"
+    "git_diff_check": "PASS",
+    "coverage": [
+      "real raw hf-xet URL",
+      "both full evidence projections",
+      "all three ZIPs and four raw file hashes",
+      "historical sanitizer AST equality",
+      "modern sanitizer AST unchanged",
+      "GitHub/PyPI/PyTorch public URLs",
+      "authenticated/query/fragment URLs and private paths",
+      "structured secrets and prohibited examples",
+      "wrong origin/commit/dirty source",
+      "load-bearing/reverted history changes",
+      "changed raw and archived metrics",
+      "public URL tampering hidden by old sanitizer",
+      "original ZIP substitution",
+      "both previous ZIP generations preserved",
+      "PackageOnly phase 05 only",
+      "no torch/transformers/peft/bitsandbytes imports"
+    ]
   },
   "load_bearing_proof": {
     "training_source_commit": "1c270adba77545720fa33bcee0e24f7d6f46e55d",
-    "packaging_commit": "8cab2c3aae1bdfdc87d1d9c68326c9564d629852",
+    "packaging_commit": "a41776bf55a6e7c9c13aae7904d7c04f9bfcb882",
     "training_tree_sha256": "c0f2cfe8a7c0b68e5c2515d0758e056b38662215e71c663fa1b8a51d7227348a",
     "protected_tree_sha256": "e6bec130c1205e0cc8307c065714cee2e7eddb1972b40b3ba73f4eb71fbf8bcd",
     "protected_paths": 313,
@@ -133,10 +180,27 @@
           "tools/windows-rtx3060-12gb-1536/source_identity.py",
           "tools/windows-rtx3060-12gb-1536/test_source_identity.py"
         ]
+      },
+      {
+        "commit": "d356d10ddb26af39fd3f2102e63b6c1eed3581c2",
+        "parent": "8cab2c3aae1bdfdc87d1d9c68326c9564d629852",
+        "changed_paths": [
+          "docs/gates/RTX3060_SOURCE_IDENTITY_CERTIFICATION_CORRECTION.md",
+          "docs/gates/evidence/RTX3060_SOURCE_IDENTITY_CERTIFICATION_CORRECTION.json"
+        ]
+      },
+      {
+        "commit": "a41776bf55a6e7c9c13aae7904d7c04f9bfcb882",
+        "parent": "d356d10ddb26af39fd3f2102e63b6c1eed3581c2",
+        "changed_paths": [
+          "tools/windows-rtx3060-12gb-1536/package_result.py",
+          "tools/windows-rtx3060-12gb-1536/source_identity.py",
+          "tools/windows-rtx3060-12gb-1536/test_source_identity.py"
+        ]
       }
     ],
     "actual_git": {
-      "commit": "8cab2c3aae1bdfdc87d1d9c68326c9564d629852",
+      "commit": "a41776bf55a6e7c9c13aae7904d7c04f9bfcb882",
       "origin": "https://github.com/AiratBastanov/TalkNFace.git",
       "clean": true
     },
@@ -241,7 +305,7 @@
     ]
   },
   "remote_action": {
-    "status": "PENDING_EXISTING_CAMPAIGN_REPACKAGING",
+    "status": "PENDING_FRIEND_PACKAGEONLY_AFTER_LEGACY_CORRECTION",
     "commands": [
       "git pull --ff-only",
       "powershell -NoProfile -ExecutionPolicy Bypass -File .\\tools\\windows-rtx3060-12gb-1536\\RUN-RTX3060-12GB-REMOTE.ps1 -RepoRoot . -PackageOnly"
@@ -258,6 +322,302 @@
     "expected_archive_integrity": "PASS",
     "expected_training_gate": "RTX3060_12GB_TARGETED_LORA_1536_ENVELOPE_SMOKE_PASS",
     "expected_certified_training_pass": true,
-    "corrected_real_result_zip_created_on_owner": false
+    "corrected_real_result_zip_created_on_owner": false,
+    "expected_failed_checks": []
+  },
+  "prior_correction_summary": {
+    "verdict": "RTX3060_SOURCE_IDENTITY_CERTIFICATION_CORRECTION_PASS",
+    "packaging_verifier_correction_commit": "8cab2c3aae1bdfdc87d1d9c68326c9564d629852",
+    "delivered_receipt_commit": "d356d10ddb26af39fd3f2102e63b6c1eed3581c2",
+    "regressions": {
+      "passed": true,
+      "tests": 74,
+      "groups": [
+        {
+          "group": "test_source_identity",
+          "returncode": 0,
+          "tests": 40,
+          "seconds": 22.688,
+          "budget_seconds": 180,
+          "passed": true
+        },
+        {
+          "group": "test_workflow_result",
+          "returncode": 0,
+          "tests": 23,
+          "seconds": 0.781,
+          "budget_seconds": 180,
+          "passed": true
+        },
+        {
+          "group": "test_python_launcher",
+          "returncode": 0,
+          "tests": 11,
+          "seconds": 13.078,
+          "budget_seconds": 180,
+          "passed": true
+        }
+      ],
+      "GPU_model_loads": 0,
+      "real_training_campaigns": 0,
+      "fixture_only_data": true,
+      "real_PowerShell_51_parsing_and_dispatch": true,
+      "git_diff_check": "PASS"
+    },
+    "files_changed": [
+      "docs/gates/RTX3060_SOURCE_IDENTITY_CERTIFICATION_CORRECTION.md",
+      "docs/gates/evidence/RTX3060_SOURCE_IDENTITY_CERTIFICATION_CORRECTION.json",
+      "tools/windows-rtx3060-12gb-1536/README.md",
+      "tools/windows-rtx3060-12gb-1536/START_HERE_RU.md",
+      "tools/windows-rtx3060-12gb-1536/package_result.py",
+      "tools/windows-rtx3060-12gb-1536/run_owner_tests.py",
+      "tools/windows-rtx3060-12gb-1536/source_identity.py",
+      "tools/windows-rtx3060-12gb-1536/test_source_identity.py",
+      "tools/windows-rtx3060-12gb-1536/test_workflow_result.py",
+      "tools/windows-rtx3060-12gb-1536/verify_result.py"
+    ],
+    "remote_repackage_source_identity_failed": true
+  },
+  "first_corrected_result_zip": {
+    "name": "repackaged.zip",
+    "sha256": "9c04661bd9959b8eb73015c36d479b5cacc5bf9ceae90c412582dab70b014fda",
+    "bytes": 65122,
+    "modified": false,
+    "diagnostic_name": "repackaged.zip"
+  },
+  "raw_evidence_supplement": {
+    "name": "RTX3060_LEGACY_RAW_CAMPAIGN_EVIDENCE.zip",
+    "sha256": "7fc6e17e924457e845c73d560aa7749b3830877b01f821609fe9b2fbc9f46b60",
+    "bytes": 76624,
+    "modified": false,
+    "files": [
+      {
+        "name": "wheel-provenance.json",
+        "bytes": 18952,
+        "sha256": "966a1308be3a6c29f750b58ed32c8210a3a1ae4b15c89dbde6c75bdc13846a7f"
+      },
+      {
+        "name": "prepared-ready.json",
+        "bytes": 1270,
+        "sha256": "ee3ce3b90c122e033b40d9d1fbc1b74ab99c8ae2b9da6450f9c306fe656ca63d"
+      },
+      {
+        "name": "integrity-before.json",
+        "bytes": 55783,
+        "sha256": "2b26fe3ca441cf13d61b34de3864e3f84f30ed7df9f028391b763c8cd29f0101"
+      },
+      {
+        "name": "outcome.json",
+        "bytes": 183231,
+        "sha256": "1375e39da1b86fdb0785e4a84a2204bbdd69ea9cbeff025d6db3ba8b62697607"
+      }
+    ],
+    "source_scope": "Four original remote JSON files; remaining diagnostic fields taken unchanged from the supplied result ZIPs",
+    "independently_verified": true,
+    "originals_preserved": true,
+    "private_raw_files_committed": false
+  },
+  "historical_sanitizer_review": {
+    "training_commit": "1c270adba77545720fa33bcee0e24f7d6f46e55d",
+    "path": "tools/windows-rtx3060-12gb-1536/package_result.py",
+    "git_blob": "d023c6eb6868fe896441593ca261234d950c9475",
+    "sha256": "e3f64d99c476b80ca9f5da88a37864b8634fabb302c0528ef76b47153307730c",
+    "read_directly_from_git": true,
+    "dynamic_execution": false,
+    "static_ast_matches_frozen_implementation": true,
+    "legacy_string_order": [
+      "repository path replacement",
+      "unbounded drive regex",
+      "hf_ token regex",
+      "Bearer regex",
+      "credentials regex",
+      "query regex"
+    ],
+    "modern_sanitizer_ast_unchanged_from": "d356d10ddb26af39fd3f2102e63b6c1eed3581c2"
+  },
+  "structural_comparison": {
+    "differing_fields": 64,
+    "paths": [
+      "outcome.integrity.git.origin",
+      "prepared.git.origin",
+      "schema_version",
+      "source_provenance",
+      "wheel_provenance.wheels_installed_this_setup[0].url",
+      "wheel_provenance.wheels_installed_this_setup[1].url",
+      "wheel_provenance.wheels_installed_this_setup[2].url",
+      "wheel_provenance.wheels_installed_this_setup[3].url",
+      "wheel_provenance.wheels_installed_this_setup[4].url",
+      "wheel_provenance.wheels_installed_this_setup[5].url",
+      "wheel_provenance.wheels_installed_this_setup[6].url",
+      "wheel_provenance.wheels_installed_this_setup[7].url",
+      "wheel_provenance.wheels_installed_this_setup[8].url",
+      "wheel_provenance.wheels_installed_this_setup[9].url",
+      "wheel_provenance.wheels_installed_this_setup[10].url",
+      "wheel_provenance.wheels_installed_this_setup[11].url",
+      "wheel_provenance.wheels_installed_this_setup[12].url",
+      "wheel_provenance.wheels_installed_this_setup[13].url",
+      "wheel_provenance.wheels_installed_this_setup[14].url",
+      "wheel_provenance.wheels_installed_this_setup[15].url",
+      "wheel_provenance.wheels_installed_this_setup[16].url",
+      "wheel_provenance.wheels_installed_this_setup[17].url",
+      "wheel_provenance.wheels_installed_this_setup[18].url",
+      "wheel_provenance.wheels_installed_this_setup[19].url",
+      "wheel_provenance.wheels_installed_this_setup[20].url",
+      "wheel_provenance.wheels_installed_this_setup[21].url",
+      "wheel_provenance.wheels_installed_this_setup[22].url",
+      "wheel_provenance.wheels_installed_this_setup[23].url",
+      "wheel_provenance.wheels_installed_this_setup[24].url",
+      "wheel_provenance.wheels_installed_this_setup[25].url",
+      "wheel_provenance.wheels_installed_this_setup[26].url",
+      "wheel_provenance.wheels_installed_this_setup[27].url",
+      "wheel_provenance.wheels_installed_this_setup[28].url",
+      "wheel_provenance.wheels_installed_this_setup[29].url",
+      "wheel_provenance.wheels_installed_this_setup[30].url",
+      "wheel_provenance.wheels_installed_this_setup[31].url",
+      "wheel_provenance.wheels_installed_this_setup[32].url",
+      "wheel_provenance.wheels_installed_this_setup[33].url",
+      "wheel_provenance.wheels_installed_this_setup[34].url",
+      "wheel_provenance.wheels_installed_this_setup[35].url",
+      "wheel_provenance.wheels_installed_this_setup[36].url",
+      "wheel_provenance.wheels_installed_this_setup[37].url",
+      "wheel_provenance.wheels_installed_this_setup[38].url",
+      "wheel_provenance.wheels_installed_this_setup[39].url",
+      "wheel_provenance.wheels_installed_this_setup[40].url",
+      "wheel_provenance.wheels_installed_this_setup[41].url",
+      "wheel_provenance.wheels_installed_this_setup[42].url",
+      "wheel_provenance.wheels_installed_this_setup[43].url",
+      "wheel_provenance.wheels_installed_this_setup[44].url",
+      "wheel_provenance.wheels_installed_this_setup[45].url",
+      "wheel_provenance.wheels_installed_this_setup[46].url",
+      "wheel_provenance.wheels_installed_this_setup[47].url",
+      "wheel_provenance.wheels_installed_this_setup[48].url",
+      "wheel_provenance.wheels_installed_this_setup[49].url",
+      "wheel_provenance.wheels_installed_this_setup[50].url",
+      "wheel_provenance.wheels_installed_this_setup[51].url",
+      "wheel_provenance.wheels_installed_this_setup[52].url",
+      "wheel_provenance.wheels_installed_this_setup[53].url",
+      "wheel_provenance.wheels_installed_this_setup[54].url",
+      "wheel_provenance.wheels_installed_this_setup[55].url",
+      "wheel_provenance.wheels_installed_this_setup[56].url",
+      "wheel_provenance.wheels_installed_this_setup[57].url",
+      "wheel_provenance.wheels_installed_this_setup[58].url",
+      "wheel_provenance.wheels_installed_this_setup[59].url"
+    ],
+    "wheel_url_differences": 60,
+    "legacy_projection_remaining_paths": [],
+    "raw_vs_repackaged_paths_before_sanitization": {
+      "wheel-provenance.json": [
+        "wheels_installed_this_setup[19].url"
+      ],
+      "prepared-ready.json": [],
+      "outcome.json": [
+        "preflight.installed_offload_api.functions.PEFT.prepare_model_for_kbit_training.file",
+        "preflight.installed_offload_api.functions.Transformers.gradient_checkpointing_enable.file",
+        "preflight.installed_offload_api.functions.torch.autograd.graph.save_on_cpu.file",
+        "preflight.packages.pip_check",
+        "preflight.packages.pip_check_stderr",
+        "training.adapter.config.base_model_name_or_path",
+        "training.adapter.path",
+        "training.runtime.functions.PEFT.prepare_model_for_kbit_training.file",
+        "training.runtime.functions.Transformers.gradient_checkpointing_enable.file",
+        "training.runtime.functions.torch.autograd.graph.save_on_cpu.file"
+      ]
+    },
+    "all_differences_explained_by_sanitization_or_provenance": true,
+    "training_metric_or_campaign_result_changes": [],
+    "canonical_legacy_bytes_equal_original": true,
+    "sanitized_payload_equals_first_repackage_without_provenance": true
+  },
+  "sanitized_evidence_canonical_sha256": "d5ba0e4a5ab44d76b957abfa92e4795eb61ddee3594e37288dd6a712c737ecd7",
+  "canonical_digest_format": "SHA256 of sorted-key compact ASCII JSON, allow_nan=false; remove source_provenance and set schema_version to 2 for both campaign projections",
+  "owner_real_evidence_verification": {
+    "kind": "In-memory schema-3 view of real returned campaign evidence with recomputed current provenance; no new hardware ZIP",
+    "at_commit": "a41776bf55a6e7c9c13aae7904d7c04f9bfcb882",
+    "result": {
+      "archive_integrity": "PASS",
+      "training_gate": "RTX3060_12GB_TARGETED_LORA_1536_ENVELOPE_SMOKE_PASS",
+      "certified_training_pass": true,
+      "failed_checks": []
+    },
+    "recomputed_source_provenance": {
+      "schema_version": 2,
+      "training_source_commit": "1c270adba77545720fa33bcee0e24f7d6f46e55d",
+      "packaging_git": {
+        "commit": "a41776bf55a6e7c9c13aae7904d7c04f9bfcb882",
+        "origin": "https://github.com/AiratBastanov/TalkNFace.git",
+        "clean": true
+      },
+      "tooling_only_proof": {
+        "training_source_commit": "1c270adba77545720fa33bcee0e24f7d6f46e55d",
+        "packaging_commit": "a41776bf55a6e7c9c13aae7904d7c04f9bfcb882",
+        "training_tree_sha256": "c0f2cfe8a7c0b68e5c2515d0758e056b38662215e71c663fa1b8a51d7227348a",
+        "protected_tree_sha256": "e6bec130c1205e0cc8307c065714cee2e7eddb1972b40b3ba73f4eb71fbf8bcd",
+        "protected_paths": 313,
+        "load_bearing_changes": [],
+        "allowed_correction_paths": [
+          "docs/gates/RTX3060_SOURCE_IDENTITY_CERTIFICATION_CORRECTION.md",
+          "docs/gates/evidence/RTX3060_SOURCE_IDENTITY_CERTIFICATION_CORRECTION.json",
+          "tools/windows-rtx3060-12gb-1536/README.md",
+          "tools/windows-rtx3060-12gb-1536/START_HERE_RU.md",
+          "tools/windows-rtx3060-12gb-1536/package_result.py",
+          "tools/windows-rtx3060-12gb-1536/run_owner_tests.py",
+          "tools/windows-rtx3060-12gb-1536/source_identity.py",
+          "tools/windows-rtx3060-12gb-1536/test_source_identity.py",
+          "tools/windows-rtx3060-12gb-1536/test_workflow_result.py",
+          "tools/windows-rtx3060-12gb-1536/verify_result.py"
+        ],
+        "commits": [
+          {
+            "commit": "8712861a731e46a53f8c99ba86e7987cdea11631",
+            "parent": "1c270adba77545720fa33bcee0e24f7d6f46e55d",
+            "changed_paths": [
+              "tools/windows-rtx3060-12gb-1536/README.md",
+              "tools/windows-rtx3060-12gb-1536/START_HERE_RU.md",
+              "tools/windows-rtx3060-12gb-1536/package_result.py",
+              "tools/windows-rtx3060-12gb-1536/run_owner_tests.py",
+              "tools/windows-rtx3060-12gb-1536/source_identity.py",
+              "tools/windows-rtx3060-12gb-1536/test_source_identity.py",
+              "tools/windows-rtx3060-12gb-1536/test_workflow_result.py",
+              "tools/windows-rtx3060-12gb-1536/verify_result.py"
+            ]
+          },
+          {
+            "commit": "8cab2c3aae1bdfdc87d1d9c68326c9564d629852",
+            "parent": "8712861a731e46a53f8c99ba86e7987cdea11631",
+            "changed_paths": [
+              "tools/windows-rtx3060-12gb-1536/README.md",
+              "tools/windows-rtx3060-12gb-1536/source_identity.py",
+              "tools/windows-rtx3060-12gb-1536/test_source_identity.py"
+            ]
+          },
+          {
+            "commit": "d356d10ddb26af39fd3f2102e63b6c1eed3581c2",
+            "parent": "8cab2c3aae1bdfdc87d1d9c68326c9564d629852",
+            "changed_paths": [
+              "docs/gates/RTX3060_SOURCE_IDENTITY_CERTIFICATION_CORRECTION.md",
+              "docs/gates/evidence/RTX3060_SOURCE_IDENTITY_CERTIFICATION_CORRECTION.json"
+            ]
+          },
+          {
+            "commit": "a41776bf55a6e7c9c13aae7904d7c04f9bfcb882",
+            "parent": "d356d10ddb26af39fd3f2102e63b6c1eed3581c2",
+            "changed_paths": [
+              "tools/windows-rtx3060-12gb-1536/package_result.py",
+              "tools/windows-rtx3060-12gb-1536/source_identity.py",
+              "tools/windows-rtx3060-12gb-1536/test_source_identity.py"
+            ]
+          }
+        ]
+      },
+      "original_result_zip_sha256": "07d2abfc00d188a469b1a18e6bc370c7040aa0e7a22f091ffc553ecff68e2cbf",
+      "original_evidence_sha256": "e8a2314894204b10ddadc5372fea4d34887f66842c9a8cd8413e9269c8d12906",
+      "sanitized_evidence_sha256": "d5ba0e4a5ab44d76b957abfa92e4795eb61ddee3594e37288dd6a712c737ecd7",
+      "gpu_campaign_rerun": false,
+      "full_training_started": false
+    },
+    "real_remote_raw_and_archive_values_used": true,
+    "GPU_training_or_model_execution": false,
+    "new_hardware_zip_written": false,
+    "all_preparation_files_remain_subject_to_remote_PackageOnly_checks": true
   }
 }
