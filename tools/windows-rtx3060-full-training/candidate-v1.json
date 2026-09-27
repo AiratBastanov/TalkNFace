@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "candidate": "QWEN3_4B_TRAIN_V1",
+  "seed": 20260917,
+  "data_seed": 20260917,
+  "rows": 8000,
+  "epochs": 1,
+  "microbatches": 8000,
+  "optimizer_updates": 2000,
+  "microbatch_size": 1,
+  "gradient_accumulation": 4,
+  "max_length": 1536,
+  "truncation": false,
+  "packing": false,
+  "quantization": {
+    "load_in_4bit": true,
+    "bnb_4bit_quant_type": "nf4",
+    "bnb_4bit_use_double_quant": true,
+    "bnb_4bit_compute_dtype": "float16"
+  },
+  "lora": {
+    "r": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "bias": "none",
+    "task_type": "CAUSAL_LM",
+    "target_modules": [
+      "q_proj",
+      "v_proj"
+    ]
+  },
+  "trainable_parameters": 2949120,
+  "attention_implementation": "sdpa",
+  "device": "cuda:0",
+  "fp16": true,
+  "bf16": false,
+  "tf32": false,
+  "activation_offload": {
+    "method": "Transformers.gradient_checkpointing_enable",
+    "offload": true,
+    "every_n_layers": 1,
+    "gradient_checkpointing_kwargs": {
+      "use_reentrant": true
+    },
+    "PEFT_prepare_use_gradient_checkpointing": false,
+    "reason": "PEFT forwards kwargs to torch checkpoint; offload is a top-level Transformers argument. Explicit reentrant=True preserves the previous effective checkpoint algorithm."
+  },
+  "optimizer": {
+    "name": "paged_adamw_8bit",
+    "class": "bitsandbytes.optim.adamw.AdamW",
+    "lr": 0.0002,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "weight_decay": 0.01,
+    "optim_bits": 8,
+    "is_paged": true,
+    "min_8bit_size": 4096,
+    "amsgrad": false
+  },
+  "max_grad_norm": 1.0,
+  "scheduler": {
+    "kind": "constant",
+    "warmup_updates": 0,
+    "step_after_successful_update": true
+  },
+  "amp": {
+    "init_scale": 65536.0,
+    "growth_factor": 2.0,
+    "backoff_factor": 0.5,
+    "growth_interval": 2000,
+    "skipped_update_policy": "FAIL_NO_CURSOR_ADVANCE_NO_AUTOMATIC_RETRY"
+  },
+  "loss": "Mean of four per-record mean completion-token cross-entropies; each divided by 4 before backward; epoch mean is sum of committed record losses / 8000. Template whitespace after EOS follows accepted labels.",
+  "data_order": "Python 3.12 random.Random(data_seed).shuffle(indices); persist exact permutation and cursor; no DataLoader RNG.",
+  "checkpoint": {
+    "every_successful_update": 1,
+    "retain_verified": 2,
+    "initial_step_zero": true,
+    "max_bytes": 536870912
+  },
+  "timeouts_seconds": {
+    "prepare": 900,
+    "admission": 180,
+    "load": 300,
+    "optimizer_group": 600,
+    "checkpoint": 120,
+    "package": 180,
+    "cancel_grace": 5,
+    "full_run_wall_clock": 86400,
+    "owner_test_group": 180
+  },
+  "disk": {
+    "required_free_bytes": 10737418240,
+    "stop_free_bytes": 2147483648
+  },
+  "telemetry": {
+    "host_interval_seconds": 0.2,
+    "external_gpu_interval_ms": 200,
+    "progress_seconds": 10,
+    "max_log_bytes": 16777216,
+    "log_backups": 2
+  },
+  "hardware_admission": {
+    "physical_vram_min_MiB": 12000,
+    "gpu_index": 0,
+    "gpu_capability": [
+      8,
+      6
+    ],
+    "nvidia_min_free_before_training_MiB": 10800,
+    "cuda_min_free_before_training_MiB": 10500,
+    "disk_before_download_bytes": 32212254720,
+    "disk_before_training_bytes": 5368709120,
+    "minimum_boundary_free_bytes": 268435456,
+    "comfortable_boundary_free_bytes": 536870912,
+    "cuda_capacity_min_MiB": 12000,
+    "gpu_name_pattern": "^(?:nvidia\\s+)?(?:geforce\\s+)?rtx\\s*3060$"
+  },
+  "host_memory": {
+    "sample_interval_seconds": 0.2,
+    "start_min_available_bytes": 12884901888,
+    "stop_min_available_bytes": 6442450944,
+    "max_pagefile_growth_bytes": 268435456,
+    "preferred_cuda_headroom_bytes": 536870912
+  },
+  "runtime_lock": "tools/windows-rtx3060-12gb-1536/runtime-lock.json",
+  "model_lock": "tools/windows-rtx3060-12gb-1536/model-lock.json",
+  "initial_adapter": "NEW_RANDOM_LORA_NOT_SMOKE",
+  "evaluation": "DISABLED"
+}

@@ -1,0 +1,321 @@
+{
+  "schema_version": 1,
+  "kind": "accepted_historical_smoke",
+  "origin": "https://github.com/AiratBastanov/TalkNFace.git",
+  "archive": {
+    "bytes": 65320,
+    "sha256": "2d90867e8be4960c1878effa12c3ddc20acbc1c4609ae4c952f33bf0b8e220ed"
+  },
+  "training_source_commit": "1c270adba77545720fa33bcee0e24f7d6f46e55d",
+  "packaging_commit": "e3de4db26a6c4dad25dc51a6b321ff2b434d0e00",
+  "strict_verifier": {
+    "version_kind": "git_commit_and_file_sha256",
+    "commit": "e3de4db26a6c4dad25dc51a6b321ff2b434d0e00",
+    "files": {
+      "verify_result.py": {
+        "bytes": 7506,
+        "sha256": "15c0d7284ece1676556761e80c3dbe7aa131e340b1db6644c8a1f4b418acdd3d"
+      },
+      "source_identity.py": {
+        "bytes": 15738,
+        "sha256": "b11620d45b424ec03caf590034c3a8c87602d5769298ddb660cfffacc5dd4c81"
+      },
+      "verdict.py": {
+        "bytes": 8843,
+        "sha256": "c209eb3af848d387faceb41744b0032fa208fa146c27076d10ddc78b5ff97d99"
+      },
+      "package_result.py": {
+        "bytes": 10856,
+        "sha256": "065ef4302f96e40b4c918dcc9f558f22574d185f36da40a3ec9baca2058a7b8c"
+      },
+      "selection.py": {
+        "bytes": 1241,
+        "sha256": "6fe28b2c9d22387f25af696957ee1fd28aa53b8a15f79e68be85b91a5512349b"
+      },
+      "state.py": {
+        "bytes": 6131,
+        "sha256": "b6af2c9ae8e541ff63d37727f010eb369cf8a52441a67eddf9b0c1923c6f1050"
+      },
+      "common.py": {
+        "bytes": 6243,
+        "sha256": "0e0c753690fd138fda041e783f434e1a447c7aa8502d5e90bb5c7dcef46d4f88"
+      },
+      "policy.py": {
+        "bytes": 1195,
+        "sha256": "4eb76c7e12dbbcdce2c3ed615324306031d0a5e751cd3f0117fb039c1745cb44"
+      }
+    },
+    "returncode": 0,
+    "result": {
+      "archive_integrity": "PASS",
+      "training_gate": "RTX3060_12GB_TARGETED_LORA_1536_ENVELOPE_SMOKE_PASS",
+      "certified_training_pass": true,
+      "failed_checks": []
+    }
+  },
+  "accepted_before_new_tracked_source": true,
+  "model": {
+    "repo_id": "Qwen/Qwen3-4B",
+    "revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+    "files": {
+      "config.json": {
+        "bytes": 726,
+        "sha256": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a"
+      },
+      "generation_config.json": {
+        "bytes": 239,
+        "sha256": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2"
+      },
+      "model.safetensors.index.json": {
+        "bytes": 32819,
+        "sha256": "6dc0981b8829fead746441f68f38f24c5ca4a3a66351f652c26c6df0efc43ab2"
+      },
+      "tokenizer.json": {
+        "bytes": 11422654,
+        "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+      },
+      "tokenizer_config.json": {
+        "bytes": 9732,
+        "sha256": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101"
+      },
+      "vocab.json": {
+        "bytes": 2776833,
+        "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      },
+      "merges.txt": {
+        "bytes": 1671853,
+        "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+      },
+      "model-00001-of-00003.safetensors": {
+        "bytes": 3957900840,
+        "sha256": "328a91d3122359d5547f9d79521205bc0a46e1f79a792dfe650e99fc2d651223"
+      },
+      "model-00002-of-00003.safetensors": {
+        "bytes": 3987450520,
+        "sha256": "6cd087b316306a68c562436b5492edbcf6e16c6dba3a1308279caa5a58e21ca5"
+      },
+      "model-00003-of-00003.safetensors": {
+        "bytes": 99630640,
+        "sha256": "e4bf436957184f4eeb86a80e9db394503f1f56446b2e6b7edeac5b81470f4ca1"
+      }
+    }
+  },
+  "data_and_compiler_pins": {
+    "ml/data/synthetic_ru/train.jsonl": {
+      "bytes": 10733980,
+      "sha256": "74defddc644eda30227a58adaef41ad31d7a849000852d6a459de4b778770f47"
+    },
+    "ml/data/synthetic_ru/contexts.json": {
+      "bytes": 761344,
+      "sha256": "7caf6ede5ec31bcc147c4e10dadd74fd5fde1ff58328ebbccf27fb09a7d4b145"
+    },
+    "ml/data/synthetic_ru/manifest.json": {
+      "bytes": 13013,
+      "sha256": "055c0b7f586dfc860685e7b1dca4bcf466dade863ba4ac669005a8e740418ba7"
+    },
+    "ml/data/synthetic_ru/compile_sft.py": {
+      "bytes": 3732,
+      "sha256": "a18c3f4d8206719f24964f318c4a8a72d42a8dacd2e618232c3bf92c0f3b4eb1"
+    },
+    "ml/data/synthetic_ru/core.py": {
+      "bytes": 6658,
+      "sha256": "25ddd5177c45c042221c586ed0cf62256fec672492b0fa0ce3b080898c14e1cf"
+    },
+    "ml/data/synthetic_ru/validate.py": {
+      "bytes": 10730,
+      "sha256": "fe7758c7bad2d1aa604ae87a8369d94d00ffe26d7b4ae8d065c8a37779b2090c"
+    },
+    "ml/data/synthetic_ru/system-prompt.txt": {
+      "bytes": 1372,
+      "sha256": "1fbd12de32c7e54ad116979bfee966ff6d15d92b02d42556dd07420b880954a5"
+    },
+    "ml/baseline/scoring.py": {
+      "bytes": 16632,
+      "sha256": "c512ef147379ef20a881a48d90b36d6c0cf853f3a7696580a8fa78b2af61696c"
+    },
+    "evals/local-qwen/interpretation.schema.json": {
+      "bytes": 6663,
+      "sha256": "0df92dd03436502599f12d6ec245ce8948dd5d4d3e85ca2657d9cd0c79db2f5d"
+    }
+  },
+  "legacy_dependency_pins": {
+    "config.json": {
+      "bytes": 2681,
+      "sha256": "04c360125801f35769cb28eaefe88e3c135757c5bd68dec454f532fc53e5cbfc"
+    },
+    "model-lock.json": {
+      "bytes": 1555,
+      "sha256": "40dc9540c9045a17d9f898336f19322917590e27ecfee7f57511a7a17ad0b1c0"
+    },
+    "runtime-lock.json": {
+      "bytes": 20193,
+      "sha256": "3fdb4d2c5c731e13aec27e6ebd063096456d4c770ea4c55fdf65ddf8187c4755"
+    },
+    "offload.py": {
+      "bytes": 6785,
+      "sha256": "5b7e6d17d0771cd834e3bdc0e5546029e7c12f27515fcfd07f5bf4599f5fd090"
+    },
+    "policy.py": {
+      "bytes": 1195,
+      "sha256": "4eb76c7e12dbbcdce2c3ed615324306031d0a5e751cd3f0117fb039c1745cb44"
+    },
+    "runtime_checks.py": {
+      "bytes": 4935,
+      "sha256": "9db982d1a4cea74b57a54208f5597cfc7f85e6b90cc939a88acf4d2f802d05e0"
+    },
+    "monitor.py": {
+      "bytes": 13594,
+      "sha256": "3bd86eb6b8b7d9bb67c98078aafea98a2c9d84011a0f5b3578cade285edc4557"
+    },
+    "environment.py": {
+      "bytes": 13116,
+      "sha256": "b4b225a43e0b0a25bf8e86e390fea4e6a28a65683359c58a084087a5664d659c"
+    },
+    "configuration.py": {
+      "bytes": 3013,
+      "sha256": "e65cf5c412d8486785d46e262fe4eb9070421558b351d623737be626c434052c"
+    },
+    "common.py": {
+      "bytes": 6243,
+      "sha256": "0e0c753690fd138fda041e783f434e1a447c7aa8502d5e90bb5c7dcef46d4f88"
+    },
+    "prepare_smoke_data.py": {
+      "bytes": 7422,
+      "sha256": "3421d3bce314e44a0018f94c0efec4db033daeae2b570614a5a82a6e3ed17461"
+    }
+  },
+  "smoke_configuration": {
+    "gate": "RTX3060_12GB_TARGETED_LORA_1536_ENVELOPE_SMOKE",
+    "seed": 20260917,
+    "model": "AlagModels/Qwen3-4B",
+    "train": "ml/data/synthetic_ru/train.jsonl",
+    "output": ".tmp/rtx3060-12gb-targeted-1536-smoke",
+    "adapter": "AlagModels/adapters/rtx3060-12gb-targeted-1536-smoke",
+    "quantization": {
+      "load_in_4bit": true,
+      "bnb_4bit_quant_type": "nf4",
+      "bnb_4bit_use_double_quant": true,
+      "bnb_4bit_compute_dtype": "float16"
+    },
+    "lora": {
+      "r": 8,
+      "lora_alpha": 16,
+      "lora_dropout": 0.05,
+      "bias": "none",
+      "task_type": "CAUSAL_LM",
+      "target_modules": [
+        "q_proj",
+        "v_proj"
+      ]
+    },
+    "training": {
+      "max_length": 1536,
+      "packing": false,
+      "per_device_train_batch_size": 1,
+      "gradient_accumulation_steps": 4,
+      "max_steps": 2,
+      "gradient_checkpointing": true,
+      "fp16": true,
+      "bf16": false,
+      "tf32": false,
+      "report_to": "none",
+      "dataloader_num_workers": 0,
+      "save_strategy": "no",
+      "eval_strategy": "no",
+      "seed": 20260917,
+      "data_seed": 20260917,
+      "learning_rate": 0.0002,
+      "optim": "paged_adamw_8bit",
+      "completion_only_loss": true,
+      "logging_steps": 1,
+      "logging_nan_inf_filter": false
+    },
+    "subset_rows": 8,
+    "retry_sequence_limit": null,
+    "timeouts_seconds": {
+      "preflight": 180,
+      "load": 300,
+      "microstep": 600,
+      "train": 1800,
+      "reload": 600,
+      "tests": 180,
+      "setup": 1800,
+      "model": 1800,
+      "prepare": 600
+    },
+    "activation_offload": {
+      "method": "Transformers.gradient_checkpointing_enable",
+      "offload": true,
+      "every_n_layers": 1,
+      "gradient_checkpointing_kwargs": {
+        "use_reentrant": true
+      },
+      "PEFT_prepare_use_gradient_checkpointing": false,
+      "reason": "PEFT forwards kwargs to torch checkpoint; offload is a top-level Transformers argument. Explicit reentrant=True preserves the previous effective checkpoint algorithm."
+    },
+    "host_memory": {
+      "sample_interval_seconds": 0.2,
+      "start_min_available_bytes": 12884901888,
+      "stop_min_available_bytes": 6442450944,
+      "max_pagefile_growth_bytes": 268435456,
+      "preferred_cuda_headroom_bytes": 536870912
+    },
+    "remote_resources": {
+      "physical_vram_min_MiB": 12000,
+      "gpu_index": 0,
+      "gpu_capability": [
+        8,
+        6
+      ],
+      "nvidia_min_free_before_training_MiB": 10800,
+      "cuda_min_free_before_training_MiB": 10500,
+      "disk_before_download_bytes": 32212254720,
+      "disk_before_training_bytes": 5368709120,
+      "minimum_boundary_free_bytes": 268435456,
+      "comfortable_boundary_free_bytes": 536870912,
+      "cuda_capacity_min_MiB": 12000,
+      "gpu_name_pattern": "^(?:nvidia\\s+)?(?:geforce\\s+)?rtx\\s*3060$"
+    }
+  },
+  "smoke_configuration_sha256": "04c360125801f35769cb28eaefe88e3c135757c5bd68dec454f532fc53e5cbfc",
+  "recorded": {
+    "train_rows": 8000,
+    "maximum_length": 1421,
+    "limit": 1536,
+    "truncation": false,
+    "microbatches": 8,
+    "updates": 2,
+    "cuda_free_boundary_MiB": [
+      3933,
+      1160.6484375
+    ],
+    "external_minimum_free_MiB": 1002,
+    "changed_adapter_tensors": 144,
+    "adapter_tensors": 144,
+    "fresh_process_reload_finite_logits": true,
+    "outcome_checks_true": 27,
+    "update_seconds": [
+      11.04700000000048,
+      10.67199999999957
+    ],
+    "load_seconds": 7.561999999999898,
+    "optimizer": {
+      "requested": "paged_adamw_8bit",
+      "class": "bitsandbytes.optim.adamw.AdamW",
+      "is_paged": true,
+      "optim_bits": 8,
+      "kwargs": {
+        "lr": 0.0002,
+        "betas": [
+          0.9,
+          0.999
+        ],
+        "eps": 1e-08,
+        "optim_bits": 8,
+        "is_paged": true
+      }
+    },
+    "quality_evaluation": false,
+    "full_training_started": false
+  }
+}
