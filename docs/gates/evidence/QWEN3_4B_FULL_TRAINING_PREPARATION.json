@@ -1,0 +1,623 @@
+{
+  "gate": "QWEN3_4B_FULL_TRAINING_PREPARATION",
+  "schema_version": 1,
+  "verdict": "QWEN3_4B_FULL_TRAINING_PREPARATION_PASS",
+  "prepared_at_utc": "2026-09-27T19:52:56.757600+00:00",
+  "meaning": "Implementation, bounded tests and handoff preparation only; not real full training or model quality.",
+  "historical_acceptance": {
+    "accepted_before_new_tracked_source": true,
+    "initial_branch": "main",
+    "initial_head": "e3de4db26a6c4dad25dc51a6b321ff2b434d0e00",
+    "initial_worktree_clean": true,
+    "initial_ahead_behind": [
+      0,
+      0
+    ],
+    "archive_relative_path": ".tmp/rtx3060-final-acceptance/final.zip",
+    "requested_sibling_path_absent": true,
+    "archive": {
+      "bytes": 65320,
+      "sha256": "2d90867e8be4960c1878effa12c3ddc20acbc1c4609ae4c952f33bf0b8e220ed"
+    },
+    "training_source_commit": "1c270adba77545720fa33bcee0e24f7d6f46e55d",
+    "packaging_commit": "e3de4db26a6c4dad25dc51a6b321ff2b434d0e00",
+    "strict_verifier": {
+      "version_kind": "git_commit_and_file_sha256",
+      "commit": "e3de4db26a6c4dad25dc51a6b321ff2b434d0e00",
+      "files": {
+        "verify_result.py": {
+          "bytes": 7506,
+          "sha256": "15c0d7284ece1676556761e80c3dbe7aa131e340b1db6644c8a1f4b418acdd3d"
+        },
+        "source_identity.py": {
+          "bytes": 15738,
+          "sha256": "b11620d45b424ec03caf590034c3a8c87602d5769298ddb660cfffacc5dd4c81"
+        },
+        "verdict.py": {
+          "bytes": 8843,
+          "sha256": "c209eb3af848d387faceb41744b0032fa208fa146c27076d10ddc78b5ff97d99"
+        },
+        "package_result.py": {
+          "bytes": 10856,
+          "sha256": "065ef4302f96e40b4c918dcc9f558f22574d185f36da40a3ec9baca2058a7b8c"
+        },
+        "selection.py": {
+          "bytes": 1241,
+          "sha256": "6fe28b2c9d22387f25af696957ee1fd28aa53b8a15f79e68be85b91a5512349b"
+        },
+        "state.py": {
+          "bytes": 6131,
+          "sha256": "b6af2c9ae8e541ff63d37727f010eb369cf8a52441a67eddf9b0c1923c6f1050"
+        },
+        "common.py": {
+          "bytes": 6243,
+          "sha256": "0e0c753690fd138fda041e783f434e1a447c7aa8502d5e90bb5c7dcef46d4f88"
+        },
+        "policy.py": {
+          "bytes": 1195,
+          "sha256": "4eb76c7e12dbbcdce2c3ed615324306031d0a5e751cd3f0117fb039c1745cb44"
+        }
+      },
+      "returncode": 0,
+      "result": {
+        "archive_integrity": "PASS",
+        "training_gate": "RTX3060_12GB_TARGETED_LORA_1536_ENVELOPE_SMOKE_PASS",
+        "certified_training_pass": true,
+        "failed_checks": []
+      }
+    },
+    "recorded": {
+      "train_rows": 8000,
+      "maximum_length": 1421,
+      "limit": 1536,
+      "truncation": false,
+      "microbatches": 8,
+      "updates": 2,
+      "cuda_free_boundary_MiB": [
+        3933,
+        1160.6484375
+      ],
+      "external_minimum_free_MiB": 1002,
+      "changed_adapter_tensors": 144,
+      "adapter_tensors": 144,
+      "fresh_process_reload_finite_logits": true,
+      "outcome_checks_true": 27,
+      "update_seconds": [
+        11.04700000000048,
+        10.67199999999957
+      ],
+      "load_seconds": 7.561999999999898,
+      "optimizer": {
+        "requested": "paged_adamw_8bit",
+        "class": "bitsandbytes.optim.adamw.AdamW",
+        "is_paged": true,
+        "optim_bits": 8,
+        "kwargs": {
+          "lr": 0.0002,
+          "betas": [
+            0.9,
+            0.999
+          ],
+          "eps": 1e-08,
+          "optim_bits": 8,
+          "is_paged": true
+        }
+      },
+      "quality_evaluation": false,
+      "full_training_started": false
+    },
+    "baseline_file": {
+      "bytes": 10477,
+      "sha256": "46e4046d15d11a8c30bb10a63bb41da0a2c6d7c818ff5ca210ce05d21c550eba"
+    },
+    "historical_scope_unchanged": true
+  },
+  "candidate": {
+    "schema_version": 1,
+    "candidate": "QWEN3_4B_TRAIN_V1",
+    "seed": 20260917,
+    "data_seed": 20260917,
+    "rows": 8000,
+    "epochs": 1,
+    "microbatches": 8000,
+    "optimizer_updates": 2000,
+    "microbatch_size": 1,
+    "gradient_accumulation": 4,
+    "max_length": 1536,
+    "truncation": false,
+    "packing": false,
+    "quantization": {
+      "load_in_4bit": true,
+      "bnb_4bit_quant_type": "nf4",
+      "bnb_4bit_use_double_quant": true,
+      "bnb_4bit_compute_dtype": "float16"
+    },
+    "lora": {
+      "r": 8,
+      "lora_alpha": 16,
+      "lora_dropout": 0.05,
+      "bias": "none",
+      "task_type": "CAUSAL_LM",
+      "target_modules": [
+        "q_proj",
+        "v_proj"
+      ]
+    },
+    "trainable_parameters": 2949120,
+    "attention_implementation": "sdpa",
+    "device": "cuda:0",
+    "fp16": true,
+    "bf16": false,
+    "tf32": false,
+    "activation_offload": {
+      "method": "Transformers.gradient_checkpointing_enable",
+      "offload": true,
+      "every_n_layers": 1,
+      "gradient_checkpointing_kwargs": {
+        "use_reentrant": true
+      },
+      "PEFT_prepare_use_gradient_checkpointing": false,
+      "reason": "PEFT forwards kwargs to torch checkpoint; offload is a top-level Transformers argument. Explicit reentrant=True preserves the previous effective checkpoint algorithm."
+    },
+    "optimizer": {
+      "name": "paged_adamw_8bit",
+      "class": "bitsandbytes.optim.adamw.AdamW",
+      "lr": 0.0002,
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.01,
+      "optim_bits": 8,
+      "is_paged": true,
+      "min_8bit_size": 4096,
+      "amsgrad": false
+    },
+    "max_grad_norm": 1.0,
+    "scheduler": {
+      "kind": "constant",
+      "warmup_updates": 0,
+      "step_after_successful_update": true
+    },
+    "amp": {
+      "init_scale": 65536.0,
+      "growth_factor": 2.0,
+      "backoff_factor": 0.5,
+      "growth_interval": 2000,
+      "skipped_update_policy": "FAIL_NO_CURSOR_ADVANCE_NO_AUTOMATIC_RETRY"
+    },
+    "loss": "Mean of four per-record mean completion-token cross-entropies; each divided by 4 before backward; epoch mean is sum of committed record losses / 8000. Template whitespace after EOS follows accepted labels.",
+    "data_order": "Python 3.12 random.Random(data_seed).shuffle(indices); persist exact permutation and cursor; no DataLoader RNG.",
+    "checkpoint": {
+      "every_successful_update": 1,
+      "retain_verified": 2,
+      "initial_step_zero": true,
+      "max_bytes": 536870912
+    },
+    "timeouts_seconds": {
+      "prepare": 900,
+      "admission": 180,
+      "load": 300,
+      "optimizer_group": 600,
+      "checkpoint": 120,
+      "package": 180,
+      "cancel_grace": 5,
+      "full_run_wall_clock": 86400,
+      "owner_test_group": 180
+    },
+    "disk": {
+      "required_free_bytes": 10737418240,
+      "stop_free_bytes": 2147483648
+    },
+    "telemetry": {
+      "host_interval_seconds": 0.2,
+      "external_gpu_interval_ms": 200,
+      "progress_seconds": 10,
+      "max_log_bytes": 16777216,
+      "log_backups": 2
+    },
+    "hardware_admission": {
+      "physical_vram_min_MiB": 12000,
+      "gpu_index": 0,
+      "gpu_capability": [
+        8,
+        6
+      ],
+      "nvidia_min_free_before_training_MiB": 10800,
+      "cuda_min_free_before_training_MiB": 10500,
+      "disk_before_download_bytes": 32212254720,
+      "disk_before_training_bytes": 5368709120,
+      "minimum_boundary_free_bytes": 268435456,
+      "comfortable_boundary_free_bytes": 536870912,
+      "cuda_capacity_min_MiB": 12000,
+      "gpu_name_pattern": "^(?:nvidia\\s+)?(?:geforce\\s+)?rtx\\s*3060$"
+    },
+    "host_memory": {
+      "sample_interval_seconds": 0.2,
+      "start_min_available_bytes": 12884901888,
+      "stop_min_available_bytes": 6442450944,
+      "max_pagefile_growth_bytes": 268435456,
+      "preferred_cuda_headroom_bytes": 536870912
+    },
+    "runtime_lock": "tools/windows-rtx3060-12gb-1536/runtime-lock.json",
+    "model_lock": "tools/windows-rtx3060-12gb-1536/model-lock.json",
+    "initial_adapter": "NEW_RANDOM_LORA_NOT_SMOKE",
+    "evaluation": "DISABLED"
+  },
+  "candidate_file": {
+    "bytes": 3873,
+    "sha256": "41b3bd010d62d53435b988086984d5e169c2c226746c64775281d60aaa5bd85d"
+  },
+  "source_identity": {
+    "kind": "full_training_implementation",
+    "commit": "deccdc32cc7bcb69c78d041e6edfef8fc52c6e6c",
+    "future_run_commit_policy": "Record actual clean Prepare checkout HEAD and load-bearing file pins. Packaging commit is separate.",
+    "source_files": {
+      "tools/windows-rtx3060-full-training/accept_historical.py": {
+        "bytes": 1907,
+        "sha256": "dff6c34f1c8c6775f57f2ccf244c4083f96b722d075c8820a5b714b5c430c28d"
+      },
+      "tools/windows-rtx3060-full-training/accepted-baseline.json": {
+        "bytes": 10477,
+        "sha256": "46e4046d15d11a8c30bb10a63bb41da0a2c6d7c818ff5ca210ce05d21c550eba"
+      },
+      "tools/windows-rtx3060-full-training/candidate-v1.json": {
+        "bytes": 3873,
+        "sha256": "41b3bd010d62d53435b988086984d5e169c2c226746c64775281d60aaa5bd85d"
+      },
+      "tools/windows-rtx3060-full-training/checkpoints.py": {
+        "bytes": 8330,
+        "sha256": "cc270a9292888d912f9a260f95e7f700228dae16fa00eb4b4f28b42ce2177fad"
+      },
+      "tools/windows-rtx3060-full-training/engine.py": {
+        "bytes": 6972,
+        "sha256": "34d33fff9f9422f7c9f3d6bb63eed4c9d7bfb6c9cb8b9ddf5badaf6210be536e"
+      },
+      "tools/windows-rtx3060-full-training/full_common.py": {
+        "bytes": 7666,
+        "sha256": "4b5fe3b1462942741dcfb29d5b2fe2d7b9b5eb6de3bc4fa0df4ca95147a3ea38"
+      },
+      "tools/windows-rtx3060-full-training/full_data.py": {
+        "bytes": 4315,
+        "sha256": "737028553ebb8376bb4d3aadd125c231ee3eeb8b71ed9c769b8922b21a63ef24"
+      },
+      "tools/windows-rtx3060-full-training/identity.py": {
+        "bytes": 3592,
+        "sha256": "77b4c03d4014cc2ec8e6c6a7cb9966bc9a0a643658cdc03badaf50f9315a1011"
+      },
+      "tools/windows-rtx3060-full-training/owner_tokenizer_check.py": {
+        "bytes": 3094,
+        "sha256": "3e07f3e8fdda73171215e1341049fc703bed7feeb6cb8d7648b7c465f33dc3b3"
+      },
+      "tools/windows-rtx3060-full-training/README_RU.md": {
+        "bytes": 17145,
+        "sha256": "175b4772fbf20d0af6f329344a1edfb3cbd89179f29555764ea60422b6272378"
+      },
+      "tools/windows-rtx3060-full-training/results.py": {
+        "bytes": 11192,
+        "sha256": "9d3088ddd875f49ebcbcc99fbc7ba45d0f636b28ac1a009de7e6342c845b1e62"
+      },
+      "tools/windows-rtx3060-full-training/RUN-FULL-TRAINING.ps1": {
+        "bytes": 2600,
+        "sha256": "f9e09fb31e8545371afbfc1d992fa724d1079ccd943d831916d5c03b668dee4d"
+      },
+      "tools/windows-rtx3060-full-training/run_owner_tests.py": {
+        "bytes": 2674,
+        "sha256": "973eb5702effc5d58fd108eb3c0ecd6f342ea2b1eb095f2caee7b92da5382b8e"
+      },
+      "tools/windows-rtx3060-full-training/supervisor.py": {
+        "bytes": 11075,
+        "sha256": "1711ea4655a846fc9af7587e1308bbf93ee51a230a5a94466bacd30457bece40"
+      },
+      "tools/windows-rtx3060-full-training/test_controls.py": {
+        "bytes": 7735,
+        "sha256": "ca0a1bcb5201768da690b23a765cf0bb8b0a7ec334225bcb6e93ff9cdce56ea2"
+      },
+      "tools/windows-rtx3060-full-training/test_results.py": {
+        "bytes": 4995,
+        "sha256": "81941c72a5dd0fd59725fcea0486e601b00d041934768e9470307dd363e0f339"
+      },
+      "tools/windows-rtx3060-full-training/test_resume.py": {
+        "bytes": 6414,
+        "sha256": "f47066de75a06d88057c41b73d52caba0fe5590a722ce3bf7d3cb030146db72e"
+      },
+      "tools/windows-rtx3060-full-training/test_support.py": {
+        "bytes": 4684,
+        "sha256": "40d87cf2e1befc43cb05a45e2ffe7ec2fe187b6f9fccb38dfd1d737111f13ea1"
+      },
+      "tools/windows-rtx3060-full-training/train_full.py": {
+        "bytes": 9118,
+        "sha256": "f673a4443fb998182529de8a985fa6546de011c63c5d6c3179034a55da3be3e8"
+      },
+      "tools/windows-rtx3060-full-training/verify_result.py": {
+        "bytes": 14648,
+        "sha256": "1f276029d263e5bdf40597235681f3f5247857f8888c3b6331703533118f57ce"
+      },
+      "tools/windows-rtx3060-full-training/workflow.py": {
+        "bytes": 10544,
+        "sha256": "a5a77f79cb95ca1921034060743589e5a7afb2d802e3edb4c34a6f9098793661"
+      }
+    }
+  },
+  "model_and_tokenizer_pins": {
+    "repo_id": "Qwen/Qwen3-4B",
+    "revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+    "files": {
+      "config.json": {
+        "bytes": 726,
+        "sha256": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a"
+      },
+      "generation_config.json": {
+        "bytes": 239,
+        "sha256": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2"
+      },
+      "model.safetensors.index.json": {
+        "bytes": 32819,
+        "sha256": "6dc0981b8829fead746441f68f38f24c5ca4a3a66351f652c26c6df0efc43ab2"
+      },
+      "tokenizer.json": {
+        "bytes": 11422654,
+        "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+      },
+      "tokenizer_config.json": {
+        "bytes": 9732,
+        "sha256": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101"
+      },
+      "vocab.json": {
+        "bytes": 2776833,
+        "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      },
+      "merges.txt": {
+        "bytes": 1671853,
+        "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+      },
+      "model-00001-of-00003.safetensors": {
+        "bytes": 3957900840,
+        "sha256": "328a91d3122359d5547f9d79521205bc0a46e1f79a792dfe650e99fc2d651223"
+      },
+      "model-00002-of-00003.safetensors": {
+        "bytes": 3987450520,
+        "sha256": "6cd087b316306a68c562436b5492edbcf6e16c6dba3a1308279caa5a58e21ca5"
+      },
+      "model-00003-of-00003.safetensors": {
+        "bytes": 99630640,
+        "sha256": "e4bf436957184f4eeb86a80e9db394503f1f56446b2e6b7edeac5b81470f4ca1"
+      }
+    }
+  },
+  "data_and_compiler_pins": {
+    "ml/data/synthetic_ru/train.jsonl": {
+      "bytes": 10733980,
+      "sha256": "74defddc644eda30227a58adaef41ad31d7a849000852d6a459de4b778770f47"
+    },
+    "ml/data/synthetic_ru/contexts.json": {
+      "bytes": 761344,
+      "sha256": "7caf6ede5ec31bcc147c4e10dadd74fd5fde1ff58328ebbccf27fb09a7d4b145"
+    },
+    "ml/data/synthetic_ru/manifest.json": {
+      "bytes": 13013,
+      "sha256": "055c0b7f586dfc860685e7b1dca4bcf466dade863ba4ac669005a8e740418ba7"
+    },
+    "ml/data/synthetic_ru/compile_sft.py": {
+      "bytes": 3732,
+      "sha256": "a18c3f4d8206719f24964f318c4a8a72d42a8dacd2e618232c3bf92c0f3b4eb1"
+    },
+    "ml/data/synthetic_ru/core.py": {
+      "bytes": 6658,
+      "sha256": "25ddd5177c45c042221c586ed0cf62256fec672492b0fa0ce3b080898c14e1cf"
+    },
+    "ml/data/synthetic_ru/validate.py": {
+      "bytes": 10730,
+      "sha256": "fe7758c7bad2d1aa604ae87a8369d94d00ffe26d7b4ae8d065c8a37779b2090c"
+    },
+    "ml/data/synthetic_ru/system-prompt.txt": {
+      "bytes": 1372,
+      "sha256": "1fbd12de32c7e54ad116979bfee966ff6d15d92b02d42556dd07420b880954a5"
+    },
+    "ml/baseline/scoring.py": {
+      "bytes": 16632,
+      "sha256": "c512ef147379ef20a881a48d90b36d6c0cf853f3a7696580a8fa78b2af61696c"
+    },
+    "evals/local-qwen/interpretation.schema.json": {
+      "bytes": 6663,
+      "sha256": "0df92dd03436502599f12d6ec245ce8948dd5d4d3e85ca2657d9cd0c79db2f5d"
+    }
+  },
+  "runtime_lock": {
+    "path": "tools/windows-rtx3060-12gb-1536/runtime-lock.json",
+    "bytes": 20193,
+    "sha256": "3fdb4d2c5c731e13aec27e6ebd063096456d4c770ea4c55fdf65ddf8187c4755"
+  },
+  "validation": {
+    "groups": [
+      {
+        "group": "test_controls",
+        "passed": true,
+        "returncode": 0,
+        "seconds": 3.2189999999973224,
+        "tests": 9,
+        "watchdog_seconds": 180
+      },
+      {
+        "group": "test_resume",
+        "passed": true,
+        "returncode": 0,
+        "seconds": 5.812000000005355,
+        "tests": 6,
+        "watchdog_seconds": 180
+      },
+      {
+        "group": "test_results",
+        "passed": true,
+        "returncode": 0,
+        "seconds": 5.8289999999979045,
+        "tests": 5,
+        "watchdog_seconds": 180
+      },
+      {
+        "group": "tokenizer",
+        "passed": true,
+        "real_tokenizer": {
+          "CUDA_initialized": false,
+          "actual_TRL_collator_masks_checked": 8000,
+          "evaluation_calls": 0,
+          "holdout_example_files_opened": 0,
+          "inference_calls": 0,
+          "kind": "real_accepted_train_tokenizer_and_compiler",
+          "model_weight_loads": 0,
+          "negative_mask_controls": 2,
+          "optimizer_updates": 0,
+          "passed": true,
+          "seconds": 58.10899999999674,
+          "summary": {
+            "complete_json_and_eos_verified": 8000,
+            "files": {
+              "offsets.json": {
+                "bytes": 70777,
+                "sha256": "0f0d07a2677dcf631400563474cf875e0d61e8735c8b7d6a29d8fe23f1689705"
+              },
+              "order.json": {
+                "bytes": 38892,
+                "sha256": "d9f40ebeda639bb7ec9b76a74505956d177813b229340102c02689a49a1ee26c"
+              },
+              "train-contexts.json": {
+                "bytes": 556707,
+                "sha256": "9e3fafd4278ce70fb50980bf0022f5f643a23bc077ed8f937691672c26e40eda"
+              },
+              "train-tokens.jsonl": {
+                "bytes": 75066982,
+                "sha256": "bb2fbae0e3f2c6eaaa4ae93717254067f9c968dd2da6fdba8efe5744d8a52347"
+              }
+            },
+            "maximum_length": 1421,
+            "minimum_length": 663,
+            "order_sha256": "28039d85dbc95113ba6c022d2285ad7d27e25fd8fb59396120255b481f888eb6",
+            "prompt_masks_verified": 8000,
+            "rows": 8000,
+            "rows_above_1536": 0,
+            "truncated_rows": 0
+          }
+        },
+        "returncode": 0,
+        "seconds": 58.88999999999942,
+        "tests": null,
+        "watchdog_seconds": 180
+      }
+    ],
+    "passed": true,
+    "production_CUDA_path": "NOT_EXECUTED; shared engine/checkpoint workflow exercised with CPU fixtures",
+    "quality_evaluation_calls": 0,
+    "real_Qwen_model_loads": 0,
+    "real_Qwen_training_updates": 0,
+    "real_Windows_PowerShell_51_and_process_controls": true
+  },
+  "owner_test_receipt_pin": {
+    "bytes": 1764,
+    "sha256": "33405f995db00a8e5ea5489ba2473dbb22cb07763848a9c6133391f7f7e6480d"
+  },
+  "resolved_validation_findings": [
+    "Preserve nested publicContext.player insertion order; canonical sorting had changed prompt tokenization to max=1420. Final full coverage is 1421.",
+    "Owner CPU optimizer health check initially initialized a CUDA context. Owner-only test processes now explicitly hide CUDA; no Qwen load or CUDA training occurred."
+  ],
+  "checkpoint_resume": {
+    "initial_step_zero": true,
+    "after_every_successful_update": true,
+    "retention": 2,
+    "atomic_stage_verify_rename": true,
+    "payload": [
+      "adapter weights/config",
+      "optimizer",
+      "constant scheduler",
+      "AMP GradScaler",
+      "Python/NumPy/Torch/CUDA RNG",
+      "exact permutation/cursor/epoch/update",
+      "run/model/tokenizer/data/config/runtime/source pins",
+      "integrity manifest and COMPLETE marker"
+    ],
+    "uncommitted_partial_group": "Explicitly identify and discard current group; restore RNG and replay only its four positions.",
+    "inference_adapter_is_not_resume": true,
+    "failed_or_skipped_update_policy": "Fail without success cursor/scheduler advance; no automatic retry",
+    "completed_step_2000_offline_finalization": true
+  },
+  "duration_estimate": {
+    "kind": "ROUGH_NOT_PROMISE",
+    "update_measurements_seconds": [
+      11.04700000000048,
+      10.67199999999957
+    ],
+    "mean_update_times_2000_seconds": 21719,
+    "compute_hours": 6.033055555555555,
+    "single_observed_model_load_seconds": 7.561999999999898,
+    "additional_unmeasured": "2000 atomic checkpoint saves/verification and I/O; preparation and reloads on explicit continuation",
+    "fixed_run_budget_seconds": 86400,
+    "includes_paused_wall_clock": true
+  },
+  "disk_estimate": {
+    "required_free_bytes": 10737418240,
+    "stop_free_bytes": 2147483648,
+    "max_checkpoint_bytes": 536870912,
+    "retained_checkpoints": 2,
+    "normal_verified_plus_staging_ceiling_bytes": 1610612736,
+    "actual_token_jsonl_bytes": 75066982,
+    "checkpoint_size_estimate": "tens of MiB, production not yet measured",
+    "cumulative_writes_estimate": "tens of GiB from 2000 checkpoints, not simultaneous usage",
+    "base_model_copy": false
+  },
+  "evidence_boundary": {
+    "immutable": [
+      "run identity",
+      "committed checkpoint receipts and measurements",
+      "completed facts and seal"
+    ],
+    "mutable": [
+      "last_error_phase",
+      "native error type/code",
+      "packaging attempts"
+    ],
+    "archive_outputs": [
+      "sanitized diagnostic ZIP",
+      "separate deployable LoRA adapter ZIP with base/tokenizer references and hashes"
+    ],
+    "excluded": [
+      "base weights",
+      "raw examples",
+      "raw diagnostics/logs",
+      "secrets",
+      "local optimizer resume checkpoints"
+    ],
+    "archive_integrity_is_quality_pass": false
+  },
+  "evaluation_sequence": [
+    "Complete V1 full TRAIN epoch",
+    "DEV and permitted 304-case tuning eval",
+    "Freeze model/configuration selection",
+    "Locked INTERNAL_TEST and A01-A16 final assessment only"
+  ],
+  "metrics_authority": "ml/baseline/scoring.py; unchanged parsing/schema/semantic/critical/clarification/unknown-ID/full-structure metrics, per-intent slices and mean/median/p95 latency",
+  "execution_boundary": {
+    "real_Qwen_full_training_started": false,
+    "real_Qwen_inference_started": false,
+    "quality_evaluation_started": false,
+    "new_hardware_smoke_started": false,
+    "application_integration_started": false,
+    "new_run_requires_separate_owner_authorization": true,
+    "production_GPU_checkpoint_resume": "NOT_EXECUTED; CPU fixture equivalence only",
+    "reuse_existing_friend_environment_and_model": true
+  },
+  "REAL_APPLICATION_SMOKE": {
+    "status": "NOT_APPLICABLE_WITH_REASON",
+    "reason": "training infrastructure only; application behavior unchanged"
+  },
+  "git": {
+    "origin": "https://github.com/AiratBastanov/TalkNFace.git",
+    "branch": "main",
+    "implementation_commit": "deccdc32cc7bcb69c78d041e6edfef8fc52c6e6c",
+    "prior_tracked_paths_unchanged": true,
+    "normal_commits_and_push_only": true,
+    "receipt_commit_resolution": "git log -1 --format=%H -- docs/gates/QWEN3_4B_FULL_TRAINING_PREPARATION.md",
+    "final_push_and_clean_0_0_verification": "Reported after final receipt commit and push in user handoff; no circular self commit/hash."
+  },
+  "friend_instructions": "tools/windows-rtx3060-full-training/README_RU.md",
+  "stop": "STOP — FULL QWEN TRAINING AND QUALITY EVALUATION NOT STARTED."
+}
