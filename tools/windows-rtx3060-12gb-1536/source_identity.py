@@ -20,6 +20,10 @@ ORIGIN = 'https://github.com/AiratBastanov/TalkNFace.git'
 TRAINING_COMMIT = '1c270adba77545720fa33bcee0e24f7d6f46e55d'
 ORIGINAL_ZIP_SHA256 = '07d2abfc00d188a469b1a18e6bc370c7040aa0e7a22f091ffc553ecff68e2cbf'
 ORIGINAL_EVIDENCE_SHA256 = 'e8a2314894204b10ddadc5372fea4d34887f66842c9a8cd8413e9269c8d12906'
+# Independently verified from the immutable result plus the hash-pinned remote
+# raw supplement. Both digests use campaign_payload(): no provenance, schema 2.
+# Modern redaction is lossy; an archive cannot be projected back to raw input.
+SANITIZED_EVIDENCE_SHA256 = 'd5ba0e4a5ab44d76b957abfa92e4795eb61ddee3594e37288dd6a712c737ecd7'
 TOOL = 'tools/windows-rtx3060-12gb-1536/'
 DECISION = 'docs/gates/evidence/LOCAL_QWEN_QLORA_MEMORY_ARCHITECTURE_DECISION.json'
 ALLOWED_CORRECTION_PATHS = frozenset(TOOL + name for name in (
@@ -174,11 +178,22 @@ def historical_snapshot(e, git):
     return expected
 
 
-def legacy_digest(e, root=ROOT):
-    from package_result import sanitize, legacy_scrub_text
+def campaign_payload(e):
+    """Compare the campaign independently of packaging schema/provenance."""
     original = {k: v for k, v in e.items() if k != 'source_provenance'}
     original['schema_version'] = 2
-    return digest(sanitize(original, root, scrubber=legacy_scrub_text))
+    return original
+
+
+def legacy_digest(e, root=ROOT):
+    """Apply the frozen schema-2 sanitizer to raw records, never modern output."""
+    from package_result import legacy_sanitize
+    return digest(legacy_sanitize(campaign_payload(e), root))
+
+
+def sanitized_digest(e, root=ROOT):
+    from package_result import sanitize
+    return digest(sanitize(campaign_payload(e), root))
 
 
 def verify_checkout(git, commit):
@@ -210,6 +225,11 @@ def verify_checkout(git, commit):
 
 
 def collect_provenance(e, root=ROOT):
+    """Bind raw records to both projections; bind published schema 3 directly.
+
+    The modern campaign pin was derived/reviewed against real remote raw bytes
+    and the original legacy pin, not inferred by reversing redacted URLs.
+    """
     ready = GitIdentity.parse(e['prepared']['git'])
     after = GitIdentity.parse(e['outcome']['integrity']['git'])
     require(ready == after and ready.commit == e['outcome']['repository_commit'] == TRAINING_COMMIT,
@@ -220,13 +240,21 @@ def collect_provenance(e, root=ROOT):
     proof = tooling_proof(git, ready.commit, current['commit'])
     # status alone does not catch assume-unchanged/skip-worktree.
     verify_checkout(git, current['commit'])
-    require(legacy_digest(e, root) == ORIGINAL_EVIDENCE_SHA256,
-            'Completed campaign differs from the immutable original result')
+    if e['schema_version'] == 2:
+        require(legacy_digest(e, root) == ORIGINAL_EVIDENCE_SHA256,
+                'Completed campaign differs from the immutable original result')
+        require(sanitized_digest(e, root) == SANITIZED_EVIDENCE_SHA256,
+                'Completed campaign differs from the verified sanitized result')
+    else:
+        require(e['schema_version'] == 3, 'Unexpected evidence schema')
+        require(digest(campaign_payload(e)) == SANITIZED_EVIDENCE_SHA256,
+                'Published campaign differs from the verified sanitized result')
     require(current == git.identity(), 'Git state changed during certification')
-    return {'schema_version': 1, 'training_source_commit': ready.commit,
+    return {'schema_version': 2, 'training_source_commit': ready.commit,
             'packaging_git': current, 'tooling_only_proof': proof,
             'original_result_zip_sha256': ORIGINAL_ZIP_SHA256,
             'original_evidence_sha256': ORIGINAL_EVIDENCE_SHA256,
+            'sanitized_evidence_sha256': SANITIZED_EVIDENCE_SHA256,
             'gpu_campaign_rerun': False, 'full_training_started': False}
 
 

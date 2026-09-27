@@ -71,6 +71,28 @@ def legacy_scrub_text(text, root=ROOT):
     return text
 
 
+# Frozen schema-2 traversal from training commit 1c270adba77545720fa33bcee0e24f7d6f46e55d.
+# Keep these independent of modern privacy policy. Never emit this projection.
+LEGACY_PRIVATE_KEYS = {'prompt','completion','input_ids','labels','messages','public_context','json','rows','reload_row'}
+LEGACY_SECRET_KEYS = {'token','access_token','hf_token','authorization','password','secret','credentials'}
+LEGACY_OMIT_KEYS = {'error','message','pip_check','pip_check_stderr'}
+
+
+def legacy_sanitize(value, root=ROOT):
+    """Exact historical traversal and scrub order, for immutable digest binding only."""
+    if isinstance(value, dict):
+        result = {}
+        for key, item in value.items():
+            if key.lower() in LEGACY_SECRET_KEYS: result[key] = '<redacted>'; continue
+            if key in LEGACY_PRIVATE_KEYS: raise ValueError('Example content cannot enter a result: ' + key)
+            if key in LEGACY_OMIT_KEYS: continue
+            result[key] = legacy_sanitize(item, root)
+        return result
+    if isinstance(value, list): return [legacy_sanitize(v, root) for v in value]
+    if isinstance(value, str): return legacy_scrub_text(value, root)
+    return value
+
+
 def sanitize(value, root=ROOT, *, scrubber=scrub_text):
     if isinstance(value, dict):
         result = {}
