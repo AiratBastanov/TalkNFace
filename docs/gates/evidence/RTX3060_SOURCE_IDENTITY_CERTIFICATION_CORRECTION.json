@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "verdict": "RTX3060_LEGACY_PROJECTION_CERTIFICATION_CORRECTION_PASS",
-  "scope": "Frozen legacy/raw and sanitized-archive certification correction, verified using actual remote raw evidence; friend PackageOnly still pending",
+  "verdict": "RTX3060_REMOTE_PACKAGEONLY_INTEGRATION_CORRECTION_PASS",
+  "scope": "Reproduced phase-05 diagnostic drift through production evidence_for/package/certify_packaging; corrected original-bound campaign view; full isolated integration regression passed; new friend PackageOnly pending",
   "gpu_campaign_rerun": false,
   "new_training_campaigns": 0,
   "real_phase04_invocations": 0,
@@ -10,11 +10,12 @@
   "full_training_status": "NOT STARTED",
   "evaluation_started": false,
   "training_source_commit": "1c270adba77545720fa33bcee0e24f7d6f46e55d",
-  "packaging_verifier_correction_commit": "a41776bf55a6e7c9c13aae7904d7c04f9bfcb882",
+  "packaging_verifier_correction_commit": "4aa509060a62716e5fa350e3f6f2af780794c86b",
   "implementation_commits": [
     "8712861a731e46a53f8c99ba86e7987cdea11631",
     "8cab2c3aae1bdfdc87d1d9c68326c9564d629852",
-    "a41776bf55a6e7c9c13aae7904d7c04f9bfcb882"
+    "a41776bf55a6e7c9c13aae7904d7c04f9bfcb882",
+    "4aa509060a62716e5fa350e3f6f2af780794c86b"
   ],
   "receipt_commit_resolution": "git log -1 --format=%H -- docs/gates/evidence/RTX3060_SOURCE_IDENTITY_CERTIFICATION_CORRECTION.json",
   "authoritative_origin": "https://github.com/AiratBastanov/TalkNFace.git",
@@ -49,6 +50,21 @@
       "proposed_modern_url_shielding_hypothesis_confirmed": false,
       "additional_frozen_traversal_gap": "Legacy digest shared the expanded modern secret-key set; now frozen independently",
       "why_owner_fixtures_missed_it": "Original synthetic evidence left wheel_provenance null; Git-origin tests never exercised a lossy wheel URL through packaging and verification"
+    },
+    "production_path_followup": {
+      "failed_delivered_head": "9febf72536f33af6872f901ce354b39abfa9fe15",
+      "actual_remote_exception": "Raw completed evidence contradicts the original result",
+      "remote_failures_reported": 2,
+      "reader": "package_result.evidence_for(scratch)",
+      "mutable_input": "last-phase-error.json",
+      "writer": "RUN-RTX3060-12GB-REMOTE.ps1 catch -> Remote.Common.ps1 Write-PhaseFailure ([string]$number)",
+      "differing_path": "last_error_phase",
+      "original_and_first_repackage_value": "4",
+      "value_written_after_failed_PackageOnly": "5",
+      "legacy_sanitizer_was_cause": false,
+      "original_zip_selection_passed_in_reproduction": true,
+      "failure_before_prepared_artifact_checks": true,
+      "why_owner_validation_missed_it": "The successful real-input composite inherited last_error_phase=4 from the ZIP; packaging test mocked evidence_for, bypassing the mutable scratch marker"
     }
   },
   "correction": {
@@ -70,7 +86,17 @@
     "raw_URL_reconstruction_or_lock_substitution": false,
     "hardcoded_wheel_positions": false,
     "legacy_values_emitted_into_schema3": false,
-    "correction_allowlist_expanded": false
+    "correction_allowlist_expanded": false,
+    "historical_error_phase_from_authenticated_original_only": true,
+    "only_live_phase_string_5_can_rebind_error_phase": true,
+    "requires_raw_schema2_completed_campaign": true,
+    "last_error_phase_not_globally_ignored": true,
+    "both_canonical_digest_constants_unchanged": true,
+    "frozen_legacy_sanitizer_unchanged": true,
+    "prepared_artifact_hash_checks_unchanged": true,
+    "scratch_records_not_rewritten": true,
+    "direct_raw_and_published_verification_remain_strict": true,
+    "certify_packaging_returns_bound_campaign_and_provenance": true
   },
   "files_changed": [
     "tools/windows-rtx3060-12gb-1536/package_result.py",
@@ -81,40 +107,9 @@
   ],
   "regressions": {
     "passed": true,
-    "tests": 94,
-    "groups": [
-      {
-        "group": "test_source_identity",
-        "returncode": 0,
-        "tests": 60,
-        "seconds": 36.156,
-        "budget_seconds": 180,
-        "passed": true,
-        "skips": 0
-      },
-      {
-        "group": "test_workflow_result",
-        "returncode": 0,
-        "tests": 23,
-        "seconds": 0.734,
-        "budget_seconds": 180,
-        "passed": true,
-        "skips": 0
-      },
-      {
-        "group": "test_python_launcher",
-        "returncode": 0,
-        "tests": 11,
-        "seconds": 12.328,
-        "budget_seconds": 180,
-        "passed": true,
-        "skips": 0
-      }
-    ],
     "real_raw_evidence_used": true,
     "gpu_training_rerun": false,
     "full_training_started": false,
-    "new_source_privacy_tests": 20,
     "GPU_model_loads": 0,
     "real_training_campaigns": 0,
     "real_PowerShell_51_parsing_and_dispatch": true,
@@ -135,12 +130,56 @@
       "original ZIP substitution",
       "both previous ZIP generations preserved",
       "PackageOnly phase 05 only",
-      "no torch/transformers/peft/bitsandbytes imports"
-    ]
+      "no torch/transformers/peft/bitsandbytes imports",
+      "actual evidence_for file reading with hash-pinned raw supplement and archive diagnostics",
+      "unchanged PowerShell Write-PhaseFailure creates phase-5 drift",
+      "full scratch/package/certify/schema-3 verification using isolated fixture pins",
+      "exact canonical pins restored without mutating any input JSON",
+      "phase-5 marker cannot hide campaign metrics, memory, adapter, source, selection, model, configuration, nonce or public URL changes",
+      "phase-5 marker cannot bypass original ZIP or prepared train-contexts byte hashes",
+      "non-5, mistyped, incomplete and already published inputs cannot use compatibility binding",
+      "direct raw and schema-3 checks still reject changed last_error_phase"
+    ],
+    "tests": 102,
+    "groups": [
+      {
+        "group": "test_source_identity",
+        "tests": 68,
+        "seconds": 46.881,
+        "budget_seconds": 180,
+        "passed": true,
+        "returncode": 0,
+        "skips": 0
+      },
+      {
+        "group": "test_workflow_result",
+        "tests": 23,
+        "seconds": 0.524,
+        "budget_seconds": 180,
+        "passed": true,
+        "returncode": 0,
+        "skips": 0
+      },
+      {
+        "group": "test_python_launcher",
+        "tests": 11,
+        "seconds": 12.035,
+        "budget_seconds": 180,
+        "passed": true,
+        "returncode": 0,
+        "skips": 0
+      }
+    ],
+    "production_integration_added_tests": 8,
+    "end_to_end_uses_fixture_pins": true,
+    "production_reader_not_mocked": true,
+    "certification_not_mocked": true,
+    "Git_not_mocked": true,
+    "verifier_not_mocked": true
   },
   "load_bearing_proof": {
     "training_source_commit": "1c270adba77545720fa33bcee0e24f7d6f46e55d",
-    "packaging_commit": "a41776bf55a6e7c9c13aae7904d7c04f9bfcb882",
+    "packaging_commit": "4aa509060a62716e5fa350e3f6f2af780794c86b",
     "training_tree_sha256": "c0f2cfe8a7c0b68e5c2515d0758e056b38662215e71c663fa1b8a51d7227348a",
     "protected_tree_sha256": "e6bec130c1205e0cc8307c065714cee2e7eddb1972b40b3ba73f4eb71fbf8bcd",
     "protected_paths": 313,
@@ -197,10 +236,27 @@
           "tools/windows-rtx3060-12gb-1536/source_identity.py",
           "tools/windows-rtx3060-12gb-1536/test_source_identity.py"
         ]
+      },
+      {
+        "commit": "9febf72536f33af6872f901ce354b39abfa9fe15",
+        "parent": "a41776bf55a6e7c9c13aae7904d7c04f9bfcb882",
+        "changed_paths": [
+          "docs/gates/RTX3060_SOURCE_IDENTITY_CERTIFICATION_CORRECTION.md",
+          "docs/gates/evidence/RTX3060_SOURCE_IDENTITY_CERTIFICATION_CORRECTION.json"
+        ]
+      },
+      {
+        "commit": "4aa509060a62716e5fa350e3f6f2af780794c86b",
+        "parent": "9febf72536f33af6872f901ce354b39abfa9fe15",
+        "changed_paths": [
+          "tools/windows-rtx3060-12gb-1536/package_result.py",
+          "tools/windows-rtx3060-12gb-1536/source_identity.py",
+          "tools/windows-rtx3060-12gb-1536/test_source_identity.py"
+        ]
       }
     ],
     "actual_git": {
-      "commit": "a41776bf55a6e7c9c13aae7904d7c04f9bfcb882",
+      "commit": "4aa509060a62716e5fa350e3f6f2af780794c86b",
       "origin": "https://github.com/AiratBastanov/TalkNFace.git",
       "clean": true
     },
@@ -305,7 +361,7 @@
     ]
   },
   "remote_action": {
-    "status": "PENDING_FRIEND_PACKAGEONLY_AFTER_LEGACY_CORRECTION",
+    "status": "PENDING_FRIEND_PACKAGEONLY_AFTER_PRODUCTION_INTEGRATION_CORRECTION",
     "commands": [
       "git pull --ff-only",
       "powershell -NoProfile -ExecutionPolicy Bypass -File .\\tools\\windows-rtx3060-12gb-1536\\RUN-RTX3060-12GB-REMOTE.ps1 -RepoRoot . -PackageOnly"
@@ -618,6 +674,160 @@
     "real_remote_raw_and_archive_values_used": true,
     "GPU_training_or_model_execution": false,
     "new_hardware_zip_written": false,
-    "all_preparation_files_remain_subject_to_remote_PackageOnly_checks": true
+    "all_preparation_files_remain_subject_to_remote_PackageOnly_checks": true,
+    "validation_scope_gap": "Historical in-memory check did not call the production evidence_for reader; see production_integration for new coverage"
+  },
+  "legacy_projection_validation": {
+    "verdict": "RTX3060_LEGACY_PROJECTION_CERTIFICATION_CORRECTION_PASS",
+    "implementation_commit": "a41776bf55a6e7c9c13aae7904d7c04f9bfcb882",
+    "delivered_head": "9febf72536f33af6872f901ce354b39abfa9fe15",
+    "regressions": {
+      "passed": true,
+      "tests": 94,
+      "groups": [
+        {
+          "group": "test_source_identity",
+          "returncode": 0,
+          "tests": 60,
+          "seconds": 36.156,
+          "budget_seconds": 180,
+          "passed": true,
+          "skips": 0
+        },
+        {
+          "group": "test_workflow_result",
+          "returncode": 0,
+          "tests": 23,
+          "seconds": 0.734,
+          "budget_seconds": 180,
+          "passed": true,
+          "skips": 0
+        },
+        {
+          "group": "test_python_launcher",
+          "returncode": 0,
+          "tests": 11,
+          "seconds": 12.328,
+          "budget_seconds": 180,
+          "passed": true,
+          "skips": 0
+        }
+      ],
+      "real_raw_evidence_used": true,
+      "gpu_training_rerun": false,
+      "full_training_started": false,
+      "new_source_privacy_tests": 20,
+      "GPU_model_loads": 0,
+      "real_training_campaigns": 0,
+      "real_PowerShell_51_parsing_and_dispatch": true,
+      "git_diff_check": "PASS",
+      "coverage": [
+        "real raw hf-xet URL",
+        "both full evidence projections",
+        "all three ZIPs and four raw file hashes",
+        "historical sanitizer AST equality",
+        "modern sanitizer AST unchanged",
+        "GitHub/PyPI/PyTorch public URLs",
+        "authenticated/query/fragment URLs and private paths",
+        "structured secrets and prohibited examples",
+        "wrong origin/commit/dirty source",
+        "load-bearing/reverted history changes",
+        "changed raw and archived metrics",
+        "public URL tampering hidden by old sanitizer",
+        "original ZIP substitution",
+        "both previous ZIP generations preserved",
+        "PackageOnly phase 05 only",
+        "no torch/transformers/peft/bitsandbytes imports",
+        "actual evidence_for file reading with hash-pinned raw supplement and archive diagnostics",
+        "unchanged PowerShell Write-PhaseFailure creates phase-5 drift",
+        "full scratch/package/certify/schema-3 verification using isolated fixture pins",
+        "exact canonical pins restored without mutating any input JSON",
+        "phase-5 marker cannot hide campaign metrics, memory, adapter, source, selection, model, configuration, nonce or public URL changes",
+        "phase-5 marker cannot bypass original ZIP or prepared train-contexts byte hashes",
+        "non-5, mistyped, incomplete and already published inputs cannot use compatibility binding",
+        "direct raw and schema-3 checks still reject changed last_error_phase"
+      ]
+    },
+    "remote_packageonly_outcome": "FAILED twice: Raw completed evidence contradicts the original result",
+    "scope_gap": "Owner composite retained archived last_error_phase; packaging regression mocked evidence_for"
+  },
+  "production_integration": {
+    "implementation_commit": "4aa509060a62716e5fa350e3f6f2af780794c86b",
+    "pre_edit_reproduction": {
+      "at_commit": "9febf72536f33af6872f901ce354b39abfa9fe15",
+      "input_scope": "Actual evidence_for/package/certify_packaging; four real raw JSON plus archive-derived diagnostic stand-ins. Last-phase-error generated by unchanged real Write-PhaseFailure(5). Not a full remote scratch capture.",
+      "before_failure_marker": {
+        "production_vs_owner_paths": [],
+        "legacy_vs_original_paths": [],
+        "legacy_sha256": "e8a2314894204b10ddadc5372fea4d34887f66842c9a8cd8413e9269c8d12906",
+        "modern_sha256": "d5ba0e4a5ab44d76b957abfa92e4795eb61ddee3594e37288dd6a712c737ecd7"
+      },
+      "after_failure_marker": {
+        "production_vs_owner_paths": [
+          "last_error_phase"
+        ],
+        "legacy_vs_original_paths": [
+          "last_error_phase"
+        ],
+        "last_error_phase": {
+          "original": "4",
+          "first_repackage": "4",
+          "production_reproduction": "5"
+        },
+        "legacy_sha256": "3375114d6a2b22d1da7d14709573e21e86b507ab0fa597f1466d0a000be30a2c",
+        "modern_sha256": "76bfc6796c21d5bd765ad1289a41be4b7dccdee018bd17ec4bbadb912946589f",
+        "exception": "Raw completed evidence contradicts the original result"
+      },
+      "current_remote_last_phase_error_bytes_received": false,
+      "phase_5_basis": "Reported repeated PackageOnly failures plus unchanged outer catch; real Write-PhaseFailure(5) executed in isolated reproduction",
+      "original_zip_sha256_verified": "07d2abfc00d188a469b1a18e6bc370c7040aa0e7a22f091ffc553ecff68e2cbf",
+      "first_repackage_sha256_verified": "9c04661bd9959b8eb73015c36d479b5cacc5bf9ceae90c412582dab70b014fda",
+      "raw_supplement_sha256_verified": "7fc6e17e924457e845c73d560aa7749b3830877b01f821609fe9b2fbc9f46b60",
+      "all_four_raw_sha256_verified": true,
+      "training_metric_selection_model_adapter_memory_commit_campaign_differences": []
+    },
+    "after_binding": {
+      "legacy_vs_original_differing_paths": [],
+      "modern_vs_first_repackage_differing_paths": [],
+      "legacy_sha256": "e8a2314894204b10ddadc5372fea4d34887f66842c9a8cd8413e9269c8d12906",
+      "modern_sha256": "d5ba0e4a5ab44d76b957abfa92e4795eb61ddee3594e37288dd6a712c737ecd7",
+      "scratch_input_hashes_unchanged": true
+    },
+    "end_to_end_regression": {
+      "test": "SourceIdentityTests.test_production_repackage_after_phase05_failure_is_certified_and_readonly",
+      "kind": "Synthetic isolated Git/scratch fixture, local fixture pins, exited-supervisor PID stub; no new hardware result",
+      "entrypoint": "package_result.package -> evidence_for -> certify_packaging -> verifier",
+      "production_reader_certification_Git_digests_verifier_mocked": false,
+      "schema_version": 3,
+      "result": {
+        "archive_integrity": "PASS",
+        "training_gate": "RTX3060_12GB_TARGETED_LORA_1536_ENVELOPE_SMOKE_PASS",
+        "certified_training_pass": true,
+        "failed_checks": []
+      },
+      "two_previous_archives_preserved": true,
+      "identical_result_reused": true,
+      "all_input_json_hashes_unchanged": true,
+      "published_last_error_phase": "4",
+      "preserved_scratch_last_error_phase": "5"
+    },
+    "real_input_validation_after_commit": {
+      "kind": "Real four raw files plus archive-derived diagnostics, production reader and authenticated binding, path-normalized in-memory verifier with actual clean owner Git",
+      "at_commit": "4aa509060a62716e5fa350e3f6f2af780794c86b",
+      "result": {
+        "archive_integrity": "PASS",
+        "training_gate": "RTX3060_12GB_TARGETED_LORA_1536_ENVELOPE_SMOKE_PASS",
+        "certified_training_pass": true,
+        "failed_checks": []
+      },
+      "all_prepared_files_checked_on_owner": false,
+      "remaining_private_prepared_files": "Strict hash checks retained for friend PackageOnly; no private dataset/model/adapter payload requested",
+      "protected_paths": 313,
+      "load_bearing_changes": []
+    },
+    "real_remote_after_correction": "PENDING",
+    "new_hardware_zip_written": false,
+    "gpu_training_rerun": false,
+    "full_training_started": false
   }
 }
