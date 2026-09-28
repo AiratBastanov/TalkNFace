@@ -7,7 +7,7 @@ import { parseEnv } from '../../apps/server/dist/env.js';
 
 const [portText, instance] = process.argv.slice(2), port = Number(portText);
 let app, stopping = false, status = 'starting';
-const info = () => ({ root, instance, port, pid: process.pid, status });
+const info = () => ({ root, instance, port, pid: process.pid, status, nodeEnv: process.env.NODE_ENV });
 const manager = createServer(socket => {
   socket.setTimeout(2000, () => socket.destroy());
   let input = '';

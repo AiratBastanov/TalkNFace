@@ -87,6 +87,11 @@ try {
   // Keep aggregate timings, not build hashes or local configuration in the public receipt.
   evidence.prepare = { node: evidence.prepare.node, npm: evidence.prepare.npm, dependencies: evidence.prepare.dependencies, timings: evidence.prepare.timings };
   await command(['-Start', '-Port', String(port)]);
+  const managed = JSON.parse(fs.readFileSync(path.join(target, '.local/arena-demo/server.json')));
+  assert.equal(managed.nodeEnv, 'production', 'Managed server must use production NODE_ENV');
+  const bundle = fs.readdirSync(path.join(target, 'apps/web/dist/assets')).filter(n => n.endsWith('.js')).map(n => fs.readFileSync(path.join(target, 'apps/web/dist/assets', n), 'utf8')).join('');
+  assert(bundle.includes('react.dev/errors/') && !bundle.includes('Each child in a list should have a unique'), 'React must be compiled in production mode');
+  evidence.production = { serverNodeEnv: 'production', reactProductionBundle: true };
   evidence.totalSetupSeconds = (Date.now() - setupAt) / 1000;
   evidence.handsOn = { commands: 2, hiddenPasswordEntries: 2, automation: preparedByPrompt ? 'Real hidden interactive Prepare; test password reaches Chrome harness through memory/stdin only' : 'UTF-8 stdin substitutes hidden password entry; no password argument or fixture hash' };
   fs.mkdirSync(artifact, { recursive: true });

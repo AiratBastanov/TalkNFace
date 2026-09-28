@@ -28,7 +28,8 @@ function env() {
   result.npm_config_registry = 'https://registry.npmjs.org/';
   result.npm_config_audit = 'false'; result.npm_config_fund = 'false';
   result.npm_config_fetch_retries = '1'; result.npm_config_fetch_timeout = '60000';
-  result.npm_config_update_notifier = 'false'; result.NODE_ENV = 'development';
+  // ci explicitly includes dev tools; both Vite compilation and the managed server use production.
+  result.npm_config_update_notifier = 'false'; result.NODE_ENV = 'production';
   return result;
 }
 async function run(label, args, timeout, cwd = root, capture = false) {
@@ -158,7 +159,7 @@ async function main() {
     await run('npm ci', [npm, 'ci', '--ignore-scripts', '--include=dev', '--no-audit', '--no-fund'], 300_000);
     const prebuild = createRequire(path.join(root, 'apps/server/node_modules/better-sqlite3/package.json')).resolve('prebuild-install/bin.js');
     await run('SQLite official prebuilt', [prebuild], Math.max(1, 300_000 - (Date.now() - installStart)), path.join(root, 'apps/server/node_modules/better-sqlite3'));
-    await run('dependency tree', [npm, 'ls', '--all', '--json'], 30_000, root, true);
+    await run('dependency tree', [npm, 'ls', '--all', '--include=dev', '--json'], 30_000, root, true);
     const count = checkTree(), Database = driver(), memory = new Database(':memory:');
     try { memory.prepare('SELECT sqlite_version()').get(); } finally { memory.close(); }
     await run('production build', [npm, 'run', 'build'], 300_000);
