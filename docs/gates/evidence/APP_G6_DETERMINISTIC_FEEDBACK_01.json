@@ -1,0 +1,457 @@
+{
+  "gate": "APP_G6_DETERMINISTIC_FEEDBACK_01",
+  "verdict": "APP_G6_DETERMINISTIC_FEEDBACK_01_PASS",
+  "REAL_APPLICATION_SMOKE": "PASS",
+  "fullG6": false,
+  "fullG7": false,
+  "fullAiMvp": false,
+  "date": "2026-09-28",
+  "selectedSubset": "G6 deterministic server evidence/rubric/preparation/suggestions/replay; no AI narrative",
+  "baseline": {
+    "head": "4b388743d8ec56a0431e076d6cd121c752f932e3",
+    "origin": "https://github.com/AiratBastanov/TalkNFace.git",
+    "branch": "feature/app-qwen-independent-01",
+    "worktree": "C:/Users/BastaPC/Desktop/Alag-app-work",
+    "original": "C:/Users/BastaPC/Desktop/Alag",
+    "main": "2034687f6f22b2973935f2c9c30bc9380c88b071",
+    "applicableInstructions": [],
+    "reportedFeatureHeadAdvanced": false
+  },
+  "sourceBoundary": {
+    "architectureSections": [
+      {
+        "heading": "# Evaluation architecture",
+        "firstLine": 226,
+        "lastLine": 249
+      },
+      {
+        "heading": "# Feedback generation",
+        "firstLine": 250,
+        "lastLine": 257
+      }
+    ],
+    "masterPlanSection": {
+      "heading": "## G6 — Explainable evaluation + AI feedback",
+      "firstLine": 284,
+      "lastLine": 315
+    },
+    "adjacentCasesPrinted": false,
+    "currentTaskProtectedExamplesRead": false,
+    "currentTaskBoundaryIncident": false,
+    "externalDialogueDataUsed": false,
+    "modelTrainingOrEvaluationExecuted": false,
+    "permittedBasis": "S1/S2 domain/application source, immutable saved app records, focused app tests and approved bounded specification; pin metadata and byte-only hashes"
+  },
+  "historicalIncident": {
+    "gate": "APP_AUDIT_AND_QWEN_INDEPENDENT_SLICE_01",
+    "verdict": "PARTIAL",
+    "receiptUnchanged": true,
+    "priorExposureAcknowledged": true,
+    "retroactivePromotion": false,
+    "description": "Prior broad search exposed two frozen-evaluation rows; prior receipt states they were not used in implementation/tests. Cases not reopened. This is not proof of Qwen gradient-training contamination."
+  },
+  "versions": {
+    "rubric": "app-guided-rubric-v1",
+    "evaluator": "app-evidence-v1",
+    "preparation": "preparation-v1",
+    "scenarioRubric": "training-rubric-v1 retained unchanged",
+    "binding": [
+      "sessionId",
+      "scenarioVersionId",
+      "terminalRevision",
+      "configHash",
+      "definitionHash",
+      "scenarioRubricVersion",
+      "rubricVersion",
+      "evaluatorVersion",
+      "evidenceDigest"
+    ],
+    "computation": "pure server-derived read transaction over committed immutable records; no queue/cache/persisted report",
+    "legacyPolicy": "Computed now with explicit evaluator version. Missing explicit pre-start evidence withholds preparation and overall score; no backfill.",
+    "migration": {
+      "forward": 3,
+      "table": "session_preparation",
+      "oldMigrationsUnchanged": true,
+      "immutableRecordTriggers": true
+    }
+  },
+  "rubric": {
+    "weights": [
+      15,
+      25,
+      20,
+      15,
+      15,
+      10
+    ],
+    "checks": [
+      "preparation.goal",
+      "preparation.boundary",
+      "interests.discovery",
+      "interests.use",
+      "argument.grounded",
+      "argument.objection",
+      "value.mutual",
+      "value.pareto",
+      "concession.reciprocal",
+      "concession.discipline",
+      "relationship.pressure",
+      "relationship.repair"
+    ],
+    "definitions": "Exact formalizations, opportunity windows and evidence requirements in companion receipt, recorded before implementation.",
+    "dimension": "100 * passed / applicable; no numeric dimension with missing required evidence",
+    "overall": "Weighted mean of applicable dimensions; >=6 applicable checks and >=3 unique accepted progress-credit events; missing required evidence blocks score.",
+    "states": [
+      "passed",
+      "failed",
+      "not_applicable",
+      "unobservable"
+    ],
+    "separateApplicabilityAndSufficiency": true,
+    "outcomeBonus": false,
+    "duplicatesTurnsPoliteLabelsAndPhraseCopyBonus": false,
+    "repairCausalBindingLimitation": "Warning removal alone is not cause-specific repair; unmatched cause is unobservable.",
+    "suggestions": "At most one issue-bound template; canonical action validated at actual prior snapshot. Examples labelled alternatives; no outcome guarantee.",
+    "spans": "Exact saved guided phrases; zero-based UTF-16, surrogate boundaries validated; structured events/windows labelled without invented quotes.",
+    "comparison": "Only immediate recorded predecessor. Same configHash/definitionHash/rubric/evaluator policy; common observed applicable checks; no unrelated total subtraction."
+  },
+  "verification": {
+    "unitIntegration": {
+      "unique": 236,
+      "existing": 207,
+      "newFeedback": 29,
+      "totalExecutions": 299,
+      "repeatedExecutions": 63,
+      "allFinalStatuses": "passed",
+      "identityNormalization": "Existing S1/S2 migration test renamed from unchanged G2 schema to additive preparation migration; counted as the same case.",
+      "initialFull": {
+        "passed": 232,
+        "total": 234,
+        "failures": "two outdated migration-count expectations"
+      },
+      "affectedMigrationRerun": 36,
+      "reviewFeedbackRun": 29
+    },
+    "playwright": {
+      "unique": 19,
+      "existingS1S2": 12,
+      "newFeedback": 7,
+      "totalExecutions": 27,
+      "repeatedExecutions": 8,
+      "allFinalStatuses": "passed",
+      "finalCaseNames": [
+        "S2 complete mutual route, concurrent S1, refresh/restart, persisted result and replay at 1280px",
+        "S2 partial outcome through resource tradeoff at 390px",
+        "S2 poor agreement explains own alternative at 360px",
+        "S2 impossible offer, no-deal result and terminal guard at 390px",
+        "S2 invalid input, counteroffer replacement, stale proposal and exact active acceptance",
+        "S2 pending lock, duplicate click, lost committed response, same identity retry and stale tab error",
+        "A: admin publish → GS1 → refresh + process restart → result → clean replay, 1280px",
+        "B: early poor offer and deliberate pressure cause opponent walkaway",
+        "active offer survives question and refresh, exact acceptance confirmation, 390px",
+        "responsive 360px: admin, briefing, offer, keyboard confirmation, poor result",
+        "responsive 390px: admin, briefing, offer, keyboard confirmation, poor result",
+        "uncertain network response → reload/retry once; stale tab reloads authoritative state; confirmed walkaway",
+        "S1 real early exit then prepared replay applies the suggested question and compares shared checks at 390px",
+        "S2 full guided agreement renders report, exact evidence and stable refresh/restart at 1280px",
+        "S2 poor agreement keeps utility separate from process 44.12 at 360px",
+        "S1 no agreement retains grounded process credit with independently expected 70",
+        "network failure fetching feedback keeps terminal facts, actionable error and retry intact at 390px",
+        "legacy v2 S1/S2 records migrate intact and mismatched replay version renders separate factual outcomes",
+        "guided genuine conditional exchange is committed, explained and linked at 360px"
+      ],
+      "moduleResolutionFailureExecutedCases": 0,
+      "failedFirstCaseExecutions": 2,
+      "postReviewRerun": 6,
+      "reportJsonMocked": false,
+      "networkFailure": "feedback GET aborted only",
+      "screens": [
+        360,
+        390,
+        1280
+      ],
+      "keyboard": "Real Tab/Enter; visible focus and exact saved-turn target."
+    },
+    "actualLegacySmoke": {
+      "status": "PASS",
+      "realBrowser": "153.0.8010.53",
+      "source": "prior accepted pre-slice G2 production file DB",
+      "copiedSeedSha256": "18511d7c506d7c78a35bea6c011183ecbcf03fc6686fa81a50139108ce0140f1",
+      "originalSeedUnchanged": true,
+      "originalSnapshotUnchanged": true,
+      "legacyFirstTurnAndVersionPreserved": true,
+      "noBackfilledPreparation": true,
+      "reportStableAfterRestart": true
+    },
+    "runtimes": {
+      "node": "24.21.0",
+      "npm": "11.19.0",
+      "chrome": "153.0.8010.53",
+      "playwright": "1.63.0",
+      "os": "Windows x64"
+    },
+    "durationMs": {
+      "typecheck": 9040,
+      "build": 5665,
+      "feedbackTests": 2712,
+      "e2eTypes": 873,
+      "existingChrome": 23705,
+      "firstGreenFeedback": 16905,
+      "postReviewFeedback": 16576,
+      "conditionalChrome": 4145,
+      "actualLegacy": 2333
+    },
+    "realProduction": [
+      {
+        "command": "npm start",
+        "starts": 1,
+        "cleanShutdowns": 1,
+        "orphanProcesses": 0,
+        "aiCredentials": "NONE",
+        "database": "isolated real SQLite"
+      },
+      {
+        "command": "npm start",
+        "starts": 2,
+        "cleanShutdowns": 2,
+        "orphanProcesses": 0,
+        "aiCredentials": "NONE",
+        "database": "isolated real SQLite"
+      },
+      {
+        "command": "npm start",
+        "starts": 1,
+        "cleanShutdowns": 1,
+        "orphanProcesses": 0,
+        "aiCredentials": "NONE",
+        "database": "isolated real SQLite"
+      },
+      {
+        "command": "npm start",
+        "starts": 1,
+        "cleanShutdowns": 1,
+        "orphanProcesses": 0,
+        "aiCredentials": "NONE",
+        "database": "isolated real SQLite"
+      },
+      {
+        "command": "npm start",
+        "starts": 1,
+        "cleanShutdowns": 1,
+        "orphanProcesses": 0,
+        "aiCredentials": "NONE",
+        "database": "isolated real SQLite"
+      },
+      {
+        "command": "npm start",
+        "starts": 1,
+        "cleanShutdowns": 1,
+        "orphanProcesses": 0,
+        "aiCredentials": "NONE",
+        "database": "isolated real SQLite"
+      },
+      {
+        "command": "npm start",
+        "starts": 1,
+        "cleanShutdowns": 1,
+        "orphanProcesses": 0,
+        "aiCredentials": "NONE",
+        "database": "isolated real SQLite"
+      },
+      {
+        "command": "npm start",
+        "starts": 2,
+        "cleanShutdowns": 2,
+        "orphanProcesses": 0,
+        "aiCredentials": "NONE",
+        "database": "isolated real SQLite"
+      }
+    ],
+    "externalBrowserRequests": [],
+    "browserErrors": [],
+    "layouts": [
+      {
+        "name": "g6-insufficient-390",
+        "width": 390,
+        "overflow": 0
+      },
+      {
+        "name": "g6-s1-evidence-390",
+        "width": 390,
+        "overflow": 0
+      },
+      {
+        "name": "g6-s2-report-1280",
+        "width": 1280,
+        "overflow": 0
+      },
+      {
+        "name": "g6-poor-report-360",
+        "width": 360,
+        "overflow": 0
+      },
+      {
+        "name": "g6-no-agreement-360",
+        "width": 360,
+        "overflow": 0
+      },
+      {
+        "name": "g6-fetch-error-390",
+        "width": 390,
+        "overflow": 0
+      },
+      {
+        "name": "g6-noncomparable-1280",
+        "width": 1280,
+        "overflow": 0
+      },
+      {
+        "name": "g6-reciprocal-360",
+        "width": 360,
+        "overflow": 0
+      }
+    ],
+    "wcagCertification": false,
+    "review": "Separate post-implementation diff/user-flow pass by implementing agent; no independent-person/subagent claim.",
+    "noRepeatedGreenExpensiveGroupWithoutChanges": true
+  },
+  "syntheticExamples": [
+    {
+      "scenario": "S1",
+      "outcome": "MUTUAL_GAIN",
+      "ownUtility": 64,
+      "process": 100,
+      "applicable": 7,
+      "acceptedCredits": 5
+    },
+    {
+      "scenario": "S2",
+      "outcome": "MUTUAL_GAIN",
+      "ownUtility": 47,
+      "process": 100
+    },
+    {
+      "scenario": "S2",
+      "outcome": "POOR_AGREEMENT",
+      "ownUtility": 20,
+      "process": 44.12
+    },
+    {
+      "scenario": "S1",
+      "outcome": "NO_AGREEMENT",
+      "ownUtility": null,
+      "process": 70,
+      "mutualOfferCredit": true
+    },
+    {
+      "legacyOrEarlyExit": true,
+      "process": null,
+      "explanation": "Insufficient observations, not perfect score"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "docs/gates/evidence/app-g6-deterministic-feedback-01/g6-s2-report-1280.png",
+      "sha256": "a1d2e51c61f2788264316401f4c9796e0503e11f0e6be8a56840d43b5a546483",
+      "syntheticApplicationOnly": true,
+      "visuallyInspected": true
+    },
+    {
+      "path": "docs/gates/evidence/app-g6-deterministic-feedback-01/g6-poor-report-360.png",
+      "sha256": "70ae712dd685b1a0b8bfa86ef16cb7296bde0a2354f40714d89a5444f353cc77",
+      "syntheticApplicationOnly": true,
+      "visuallyInspected": true
+    },
+    {
+      "path": "docs/gates/evidence/app-g6-deterministic-feedback-01/g6-insufficient-390.png",
+      "sha256": "d99f400a552ed746185f7667393be0a7690600f829dac1499e4e142edd9044fa",
+      "syntheticApplicationOnly": true,
+      "visuallyInspected": true
+    },
+    {
+      "path": "docs/gates/evidence/app-g6-deterministic-feedback-01/g6-s1-evidence-390.png",
+      "sha256": "a8413b163bfefef3a998b300cef8d9aaf0d69dd74499e43f1083d76e2d42c249",
+      "syntheticApplicationOnly": true,
+      "visuallyInspected": true
+    },
+    {
+      "path": "docs/gates/evidence/app-g6-deterministic-feedback-01/g6-no-agreement-360.png",
+      "sha256": "67e44fce567b19ee0ee803f1d3433da255b901a19e46a0d8a10ecd4680431b4d",
+      "syntheticApplicationOnly": true,
+      "visuallyInspected": true
+    },
+    {
+      "path": "docs/gates/evidence/app-g6-deterministic-feedback-01/g6-fetch-error-390.png",
+      "sha256": "3ef5c18bc361d70067a9c8eea18ac906b9f0680a3d85bf25845e4a97ae2e4aca",
+      "syntheticApplicationOnly": true,
+      "visuallyInspected": true
+    },
+    {
+      "path": "docs/gates/evidence/app-g6-deterministic-feedback-01/g6-noncomparable-1280.png",
+      "sha256": "907b058bc9476aff36d4369ad7e112823617f31f6fcd5aad952b810e4fd42aa7",
+      "syntheticApplicationOnly": true,
+      "visuallyInspected": true
+    },
+    {
+      "path": "docs/gates/evidence/app-g6-deterministic-feedback-01/g6-reciprocal-360.png",
+      "sha256": "6d7c2dc3be7b2206f150ebabac19d24ab677e2084e163c8d8230af913b9e6878",
+      "syntheticApplicationOnly": true,
+      "visuallyInspected": true
+    }
+  ],
+  "protection": {
+    "originalHead": "2034687f6f22b2973935f2c9c30bc9380c88b071",
+    "originalBranch": "main",
+    "originalClean": true,
+    "originalTrackedBytesVerified": 346,
+    "featureProtectedBytesVerified": 345,
+    "originalManifestDigest": "939a6ac97cb1699b5dbfa8d484849ad8af5de2f5bba8cf92deb76874d4cf26af",
+    "featureManifestDigest": "dbbb002a2fa5fefd8ce3d4f9c398bee81617b3635461444cd2daef72c29293e7",
+    "mismatches": [],
+    "metadataChanges": [],
+    "acceptedManifestPinsVerified": 20,
+    "fullTrainingSourcePinsVerified": 11,
+    "historicalPartialReceiptUnchanged": true,
+    "explicitAppWorkspacesPreserved": true,
+    "rootPackageAndLockByteUnchanged": true,
+    "pdfSha256": "ff50f0ade59e2060818815284a8be0ccd1f10065a0ce6f46f48b664e4df0d75d"
+  },
+  "watchdogsSeconds": {
+    "gitNetwork": 120,
+    "unitTypecheckGroup": 180,
+    "productionBuild": 300,
+    "browserCampaignGlobal": 180,
+    "browserTest": 90,
+    "startup": 12
+  },
+  "delivery": {
+    "implementationCommit": "00e90a19527ab2b74986e542cebf40378059faf4",
+    "implementationPushed": true,
+    "upstreamAtImplementation": "00e90a19527ab2b74986e542cebf40378059faf4",
+    "implementationAheadBehind": [
+      0,
+      0
+    ],
+    "remoteMainAfterImplementationPush": "2034687f6f22b2973935f2c9c30bc9380c88b071",
+    "normalFeaturePushOnly": true,
+    "receiptCommit": "Following commit; resolve git log -1 --format=%H -- docs/gates/APP_G6_DETERMINISTIC_FEEDBACK_01.md",
+    "finalChecks": "Recheck HEAD/upstream 0/0, clean worktree and unchanged main after receipt push; report actual final SHA in owner handoff."
+  },
+  "remaining": {
+    "liveAiNarrative": "PENDING",
+    "fullG6": "PENDING",
+    "ownershipAuthCsrf": "OPEN",
+    "publicDeployment": "NOT_PERFORMED",
+    "remoteTrainingExecution": "UNKNOWN"
+  },
+  "ownerLaunchPowerShell": [
+    "Set-Location 'C:\\Users\\BastaPC\\Desktop\\Alag-app-work'",
+    "$env:HOST = '127.0.0.1'",
+    "$env:PORT = '3000'",
+    "$env:DATABASE_PATH = '.tmp/owner-app-demo.sqlite'",
+    "& 'C:\\Users\\BastaPC\\Desktop\\Alag\\.tools\\node-v24.21.0-win-x64\\node.exe' .\\scripts\\start.mjs"
+  ],
+  "localUrl": "http://127.0.0.1:3000/admin",
+  "nextTask": "Separate G8 ownership/authentication/CSRF boundary before considering public deployment",
+  "stop": "NO QWEN TRAINING; NO MODEL EVALUATION; NO LIVE AI PROMOTION; NO PUBLIC DEPLOYMENT; NO MERGE TO MAIN"
+}
