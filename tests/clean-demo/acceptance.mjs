@@ -6,6 +6,7 @@ import path from 'node:path';
 import { spawn } from 'node:child_process';
 import { randomBytes, createHash } from 'node:crypto';
 import { createServer } from 'node:http';
+import { createRequire } from 'node:module';
 import { once } from 'node:events';
 import os from 'node:os';
 import { chromium, expect } from '@playwright/test';
@@ -222,6 +223,12 @@ try {
   await scenario('Safe live backup and stopped restore preserve data without reviving logout', async () => {
     const before = await snapshot(playerPage);
     const output = await command(['-Backup']); const id = /Verified backup: (\S+)/.exec(output)?.[1]; assert(id);
+    const Database = createRequire(path.join(target, 'apps/server/package.json'))('better-sqlite3');
+    const readBudget = () => { const db = new Database(path.join(target, '.local/arena-demo/arena.sqlite'), { readonly: true });
+      try { return db.prepare('SELECT attempts FROM access_login_budget WHERE id=1').get().attempts; } finally { db.close(); } };
+    const budgetBefore = readBudget();
+    assert.equal((await post(adminPage, origin + '/api/auth/login', { password: 'intentionally-incorrect-test-input' })).status(), 401);
+    const budgetAfter = readBudget(); assert.equal(budgetAfter, budgetBefore + 1);
     const oldOtherCookie = (await outsider.cookies(origin)).find(c => c.name === 'arena_session');
     await post(otherPage, origin + '/api/auth/logout', {});
     await command(['-Stop']); await command(['-Restore', id], undefined, 60_000); await command(['-Start', '-Port', String(port)]);
@@ -229,7 +236,8 @@ try {
     assert(digest(await (await playerPage.request.get(s1ReportUrl)).json()) === digest(s1Report), 'SQLite restored G6 report');
     await outsider.addCookies([oldOtherCookie]);
     assert.equal((await otherPage.request.get(origin + '/api/auth/session')).status(), 401, 'Restore must not revive logout');
-    evidence.backupRestore = { liveSqliteBackup: true, integrityVerified: true, previousDbPreserved: true, resultEquivalent: true, logoutStillRevoked: true };
+    assert.equal(readBudget(), budgetAfter, 'Restore must not roll back the durable login budget');
+    evidence.backupRestore = { liveSqliteBackup: true, integrityVerified: true, previousDbPreserved: true, resultEquivalent: true, logoutStillRevoked: true, loginBudgetNotRolledBack: true };
   });
   await scenario('Real Chrome foreign Origin and wrong CSRF cannot publish', async () => {
     const catalog = await (await adminPage.request.get(origin + '/api/scenarios')).json();

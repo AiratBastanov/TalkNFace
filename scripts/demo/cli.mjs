@@ -98,8 +98,11 @@ async function replaceDatabase(sourceFile) {
 async function restoreWithoutRevivingAccess(sourceFile) {
   const Database = driver();
   const current = new Database(safeDatabase(databaseFile), { readonly: true, fileMustExist: true, timeout: 5000 });
-  let live;
-  try { live = new Map(current.prepare('SELECT * FROM access_sessions').all().map(row => [row.token_digest, row])); }
+  let live, loginBudget;
+  try {
+    live = new Map(current.prepare('SELECT * FROM access_sessions').all().map(row => [row.token_digest, row]));
+    loginBudget = current.prepare('SELECT window_start, attempts FROM access_login_budget WHERE id=1').get();
+  }
   finally { current.close(); }
   const candidate = safe(path.join(data, 'restore-' + randomUUID() + '.sqlite'));
   const source = new Database(sourceFile, { readonly: true, fileMustExist: true });
@@ -113,9 +116,12 @@ async function restoreWithoutRevivingAccess(sourceFile) {
         const valid = previous && previous.revoked_at === null && previous.idle_expires_at > now && previous.absolute_expires_at > now &&
           ['principal_id', 'role', 'csrf_digest', 'credential_digest', 'created_at'].every(key => previous[key] === row[key]);
         if (!valid) restored.prepare('UPDATE access_sessions SET revoked_at = COALESCE(revoked_at, ?) WHERE token_digest = ?').run(now, row.token_digest);
-        else restored.prepare('UPDATE access_sessions SET idle_expires_at = min(idle_expires_at, ?), absolute_expires_at = min(absolute_expires_at, ?) WHERE token_digest = ?')
-          .run(previous.idle_expires_at, previous.absolute_expires_at, row.token_digest);
+        else restored.prepare('UPDATE access_sessions SET idle_expires_at = min(idle_expires_at, ?), absolute_expires_at = min(absolute_expires_at, ?), last_seen_at = max(last_seen_at, ?) WHERE token_digest = ?')
+          .run(previous.idle_expires_at, previous.absolute_expires_at, previous.last_seen_at, row.token_digest);
       }
+      if (loginBudget) restored.prepare(`INSERT INTO access_login_budget(id,window_start,attempts) VALUES (1,?,?)
+        ON CONFLICT(id) DO UPDATE SET window_start=max(window_start,excluded.window_start), attempts=max(attempts,excluded.attempts)`)
+        .run(loginBudget.window_start, loginBudget.attempts);
     }).immediate();
     integrity(restored);
   } finally { restored.close(); }
