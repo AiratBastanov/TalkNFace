@@ -1,0 +1,1278 @@
+{
+  "gate": "APP_AUDIT_AND_QWEN_INDEPENDENT_SLICE_01",
+  "verdict": "APP_AUDIT_AND_QWEN_INDEPENDENT_SLICE_01_PARTIAL",
+  "application_audit_and_slice": "PASS",
+  "REAL_APPLICATION_SMOKE": "PASS",
+  "FULL_AI_MVP_PASS": false,
+  "full_G7_certification": false,
+  "date": "2026-09-28",
+  "strategy": "AI_FIRST_HYBRID_WITH_DETERMINISTIC_CORE_AND_FALLBACK",
+  "process_exception": {
+    "status": "RECORDED_UNRESOLVABLE_READ_BOUNDARY",
+    "description": "An initial overbroad heading search incidentally returned two frozen eval table lines (A01/A16) from the master plan. Reading was narrowed; the lines were not used in implementation or tests. Unconditional gate PASS is withheld.",
+    "dataset_examples_used": false,
+    "holdout_example_files_opened": false
+  },
+  "baseline": {
+    "origin": "https://github.com/AiratBastanov/TalkNFace.git",
+    "inspected_commit": "2034687f6f22b2973935f2c9c30bc9380c88b071",
+    "training_implementation_commit": "deccdc32cc7bcb69c78d041e6edfef8fc52c6e6c",
+    "frozen_training_handoff_commit": "2034687f6f22b2973935f2c9c30bc9380c88b071",
+    "friend_run_status": "UNKNOWN",
+    "friend_machine_accessed": false,
+    "original_checkout": "C:\\Users\\BastaPC\\Desktop\\Alag",
+    "original_branch": "main",
+    "original_status_clean": true,
+    "remote_main_before": "2034687f6f22b2973935f2c9c30bc9380c88b071",
+    "remote_main_after_implementation_push": "2034687f6f22b2973935f2c9c30bc9380c88b071",
+    "worktree": "C:\\Users\\BastaPC\\Desktop\\Alag-app-work",
+    "kind": "normal linked worktree",
+    "applicable_AGENTS_files": [],
+    "requirements_pdf_pages_read": 8,
+    "requirements_pdf_sha256": "ff50f0ade59e2060818815284a8be0ccd1f10065a0ce6f46f48b664e4df0d75d"
+  },
+  "selected_slice": {
+    "name": "S2-WORKLOAD-URGENT guided/fallback publication-to-replay",
+    "count": 1,
+    "gate_component": "G7 — Scenario 2 + generic engine proof",
+    "acceptance_recorded_before_implementation": true,
+    "independence": "Existing validated S2 and deterministic engine; public catalog and generic application UI only. No model/provider/API key/download.",
+    "requirements": [
+      "R03",
+      "R05",
+      "R08",
+      "R09",
+      "R10",
+      "R15",
+      "R20",
+      "R21",
+      "R22",
+      "R26",
+      "R31"
+    ],
+    "validation_subsets": [
+      "V02",
+      "V03",
+      "V06",
+      "V09",
+      "V10",
+      "V11",
+      "V12"
+    ],
+    "outcomes_browser": [
+      {
+        "family": "MUTUAL_GAIN",
+        "utility": 47
+      },
+      {
+        "family": "ACCEPTABLE_PARTIAL",
+        "utility": 32
+      },
+      {
+        "family": "POOR_AGREEMENT",
+        "utility": 20
+      },
+      {
+        "family": "NO_AGREEMENT",
+        "utility": null
+      }
+    ],
+    "schema_migrations": [
+      1,
+      2
+    ],
+    "new_migrations": 0,
+    "new_engine": false,
+    "server_transition_and_transaction_per_move": 1,
+    "frozen_contract_changes": false,
+    "additive_contract": "packages/contracts/src/catalog.ts"
+  },
+  "status_by_gate": [
+    {
+      "gate": "G0 — Foundation / reproducible runtime",
+      "status": "IMPLEMENTED_AND_VERIFIED_WINDOWS_SUBSET",
+      "requirements": [
+        "R23",
+        "R25",
+        "R26",
+        "R28",
+        "R30"
+      ]
+    },
+    {
+      "gate": "G1 — Domain contracts + deterministic core",
+      "status": "IMPLEMENTED_AND_VERIFIED",
+      "requirements": [
+        "R05",
+        "R07",
+        "R08",
+        "R10",
+        "R15"
+      ]
+    },
+    {
+      "gate": "G2 — S1 vertical slice without API dependency",
+      "status": "IMPLEMENTED_AND_VERIFIED_GUIDED",
+      "requirements": [
+        "R01",
+        "R03",
+        "R04",
+        "R09",
+        "R18",
+        "R20",
+        "R21",
+        "R31"
+      ]
+    },
+    {
+      "gate": "G3 — Provider boundary + structured interpretation",
+      "status": "INCOMPLETE",
+      "details": "Contracts/context/prompt scaffold present, live adapter not implemented. Model/provider evaluation specifically blocks live certification; scaffold is not current live evidence.",
+      "requirements": [
+        "R06",
+        "R07",
+        "R27",
+        "AI-02",
+        "AI-03"
+      ]
+    },
+    {
+      "gate": "G4 — AI LIVE opponent conversation",
+      "status": "NOT_IMPLEMENTED",
+      "requirements": [
+        "AI-02",
+        "AI-04"
+      ]
+    },
+    {
+      "gate": "G5 — AI scenario generation + admin workflow",
+      "status": "NOT_IMPLEMENTED_BEYOND_FIXED_REFERENCE_PUBLICATION",
+      "requirements": [
+        "R11",
+        "R12",
+        "R13",
+        "R14",
+        "R15",
+        "R16",
+        "R17",
+        "R19",
+        "AI-01",
+        "AI-06"
+      ]
+    },
+    {
+      "gate": "G6 — Explainable evaluation + AI feedback",
+      "status": "INCOMPLETE_BASIC_EVENT_RESULTS_ONLY",
+      "requirements": [
+        "R02",
+        "R21",
+        "AI-05"
+      ]
+    },
+    {
+      "gate": "G7 — Scenario 2 + generic engine proof",
+      "status": "GUIDED_COMPONENT_VERIFIED_FULL_GATE_INCOMPLETE",
+      "requirements": [
+        "R05",
+        "R08",
+        "R09",
+        "R10",
+        "R15",
+        "R22"
+      ]
+    },
+    {
+      "gate": "G8 — AI failures + judge-safe fallback certification",
+      "status": "INCOMPLETE_NO_PUBLIC_AUTH_OR_LIVE_CERTIFICATION",
+      "requirements": [
+        "R26",
+        "R31"
+      ]
+    },
+    {
+      "gate": "G9 — Responsive UX and bounded polish",
+      "status": "VERIFIED_VIEWPORT_AND_KEYBOARD_SUBSET",
+      "requirements": [
+        "R20",
+        "R24",
+        "R25",
+        "R46"
+      ]
+    },
+    {
+      "gate": "G10 — Public deployment + reproducibility",
+      "status": "LOCAL_WINDOWS_VERIFIED_PUBLIC_LINUX_NOT_VERIFIED",
+      "requirements": [
+        "R23",
+        "R28",
+        "R29",
+        "R30",
+        "R54"
+      ]
+    },
+    {
+      "gate": "G11 — Documentation / presentation / demo",
+      "status": "INCOMPLETE_README_RECEIPT_UPDATED_NO_DECK",
+      "requirements": [
+        "R32",
+        "R33",
+        "R34",
+        "R35",
+        "R36",
+        "R37",
+        "R38",
+        "R39",
+        "R40",
+        "R41",
+        "R44",
+        "R47"
+      ]
+    },
+    {
+      "gate": "M1 / G12 — Final certification and submission readiness",
+      "status": "NOT_VERIFIED",
+      "requirements": [
+        "R42",
+        "R43",
+        "R51",
+        "R52",
+        "R53",
+        "R54",
+        "R55",
+        "R56"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "D1",
+      "severity": "HIGH",
+      "owner": [
+        "package.json",
+        "package-lock.json"
+      ],
+      "status": "FIXED",
+      "reproduction": "Isolated Node 24.21.0 npm ci --offline fails: missing @arena/ai and openai@7.17.0 in lockfile.",
+      "expected": "Clean application installation from existing pins",
+      "actual_before": "Wildcard workspace includes unfinished provider package outside the lock.",
+      "impact": "Prevents reproducible local startup",
+      "correction": "Explicit app workspace list; no dependency resolution/provider source changes.",
+      "regression": "Clean offline npm ci, root typecheck, build and existing tests"
+    },
+    {
+      "id": "D2",
+      "severity": "LOW",
+      "owner": [
+        "apps/web/src/board.tsx"
+      ],
+      "status": "FIXED",
+      "reproduction": "Two tabs: first commits, second sends stale revision; automatic GET succeeds but error still asks to update.",
+      "expected": "Tell user authoritative state was loaded and choose next move",
+      "actual_before": "Message implies manual refresh still required.",
+      "impact": "Confusing recovery instruction despite preserved data",
+      "correction": "Change message only after successful authoritative GET.",
+      "regression": "S1/S2 real-browser stale revision + lost-response retry; screenshot"
+    },
+    {
+      "id": "B1",
+      "severity": "HIGH_FOR_PUBLIC_DEPLOYMENT",
+      "owner": [
+        "apps/server/src/routes/g2-routes.ts"
+      ],
+      "status": "OPEN_OUTSIDE_LOCAL_DEMO_SCOPE",
+      "reproduction": "Unauthenticated context with valid session UUID can read session; publication requires no admin identity.",
+      "expected": "Future G8 owner/admin/CSRF checks",
+      "actual_before": "No public multi-user authorization",
+      "impact": "Public deployment unsafe; UUID is not authorization",
+      "regression": "Boundary documented; all task servers bind loopback only"
+    }
+  ],
+  "verification": {
+    "node": "24.21.0",
+    "npm": "11.19.0",
+    "browser": "153.0.8010.53",
+    "playwright": "1.63.0",
+    "unit_integration_unique_passed": 207,
+    "existing_passed": 197,
+    "new_passed": 10,
+    "unit_run_boundary": "197 existing passed in the full slice run; corrected 10-test catalog suite passed separately. No fabricated all-green single full-run claim.",
+    "full_browser": {
+      "startTime": "2026-09-28T07:24:21.211Z",
+      "duration": 21674.893,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "focused_after_D2": {
+      "startTime": "2026-09-28T07:31:18.538Z",
+      "duration": 7306.93,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "unique_browser_cases": 12,
+    "focused_repeated_cases": 3,
+    "full_s1": {
+      "browser": "153.0.8010.53",
+      "channel": "chrome",
+      "routes": [
+        "/admin",
+        "/",
+        "/session/:id/briefing",
+        "/session/:id",
+        "/session/:id/result"
+      ],
+      "cases": [
+        {
+          "name": "GS1",
+          "expected": "MUTUAL_GAIN",
+          "actual": "MUTUAL_GAIN",
+          "refresh": "PASS",
+          "restart": "PASS",
+          "replay": "PASS",
+          "offerEditConfirmation": "PASS"
+        },
+        {
+          "name": "GS3",
+          "expected": "NO_AGREEMENT",
+          "actual": "NO_AGREEMENT",
+          "terminalReason": "opponent_walkaway"
+        },
+        {
+          "name": "active-commitment",
+          "physicalRejection": "PASS",
+          "questionPreservesOffer": "PASS",
+          "refresh": "PASS",
+          "exactAcceptance": "PASS"
+        },
+        {
+          "name": "responsive-360",
+          "expected": "POOR_AGREEMENT",
+          "actual": "POOR_AGREEMENT",
+          "keyboard": "PASS"
+        },
+        {
+          "name": "responsive-390",
+          "expected": "POOR_AGREEMENT",
+          "actual": "POOR_AGREEMENT",
+          "keyboard": "PASS"
+        },
+        {
+          "name": "retry-and-stale-tab",
+          "uncertainRetry": "PASS",
+          "refreshPending": "PASS",
+          "singleCommit": "PASS",
+          "staleTabRecovery": "PASS",
+          "confirmedWalkaway": "PASS"
+        }
+      ],
+      "viewportChecks": [
+        {
+          "width": 1280,
+          "overflow": 0,
+          "screen": "admin"
+        },
+        {
+          "width": 1280,
+          "overflow": 0,
+          "screen": "briefing"
+        },
+        {
+          "width": 1280,
+          "overflow": 0,
+          "screen": "offer"
+        },
+        {
+          "width": 1280,
+          "overflow": 0,
+          "screen": "confirmation"
+        },
+        {
+          "width": 1280,
+          "overflow": 0,
+          "screen": "result"
+        },
+        {
+          "width": 1280,
+          "overflow": 0,
+          "screen": "briefing"
+        },
+        {
+          "width": 1280,
+          "overflow": 0,
+          "screen": "offer"
+        },
+        {
+          "width": 1280,
+          "overflow": 0,
+          "screen": "confirmation"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "briefing"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "offer"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "confirmation"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "accept-confirmation"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "accepted-result"
+        },
+        {
+          "width": 360,
+          "overflow": 0,
+          "screen": "admin"
+        },
+        {
+          "width": 360,
+          "overflow": 0,
+          "screen": "briefing"
+        },
+        {
+          "width": 360,
+          "overflow": 0,
+          "screen": "offer"
+        },
+        {
+          "width": 360,
+          "overflow": 0,
+          "screen": "confirmation"
+        },
+        {
+          "width": 360,
+          "overflow": 0,
+          "screen": "poor-result"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "admin"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "briefing"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "offer"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "confirmation"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "poor-result"
+        },
+        {
+          "width": 1280,
+          "overflow": 0,
+          "screen": "briefing"
+        }
+      ],
+      "browserResponses": 66,
+      "externalRequests": [],
+      "privacyFailures": [],
+      "browserErrors": [],
+      "production": {
+        "command": "npm start",
+        "runtime": "v24.21.0",
+        "platform": "win32",
+        "starts": 2,
+        "cleanShutdowns": 2,
+        "serverPids": [
+          9024,
+          19480
+        ],
+        "aiCredentials": "NONE",
+        "database": "isolated real SQLite",
+        "shutdown": "real SIGINT handler via test-only stdin adapter",
+        "orphanProcesses": 0
+      }
+    },
+    "full_s2": {
+      "browser": "153.0.8010.53",
+      "responses": 95,
+      "externalRequests": [],
+      "privacyFailures": [],
+      "browserErrors": [],
+      "layouts": [
+        {
+          "width": 1280,
+          "overflow": 0,
+          "screen": "S2 publication"
+        },
+        {
+          "width": 1280,
+          "overflow": 0,
+          "screen": "S2 selection"
+        },
+        {
+          "width": 1280,
+          "overflow": 0,
+          "screen": "S2 briefing"
+        },
+        {
+          "width": 1280,
+          "overflow": 0,
+          "screen": "S2 confirmation"
+        },
+        {
+          "width": 1280,
+          "overflow": 0,
+          "screen": "S2 result"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "S2 publication"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "S2 selection"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "S2 briefing"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "S2 confirmation"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "S2 result"
+        },
+        {
+          "width": 360,
+          "overflow": 0,
+          "screen": "S2 publication"
+        },
+        {
+          "width": 360,
+          "overflow": 0,
+          "screen": "S2 selection"
+        },
+        {
+          "width": 360,
+          "overflow": 0,
+          "screen": "S2 briefing"
+        },
+        {
+          "width": 360,
+          "overflow": 0,
+          "screen": "S2 confirmation"
+        },
+        {
+          "width": 360,
+          "overflow": 0,
+          "screen": "S2 result"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "S2 publication"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "S2 selection"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "S2 briefing"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "S2 confirmation"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "S2 result"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "S2 publication"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "S2 selection"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "S2 briefing"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "S2 confirmation"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "S2 publication"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "S2 selection"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "S2 briefing"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "S2 actionable stale error"
+        }
+      ],
+      "outcomes": [
+        {
+          "family": "MUTUAL_GAIN",
+          "utility": 47
+        },
+        {
+          "family": "ACCEPTABLE_PARTIAL",
+          "utility": 32
+        },
+        {
+          "family": "POOR_AGREEMENT",
+          "utility": 20
+        },
+        {
+          "family": "NO_AGREEMENT",
+          "utility": null
+        }
+      ],
+      "production": {
+        "command": "npm start",
+        "runtime": "v24.21.0",
+        "platform": "win32",
+        "starts": 3,
+        "cleanShutdowns": 3,
+        "serverPids": [
+          21812,
+          21668,
+          16120
+        ],
+        "aiCredentials": "NONE",
+        "database": "isolated real SQLite",
+        "shutdown": "real SIGINT handler via test-only stdin adapter",
+        "orphanProcesses": 0
+      }
+    },
+    "focused_s1": {
+      "browser": "153.0.8010.53",
+      "channel": "chrome",
+      "routes": [],
+      "cases": [
+        {
+          "name": "retry-and-stale-tab",
+          "uncertainRetry": "PASS",
+          "refreshPending": "PASS",
+          "singleCommit": "PASS",
+          "staleTabRecovery": "PASS",
+          "confirmedWalkaway": "PASS"
+        }
+      ],
+      "viewportChecks": [
+        {
+          "width": 1280,
+          "overflow": 0,
+          "screen": "briefing"
+        }
+      ],
+      "browserResponses": 13,
+      "externalRequests": [],
+      "privacyFailures": [],
+      "browserErrors": [],
+      "production": {
+        "command": "npm start",
+        "runtime": "v24.21.0",
+        "platform": "win32",
+        "starts": 1,
+        "cleanShutdowns": 1,
+        "serverPids": [
+          3904
+        ],
+        "aiCredentials": "NONE",
+        "database": "isolated real SQLite",
+        "shutdown": "real SIGINT handler via test-only stdin adapter",
+        "orphanProcesses": 0
+      }
+    },
+    "focused_s2": {
+      "browser": "153.0.8010.53",
+      "responses": 34,
+      "externalRequests": [],
+      "privacyFailures": [],
+      "browserErrors": [],
+      "layouts": [
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "S2 publication"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "S2 selection"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "S2 briefing"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "S2 confirmation"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "S2 publication"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "S2 selection"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "S2 briefing"
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "screen": "S2 actionable stale error"
+        }
+      ],
+      "outcomes": [],
+      "production": {
+        "command": "npm start",
+        "runtime": "v24.21.0",
+        "platform": "win32",
+        "starts": 1,
+        "cleanShutdowns": 1,
+        "serverPids": [
+          8120
+        ],
+        "aiCredentials": "NONE",
+        "database": "isolated real SQLite",
+        "shutdown": "real SIGINT handler via test-only stdin adapter",
+        "orphanProcesses": 0
+      }
+    },
+    "old_G2_database_upgrade": {
+      "status": "PASS",
+      "realBrowser": "153.0.8010.53",
+      "baselineBuild": "2034687f6f22b2973935f2c9c30bc9380c88b071 plus workspace-install correction only",
+      "oldG2Database": "generated by audited pre-slice production build",
+      "originalS1SnapshotByteEquivalentJson": true,
+      "originalVersionAndFirstTurnPreserved": true,
+      "publishedS2IntoExistingSchema": true,
+      "continuedS1AndRestarted": true,
+      "durationMs": 2423,
+      "production": {
+        "command": "npm start",
+        "runtime": "v24.21.0",
+        "platform": "win32",
+        "starts": 2,
+        "cleanShutdowns": 2,
+        "serverPids": [
+          2028,
+          11576
+        ],
+        "aiCredentials": "NONE",
+        "database": "isolated real SQLite",
+        "shutdown": "real SIGINT handler via test-only stdin adapter",
+        "orphanProcesses": 0
+      }
+    },
+    "injection_boundary": {
+      "outcomes": [
+        {
+          "trace": "GS1",
+          "expected": "MUTUAL_GAIN",
+          "actual": "MUTUAL_GAIN",
+          "turns": 5,
+          "batnaComparison": "above"
+        },
+        {
+          "trace": "GS2",
+          "expected": "ACCEPTABLE_PARTIAL",
+          "actual": "ACCEPTABLE_PARTIAL",
+          "turns": 7,
+          "batnaComparison": "above"
+        },
+        {
+          "trace": "GS3",
+          "expected": "NO_AGREEMENT",
+          "actual": "NO_AGREEMENT",
+          "turns": 5,
+          "batnaComparison": "not_exercised"
+        },
+        {
+          "trace": "GS4",
+          "expected": "POOR_AGREEMENT",
+          "actual": "POOR_AGREEMENT",
+          "turns": 5,
+          "batnaComparison": "below"
+        },
+        {
+          "trace": "GS5",
+          "expected": "POOR_AGREEMENT",
+          "actual": "POOR_AGREEMENT",
+          "turns": 2,
+          "batnaComparison": "below"
+        },
+        {
+          "trace": "GS6",
+          "expected": "NO_AGREEMENT",
+          "actual": "NO_AGREEMENT",
+          "turns": 8,
+          "batnaComparison": "not_exercised"
+        },
+        {
+          "trace": "GS7",
+          "expected": "MUTUAL_GAIN",
+          "actual": "MUTUAL_GAIN",
+          "turns": 5,
+          "batnaComparison": "above"
+        }
+      ],
+      "serializedResponses": 145,
+      "timing": {
+        "sample": 57,
+        "p95Ms": 6.206100000000106,
+        "targetMs": 500,
+        "kind": "local Fastify inject; not production capacity"
+      }
+    },
+    "final_frontend_asset": "apps/web/dist/assets/index-ChKHRQVn.js",
+    "full_campaign_asset_before_message_fix": "apps/web/dist/assets/index-NeBe4M_h.js",
+    "fault_injection": "Playwright drops HTTP response after real committed turn. No mocked provider/state/outcome.",
+    "privacy": "Explicit public DTOs, private value checks in API/network/bundle, public pending command in sessionStorage; schema names are not private scenario data.",
+    "limitations": [
+      "Not Linux/macOS/Firefox/Safari",
+      "Not a physical mobile device or full accessibility certification",
+      "No public auth/deployment certification",
+      "No model quality evidence"
+    ],
+    "initial_test_harness_failures": [
+      "New bundle assertion confused schema key witnessTraces with private values; replaced with value/witness-ID assertions.",
+      "Exact wrapped-label selectors failed in first five S2 browser cases; campaign interrupted, locators corrected and full 12-case campaign passed."
+    ],
+    "command_logs": [
+      {
+        "label": "audit-browser",
+        "exit": 0,
+        "duration_ms": 11786,
+        "log_path": ".tools/logs/audit-browser.log",
+        "bytes": 1145,
+        "sha256": "37a5ea2dee78d0491d0368c20fbb5fe406e33f6ed6e87fee30df6efcc8cbc5d1"
+      },
+      {
+        "label": "audit-build",
+        "exit": 0,
+        "duration_ms": 5809,
+        "log_path": ".tools/logs/audit-build.log",
+        "bytes": 998,
+        "sha256": "a1fec96d25ade0b473c1c3f577b3cc7a570549c49421e9af8420832dcfee9a90"
+      },
+      {
+        "label": "audit-ci-fixed",
+        "exit": 0,
+        "duration_ms": 3068,
+        "log_path": ".tools/logs/audit-ci-fixed.log",
+        "bytes": 902,
+        "sha256": "d23411f1dcf380b883709f5a3db0f6da3d15c470b268cbe64a1aa9e144cb5a81"
+      },
+      {
+        "label": "audit-ci",
+        "exit": 1,
+        "duration_ms": 1620,
+        "log_path": ".tools/logs/audit-ci.log",
+        "bytes": 4427,
+        "sha256": "04b03a4f66279dda0ff9fef3ab332ba918f2fa7f90ea2674000200b00d32002a"
+      },
+      {
+        "label": "audit-tests",
+        "exit": 0,
+        "duration_ms": 7069,
+        "log_path": ".tools/logs/audit-tests.log",
+        "bytes": 1542,
+        "sha256": "eb887c14c6c2a7bf14f0546ab04f53fc0e98df14776e1ee40f063cb08c685e48"
+      },
+      {
+        "label": "audit-typecheck",
+        "exit": 0,
+        "duration_ms": 8712,
+        "log_path": ".tools/logs/audit-typecheck.log",
+        "bytes": 960,
+        "sha256": "5b7f059505330d115aeead0541497df7249dca0861b301ae2c0e75fd01636300"
+      },
+      {
+        "label": "browser-fixed",
+        "exit": 0,
+        "duration_ms": 22657,
+        "log_path": ".tools/logs/browser-fixed.log",
+        "bytes": 1904,
+        "sha256": "81168063e9b6b9838e166a63435f897bda0aa7dad73fbc551088144dd3a73f89"
+      },
+      {
+        "label": "browser-typecheck",
+        "exit": 0,
+        "duration_ms": 1008,
+        "log_path": ".tools/logs/browser-typecheck.log",
+        "bytes": 123,
+        "sha256": "8d5df5f52ee6ce9a1fd23eca067b76f24797582ff52febffdbefebd3dcf9d464"
+      },
+      {
+        "label": "catalog-tests-fixed",
+        "exit": 0,
+        "duration_ms": 2002,
+        "log_path": ".tools/logs/catalog-tests-fixed.log",
+        "bytes": 602,
+        "sha256": "484e53a22e688b2e00a37723a79115201af7e6bb708884cff402bb2140cfa4a2"
+      },
+      {
+        "label": "final-typecheck",
+        "exit": 0,
+        "duration_ms": 8855,
+        "log_path": ".tools/logs/final-typecheck.log",
+        "bytes": 960,
+        "sha256": "761a7dd2aa3c3074051c60076a53a4a9849e3d951ffd9a8fd7ac2f7a0dbabf65"
+      },
+      {
+        "label": "final-web-build",
+        "exit": 0,
+        "duration_ms": 566,
+        "log_path": ".tools/logs/final-web-build.log",
+        "bytes": 434,
+        "sha256": "caf8e890826e5ae1931fefac8868861cae672095411eba7342771920fab20cc3"
+      },
+      {
+        "label": "final-web-typecheck",
+        "exit": 0,
+        "duration_ms": 1011,
+        "log_path": ".tools/logs/final-web-typecheck.log",
+        "bytes": 110,
+        "sha256": "7c15c54879d27f41d85f677c2ea00360fb1f7c731c7ebf9b68384565f76ea893"
+      },
+      {
+        "label": "slice-build",
+        "exit": 0,
+        "duration_ms": 5355,
+        "log_path": ".tools/logs/slice-build.log",
+        "bytes": 998,
+        "sha256": "3e6d88bc7ba192487ea874e296ccd46a985854efcbbef26ab56dea6d90934a2a"
+      },
+      {
+        "label": "slice-tests",
+        "exit": 1,
+        "duration_ms": 8284,
+        "log_path": ".tools/logs/slice-tests.log",
+        "bytes": 103516,
+        "sha256": "c963050e50235a0f2abe2bcda70df270c4e9f73a40f86c4c0cf74637e9b99522"
+      },
+      {
+        "label": "slice-typecheck",
+        "exit": 0,
+        "duration_ms": 9084,
+        "log_path": ".tools/logs/slice-typecheck.log",
+        "bytes": 960,
+        "sha256": "6a9366f446026951438be0c909a99acc4ce30206161e8bd826ab974bd1c42db5"
+      },
+      {
+        "label": "stale-error-regression",
+        "exit": 0,
+        "duration_ms": 8031,
+        "log_path": ".tools/logs/stale-error-regression.log",
+        "bytes": 827,
+        "sha256": "d0430fa9e56ec72ff242492cca6be751d3f2a7d06cab2eb2d8eef36a88e7157d"
+      }
+    ],
+    "largest_retained_command_log_bytes": 103516
+  },
+  "screenshots": [
+    {
+      "path": "docs/gates/evidence/app-qwen-independent-01/app-s2-briefing-390.png",
+      "bytes": 98889,
+      "sha256": "6e3e1e8390671da2dde0476e19ae82b9b46abafb2796842e70ba903426accdd2"
+    },
+    {
+      "path": "docs/gates/evidence/app-qwen-independent-01/app-s2-error-390.png",
+      "bytes": 83816,
+      "sha256": "cc25953426665481e9a58cf95bdbb372dac217c4ded3e3e46ac362c76e1bd3ad"
+    },
+    {
+      "path": "docs/gates/evidence/app-qwen-independent-01/app-s2-result-1280.png",
+      "bytes": 146980,
+      "sha256": "5ec774b0bfdb12c5d1cbf183107a878c806408f00c83fc020122f74cd1114986"
+    },
+    {
+      "path": "docs/gates/evidence/app-qwen-independent-01/app-s2-result-360.png",
+      "bytes": 115748,
+      "sha256": "c00527e45c7cb45c83fd1184d04bd0d74c66adbf2e703ef9e2ab61613c3e0aa6"
+    },
+    {
+      "path": "docs/gates/evidence/app-qwen-independent-01/g2-result-390.png",
+      "bytes": 93217,
+      "sha256": "176bdd168ec5b4730fd1377ea0ef6cd0e82b14f281309c6702a1e46f8908f9d0"
+    }
+  ],
+  "protection": {
+    "original_tracked_files_byte_unchanged": 346,
+    "original_sha256_manifest_digest": "a044029bd3cdb526f1ed40dd79016079f7ad3efeb4d2af3ba2f6ab413ce75cb2",
+    "protected_baseline_paths": 295,
+    "protected_canonical_git_diff": [],
+    "git_checkout_lf_normalizations": [
+      "docs/gates/AI_LOCAL_DATASET_ACQUISITION.md",
+      "docs/gates/LOCAL_QWEN_QLORA_HOST_RAM_OFFLOAD_CORRECTION.md",
+      "docs/gates/evidence/LOCAL_QWEN_QLORA_FEASIBILITY_SMOKE.json",
+      "docs/gates/evidence/LOCAL_QWEN_QLORA_HOST_RAM_OFFLOAD_CORRECTION.json",
+      "docs/gates/evidence/LOCAL_QWEN_QLORA_MEMORY_ARCHITECTURE_DECISION.json",
+      "docs/gates/evidence/LOCAL_QWEN_TARGETED_LORA_MEMORY_SMOKE.json",
+      "ml/qlora_offload_smoke/config.json",
+      "ml/qwen_targeted_lora_memory_smoke/common.py",
+      "ml/qwen_targeted_lora_memory_smoke/config.json",
+      "ml/qwen_targeted_lora_memory_smoke/prepare_smoke_data.py",
+      "ml/qwen_targeted_lora_memory_smoke/train_smoke.py",
+      "ml/qwen_targeted_lora_memory_smoke/verify_adapter.py",
+      "tools/windows-rtx3070-1536/RUN-1536-REMOTE.ps1",
+      "tools/windows-rtx3070-1536/Remote.Common.ps1"
+    ],
+    "accepted_data_compiler_legacy_pins_verified": 20,
+    "full_training_source_files_byte_unchanged": 11,
+    "verified_training_pins": {
+      "ml/data/synthetic_ru/train.jsonl": {
+        "bytes": 10733980,
+        "sha256": "74defddc644eda30227a58adaef41ad31d7a849000852d6a459de4b778770f47"
+      },
+      "ml/data/synthetic_ru/contexts.json": {
+        "bytes": 761344,
+        "sha256": "7caf6ede5ec31bcc147c4e10dadd74fd5fde1ff58328ebbccf27fb09a7d4b145"
+      },
+      "ml/data/synthetic_ru/manifest.json": {
+        "bytes": 13013,
+        "sha256": "055c0b7f586dfc860685e7b1dca4bcf466dade863ba4ac669005a8e740418ba7"
+      },
+      "ml/data/synthetic_ru/compile_sft.py": {
+        "bytes": 3732,
+        "sha256": "a18c3f4d8206719f24964f318c4a8a72d42a8dacd2e618232c3bf92c0f3b4eb1"
+      },
+      "ml/data/synthetic_ru/core.py": {
+        "bytes": 6658,
+        "sha256": "25ddd5177c45c042221c586ed0cf62256fec672492b0fa0ce3b080898c14e1cf"
+      },
+      "ml/data/synthetic_ru/validate.py": {
+        "bytes": 10730,
+        "sha256": "fe7758c7bad2d1aa604ae87a8369d94d00ffe26d7b4ae8d065c8a37779b2090c"
+      },
+      "ml/data/synthetic_ru/system-prompt.txt": {
+        "bytes": 1372,
+        "sha256": "1fbd12de32c7e54ad116979bfee966ff6d15d92b02d42556dd07420b880954a5"
+      },
+      "ml/baseline/scoring.py": {
+        "bytes": 16632,
+        "sha256": "c512ef147379ef20a881a48d90b36d6c0cf853f3a7696580a8fa78b2af61696c"
+      },
+      "evals/local-qwen/interpretation.schema.json": {
+        "bytes": 6663,
+        "sha256": "0df92dd03436502599f12d6ec245ce8948dd5d4d3e85ca2657d9cd0c79db2f5d"
+      },
+      "tools/windows-rtx3060-12gb-1536/config.json": {
+        "bytes": 2681,
+        "sha256": "04c360125801f35769cb28eaefe88e3c135757c5bd68dec454f532fc53e5cbfc"
+      },
+      "tools/windows-rtx3060-12gb-1536/model-lock.json": {
+        "bytes": 1555,
+        "sha256": "40dc9540c9045a17d9f898336f19322917590e27ecfee7f57511a7a17ad0b1c0"
+      },
+      "tools/windows-rtx3060-12gb-1536/runtime-lock.json": {
+        "bytes": 20193,
+        "sha256": "3fdb4d2c5c731e13aec27e6ebd063096456d4c770ea4c55fdf65ddf8187c4755"
+      },
+      "tools/windows-rtx3060-12gb-1536/offload.py": {
+        "bytes": 6785,
+        "sha256": "5b7e6d17d0771cd834e3bdc0e5546029e7c12f27515fcfd07f5bf4599f5fd090"
+      },
+      "tools/windows-rtx3060-12gb-1536/policy.py": {
+        "bytes": 1195,
+        "sha256": "4eb76c7e12dbbcdce2c3ed615324306031d0a5e751cd3f0117fb039c1745cb44"
+      },
+      "tools/windows-rtx3060-12gb-1536/runtime_checks.py": {
+        "bytes": 4935,
+        "sha256": "9db982d1a4cea74b57a54208f5597cfc7f85e6b90cc939a88acf4d2f802d05e0"
+      },
+      "tools/windows-rtx3060-12gb-1536/monitor.py": {
+        "bytes": 13594,
+        "sha256": "3bd86eb6b8b7d9bb67c98078aafea98a2c9d84011a0f5b3578cade285edc4557"
+      },
+      "tools/windows-rtx3060-12gb-1536/environment.py": {
+        "bytes": 13116,
+        "sha256": "b4b225a43e0b0a25bf8e86e390fea4e6a28a65683359c58a084087a5664d659c"
+      },
+      "tools/windows-rtx3060-12gb-1536/configuration.py": {
+        "bytes": 3013,
+        "sha256": "e65cf5c412d8486785d46e262fe4eb9070421558b351d623737be626c434052c"
+      },
+      "tools/windows-rtx3060-12gb-1536/common.py": {
+        "bytes": 6243,
+        "sha256": "0e0c753690fd138fda041e783f434e1a447c7aa8502d5e90bb5c7dcef46d4f88"
+      },
+      "tools/windows-rtx3060-12gb-1536/prepare_smoke_data.py": {
+        "bytes": 7422,
+        "sha256": "3421d3bce314e44a0018f94c0efec4db033daeae2b570614a5a82a6e3ed17461"
+      },
+      "tools/windows-rtx3060-full-training/full_common.py": {
+        "sha256": "4b5fe3b1462942741dcfb29d5b2fe2d7b9b5eb6de3bc4fa0df4ca95147a3ea38",
+        "bytes": 7666
+      },
+      "tools/windows-rtx3060-full-training/identity.py": {
+        "sha256": "77b4c03d4014cc2ec8e6c6a7cb9966bc9a0a643658cdc03badaf50f9315a1011",
+        "bytes": 3592
+      },
+      "tools/windows-rtx3060-full-training/full_data.py": {
+        "sha256": "737028553ebb8376bb4d3aadd125c231ee3eeb8b71ed9c769b8922b21a63ef24",
+        "bytes": 4315
+      },
+      "tools/windows-rtx3060-full-training/checkpoints.py": {
+        "sha256": "cc270a9292888d912f9a260f95e7f700228dae16fa00eb4b4f28b42ce2177fad",
+        "bytes": 8330
+      },
+      "tools/windows-rtx3060-full-training/engine.py": {
+        "sha256": "34d33fff9f9422f7c9f3d6bb63eed4c9d7bfb6c9cb8b9ddf5badaf6210be536e",
+        "bytes": 6972
+      },
+      "tools/windows-rtx3060-full-training/train_full.py": {
+        "sha256": "f673a4443fb998182529de8a985fa6546de011c63c5d6c3179034a55da3be3e8",
+        "bytes": 9118
+      },
+      "tools/windows-rtx3060-full-training/supervisor.py": {
+        "sha256": "1711ea4655a846fc9af7587e1308bbf93ee51a230a5a94466bacd30457bece40",
+        "bytes": 11075
+      },
+      "tools/windows-rtx3060-full-training/workflow.py": {
+        "sha256": "a5a77f79cb95ca1921034060743589e5a7afb2d802e3edb4c34a6f9098793661",
+        "bytes": 10544
+      },
+      "tools/windows-rtx3060-full-training/RUN-FULL-TRAINING.ps1": {
+        "sha256": "f9e09fb31e8545371afbfc1d992fa724d1079ccd943d831916d5c03b668dee4d",
+        "bytes": 2600
+      },
+      "tools/windows-rtx3060-full-training/candidate-v1.json": {
+        "sha256": "41b3bd010d62d53435b988086984d5e169c2c226746c64775281d60aaa5bd85d",
+        "bytes": 3873
+      },
+      "tools/windows-rtx3060-full-training/accepted-baseline.json": {
+        "sha256": "46e4046d15d11a8c30bb10a63bb41da0a2c6d7c818ff5ca210ce05d21c550eba",
+        "bytes": 10477
+      }
+    },
+    "dependency_resolutions_unchanged": true,
+    "contracts_original_exports_and_dependencies_unchanged": true
+  },
+  "changed_implementation_files": [
+    "README.md",
+    "apps/server/src/presentation/renderers.ts",
+    "apps/server/src/routes/g2-routes.ts",
+    "apps/server/src/services/reference-catalog.ts",
+    "apps/server/src/services/session-service.ts",
+    "apps/server/test/catalog.test.ts",
+    "apps/web/src/board.tsx",
+    "apps/web/src/product.tsx",
+    "docs/gates/evidence/app-qwen-independent-01/app-s2-briefing-390.png",
+    "docs/gates/evidence/app-qwen-independent-01/app-s2-error-390.png",
+    "docs/gates/evidence/app-qwen-independent-01/app-s2-result-1280.png",
+    "docs/gates/evidence/app-qwen-independent-01/app-s2-result-360.png",
+    "docs/gates/evidence/app-qwen-independent-01/g2-result-390.png",
+    "package-lock.json",
+    "package.json",
+    "packages/contracts/package.json",
+    "packages/contracts/src/catalog.ts",
+    "playwright.config.ts",
+    "tests/e2e/app-s2.spec.ts",
+    "tests/e2e/g2.spec.ts",
+    "tests/e2e/production.ts"
+  ],
+  "receipt_files": [
+    "docs/gates/APP_AUDIT_AND_QWEN_INDEPENDENT_SLICE_01.md",
+    "docs/gates/evidence/APP_AUDIT_AND_QWEN_INDEPENDENT_SLICE_01.json"
+  ],
+  "watchdogs_seconds": {
+    "git_network": 120,
+    "npm_ci": 300,
+    "typecheck": 180,
+    "unit_integration": 180,
+    "build": 300,
+    "production_startup": 12,
+    "browser_global": 180,
+    "browser_case": 90,
+    "old_db_upgrade_outer": 120
+  },
+  "forbidden_actions_executed": {
+    "training": false,
+    "resume": false,
+    "Qwen_inference": false,
+    "model_quality_evaluation": false,
+    "RTX2060_experiment": false,
+    "GPU_experiments": false,
+    "old_certification_or_PackageOnly": false,
+    "provider_download": false,
+    "paid_API": false,
+    "deployment": false,
+    "merge_main": false
+  },
+  "delivery": {
+    "branch": "feature/app-qwen-independent-01",
+    "upstream": "origin/feature/app-qwen-independent-01",
+    "implementation_commit": "6e6d812ecf58852dabd1e061ef0584cb469a4393",
+    "implementation_push_verified": true,
+    "implementation_upstream_ahead_behind": [
+      0,
+      0
+    ],
+    "receipt_commit_resolution": "git log -1 --format=%H -- docs/gates/APP_AUDIT_AND_QWEN_INDEPENDENT_SLICE_01.md",
+    "final_delivery_checks": "Recheck final HEAD equals own remote upstream, 0/0, clean worktree, unchanged original main and remote main after receipt push; report final SHA to owner."
+  },
+  "owner_launch_powershell": "Set-Location 'C:\\Users\\BastaPC\\Desktop\\Alag-app-work'\n$env:HOST = '127.0.0.1'\n$env:PORT = '3000'\n$env:DATABASE_PATH = '.tmp/owner-app-demo.sqlite'\n& 'C:\\Users\\BastaPC\\Desktop\\Alag\\.tools\\node-v24.21.0-win-x64\\node.exe' .\\scripts\\start.mjs",
+  "local_url": "http://127.0.0.1:3000/admin",
+  "next_single_recommended_task": "Qwen-independent deterministic feedback component of G6 using existing rubric and stored evidence; not started.",
+  "stop": "NO QWEN TRAINING, NO MODEL EVALUATION, NO LIVE AI PROMOTION, NO MERGE TO MAIN"
+}
