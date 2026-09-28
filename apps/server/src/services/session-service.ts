@@ -1,7 +1,8 @@
 import { randomUUID } from 'node:crypto';
 import { CanonicalActionSchema, DomainEventSchema, NegotiationStateSchema } from '@arena/contracts';
 import type { NegotiationState, PublicProjection, ScenarioDefinition } from '@arena/contracts';
-import { PlayTurnSchema, PublishedScenarioSchema, ReferencePreviewSchema, SessionViewSchema } from '@arena/contracts/g2';
+import { PlayTurnSchema, SessionViewSchema } from '@arena/contracts/g2';
+import { PublishedCatalogScenarioSchema as PublishedScenarioSchema, CatalogReferenceSchema as ReferencePreviewSchema } from '@arena/contracts/catalog';
 import type { BasicResult, PublicTurn, SessionView } from '@arena/contracts/g2';
 import { createInitialState, projectPlayer, transition } from '@arena/domain';
 import { S1 } from '@arena/scenarios';
@@ -9,6 +10,7 @@ import { ApiError, corruptState } from '../api-error.ts';
 import { ArenaRepository, hashBody, readPublicResponse } from '../repositories/arena-repository.ts';
 import type { SessionRow, VersionRow } from '../repositories/arena-repository.ts';
 import { basicResult, guidedActions, renderTurn } from '../presentation/renderers.ts';
+import { referenceDefinition } from './reference-catalog.ts';
 
 export function referencePreview(definition: ScenarioDefinition = S1) {
   const p = projectPlayer(definition, createInitialState(definition, { sessionId: 'preview', scenarioVersionId: 'preview' }));
@@ -29,7 +31,7 @@ export class SessionService {
       schemaVersion: row.schema_version, engineVersion: row.engine_version, rubricVersion: row.rubric_version,
       configFingerprint: row.config_fingerprint, createdAt: row.created_at, publishedAt: row.published_at, preview: referencePreview(definition) });
   }
-  publish() { return this.repository.immediate(() => this.published(this.repository.publish(S1))); }
+  publish(key = 's1') { return this.repository.immediate(() => this.published(this.repository.publish(referenceDefinition(key)))); }
   scenarios() { return this.repository.read(() => this.repository.versions().map(row => this.published(row))); }
   private load(id: string) {
     const row = this.repository.session(id);

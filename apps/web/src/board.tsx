@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { CanonicalAction, Package, PublicProjection } from '@arena/contracts';
 import { PlayTurnSchema, SessionViewSchema } from '@arena/contracts/g2';
+import { formatIssueValue } from '@arena/contracts/catalog';
 import type { PlayTurnRequest, SessionView } from '@arena/contracts/g2';
 import { errorMessage, request, RequestError } from './api';
 import { navigate, sessionPath } from './product';
@@ -14,7 +15,7 @@ const social = () => ({ tone: 'neutral' as const, acknowledgementFactId: null, a
 export function Terms({ terms, p }: { terms: Package; p: PublicProjection['scenario'] }) {
   return <dl className="terms">{p.issues.map(issue => {
     const value = issue.values.find(item => terms.some(term => term.issueId === issue.id && term.valueId === item.id));
-    return <div key={issue.id}><dt>{issue.label}</dt><dd>{value?.label}{value && value.quantity !== null && <> {issue.unit}</>}</dd></div>;
+    return <div key={issue.id}><dt>{issue.label}</dt><dd>{value && formatIssueValue(issue, value)}</dd></div>;
   })}</dl>;
 }
 export function Transcript({ data }: { data: SessionView }) {
@@ -73,6 +74,7 @@ export function Board({ data, onChange }: { data: SessionView; onChange(data: Se
         try {
           const current = await request(`/api/sessions/${p.sessionId}`, SessionViewSchema);
           onChange(current); if (current.result) navigate(sessionPath(current));
+          if (caught.code === 'STALE_REVISION') setError('В другой вкладке уже сделан ход. Загружено актуальное состояние. Проверьте условия и выберите следующий ход.');
         } catch (refreshError) { setError(errorMessage(refreshError)); }
       }
     } finally { lock.current = false; setBusy(false); }
@@ -117,7 +119,7 @@ export function Board({ data, onChange }: { data: SessionView; onChange(data: Se
             {p.lastUserOffer && <button className="small" onClick={() => copyTerms(p.lastUserOffer!.terms)}>Изменить последнее предложение</button>}
             <div className="offer-fields">{p.scenario.issues.map(issue => <label key={issue.id}>{issue.label} ({issue.unit})
               <select value={values[issue.id] ?? ''} onChange={event => { setValues({ ...values, [issue.id]: event.target.value }); setConfirmation(null); }}>
-                <option value="">Выберите значение</option>{issue.values.map(v => <option key={v.id} value={v.id}>{v.label}</option>)}</select></label>)}</div></>}
+                <option value="">Выберите значение</option>{issue.values.map(v => <option key={v.id} value={v.id}>{formatIssueValue(issue, v)}</option>)}</select></label>)}</div></>}
           {kind === 'accept' && p.activeOffer && <><p>Вы принимаете именно это действующее предложение:</p><Terms terms={p.activeOffer.terms} p={p.scenario} /></>}
           {kind === 'pressure' && <p className="hint">Твёрдо обозначить альтернативу и перейти к личному давлению — разные действия. Выберите намеренно.</p>}
           {kind === 'walk_away' && <p>Вы можете закончить разговор без сделки и выбрать свою альтернативу.</p>}

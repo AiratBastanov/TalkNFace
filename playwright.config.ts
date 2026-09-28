@@ -1,6 +1,6 @@
 import { defineConfig } from '@playwright/test';
 export default defineConfig({
-  testDir: './tests/e2e', workers: 1, fullyParallel: false, retries: 0,
+  testDir: './tests/e2e', workers: 1, fullyParallel: false, retries: 0, maxFailures: 1,
   timeout: 90_000, globalTimeout: 180_000, expect: { timeout: 5_000 },
   outputDir: '.tools/g2-browser-artifacts',
   reporter: [['list'], ['json', { outputFile: '.tools/g2-browser-tests.json' }]],

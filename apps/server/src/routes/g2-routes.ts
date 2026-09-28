@@ -1,9 +1,12 @@
 import { z } from 'zod';
 import type { FastifyInstance } from 'fastify';
 import { ApiErrorSchema, BasicResultSchema, CreateSessionSchema, EmptyBodySchema, PlayTurnSchema,
-  PublishedScenarioSchema, ReferenceListSchema, ReferencePreviewSchema, ScenarioListSchema, SessionParamsSchema, SessionViewSchema } from '@arena/contracts/g2';
+  SessionParamsSchema, SessionViewSchema } from '@arena/contracts/g2';
+import { PublishedCatalogScenarioSchema as PublishedScenarioSchema, ReferenceCatalogSchema as ReferenceListSchema,
+  CatalogReferenceSchema as ReferencePreviewSchema, PublishedCatalogSchema as ScenarioListSchema } from '@arena/contracts/catalog';
 import { ApiError } from '../api-error.ts';
 import { referencePreview, SessionService } from '../services/session-service.ts';
+import { referenceDefinition, referenceDefinitions } from '../services/reference-catalog.ts';
 
 function input<T>(schema: z.ZodType<T>, value: unknown): T {
   const result = schema.safeParse(value);
@@ -23,15 +26,16 @@ export function registerG2Routes(app: FastifyInstance, service: SessionService) 
   // One strict Zod contract universe: validate outgoing DTOs at every HTTP boundary.
   app.get('/api/reference-scenarios', async request => {
     input(EmptyBodySchema, request.query);
-    return ReferenceListSchema.parse([referencePreview()]);
+    return ReferenceListSchema.parse(referenceDefinitions().map(referencePreview));
   });
-  app.get('/api/admin/reference-scenarios/s1', async request => {
+  const referenceKey = (params: unknown) => input(z.strictObject({ key: z.string().min(1).max(32) }), params).key;
+  app.get('/api/admin/reference-scenarios/:key', async request => {
     input(EmptyBodySchema, request.query);
-    return ReferencePreviewSchema.parse(referencePreview());
+    return ReferencePreviewSchema.parse(referencePreview(referenceDefinition(referenceKey(request.params))));
   });
-  app.post('/api/admin/reference-scenarios/s1/publish', async request => {
+  app.post('/api/admin/reference-scenarios/:key/publish', async request => {
     input(EmptyBodySchema, request.query); input(EmptyBodySchema, request.body);
-    return PublishedScenarioSchema.parse(service.publish());
+    return PublishedScenarioSchema.parse(service.publish(referenceKey(request.params)));
   });
   app.get('/api/scenarios', async request => {
     input(EmptyBodySchema, request.query);

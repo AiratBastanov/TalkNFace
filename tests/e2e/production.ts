@@ -1,17 +1,19 @@
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { once } from 'node:events';
-import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { createServer } from 'node:net';
 import { dirname, join, resolve, sep } from 'node:path';
 import { setTimeout as delay } from 'node:timers/promises';
 
-export async function productionHarness() {
+export async function productionHarness(options: { seedDatabase?: string; label?: string } = {}) {
   assert.equal(process.version, 'v24.21.0');
   const root = process.cwd(); const tempRoot = resolve(root, '.tmp');
   mkdirSync(tempRoot, { recursive: true });
   const directory = mkdtempSync(join(tempRoot, 'g2-browser-'));
   const database = join(directory, 'arena.sqlite');
+  if (options.seedDatabase) copyFileSync(options.seedDatabase, database);
+  const label = options.label ?? 'g2';
   const portServer = createServer(); portServer.listen(0, '127.0.0.1'); await once(portServer, 'listening');
   const address = portServer.address(); assert(address && typeof address !== 'string'); const port = address.port;
   await new Promise<void>((done, reject) => portServer.close(error => error ? reject(error) : done()));
@@ -67,7 +69,7 @@ export async function productionHarness() {
           assert.match(output, /database.closed/); assert.equal(existsSync(database + '-wal'), false); assert.equal(existsSync(database + '-shm'), false); stops++;
         } finally {
           clearTimeout(deadline); clearTimeout(lifetime);
-          mkdirSync(join(root, '.tools/logs'), { recursive: true }); writeFileSync(join(root, `.tools/logs/g2-browser-production-${starts}.log`), output);
+          mkdirSync(join(root, '.tools/logs'), { recursive: true }); writeFileSync(join(root, `.tools/logs/${label}-browser-production-${starts}.log`), output);
           await forceStop();
         }
       },

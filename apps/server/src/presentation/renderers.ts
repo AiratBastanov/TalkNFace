@@ -2,13 +2,14 @@ import type { CanonicalAction, DomainEvent, Package, PublicProjection } from '@a
 import { assertNever } from '@arena/contracts';
 import type { BasicResult, GuidedActions, Observation, PublicTurn } from '@arena/contracts/g2';
 import { BasicResultSchema, PublicTurnSchema } from '@arena/contracts/g2';
+import { formatIssueValue } from '@arena/contracts/catalog';
 
 export function renderTerms(terms: Package, projection: PublicProjection): string {
   return projection.scenario.issues.map(issue => {
     const term = terms.find(item => item.issueId === issue.id);
     const value = issue.values.find(item => item.id === term?.valueId);
     if (!value) throw new Error('Cannot render unknown public term');
-    return `${issue.label}: ${value.label}${value.quantity === null ? '' : ' ' + issue.unit}`;
+    return `${issue.label}: ${formatIssueValue(issue, value)}`;
   }).join('; ');
 }
 const factText = (p: PublicProjection, id: string) => {

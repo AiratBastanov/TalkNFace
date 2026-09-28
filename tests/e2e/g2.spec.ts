@@ -203,6 +203,7 @@ test('uncertain network response → reload/retry once; stale tab reloads author
   await ask(page, 'payment', 2);
   await stale.getByRole('button', { name: 'Отправить ход', exact: true }).click();
   await expect(stale.getByRole('alert')).toContainText('другой вкладке'); await expect(stale.getByTestId('revision')).toHaveText('Ход 2 из 8');
+  await expect(stale.getByRole('alert')).toContainText('Загружено актуальное состояние');
   expect((await snapshot(stale)).projection.revision).toBe(2); await stale.close();
   await choose(page, 'walk_away'); await page.getByRole('button', { name: 'Подтвердить выход…' }).click();
   expect((await snapshot(page)).projection.revision).toBe(2);

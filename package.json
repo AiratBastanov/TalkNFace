@@ -4,8 +4,11 @@
   "private": true,
   "type": "module",
   "workspaces": [
-    "apps/*",
-    "packages/*"
+    "apps/server",
+    "apps/web",
+    "packages/contracts",
+    "packages/domain",
+    "packages/scenarios"
   ],
   "packageManager": "npm@11.19.0",
   "engines": {
