@@ -10,6 +10,7 @@ data/*.sqlite-wal
 coverage/
 logs/
 .tmp/
+.local/
 *.tsbuildinfo
 AlagModels/
 AlagDatasets/
