@@ -1,0 +1,1285 @@
+{
+  "gate": "APP_G5_CONTEXT_CONFIGURATION_01",
+  "verdict": "APP_G5_CONTEXT_CONFIGURATION_01_PASS",
+  "REAL_APPLICATION_SMOKE": "PASS",
+  "scope": "Deterministic reference configuration component of G5 only",
+  "completeG5": false,
+  "liveAI": false,
+  "fullAiMvp": false,
+  "baseline": {
+    "worktree": "C:/Users/BastaPC/Desktop/Alag-app-work",
+    "branch": "feature/app-qwen-independent-01",
+    "head": "c40ebbbf09ed279239c093efa5c290c0e46f58bb",
+    "clean": true,
+    "origin": "https://github.com/AiratBastanov/TalkNFace.git",
+    "main": "2034687f6f22b2973935f2c9c30bc9380c88b071"
+  },
+  "requirements": {
+    "pdfPagesRead": 8,
+    "pdfAuthority": "PDF p3 §2 items2–3; p4 §3.2; p5 §4; p7 §7.2/§8.2; p8 §8.3–8.4",
+    "AIOptionalInPDF": true,
+    "internalAiFirstIntentPreserved": true
+  },
+  "sourceBoundary": {
+    "architectureSections": [
+      "Admin UX",
+      "Scenario generation",
+      "Scenario validation",
+      "Shared scenario schema"
+    ],
+    "masterPlan": "G5 — AI scenario generation + admin workflow only",
+    "frozenExamplesRead": false,
+    "newReadIncident": false,
+    "protectedExamples": "byte-only hashes, no content output"
+  },
+  "historicalIncident": {
+    "receipt": "docs/gates/APP_AUDIT_AND_QWEN_INDEPENDENT_SLICE_01.md",
+    "status": "PARTIAL preserved",
+    "exposedRows": 2,
+    "reopened": false,
+    "trainingContaminationInference": false
+  },
+  "identity": {
+    "compiler": "context-reference-v1",
+    "validationPolicy": "context-witness-v1",
+    "baseIdentity": "SHA256 of immutable full reference",
+    "fingerprintInputs": [
+      "settings",
+      "baseHash",
+      "compilerVersion",
+      "validationPolicy",
+      "engine",
+      "policy"
+    ],
+    "excluded": [
+      "timestamps",
+      "request IDs",
+      "UI state",
+      "transient errors"
+    ],
+    "derivedTemplate": "G5-S1/G5-S2 + first40 fingerprint hex",
+    "candidateHash": "full exact ScenarioDefinition SHA256"
+  },
+  "validation": {
+    "issues": [
+      2,
+      4
+    ],
+    "maxPackages": 1296,
+    "templates": 2,
+    "maxOffersPerTemplate": 64,
+    "maxTurns": 8,
+    "minMutuallyAcceptablePackages": 2,
+    "targetPackageRequired": true,
+    "twoDistinctAcceptedFinalPackages": true,
+    "fullTargetWitnessRequired": true,
+    "sameEngine": true,
+    "guidedRenderChecked": true,
+    "noAgreementRouteChecked": true,
+    "dialogueTreeSearch": false,
+    "privateProofsStayServerSide": true
+  },
+  "capabilityMatrix": {
+    "kind": "bounded application configuration audit, not ML evaluation or additional test cases",
+    "total": 144,
+    "valid": 78,
+    "invalid": 66,
+    "elapsedMs": 707,
+    "maxCandidateMs": 48,
+    "groups": [
+      {
+        "sphere": "supply",
+        "topic": "launch",
+        "opponentRole": "director",
+        "opponentGoals": "cashflow",
+        "accepted": [
+          "beginner/friendly",
+          "beginner/neutral",
+          "beginner/skeptical",
+          "normal/friendly",
+          "normal/neutral",
+          "normal/skeptical",
+          "advanced/friendly",
+          "advanced/neutral",
+          "advanced/skeptical"
+        ],
+        "rejected": []
+      },
+      {
+        "sphere": "supply",
+        "topic": "launch",
+        "opponentRole": "director",
+        "opponentGoals": "margin",
+        "accepted": [
+          "beginner/friendly",
+          "beginner/neutral",
+          "beginner/skeptical",
+          "normal/friendly",
+          "normal/neutral",
+          "normal/skeptical",
+          "advanced/friendly",
+          "advanced/neutral"
+        ],
+        "rejected": [
+          "advanced/skeptical"
+        ]
+      },
+      {
+        "sphere": "supply",
+        "topic": "launch",
+        "opponentRole": "account_manager",
+        "opponentGoals": "cashflow",
+        "accepted": [
+          "beginner/friendly",
+          "beginner/neutral",
+          "beginner/skeptical",
+          "normal/friendly",
+          "normal/neutral"
+        ],
+        "rejected": [
+          "normal/skeptical",
+          "advanced/friendly",
+          "advanced/neutral",
+          "advanced/skeptical"
+        ]
+      },
+      {
+        "sphere": "supply",
+        "topic": "launch",
+        "opponentRole": "account_manager",
+        "opponentGoals": "margin",
+        "accepted": [],
+        "rejected": [
+          "beginner/friendly",
+          "beginner/neutral",
+          "beginner/skeptical",
+          "normal/friendly",
+          "normal/neutral",
+          "normal/skeptical",
+          "advanced/friendly",
+          "advanced/neutral",
+          "advanced/skeptical"
+        ]
+      },
+      {
+        "sphere": "supply",
+        "topic": "planned",
+        "opponentRole": "director",
+        "opponentGoals": "cashflow",
+        "accepted": [
+          "beginner/friendly",
+          "beginner/neutral",
+          "beginner/skeptical",
+          "normal/friendly",
+          "normal/neutral",
+          "normal/skeptical",
+          "advanced/friendly",
+          "advanced/neutral",
+          "advanced/skeptical"
+        ],
+        "rejected": []
+      },
+      {
+        "sphere": "supply",
+        "topic": "planned",
+        "opponentRole": "director",
+        "opponentGoals": "margin",
+        "accepted": [
+          "beginner/friendly",
+          "beginner/neutral",
+          "beginner/skeptical",
+          "normal/friendly",
+          "normal/neutral",
+          "normal/skeptical",
+          "advanced/friendly",
+          "advanced/neutral"
+        ],
+        "rejected": [
+          "advanced/skeptical"
+        ]
+      },
+      {
+        "sphere": "supply",
+        "topic": "planned",
+        "opponentRole": "account_manager",
+        "opponentGoals": "cashflow",
+        "accepted": [
+          "beginner/friendly",
+          "beginner/neutral",
+          "beginner/skeptical",
+          "normal/friendly",
+          "normal/neutral"
+        ],
+        "rejected": [
+          "normal/skeptical",
+          "advanced/friendly",
+          "advanced/neutral",
+          "advanced/skeptical"
+        ]
+      },
+      {
+        "sphere": "supply",
+        "topic": "planned",
+        "opponentRole": "account_manager",
+        "opponentGoals": "margin",
+        "accepted": [],
+        "rejected": [
+          "beginner/friendly",
+          "beginner/neutral",
+          "beginner/skeptical",
+          "normal/friendly",
+          "normal/neutral",
+          "normal/skeptical",
+          "advanced/friendly",
+          "advanced/neutral",
+          "advanced/skeptical"
+        ]
+      },
+      {
+        "sphere": "team",
+        "topic": "urgent",
+        "opponentRole": "specialist",
+        "opponentGoals": "protect_load",
+        "accepted": [
+          "beginner/friendly",
+          "beginner/neutral",
+          "beginner/skeptical",
+          "normal/friendly",
+          "normal/neutral",
+          "normal/skeptical",
+          "advanced/friendly",
+          "advanced/neutral"
+        ],
+        "rejected": [
+          "advanced/skeptical"
+        ]
+      },
+      {
+        "sphere": "team",
+        "topic": "urgent",
+        "opponentRole": "specialist",
+        "opponentGoals": "deliver_scope",
+        "accepted": [
+          "beginner/friendly",
+          "beginner/neutral",
+          "beginner/skeptical",
+          "normal/friendly",
+          "normal/neutral",
+          "normal/skeptical",
+          "advanced/friendly",
+          "advanced/neutral",
+          "advanced/skeptical"
+        ],
+        "rejected": []
+      },
+      {
+        "sphere": "team",
+        "topic": "urgent",
+        "opponentRole": "team_lead",
+        "opponentGoals": "protect_load",
+        "accepted": [
+          "beginner/friendly",
+          "beginner/neutral",
+          "beginner/skeptical",
+          "normal/friendly",
+          "normal/neutral",
+          "normal/skeptical",
+          "advanced/friendly",
+          "advanced/neutral"
+        ],
+        "rejected": [
+          "advanced/skeptical"
+        ]
+      },
+      {
+        "sphere": "team",
+        "topic": "urgent",
+        "opponentRole": "team_lead",
+        "opponentGoals": "deliver_scope",
+        "accepted": [
+          "beginner/friendly",
+          "beginner/neutral",
+          "beginner/skeptical",
+          "normal/friendly",
+          "normal/neutral",
+          "normal/skeptical",
+          "advanced/friendly",
+          "advanced/neutral",
+          "advanced/skeptical"
+        ],
+        "rejected": []
+      },
+      {
+        "sphere": "team",
+        "topic": "reprioritize",
+        "opponentRole": "specialist",
+        "opponentGoals": "protect_load",
+        "accepted": [],
+        "rejected": [
+          "beginner/friendly",
+          "beginner/neutral",
+          "beginner/skeptical",
+          "normal/friendly",
+          "normal/neutral",
+          "normal/skeptical",
+          "advanced/friendly",
+          "advanced/neutral",
+          "advanced/skeptical"
+        ]
+      },
+      {
+        "sphere": "team",
+        "topic": "reprioritize",
+        "opponentRole": "specialist",
+        "opponentGoals": "deliver_scope",
+        "accepted": [],
+        "rejected": [
+          "beginner/friendly",
+          "beginner/neutral",
+          "beginner/skeptical",
+          "normal/friendly",
+          "normal/neutral",
+          "normal/skeptical",
+          "advanced/friendly",
+          "advanced/neutral",
+          "advanced/skeptical"
+        ]
+      },
+      {
+        "sphere": "team",
+        "topic": "reprioritize",
+        "opponentRole": "team_lead",
+        "opponentGoals": "protect_load",
+        "accepted": [],
+        "rejected": [
+          "beginner/friendly",
+          "beginner/neutral",
+          "beginner/skeptical",
+          "normal/friendly",
+          "normal/neutral",
+          "normal/skeptical",
+          "advanced/friendly",
+          "advanced/neutral",
+          "advanced/skeptical"
+        ]
+      },
+      {
+        "sphere": "team",
+        "topic": "reprioritize",
+        "opponentRole": "team_lead",
+        "opponentGoals": "deliver_scope",
+        "accepted": [],
+        "rejected": [
+          "beginner/friendly",
+          "beginner/neutral",
+          "beginner/skeptical",
+          "normal/friendly",
+          "normal/neutral",
+          "normal/skeptical",
+          "advanced/friendly",
+          "advanced/neutral",
+          "advanced/skeptical"
+        ]
+      }
+    ]
+  },
+  "behavioralEvidence": {
+    "sphere": "S1 PRICE/DELIVERY/PREPAY versus S2 SCOPE/DEADLINE/HELP/DEFER_REPORT, different units/interests; actual capacity rejection",
+    "topic": "Identical S1 all14 package physically refused in launch and allowed in planned; unchanged target; unsupported helper-free S2 request refused",
+    "difficulty": "Initial supplier27 offer: beginner threshold26 accepts, normal33 rejects; trust54 question discloses for normal45 but not advanced55",
+    "tone": "Neutral first logistics question discloses, skeptical does not; public acknowledgement leaves tension16 versus28",
+    "role": "S1 price95 permitted for director, refused for account_manager; S2 helper-originating counteroffer requires player grant only for specialist",
+    "goals": "S1 same package opponent27 vs25, BATNA=reservation20 vs22; S2 full package30 vs38, BATNA=reservation25 vs27"
+  },
+  "publication": {
+    "migration": 4,
+    "draftSeparate": true,
+    "revisionAndHashBinding": true,
+    "explicitApproval": true,
+    "validationOutsideWriteLock": true,
+    "atomicRecheck": true,
+    "idempotentRequestIdentity": true,
+    "sameIdDifferentInputRejected": true,
+    "exactCandidatePersisted": true,
+    "oldVersionsSessionsTurnsReportsReplayUnchanged": true,
+    "privateAdminTruthEndpoint": false
+  },
+  "verification": {
+    "unitIntegration": {
+      "unique": 272,
+      "existing": 236,
+      "new": 36,
+      "repeatedExecutions": 33,
+      "totalExecutions": 305,
+      "failedCaseExecutions": 0,
+      "newCaseNames": [
+        "six real configuration effects and bounded common-engine proof sphere changes issue units, interests and physically feasible packages",
+        "six real configuration effects and bounded common-engine proof topic admits all14 only for planned supply; both settings have playable target witnesses",
+        "six real configuration effects and bounded common-engine proof difficulty changes actual first-offer acceptance and disclosure, with unchanged rubric",
+        "six real configuration effects and bounded common-engine proof tone changes actual disclosure and skeptical repair strength",
+        "six real configuration effects and bounded common-engine proof role changes S1 authority for the identical package, and S2 ability to originate a helper",
+        "six real configuration effects and bounded common-engine proof goals change complete utility/BATNA data coherently in both valid families",
+        "six real configuration effects and bounded common-engine proof supplier base: distinct acceptable committed witness traces plus target and exit",
+        "six real configuration effects and bounded common-engine proof planned margin friendly: distinct acceptable committed witness traces plus target and exit",
+        "six real configuration effects and bounded common-engine proof account manager beginner: distinct acceptable committed witness traces plus target and exit",
+        "six real configuration effects and bounded common-engine proof skeptical advanced: distinct acceptable committed witness traces plus target and exit",
+        "six real configuration effects and bounded common-engine proof team base: distinct acceptable committed witness traces plus target and exit",
+        "six real configuration effects and bounded common-engine proof team lead delivery: distinct acceptable committed witness traces plus target and exit",
+        "six real configuration effects and bounded common-engine proof rejects cross-family role without correction",
+        "six real configuration effects and bounded common-engine proof rejects cross-family goals without correction",
+        "six real configuration effects and bounded common-engine proof rejects missing choices without correction",
+        "six real configuration effects and bounded common-engine proof rejects unavailable helper / locked target without correction",
+        "six real configuration effects and bounded common-engine proof rejects manager margin cannot reach target62 without correction",
+        "six real configuration effects and bounded common-engine proof separates package feasibility from reachability under the current aspiration policy",
+        "six real configuration effects and bounded common-engine proof retains immutable frozen references, deterministic semantic identity and strict validation",
+        "real Fastify + file-backed SQLite admin transactions requires current validation and explicit approval; exact idempotent publication survives changed drafts",
+        "real Fastify + file-backed SQLite admin transactions changed settings invalidate approval; stale save, validation and publication never overwrite",
+        "real Fastify + file-backed SQLite admin transactions rechecks revision atomically when another SQLite connection saves during publication preparation",
+        "real Fastify + file-backed SQLite admin transactions rechecks exact revision after validation if another SQLite connection changes the draft",
+        "real Fastify + file-backed SQLite admin transactions rejects client validity flags and user-supplied definitions even with a current draft binding",
+        "real Fastify + file-backed SQLite admin transactions refuses approvals from an older compiler policy",
+        "real Fastify + file-backed SQLite admin transactions invalid combinations remain saved/editable with affected-field messages and no private data",
+        "real Fastify + file-backed SQLite admin transactions strict server settings reject {\"sphere\":\"supply\",\"topic\":\"launch\",\"difficulty\":\"normal\",\"tone\":\"neutral\",\"opponentRole\":\"director\",\"opponentGoals\":\"__proto__\"}",
+        "real Fastify + file-backed SQLite admin transactions strict server settings reject {\"sphere\":\"supply\",\"topic\":\"<script>alert(1)</script>\",\"difficulty\":\"normal\",\"tone\":\"neutral\",\"opponentRole\":\"director\",\"opponentGoals\":\"cashflow\"}",
+        "real Fastify + file-backed SQLite admin transactions strict server settings reject {\"sphere\":\"supply\",\"topic\":\"launch\",\"difficulty\":999,\"tone\":\"neutral\",\"opponentRole\":\"director\",\"opponentGoals\":\"cashflow\"}",
+        "real Fastify + file-backed SQLite admin transactions strict server settings reject {\"sphere\":\"supply\",\"topic\":\"launch\",\"difficulty\":\"normal\",\"tone\":\"neutral\",\"opponentRole\":\"director\",\"opponentGoals\":\"cashflow\",\"unknown\":true}",
+        "real Fastify + file-backed SQLite admin transactions strict server settings reject {\"sphere\":\"supply\",\"topic\":\"launch\",\"difficulty\":\"normal\",\"tone\":\"neutral\",\"opponentRole\":\"director\",\"opponentGoals\":{\"formula\":\"1+1\"}}",
+        "real Fastify + file-backed SQLite admin transactions malformed JSON, oversize input and unknown query fields are safe and nonpersistent",
+        "real Fastify + file-backed SQLite admin transactions configured version A, committed report, active replay and draft survive B publication and restart",
+        "real Fastify + file-backed SQLite admin transactions configured public preview, player DTO and bundle exclude private facts/tables/witnesses",
+        "migration 2 data upgrade preserves reference versions, active attempts and feedback",
+        "migration 3 data upgrade preserves reference versions, active attempts and feedback"
+      ],
+      "groups": [
+        {
+          "label": "new initial",
+          "passed": 33,
+          "elapsedMs": 2885
+        },
+        {
+          "label": "existing regression",
+          "passed": 236,
+          "elapsedMs": 9907
+        },
+        {
+          "label": "review final",
+          "passed": 36,
+          "elapsedMs": 2656
+        }
+      ]
+    },
+    "browser": {
+      "unique": 25,
+      "existing": 19,
+      "new": 6,
+      "repeatedExecutions": 11,
+      "totalExecutions": 36,
+      "failedCaseExecutions": 4,
+      "groups": [
+        {
+          "path": ".tools/g5-browser-pre-review.json",
+          "stats": {
+            "startTime": "2026-09-28T09:52:35.349Z",
+            "duration": 17219.831000000002,
+            "expected": 6,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "bytes": 8535,
+          "sha256": "a64491b48b50af0a930d66cc28c550ee9847d6930b3cb3b2832671d275964d37"
+        },
+        {
+          "path": ".tools/g5-browser-final.json",
+          "stats": {
+            "startTime": "2026-09-28T09:56:23.712Z",
+            "duration": 17547.086,
+            "expected": 6,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "bytes": 8526,
+          "sha256": "bea0f6192ef22293d1145ea85c41d7e39202eb83b6e79ec0a8178eaceb0e0f18"
+        },
+        {
+          "path": ".tools/g5-legacy-browser-first.json",
+          "stats": {
+            "startTime": "2026-09-28T09:57:34.934Z",
+            "duration": 28150.123,
+            "expected": 11,
+            "skipped": 7,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "bytes": 24738,
+          "sha256": "a85dbdb9c0b677e078468612f37be6ba53e37cb39838e9d0aedc9531eea55b26"
+        },
+        {
+          "path": ".tools/g5-legacy-browser-second.json",
+          "stats": {
+            "startTime": "2026-09-28T09:59:09.355Z",
+            "duration": 9241.344,
+            "expected": 1,
+            "skipped": 5,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "bytes": 13077,
+          "sha256": "aacfd487c11a97c0c72aa01cdc0535d05ac235b6612059bfea8829a5fca2ba50"
+        },
+        {
+          "path": ".tools/g5-browser-remaining.json",
+          "stats": {
+            "startTime": "2026-09-28T10:00:07.142Z",
+            "duration": 17884.854,
+            "expected": 8,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "bytes": 10960,
+          "sha256": "c67e0753fcd44d3d916677946dead3532a32c4a7ee095b8a7215ee8851c87927"
+        }
+      ],
+      "firstTwoHarnessFailures": {
+        "executions": 2,
+        "elapsedMs": [
+          9583,
+          5163
+        ],
+        "reasons": [
+          "nested label exact locator",
+          "snapshot before replay navigation"
+        ]
+      },
+      "uniquePassedCases": [
+        {
+          "file": "context-config.spec.ts",
+          "title": "configured S1: real lost publication response, safe retry, preparation, G6 evidence and same-version replay"
+        },
+        {
+          "file": "context-config.spec.ts",
+          "title": "configured S2: explicit dependencies, unavailable resources, valid lead goal, draft and active-session restart, G6"
+        },
+        {
+          "file": "context-config.spec.ts",
+          "title": "two real tabs: stale publication/save preserve input, restore is explicit, validation pending and duplicate IDs"
+        },
+        {
+          "file": "context-config.spec.ts",
+          "title": "admin initial defaults and keyboard focus without horizontal overflow at 360"
+        },
+        {
+          "file": "context-config.spec.ts",
+          "title": "admin initial defaults and keyboard focus without horizontal overflow at 390"
+        },
+        {
+          "file": "context-config.spec.ts",
+          "title": "admin initial defaults and keyboard focus without horizontal overflow at 1280"
+        },
+        {
+          "file": "app-s2.spec.ts",
+          "title": "S2 complete mutual route, concurrent S1, refresh/restart, persisted result and replay at 1280px"
+        },
+        {
+          "file": "app-s2.spec.ts",
+          "title": "S2 partial outcome through resource tradeoff at 390px"
+        },
+        {
+          "file": "app-s2.spec.ts",
+          "title": "S2 poor agreement explains own alternative at 360px"
+        },
+        {
+          "file": "app-s2.spec.ts",
+          "title": "S2 impossible offer, no-deal result and terminal guard at 390px"
+        },
+        {
+          "file": "app-s2.spec.ts",
+          "title": "S2 invalid input, counteroffer replacement, stale proposal and exact active acceptance"
+        },
+        {
+          "file": "app-s2.spec.ts",
+          "title": "S2 pending lock, duplicate click, lost committed response, same identity retry and stale tab error"
+        },
+        {
+          "file": "feedback.spec.ts",
+          "title": "S1 real early exit then prepared replay applies the suggested question and compares shared checks at 390px"
+        },
+        {
+          "file": "feedback.spec.ts",
+          "title": "S2 full guided agreement renders report, exact evidence and stable refresh/restart at 1280px"
+        },
+        {
+          "file": "feedback.spec.ts",
+          "title": "S2 poor agreement keeps utility separate from process 44.12 at 360px"
+        },
+        {
+          "file": "feedback.spec.ts",
+          "title": "S1 no agreement retains grounded process credit with independently expected 70"
+        },
+        {
+          "file": "feedback.spec.ts",
+          "title": "network failure fetching feedback keeps terminal facts, actionable error and retry intact at 390px"
+        },
+        {
+          "file": "feedback.spec.ts",
+          "title": "legacy v2 S1/S2 records migrate intact and mismatched replay version renders separate factual outcomes"
+        },
+        {
+          "file": "feedback.spec.ts",
+          "title": "guided genuine conditional exchange is committed, explained and linked at 360px"
+        },
+        {
+          "file": "g2.spec.ts",
+          "title": "A: admin publish → GS1 → refresh + process restart → result → clean replay, 1280px"
+        },
+        {
+          "file": "g2.spec.ts",
+          "title": "B: early poor offer and deliberate pressure cause opponent walkaway"
+        },
+        {
+          "file": "g2.spec.ts",
+          "title": "active offer survives question and refresh, exact acceptance confirmation, 390px"
+        },
+        {
+          "file": "g2.spec.ts",
+          "title": "responsive 360px: admin, briefing, offer, keyboard confirmation, poor result"
+        },
+        {
+          "file": "g2.spec.ts",
+          "title": "responsive 390px: admin, briefing, offer, keyboard confirmation, poor result"
+        },
+        {
+          "file": "g2.spec.ts",
+          "title": "uncertain network response → reload/retry once; stale tab reloads authoritative state; confirmed walkaway"
+        }
+      ],
+      "version": "153.0.8010.53",
+      "playwright": "1.63.0",
+      "realProductionFastify": true,
+      "fileBackedSQLite": true,
+      "React": true,
+      "mockedNewFeatureResponses": false,
+      "transportFailureInjectedAfterRealPublication": true,
+      "legacyFeedbackRetryPreserved": true
+    },
+    "finalTypecheckMs": 9077,
+    "finalBuildMs": 5529,
+    "runtime": "Node24.21.0/npm11.19.0",
+    "installationPerformed": false,
+    "ownerDatabaseUsed": false,
+    "legacy": {
+      "migration2": true,
+      "migration3": true,
+      "referenceS1S2": true,
+      "preparationNotBackfilled": true,
+      "reportEvidenceUnchanged": true,
+      "incompatibleComparisonsRemainNoncomparable": true
+    },
+    "screenshotsInspectedWidths": [
+      360,
+      390,
+      1280
+    ],
+    "horizontalOverflow": 0,
+    "keyboardFocus": true,
+    "productionEvidence": {
+      "browser": "153.0.8010.53",
+      "cases": [
+        "configured S1: real lost publication response, safe retry, preparation, G6 evidence and same-version replay",
+        "configured S2: explicit dependencies, unavailable resources, valid lead goal, draft and active-session restart, G6",
+        "two real tabs: stale publication/save preserve input, restore is explicit, validation pending and duplicate IDs",
+        "admin initial defaults and keyboard focus without horizontal overflow at 360",
+        "admin initial defaults and keyboard focus without horizontal overflow at 390",
+        "admin initial defaults and keyboard focus without horizontal overflow at 1280"
+      ],
+      "layouts": [
+        {
+          "name": "g5-preview-1280",
+          "width": 1280,
+          "overflow": 0
+        },
+        {
+          "name": "g5-publication-retry-390",
+          "width": 390,
+          "overflow": 0
+        },
+        {
+          "name": "g5-s1-evidence-390",
+          "width": 390,
+          "overflow": 0
+        },
+        {
+          "name": "g5-invalid-resources-360",
+          "width": 360,
+          "overflow": 0
+        },
+        {
+          "name": "g5-s2-preview-390",
+          "width": 390,
+          "overflow": 0
+        },
+        {
+          "name": "g5-s2-report-1280",
+          "width": 1280,
+          "overflow": 0
+        },
+        {
+          "name": "g5-stale-tab-390",
+          "width": 390,
+          "overflow": 0
+        },
+        {
+          "name": "g5-initial-360",
+          "width": 360,
+          "overflow": 0
+        },
+        {
+          "name": "g5-initial-390",
+          "width": 390,
+          "overflow": 0
+        },
+        {
+          "name": "g5-initial-1280",
+          "width": 1280,
+          "overflow": 0
+        }
+      ],
+      "screenshots": [
+        ".tools/g5-preview-1280.png",
+        ".tools/g5-preview-1280-viewport.png",
+        ".tools/g5-publication-retry-390.png",
+        ".tools/g5-s1-evidence-390.png",
+        ".tools/g5-invalid-resources-360.png",
+        ".tools/g5-invalid-resources-360-viewport.png",
+        ".tools/g5-s2-preview-390.png",
+        ".tools/g5-s2-preview-390-viewport.png",
+        ".tools/g5-s2-report-1280.png",
+        ".tools/g5-stale-tab-390.png",
+        ".tools/g5-stale-tab-390-viewport.png",
+        ".tools/g5-initial-360.png",
+        ".tools/g5-initial-360-viewport.png",
+        ".tools/g5-initial-390.png",
+        ".tools/g5-initial-390-viewport.png",
+        ".tools/g5-initial-1280.png",
+        ".tools/g5-initial-1280-viewport.png"
+      ],
+      "external": [],
+      "errors": [],
+      "productions": [
+        {
+          "command": "npm start",
+          "runtime": "v24.21.0",
+          "platform": "win32",
+          "starts": 1,
+          "cleanShutdowns": 1,
+          "serverPids": [
+            11104
+          ],
+          "aiCredentials": "NONE",
+          "database": "isolated real SQLite",
+          "shutdown": "real SIGINT handler via test-only stdin adapter",
+          "orphanProcesses": 0
+        },
+        {
+          "command": "npm start",
+          "runtime": "v24.21.0",
+          "platform": "win32",
+          "starts": 4,
+          "cleanShutdowns": 4,
+          "serverPids": [
+            19156,
+            16664,
+            19828,
+            16892
+          ],
+          "aiCredentials": "NONE",
+          "database": "isolated real SQLite",
+          "shutdown": "real SIGINT handler via test-only stdin adapter",
+          "orphanProcesses": 0
+        },
+        {
+          "command": "npm start",
+          "runtime": "v24.21.0",
+          "platform": "win32",
+          "starts": 1,
+          "cleanShutdowns": 1,
+          "serverPids": [
+            21632
+          ],
+          "aiCredentials": "NONE",
+          "database": "isolated real SQLite",
+          "shutdown": "real SIGINT handler via test-only stdin adapter",
+          "orphanProcesses": 0
+        },
+        {
+          "command": "npm start",
+          "runtime": "v24.21.0",
+          "platform": "win32",
+          "starts": 1,
+          "cleanShutdowns": 1,
+          "serverPids": [
+            8188
+          ],
+          "aiCredentials": "NONE",
+          "database": "isolated real SQLite",
+          "shutdown": "real SIGINT handler via test-only stdin adapter",
+          "orphanProcesses": 0
+        },
+        {
+          "command": "npm start",
+          "runtime": "v24.21.0",
+          "platform": "win32",
+          "starts": 1,
+          "cleanShutdowns": 1,
+          "serverPids": [
+            17060
+          ],
+          "aiCredentials": "NONE",
+          "database": "isolated real SQLite",
+          "shutdown": "real SIGINT handler via test-only stdin adapter",
+          "orphanProcesses": 0
+        },
+        {
+          "command": "npm start",
+          "runtime": "v24.21.0",
+          "platform": "win32",
+          "starts": 1,
+          "cleanShutdowns": 1,
+          "serverPids": [
+            1612
+          ],
+          "aiCredentials": "NONE",
+          "database": "isolated real SQLite",
+          "shutdown": "real SIGINT handler via test-only stdin adapter",
+          "orphanProcesses": 0
+        }
+      ]
+    },
+    "focusedEvidence": {
+      "browser": "153.0.8010.53",
+      "cases": [
+        "configured S1: real lost publication response, safe retry, preparation, G6 evidence and same-version replay"
+      ],
+      "layouts": [
+        {
+          "name": "g5-preview-1280",
+          "width": 1280,
+          "overflow": 0
+        },
+        {
+          "name": "g5-publication-controls-390",
+          "width": 390,
+          "overflow": 0
+        },
+        {
+          "name": "g5-publication-retry-390",
+          "width": 390,
+          "overflow": 0
+        },
+        {
+          "name": "g5-s1-evidence-390",
+          "width": 390,
+          "overflow": 0
+        }
+      ],
+      "screenshots": [
+        ".tools/g5-preview-1280.png",
+        ".tools/g5-preview-1280-viewport.png",
+        ".tools/g5-publication-controls-390.png",
+        ".tools/g5-publication-retry-390.png",
+        ".tools/g5-s1-evidence-390.png"
+      ],
+      "external": [],
+      "errors": [],
+      "productions": [
+        {
+          "command": "npm start",
+          "runtime": "v24.21.0",
+          "platform": "win32",
+          "starts": 1,
+          "cleanShutdowns": 1,
+          "serverPids": [
+            22168
+          ],
+          "aiCredentials": "NONE",
+          "database": "isolated real SQLite",
+          "shutdown": "real SIGINT handler via test-only stdin adapter",
+          "orphanProcesses": 0
+        }
+      ]
+    },
+    "logs": [
+      {
+        "path": ".tools/logs/g5-browser-final.log",
+        "bytes": 1319,
+        "sha256": "48ea028e4d7de9fdc7f68f641f05c67c258570e78968e4417d7316d7487335b9",
+        "label": "g5-browser-final",
+        "exit": 0,
+        "elapsedMs": 18265
+      },
+      {
+        "path": ".tools/logs/g5-browser-first.log",
+        "bytes": 3696,
+        "sha256": "dd05df53f2a52728636414443f06311a85b743fc22d4fe1fc2a2e3c2c32ba1d7",
+        "label": "g5-browser-first",
+        "exit": 1,
+        "elapsedMs": 9583
+      },
+      {
+        "path": ".tools/logs/g5-browser-remaining.log",
+        "bytes": 1581,
+        "sha256": "6abc35b8e5783deb6fe9b2428d904a5cbed75797496ccf1ba108ec9f3ddb69db",
+        "label": "g5-browser-remaining",
+        "exit": 0,
+        "elapsedMs": 18594
+      },
+      {
+        "path": ".tools/logs/g5-browser-second.log",
+        "bytes": 3660,
+        "sha256": "387f915aa7793ea8a8ace15323a78f77c0f1336607fb4533ff4a849995f28b4e",
+        "label": "g5-browser-second",
+        "exit": 1,
+        "elapsedMs": 5163
+      },
+      {
+        "path": ".tools/logs/g5-browser-third.log",
+        "bytes": 1319,
+        "sha256": "17c300e9ec403e9703772567324294bd08bb0bf9ca12fd2b7da56c12bb7c702d",
+        "label": "g5-browser-third",
+        "exit": 0,
+        "elapsedMs": 17932
+      },
+      {
+        "path": ".tools/logs/g5-browser-types.log",
+        "bytes": 961,
+        "sha256": "1a3afdc09efb1f79f5c775a47b1bab7f327213f466a06899555d63aea9537e91",
+        "label": "g5-browser-types",
+        "exit": 0,
+        "elapsedMs": 9122
+      },
+      {
+        "path": ".tools/logs/g5-build-1.log",
+        "bytes": 997,
+        "sha256": "86917670e9b232d7107e308a4533801422cbe9345000ff7fb16b25297ed6b564",
+        "label": "g5-build-1",
+        "exit": 0,
+        "elapsedMs": 5664
+      },
+      {
+        "path": ".tools/logs/g5-build-final.log",
+        "bytes": 1001,
+        "sha256": "b3bc0a342b770f9a83dcae6044906409a3dd329fe501d55d14a6de91be8cf4c3",
+        "label": "g5-build-final",
+        "exit": 0,
+        "elapsedMs": 5529
+      },
+      {
+        "path": ".tools/logs/g5-context-final.log",
+        "bytes": 594,
+        "sha256": "7e40d40815c496b3b599adb2ab37a0b235fe05f3b2a3cd679219a0e5d6faec15",
+        "label": "g5-context-final",
+        "exit": 0,
+        "elapsedMs": 2656
+      },
+      {
+        "path": ".tools/logs/g5-context-tests-1.log",
+        "bytes": 436,
+        "sha256": "85f07e25c74ae35edfad5608bad75e307334a494728cc425bbf117b7cd58d2f4",
+        "label": "g5-context-tests-1",
+        "exit": 0,
+        "elapsedMs": 2885
+      },
+      {
+        "path": ".tools/logs/g5-existing-unit.log",
+        "bytes": 1798,
+        "sha256": "4b3f56b0c52dfc80f475ce7630b83c3a9f0f9b9011d0add70f87e9e5f77cd0db",
+        "label": "g5-existing-unit",
+        "exit": 0,
+        "elapsedMs": 9907
+      },
+      {
+        "path": ".tools/logs/g5-legacy-browser-remaining.log",
+        "bytes": 3983,
+        "sha256": "c70b4b3f157189a11cced9708e8f468eaa88ed9c8c6d7bd48b99616fc5a5019e",
+        "label": "g5-legacy-browser-remaining",
+        "exit": 1,
+        "elapsedMs": 10008
+      },
+      {
+        "path": ".tools/logs/g5-legacy-browser.log",
+        "bytes": 5026,
+        "sha256": "8b4da2d04f90066bcb173b080db2b2137ea143d0dc78024ccc6aa89ca04b75c6",
+        "label": "g5-legacy-browser",
+        "exit": 1,
+        "elapsedMs": 28890
+      },
+      {
+        "path": ".tools/logs/g5-typecheck-1.log",
+        "bytes": 1353,
+        "sha256": "f945b912e6cc1329da5c3b590dc8fe098eccecb689c36520977fe36059be1206",
+        "label": "g5-typecheck-1",
+        "exit": 1,
+        "elapsedMs": 7985
+      },
+      {
+        "path": ".tools/logs/g5-typecheck-2.log",
+        "bytes": 959,
+        "sha256": "7306ebb6f9b70ed2f8fcb16b522ba75a169274e046a7f62e2b7f9f14003207ab",
+        "label": "g5-typecheck-2",
+        "exit": 0,
+        "elapsedMs": 8794
+      },
+      {
+        "path": ".tools/logs/g5-typecheck-final.log",
+        "bytes": 963,
+        "sha256": "859aa4d09b5a0053a4380c7c9b9b929ae4d51e4c9d660f107f4e6014c91d54f7",
+        "label": "g5-typecheck-final",
+        "exit": 0,
+        "elapsedMs": 9077
+      }
+    ]
+  },
+  "review": {
+    "kind": "implementer self-review",
+    "independentReviewer": false,
+    "fixes": [
+      "remove private numeric authority hints from UI",
+      "readable derived family label",
+      "associated field errors",
+      "validation race and spoofed client validity tests",
+      "separate feasible package from reachable target proof"
+    ]
+  },
+  "protection": {
+    "originalHead": "2034687f6f22b2973935f2c9c30bc9380c88b071",
+    "originalClean": true,
+    "originalTrackedFiles": 346,
+    "featureProtectedFiles": 364,
+    "originalManifestDigest": "939a6ac97cb1699b5dbfa8d484849ad8af5de2f5bba8cf92deb76874d4cf26af",
+    "featureBeforeManifestDigest": "504df8cf01b4a0f53ce5703d091d8248a2f5fdf663765c78c4c11c466af2459a",
+    "mismatches": [],
+    "metadataChanges": [],
+    "trainingPinsVerified": 31,
+    "acceptedPinsVerified": 20,
+    "sharedContractPinsVerified": {
+      "packages/contracts/src/g3.ts": "74bd9c059678247cc2d63b45b8384de8ba5337c29ab96d44a63df00195c19e0e",
+      "packages/contracts/src/action.ts": "25a6c69a251ca940a793135766016b2f3e8a96e0187d131a48e653aed698e8dd",
+      "packages/contracts/src/common.ts": "a2f0769a74949661586f434283a0b4a86e75ec0e60b660279ea3807d4edeaaa9",
+      "packages/ai/src/context.ts": "1b5ce4b64beb2bfb23ec9e072de0bb5a4c1227bff2cfde1f3f73320c48074659",
+      "packages/ai/src/prompt.ts": "5f9ef9ef8f4fdfe0a4bc1e19dab62320483240becd95dbd944356c59e4d95cca",
+      "packages/scenarios/src/s1-supply-launch.ts": "a29ee9a1579625bf9863105e573ab61dcd326ff6d995c7087febf14d5b3e2f5a",
+      "packages/scenarios/src/s2-workload-urgent.ts": "a3cd71e10d7088db1e358f27636042e86931d34e9cb59e1311fb9f390853a0a4",
+      "evals/local-qwen/interpretation.schema.json": "0df92dd03436502599f12d6ec245ce8948dd5d4d3e85ca2657d9cd0c79db2f5d"
+    },
+    "pdfSha256": "ff50f0ade59e2060818815284a8be0ccd1f10065a0ce6f46f48b664e4df0d75d",
+    "priorReceiptsByteUnchanged": true,
+    "rootPackageAndLockByteUnchanged": true,
+    "domainReferenceAndFrozenContractsByteUnchanged": true,
+    "externalMainMovement": false
+  },
+  "screenshots": [
+    {
+      "path": "docs/gates/evidence/app-g5-context-configuration-01/g5-initial-1280-viewport.png",
+      "bytes": 71456,
+      "sha256": "a721e25f37a3119de0af847773797799c5b24b49891bdc165dbb3d432ee3fa00"
+    },
+    {
+      "path": "docs/gates/evidence/app-g5-context-configuration-01/g5-initial-360-viewport.png",
+      "bytes": 42323,
+      "sha256": "c23a07793590da20974964343c06bc3529b32d78d10f175c10d21cb47287a525"
+    },
+    {
+      "path": "docs/gates/evidence/app-g5-context-configuration-01/g5-invalid-resources-360-viewport.png",
+      "bytes": 39273,
+      "sha256": "31b48a90854fd7c5acb22eefc3f7ccb17a3341bd7a1abd9a2c1054a60d9695eb"
+    },
+    {
+      "path": "docs/gates/evidence/app-g5-context-configuration-01/g5-preview-1280-viewport.png",
+      "bytes": 71039,
+      "sha256": "6ed9b70944279768558db3e28f42aa2f984454b1f57a5581e7c4f5c82ea992d8"
+    },
+    {
+      "path": "docs/gates/evidence/app-g5-context-configuration-01/g5-publication-controls-390.png",
+      "bytes": 42483,
+      "sha256": "c6f352ad5ed714e8c82989386b3d15efd019d67bf73b29249ee0d479f951d750"
+    },
+    {
+      "path": "docs/gates/evidence/app-g5-context-configuration-01/g5-publication-retry-390.png",
+      "bytes": 38036,
+      "sha256": "f57705a687f2718574709fec9757841ec19f1292210e2bd631b7bf7d7d2f1851"
+    },
+    {
+      "path": "docs/gates/evidence/app-g5-context-configuration-01/g5-s1-evidence-390.png",
+      "bytes": 31742,
+      "sha256": "bc14fca2fcb18b72ddd849323176cc8c695ccb007cc41eb69642f439a7367918"
+    },
+    {
+      "path": "docs/gates/evidence/app-g5-context-configuration-01/g5-s2-preview-390-viewport.png",
+      "bytes": 34435,
+      "sha256": "abede018f9fdb57a6c9d639155beb19aed41081063e3f35229b781c20d0ebf41"
+    },
+    {
+      "path": "docs/gates/evidence/app-g5-context-configuration-01/g5-s2-report-1280.png",
+      "bytes": 56034,
+      "sha256": "635a8ce4d1a08b3eeb9686e7afeab33002f0d0f752fabf346bd17f85db1392f2"
+    },
+    {
+      "path": "docs/gates/evidence/app-g5-context-configuration-01/g5-stale-tab-390-viewport.png",
+      "bytes": 43222,
+      "sha256": "cef0d346a5c4d70061706f33bd42f241b667b234718efd6f7117cbc90eff89dc"
+    }
+  ],
+  "implementationArtifacts": [
+    {
+      "path": "README.md",
+      "bytes": 25370,
+      "sha256": "17ba07849038d3173af057e351c7e8d27e3b66d5f4267fb8a6fb193b9991cd12"
+    },
+    {
+      "path": "apps/server/src/app.ts",
+      "bytes": 3257,
+      "sha256": "adc2f3b638f2e7a48e63eee33a45673628403ba0a9f4dccd42b7836d305d0a84"
+    },
+    {
+      "path": "apps/server/src/database.ts",
+      "bytes": 1759,
+      "sha256": "a3190aa81b3ece8390282b379c09abf3ba2afd9c60ef16df4cf1e4f3c89438d3"
+    },
+    {
+      "path": "apps/server/src/presentation/renderers.ts",
+      "bytes": 14676,
+      "sha256": "ec60da0df9b39c0caa65855db0238bcf0fb43a30ef659c0af2449c2694506b7d"
+    },
+    {
+      "path": "apps/server/src/context/compiler.ts",
+      "bytes": 15210,
+      "sha256": "496688ddf1c62eb61b4fde5710fbfd905b4a787ea607df39d5362413d6809513"
+    },
+    {
+      "path": "apps/server/src/context/service.ts",
+      "bytes": 8046,
+      "sha256": "548323f6e7cfd15171704f7e498f8c05e3745d616fac7df4ae53cd027b8313fe"
+    },
+    {
+      "path": "apps/server/src/migration-context.ts",
+      "bytes": 903,
+      "sha256": "23d53c5186b069af0d55757dbd7854cd3de95f4815956e8ac86fea3ff2079b2d"
+    },
+    {
+      "path": "apps/server/src/routes/context-routes.ts",
+      "bytes": 1258,
+      "sha256": "7bbddd5e3d9c4923ff5e42c6b288f3684d0d0fb580c732f9092f02876cfc31cf"
+    },
+    {
+      "path": "apps/server/test/catalog.test.ts",
+      "bytes": 11676,
+      "sha256": "405bf643d50da29b089fbeb6666f9f31376b776b8e0bedba6649203c6e3f09f8"
+    },
+    {
+      "path": "apps/server/test/database.test.ts",
+      "bytes": 2965,
+      "sha256": "83bfee576847ee9a360c46e45e45c48fa1b5f948c0762885338f3caa51994f5e"
+    },
+    {
+      "path": "apps/server/test/g2.test.ts",
+      "bytes": 23139,
+      "sha256": "a5a3e9e8123383e3e90ddd7a6ee5821fa9beb360b331fc917b2423636be4835d"
+    },
+    {
+      "path": "apps/server/test/context.test.ts",
+      "bytes": 24005,
+      "sha256": "30208f69dbfe3bdc43bdbe417afe66450acae98555fd417a677287e32f30f5fa"
+    },
+    {
+      "path": "apps/web/src/product.tsx",
+      "bytes": 15181,
+      "sha256": "c41c3125ad4c3fd15ff0a6d6b12c5f1b0d4205442bcb3e4fcda92cba5c2e8d86"
+    },
+    {
+      "path": "apps/web/src/style.css",
+      "bytes": 7619,
+      "sha256": "60a4e5e3cf22ce63541f33a65f959f871b2e26fea35048851e779398d016bc8a"
+    },
+    {
+      "path": "apps/web/src/context-admin.tsx",
+      "bytes": 9297,
+      "sha256": "edd2b404fde69055ab00a9fc9e1b976cdf883e66284185d6397da3a3834db587"
+    },
+    {
+      "path": "packages/contracts/package.json",
+      "bytes": 665,
+      "sha256": "e75b1060270e2cacd29c130c6dcb582a694036c337194660e5633f4a0e26bdeb"
+    },
+    {
+      "path": "packages/contracts/src/catalog.ts",
+      "bytes": 1425,
+      "sha256": "7f5b7fa2a404c7a0273dbf89f763307a36850974f29db0a270be04a44db478e7"
+    },
+    {
+      "path": "packages/contracts/src/context-config.ts",
+      "bytes": 9015,
+      "sha256": "e66c3ec2215c194986159f1110202ebca4d94c55f7939d3d3a819e2ca2fc7b66"
+    },
+    {
+      "path": "tests/e2e/g2.spec.ts",
+      "bytes": 17683,
+      "sha256": "c6c29997ebb47193ab0da20e6f154f6969b973039549963bc60192fd56b42556"
+    },
+    {
+      "path": "tests/e2e/feedback.spec.ts",
+      "bytes": 18190,
+      "sha256": "41e336fc1a89f077a2e605c5a7c08ee05682179b8acdb6c514aac8d2baa45c35"
+    },
+    {
+      "path": "tests/e2e/context-config.spec.ts",
+      "bytes": 18552,
+      "sha256": "8c7c8f8ff7033f38022cdc967bf92a795a012199eb1afe45ba31edfda3ec0aeb"
+    }
+  ],
+  "watchdogsSeconds": {
+    "gitNetwork": 120,
+    "npmCiIfNecessary": 300,
+    "typecheckTests": 180,
+    "build": 300,
+    "browserCampaign": 180,
+    "browserCase": 90,
+    "startup": 12
+  },
+  "permissions": {
+    "scopedSandboxApprovals": true,
+    "reason": "reopened session retained restrictive writable roots and linked Git metadata",
+    "windowsRightsOrAclRegistryFirewallChanged": false
+  },
+  "delivery": {
+    "implementationCommit": "da27e5571209824b77f08a4e421305f576bb1a18",
+    "upstream": "da27e5571209824b77f08a4e421305f576bb1a18",
+    "aheadBehind": "0\t0",
+    "normalPush": true,
+    "remoteBranch": "origin/feature/app-qwen-independent-01",
+    "receiptCommitResolution": "git log -1 --format=%H -- docs/gates/APP_G5_CONTEXT_CONFIGURATION_01.md",
+    "finalChecks": "verify HEAD=own upstream,0/0,clean and original/remote main unchanged after receipt push"
+  },
+  "remaining": {
+    "AI": "generation, live dialog/narrative and Qwen accuracy on derived contexts uncertified",
+    "accessControl": "authentication/ownership/CSRF OPEN and prerequisite for public hosting",
+    "reproducibility": "no fresh clean-machine install or cross-platform certification this gate",
+    "submission": "presentation/pitch/submission links and public hosting incomplete"
+  },
+  "nextSingleTask": "Authentication, session ownership and CSRF before public hosting",
+  "ownerLaunchPowerShell": "Set-Location 'C:\\Users\\BastaPC\\Desktop\\Alag-app-work'\n$env:HOST = '127.0.0.1'\n$env:PORT = '3000'\n$env:DATABASE_PATH = '.tmp/owner-app-demo.sqlite'\n& 'C:\\Users\\BastaPC\\Desktop\\Alag\\.tools\\node-v24.21.0-win-x64\\node.exe' .\\scripts\\start.mjs",
+  "localUrl": "http://127.0.0.1:3000/admin",
+  "forbiddenActionsExecuted": {
+    "training": false,
+    "inference": false,
+    "modelEvaluation": false,
+    "providerInstall": false,
+    "paidAPI": false,
+    "gpuExperiments": false,
+    "publicDeployment": false,
+    "tunnel": false,
+    "mergeMain": false
+  },
+  "stop": "NO QWEN TRAINING, NO MODEL EVALUATION, NO LIVE AI PROMOTION, NO PUBLIC DEPLOYMENT, NO MERGE TO MAIN"
+}
