@@ -1,6 +1,6 @@
 # APP_ORGANIZER_PRESENTATION_AND_REPOSITORY_01
 
-**VERDICT: DELIVERED locally on `docs/organizer-presentation-01`. Remote push recorded at the end of this receipt after it is performed. Not a public submission, not a merge, not FULL_AI_MVP.**
+**VERDICT: DELIVERED on `docs/organizer-presentation-01` @ following receipt commit. Artifacts commit `204dd23eb5b0f0fc9e849c83a00dd92998b4898b`. Not a public submission, not a merge, not FULL_AI_MVP.**
 
 ## Baseline
 
@@ -48,4 +48,11 @@ Git `safe.directory` was set only in the process environment (`GIT_CONFIG_COUNT`
 
 ## Push / upstream
 
-Заполняется после `git push -u origin HEAD:refs/heads/docs/organizer-presentation-01`.
+- Команда: `git push -u origin HEAD:refs/heads/docs/organizer-presentation-01`
+- Коммит поставки: `204dd23eb5b0f0fc9e849c83a00dd92998b4898b`
+- `HEAD` = `origin/docs/organizer-presentation-01`
+- upstream: `origin/docs/organizer-presentation-01`
+- ahead/behind: 0/0
+- `origin/feature/app-qwen-independent-01` остался `bb92b256ba55c72faebb69ec13a2407383bff959`
+- `origin/main` остался `2034687f6f22b2973935f2c9c30bc9380c88b071`
+- PR не создавался, merge не выполнялся

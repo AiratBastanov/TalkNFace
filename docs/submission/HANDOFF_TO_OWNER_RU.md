@@ -26,7 +26,7 @@
 
 ## Remote
 
-Статус push будет в receipt и в финальном сообщении этой задачи. Если push не прошёл — отдайте владельцу локальный коммит этой ветки и файлы из таблицы.
+Push выполнен: `origin/docs/organizer-presentation-01` @ `204dd23eb5b0f0fc9e849c83a00dd92998b4898b`. Upstream этой ветки указывает только на неё. `main` и `feature/app-qwen-independent-01` не сдвигались. Pull request не создавался.
 
 ## Нужно от владельца
 
