@@ -9,7 +9,7 @@ import type { SessionView } from '@arena/contracts/g2';
 import { createInitialState, projectPlayer, transition } from '@arena/domain';
 import { S1, accept, acknowledge, argument, offer, pressure, question, supplyTerms, walkAway } from '@arena/scenarios';
 import { GOLDENS } from '../../../packages/scenarios/test/goldens.ts';
-import { buildApp } from '../src/app.ts';
+import { buildApp } from './authenticated-fixture.ts';
 import { openDatabase } from '../src/database.ts';
 import { ArenaRepository, hashBody } from '../src/repositories/arena-repository.ts';
 import { renderOpponent, renderPlayer, observations } from '../src/presentation/renderers.ts';
@@ -183,9 +183,9 @@ describe('G2 actual HTTP / SQLite application boundary', () => {
   });
   it('recovers the same session/transcript on database reopen and can continue to agreement', async () => {
     let current = await play(await create(), question('logistics')); current = await play(current, question('payment'));
-    const id = current.projection.sessionId; await app.close();
+    const id = current.projection.sessionId; const jars = app.jars; await app.close();
     db = openDatabase(temp.filename);
-    app = await buildApp({ NODE_ENV: 'development', HOST: '127.0.0.1', PORT: 3000, DATABASE_PATH: temp.filename }, { database: db });
+    app = await buildApp({ NODE_ENV: 'development', HOST: '127.0.0.1', PORT: 3000, DATABASE_PATH: temp.filename }, { database: db }, jars);
     const recovered = await app.inject(`/api/sessions/${id}`); expect(recovered.json()).toEqual(current);
     current = await play(current, acknowledge('cashflow-need')); current = await play(current, argument('logistics-argument'));
     current = await play(current, offer(supplyTerms(95, 'split40at7_rest14', 50))); expect(current.result?.family).toBe('MUTUAL_GAIN');
@@ -224,7 +224,7 @@ describe('G2 actual HTTP / SQLite application boundary', () => {
     }
     const malformed = await app.inject({ method: 'POST', url: `/api/sessions/${id}/turns`, headers: { 'content-type': 'application/json' }, payload: '{bad' });
     expect(malformed.statusCode).toBe(400); privacy(malformed.body);
-    expect((await app.inject('/api/sessions/not-a-uuid')).statusCode).toBe(400);
+    expect((await app.inject('/api/sessions/not-a-uuid')).statusCode).toBe(404);
     expect((await app.inject(`/api/sessions/${randomUUID()}`)).statusCode).toBe(404);
     expect((await app.inject({ method: 'POST', url: '/api/sessions', payload: { scenarioVersionId: randomUUID() } })).statusCode).toBe(404);
     expect((await app.inject(`/api/sessions/${id}/result`)).statusCode).toBe(409);
@@ -256,7 +256,7 @@ it('upgrades an existing G0 file once, retaining original sentinel and migration
       INSERT INTO foundation_metadata VALUES('sentinel', 'keep-g0');`);
     db.close(); db = openDatabase(temp.filename);
     const versions = db.prepare('SELECT * FROM schema_migrations ORDER BY version').all();
-    expect(versions).toHaveLength(4); expect(versions[0]).toMatchObject({ version: 1, applied_at: '2026-09-16T00:00:00Z' });
+    expect(versions).toHaveLength(5); expect(versions[0]).toMatchObject({ version: 1, applied_at: '2026-09-16T00:00:00Z' });
     db.close(); db = openDatabase(temp.filename); expect(db.prepare('SELECT * FROM schema_migrations ORDER BY version').all()).toEqual(versions);
     expect(db.prepare('SELECT value FROM foundation_metadata').get()).toEqual({ value: 'keep-g0' });
   } finally { if (db.open) db.close(); temp.cleanup(); }

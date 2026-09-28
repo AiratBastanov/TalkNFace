@@ -5,7 +5,9 @@ import type { BasicResult, SessionView } from '@arena/contracts/g2';
 import { PublishedCatalogScenarioSchema as PublishedScenarioSchema, ReferenceCatalogSchema,
   PublishedCatalogSchema as ScenarioListSchema, formatIssueValue } from '@arena/contracts/catalog';
 import type { PublishedCatalogScenario as PublishedScenario, CatalogReference as ReferencePreview } from '@arena/contracts/catalog';
-import { errorMessage, request } from './api';
+import { accessStatus, errorMessage, logout, request, subscribeAccess } from './api';
+import type { AccessStatus } from './api';
+import { AdminLogin } from './admin-login';
 import { Board, Terms, Transcript } from './board';
 import { Feedback, PreparationForm } from './feedback';
 import { ContextAdmin } from './context-admin';
@@ -74,6 +76,7 @@ function Result({ data, replay, busy }: { data: SessionView; replay(): void; bus
   </article><Feedback key={data.projection.sessionId} data={data} /><div className="reading"><Transcript data={data} /></div></>;
 }
 export function Product() {
+  const [identity, setIdentity] = useState<AccessStatus | null>(null);
   const [path, setPath] = useState(location.pathname);
   const [version, setVersion] = useState(0);
   const [scenarios, setScenarios] = useState<PublishedScenario[]>([]);
@@ -89,6 +92,7 @@ export function Product() {
   const lock = useRef(false);
   const match = /^\/session\/([^/]+)(\/briefing|\/result)?$/.exec(path);
   const id = match?.[1];
+  useEffect(() => subscribeAccess(status => { setIdentity(status); if (!status) setSession(null); }), []);
   useEffect(() => {
     const pop = () => setPath(location.pathname); window.addEventListener('popstate', pop);
     return () => window.removeEventListener('popstate', pop);
@@ -98,7 +102,10 @@ export function Product() {
     setLoading(true); setError(''); setSession(null);
     (async () => {
       try {
+        const identity = await accessStatus();
+        if (active) setIdentity(identity);
         if (path === '/admin') {
+          if (identity.role !== 'admin') return;
           const value = await request('/api/reference-scenarios', ReferenceCatalogSchema);
           if (active) { setReferences(value); setPublished(null); }
         } else if (path === '/') {
@@ -127,7 +134,9 @@ export function Product() {
     <div className="mode-banner">Демо без AI <span>Переговоры работают без внешнего API и ключей</span></div>
     <main>
       {error && <div className="error" role="alert"><p>{error}</p><button disabled={busy} onClick={() => setVersion(v => v + 1)}>Обновить данные</button> <Link to="/">К ситуациям</Link></div>}
-      {loading ? <p role="status">Загружаем ситуацию…</p> : path === '/admin' && preview ? <>
+      {identity?.role === 'admin' && <div className="button-row"><p>Вы вошли как администратор.</p><button disabled={busy} onClick={() => void perform(async () => { await logout(); setVersion(v => v + 1); })}>Выйти</button></div>}
+      {loading ? <p role="status">Загружаем ситуацию…</p> : path === '/admin' && identity?.role !== 'admin' ?
+        <AdminLogin configured={identity?.adminConfigured ?? true} onSuccess={() => setVersion(v => v + 1)} /> : path === '/admin' && preview ? <>
         <div className="page-heading"><div><p className="eyebrow">Администратор · настройка контекста</p><h1>Подготовить тренировку</h1></div></div>
         <ContextAdmin start={start} preview={data => <Preview data={data} />} />
         <h2>Неизменённые эталонные сценарии</h2>
@@ -146,6 +155,6 @@ export function Product() {
         </> : session ? (session.result ? <Result data={session} busy={busy} replay={() => void perform(async () => {
           const value = await request(`/api/sessions/${session.projection.sessionId}/replay`, SessionViewSchema, {}); remember(value.projection.sessionId); navigate(sessionPath(value, true));
         })} /> : path.endsWith('/briefing') ? <Briefing data={session} /> : <Board key={session.projection.sessionId} data={session} onChange={setSession} />) : null}
-    </main><footer>Локальное демо без AI. Авторизация, владение сессиями и CSRF-защита ещё не реализованы. Для публичного доступа не предназначено.</footer>
+    </main><footer>Локальное демо без AI. Попытки доступны только создавшему их браузеру, пока действует его сессия. Публичное размещение не сертифицировано.</footer>
   </>;
 }

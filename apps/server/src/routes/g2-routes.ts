@@ -1,19 +1,21 @@
 import { z } from 'zod';
 import type { FastifyInstance } from 'fastify';
-import { ApiErrorSchema, BasicResultSchema, CreateSessionSchema, EmptyBodySchema, PlayTurnSchema,
+import { BasicResultSchema, CreateSessionSchema, EmptyBodySchema, PlayTurnSchema,
   SessionParamsSchema, SessionViewSchema } from '@arena/contracts/g2';
 import { PublishedCatalogScenarioSchema as PublishedScenarioSchema, ReferenceCatalogSchema as ReferenceListSchema,
   CatalogReferenceSchema as ReferencePreviewSchema, PublishedCatalogSchema as ScenarioListSchema } from '@arena/contracts/catalog';
 import { ApiError } from '../api-error.ts';
 import { referencePreview, SessionService } from '../services/session-service.ts';
 import { referenceDefinition, referenceDefinitions } from '../services/reference-catalog.ts';
+import { AccessErrorSchema as ApiErrorSchema } from '@arena/contracts/access';
+import type { AccessBoundary } from '../access/boundary.ts';
 
 function input<T>(schema: z.ZodType<T>, value: unknown): T {
   const result = schema.safeParse(value);
   if (!result.success) throw new ApiError(400, 'INVALID_REQUEST', 'Некорректный запрос. Проверьте выбранное действие.');
   return result.data;
 }
-export function registerG2Routes(app: FastifyInstance, service: SessionService) {
+export function registerG2Routes(app: FastifyInstance, service: SessionService, access: AccessBoundary) {
   app.setErrorHandler((error, _request, reply) => {
     if (error instanceof ApiError) return reply.code(error.status).send(ApiErrorSchema.parse(error.body));
     // Fastify JSON parser errors are malformed input, not internal diagnostics.
@@ -44,7 +46,7 @@ export function registerG2Routes(app: FastifyInstance, service: SessionService) 
   app.post('/api/sessions', async (request, reply) => {
     input(EmptyBodySchema, request.query);
     const body = input(CreateSessionSchema, request.body);
-    return reply.code(201).send(SessionViewSchema.parse(service.create(body.scenarioVersionId)));
+    return reply.code(201).send(SessionViewSchema.parse(access.createOwned(request, () => service.create(body.scenarioVersionId))));
   });
   const sessionId = (params: unknown, query: unknown) => {
     input(EmptyBodySchema, query);
@@ -59,7 +61,7 @@ export function registerG2Routes(app: FastifyInstance, service: SessionService) 
   app.post('/api/sessions/:sessionId/replay', async (request, reply) => {
     const id = sessionId(request.params, request.query);
     input(EmptyBodySchema, request.body);
-    return reply.code(201).send(SessionViewSchema.parse(service.replay(id)));
+    return reply.code(201).send(SessionViewSchema.parse(access.createOwned(request, () => service.replay(id))));
   });
   app.get('/api/sessions/:sessionId/result', async request =>
     BasicResultSchema.parse(service.result(sessionId(request.params, request.query))));

@@ -14,13 +14,17 @@ import { registerFeedbackRoutes } from './routes/feedback-routes.ts';
 import { FeedbackService } from './feedback/service.ts';
 import { ContextService } from './context/service.ts';
 import { registerContextRoutes } from './routes/context-routes.ts';
+import { AccessBoundary } from './access/boundary.ts';
 
 export async function buildApp(config: ServerConfig, options: {
   database?: Database.Database;
   webRoot?: string;
   logger?: boolean;
 } = {}) {
-  const app = Fastify({ logger: options.logger ?? false,
+  const app = Fastify({ logger: options.logger ? { serializers: {
+    req: () => ({ event: 'request' }), res: () => ({ event: 'response' }),
+    err: () => ({ type: 'Error', message: 'Request failed', stack: '' }),
+  } } : false,
     logController: new LogController({ disableRequestLogging: true }) });
   // The application owns and closes either the supplied or newly opened connection.
   const database = options.database ?? openDatabase(config.DATABASE_PATH);
@@ -41,8 +45,10 @@ export async function buildApp(config: ServerConfig, options: {
 
   try {
     const repository = new ArenaRepository(database);
-    registerG2Routes(app, new SessionService(repository));
-    registerFeedbackRoutes(app, new FeedbackService(repository));
+    const access = new AccessBoundary(database, config);
+    await access.register(app);
+    registerG2Routes(app, new SessionService(repository), access);
+    registerFeedbackRoutes(app, new FeedbackService(repository), access);
     registerContextRoutes(app, new ContextService(repository));
     if (config.NODE_ENV === 'production') {
       const webRoot = options.webRoot ?? WEB_ROOT;

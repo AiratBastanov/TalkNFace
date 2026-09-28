@@ -1,4 +1,4 @@
-import { randomUUID } from 'node:crypto';
+import { createHash, randomUUID } from 'node:crypto';
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
@@ -7,7 +7,7 @@ import { S1, S2 } from '@arena/scenarios';
 import { FeedbackReportSchema } from '@arena/contracts/feedback';
 import type { FeedbackReport } from '@arena/contracts/feedback';
 import { createInitialState } from '@arena/domain';
-import { buildApp } from '../src/app.ts';
+import { buildApp } from './authenticated-fixture.ts';
 import { openDatabase } from '../src/database.ts';
 import { ArenaRepository } from '../src/repositories/arena-repository.ts';
 import { SessionService } from '../src/services/session-service.ts';
@@ -278,6 +278,9 @@ describe('deterministic feedback over committed application records', () => {
   it('HTTP rejects stale/malformed references, exposes only terminal policy and does not mutate on errors', async () => {
     const h = harness(S2, true); goodS2(h);
     const app = await buildApp({ NODE_ENV: 'test', HOST: '127.0.0.1', PORT: 3000, DATABASE_PATH: h.temp.filename }, { database: h.db });
+    // Direct service fixture, not a migrated user session: give this test's player explicit ownership.
+    const token = createHash('sha256').update(app.jars.player.cookie.split('=')[1]!).digest('hex');
+    h.db.prepare('INSERT INTO session_owners SELECT ?, principal_id FROM access_sessions WHERE token_digest = ?').run(h.id, token);
     try {
       const before = h.view(), report = h.report();
       for (const suffix of ['?revision=4', '?revision=5&eventId=unrelated', '?revision=99']) {

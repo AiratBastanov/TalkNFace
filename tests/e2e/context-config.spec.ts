@@ -13,6 +13,7 @@ const evidence = { browser:'', cases:[] as string[], layouts:[] as {name:string;
 test.beforeEach(async ({context,page,browser})=>{
   evidence.browser=browser.version();
   server=await productionHarness({label:'g5-context-'+evidence.cases.length});await server.start();
+  await server.login(page);
   await context.route('**/*',async route=>{
     const url=route.request().url();
     if(/^https?:/.test(url)&&new URL(url).origin!==server!.origin){evidence.external.push(url);await route.abort();}
@@ -206,10 +207,10 @@ test('two real tabs: stale publication/save preserve input, restore is explicit,
   await expect(workspace(page).getByRole('button',{name:'Опубликовать',exact:true})).toHaveCount(0);
   await save(page);await validate(page);await preview(page);await publish(page);
   const d=await draft(page),payload={requestId:randomUUID(),expectedRevision:d.revision,settingsHash:d.settingsHash,candidateHash:d.validation!.candidateHash,approved:true};
-  const a=await page.request.post(server!.origin+'/api/admin/context-draft/publish',{data:payload});
-  const b=await page.request.post(server!.origin+'/api/admin/context-draft/publish',{data:payload});expect(a.status()).toBe(200);
+  const a=await server!.post(page,server!.origin+'/api/admin/context-draft/publish',payload);
+  const b=await server!.post(page,server!.origin+'/api/admin/context-draft/publish',payload);expect(a.status()).toBe(200);
   expect(ContextPublicationSchema.parse(await a.json())).toEqual(ContextPublicationSchema.parse(await b.json()));
-  const conflict=await page.request.post(server!.origin+'/api/admin/context-draft/publish',{data:{...payload,candidateHash:'a'.repeat(64)}});expect(conflict.status()).toBe(409);
+  const conflict=await server!.post(page,server!.origin+'/api/admin/context-draft/publish',{...payload,candidateHash:'a'.repeat(64)});expect(conflict.status()).toBe(409);
   await other.close();
 });
 

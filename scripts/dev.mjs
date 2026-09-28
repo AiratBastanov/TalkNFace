@@ -9,6 +9,8 @@ import { parseEnv } from '../apps/server/src/env.ts';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const envFile = new URL('../.env', import.meta.url);
 if (existsSync(envFile)) process.loadEnvFile(envFile);
+// Browser uses Vite's loopback origin; the backend never accepts a wildcard Origin.
+process.env.APP_ORIGIN ??= 'http://127.0.0.1:5173';
 const config = parseEnv({ ...process.env, NODE_ENV: 'development' });
 const backend = fork(new URL('../apps/server/src/main.ts', import.meta.url), [], {
   cwd: root, execArgv: [], env: { ...process.env, NODE_ENV: 'development' },

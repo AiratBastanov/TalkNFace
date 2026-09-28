@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "exports": {".":{"types":"./dist/index.d.ts","default":"./dist/index.js"},"./g2":{"types":"./dist/g2.d.ts","default":"./dist/g2.js"},"./g3":{"types":"./dist/g3.d.ts","default":"./dist/g3.js"},"./catalog":{"types":"./dist/catalog.d.ts","default":"./dist/catalog.js"},"./feedback":{"types":"./dist/feedback.d.ts","default":"./dist/feedback.js"},"./context-config":{"types":"./dist/context-config.d.ts","default":"./dist/context-config.js"}},
+  "exports": {".":{"types":"./dist/index.d.ts","default":"./dist/index.js"},"./access":{"types":"./dist/access.d.ts","default":"./dist/access.js"},"./g2":{"types":"./dist/g2.d.ts","default":"./dist/g2.js"},"./g3":{"types":"./dist/g3.d.ts","default":"./dist/g3.js"},"./catalog":{"types":"./dist/catalog.d.ts","default":"./dist/catalog.js"},"./feedback":{"types":"./dist/feedback.d.ts","default":"./dist/feedback.js"},"./context-config":{"types":"./dist/context-config.d.ts","default":"./dist/context-config.js"}},
   "scripts": {"build":"tsc -p tsconfig.json","typecheck":"tsc --noEmit -p tsconfig.json"},
   "dependencies": { "zod": "4.6.5" }
 }

@@ -30,6 +30,7 @@ test.beforeAll(async ({ browser }) => {
   evidence.browser = browser.version(); server = await productionHarness({ label: 'app-s2' }); await server.start();
 });
 test.beforeEach(async ({ context, page }) => {
+  await server.login(page);
   await context.route('**/*', async route => {
     const url = route.request().url();
     if (/^https?:/.test(url) && new URL(url).origin !== server.origin) { evidence.externalRequests.push(url); await route.abort(); }
@@ -115,8 +116,8 @@ async function result(page: Page, family: string, utility: number | null) {
 test('S2 complete mutual route, concurrent S1, refresh/restart, persisted result and replay at 1280px', async ({ page }) => {
   expect((await page.request.get(server.origin + '/health')).status()).toBe(200);
   expect(await (await page.request.get(server.origin + '/ready')).json()).toEqual({ status: 'ready' });
-  const s1Version = await (await page.request.post(server.origin + '/api/admin/reference-scenarios/s1/publish', { data: {} })).json() as { id: string };
-  const s1 = SessionViewSchema.parse(await (await page.request.post(server.origin + '/api/sessions', { data: { scenarioVersionId: s1Version.id } })).json());
+  const s1Version = await (await server.post(page, server.origin + '/api/admin/reference-scenarios/s1/publish', {})).json() as { id: string };
+  const s1 = SessionViewSchema.parse(await (await server.post(page, server.origin + '/api/sessions', { scenarioVersionId: s1Version.id })).json());
   const initial = await begin(page);
   await ask(page, 'priorities', 1); await ask(page, 'resources', 2);
   const saved = await snapshot(page); await page.reload(); await expect(page.getByTestId('revision')).toHaveText('Ход 2 из 8'); expect(await snapshot(page)).toEqual(saved);
@@ -155,14 +156,14 @@ test('S2 impossible offer, no-deal result and terminal guard at 390px', async ({
   expect(refused.projection.activeOffer!.terms.find(t => t.issueId === 'HELP')?.valueId).toBe('0');
   await choose(page, 'walk_away'); await page.getByRole('button', { name: 'Подтвердить выход…' }).click(); await page.getByRole('button', { name: 'Выйти без сделки', exact: true }).click();
   const ended = await result(page, 'NO_AGREEMENT', null);
-  const r = await page.request.post(`${server.origin}/api/sessions/${ended.projection.sessionId}/turns`, { data: { requestId: randomUUID(), expectedRevision: ended.projection.revision, action: walkAway() } });
+  const r = await server.post(page, `${server.origin}/api/sessions/${ended.projection.sessionId}/turns`, { requestId: randomUUID(), expectedRevision: ended.projection.revision, action: walkAway() });
   expect(r.status()).toBe(409); expect((await r.json() as { code: string }).code).toBe('SESSION_TERMINAL');
   expect(await snapshot(page)).toEqual(ended);
 });
 test('S2 invalid input, counteroffer replacement, stale proposal and exact active acceptance', async ({ page }) => {
   const initial = await begin(page, 390);
   const url = `${server.origin}/api/sessions/${initial.projection.sessionId}/turns`;
-  const invalid = await page.request.post(url, { data: { requestId: randomUUID(), expectedRevision: 0, action: { kind: 'offer', terms: [] } } });
+  const invalid = await server.post(page, url, { requestId: randomUUID(), expectedRevision: 0, action: { kind: 'offer', terms: [] } });
   expect(invalid.status()).toBe(400); expect(await snapshot(page)).toEqual(initial);
   await propose(page, 'full', '2', '0', '0', 1); const old = (await snapshot(page)).projection.activeOffer!;
   await ask(page, 'capacity-topic', 2);
@@ -174,7 +175,7 @@ test('S2 invalid input, counteroffer replacement, stale proposal and exact activ
   await page.getByLabel('Перенос отчёта (6 часов ресурса)').selectOption('0');
   await page.getByRole('button', { name: 'Проверить предложение', exact: true }).click(); await page.getByRole('button', { name: 'Отправить предложение', exact: true }).click();
   await expect(page.getByTestId('revision')).toHaveText('Ход 3 из 8'); const active = await snapshot(page); expect(active.projection.activeOffer!.id).not.toBe(old.id);
-  const stale = await page.request.post(url, { data: { requestId: randomUUID(), expectedRevision: 3, action: accept(old.id) } }); expect(stale.status()).toBe(422);
+  const stale = await server.post(page, url, { requestId: randomUUID(), expectedRevision: 3, action: accept(old.id) }); expect(stale.status()).toBe(422);
   await page.reload(); await expect(page.getByTestId('revision')).toHaveText('Ход 3 из 8'); expect(await snapshot(page)).toEqual(active);
   await page.getByRole('button', { name: 'Принять предложение', exact: true }).click();
   await page.getByRole('button', { name: 'Принять эти условия', exact: true }).click(); await expect(page.getByTestId('result')).toBeVisible();

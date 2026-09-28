@@ -1,4 +1,4 @@
-import { randomUUID } from 'node:crypto';
+import { createHash, randomUUID } from 'node:crypto';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { createRequire } from 'node:module';
@@ -70,6 +70,7 @@ async function prepare(page: Page) {
   await expect(page.getByText(/Подготовка сохранена:/)).toBeVisible();
 }
 async function begin(page: Page, scenario: 'S1' | 'S2', width: number, prepared = true) {
+  await server!.login(page);
   await page.setViewportSize({ width, height: 900 }); await page.goto(server!.origin + '/admin');
   await page.getByRole('button', { name: scenario + ' — ' + (scenario === 'S1' ? S1.title : S2.title), exact: true }).click();
   await page.getByRole('button', { name: 'Опубликовать ' + scenario, exact: true }).click();
@@ -182,7 +183,7 @@ test('network failure fetching feedback keeps terminal facts, actionable error a
   expect(r.suggestions[0]?.action).toMatchObject({ kind: 'pressure', tone: 'respectful_firm' });
   expect(await snapshot(page)).toEqual(before); await page.reload(); expect(await report(page)).toEqual(r);
 });
-test('legacy v2 S1/S2 records migrate intact and mismatched replay version renders separate factual outcomes', async ({ page }) => {
+test('legacy v2 records remain inaccessible; fixture-only ownership retains mismatched replay rendering', async ({ page }) => {
   const temp = temporaryDatabase(), file = join(temp.directory, 'legacy.sqlite'), db = new Database(file);
   let oldS1: ReturnType<SessionService['create']>, oldS2: ReturnType<SessionService['create']>, mismatch: ReturnType<SessionService['create']>;
   try {
@@ -200,6 +201,20 @@ test('legacy v2 S1/S2 records migrate intact and mismatched replay version rende
   } finally { db.close(); }
   try {
     await start(file); await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto(server!.origin + '/session/' + oldS1!.projection.sessionId);
+    await expect(page.getByRole('alert')).toContainText('Попытка недоступна');
+    for (const saved of [oldS1!, oldS2!, mismatch!]) {
+      expect((await page.request.get(server!.origin + '/api/sessions/' + saved.projection.sessionId)).status()).toBe(404);
+    }
+    // Explicit TEST-ONLY DB fixture ownership, after verifying the normal migration denies access.
+    // There is no production UUID-claim API. This retains the prior G6 noncomparable-view regression.
+    const cookie = (await page.context().cookies(server!.origin)).find(c => c.name === 'arena_session')!;
+    const digest = createHash('sha256').update(cookie.value).digest('hex');
+    const fixtures = new Database(server!.database);
+    try {
+      for (const saved of [oldS1!, oldS2!, mismatch!]) fixtures.prepare('INSERT INTO session_owners SELECT ?, principal_id FROM access_sessions WHERE token_digest = ?')
+        .run(saved.projection.sessionId, digest);
+    } finally { fixtures.close(); }
     for (const saved of [oldS1!, oldS2!]) {
       await page.goto(server!.origin + '/session/' + saved.projection.sessionId + '/result');
       expect(await snapshot(page)).toEqual(saved); const r = await report(page);
@@ -211,7 +226,7 @@ test('legacy v2 S1/S2 records migrate intact and mismatched replay version rende
     await expect(page.getByTestId('comparison')).toContainText('Ранее: Соглашение не достигнуто. Сейчас: Соглашение не достигнуто.');
     await screenshot(page, 'g6-noncomparable-1280');
     const inspect = new Database(server!.database, { readonly: true });
-    try { expect(inspect.prepare('SELECT version FROM schema_migrations ORDER BY version').all()).toEqual([{ version: 1 }, { version: 2 }, { version: 3 }, { version: 4 }]); }
+    try { expect(inspect.prepare('SELECT version FROM schema_migrations ORDER BY version').all()).toEqual([{ version: 1 }, { version: 2 }, { version: 3 }, { version: 4 }, { version: 5 }]); }
     finally { inspect.close(); }
   } finally { temp.cleanup(); }
 });

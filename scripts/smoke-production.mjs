@@ -110,7 +110,7 @@ try {
   db = openDatabase(databasePath);
   try {
     assert.deepEqual(db.prepare('SELECT value FROM foundation_metadata WHERE key = ?').get('g0-runtime-smoke'), { value: sentinel });
-    assert.deepEqual(db.prepare('SELECT version FROM schema_migrations ORDER BY version').all(), [{ version: 1 }, { version: 2 }]);
+    assert.deepEqual(db.prepare('SELECT version FROM schema_migrations ORDER BY version').all(), [1, 2, 3, 4, 5].map(version => ({ version })));
   } finally { db.close(); }
   await stop(second);
   console.log(JSON.stringify({ result: 'PASS', runtime: process.version, platform: process.platform, arch: process.arch,

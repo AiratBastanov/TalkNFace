@@ -5,5 +5,6 @@ export default defineConfig({
   outputDir: '.tools/g2-browser-artifacts',
   reporter: [['list'], ['json', { outputFile: '.tools/g2-browser-tests.json' }]],
   use: { channel: 'chrome', headless: true, viewport: { width: 1280, height: 900 },
-    actionTimeout: 5_000, navigationTimeout: 10_000, screenshot: 'only-on-failure', trace: 'retain-on-failure' },
+    // Traces contain Cookie/CSRF request headers. Never persist authentication traces.
+    actionTimeout: 5_000, navigationTimeout: 10_000, screenshot: 'only-on-failure', trace: 'off' },
 });

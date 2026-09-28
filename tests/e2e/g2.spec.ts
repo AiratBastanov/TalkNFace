@@ -33,6 +33,7 @@ test.beforeAll(async ({ browser }) => {
   evidence.browser = browser.version(); server = await productionHarness(); await server.start();
 });
 test.beforeEach(async ({ context, page }) => {
+  await server.login(page);
   await context.route('**/*', async route => {
     const url = route.request().url();
     if (/^https?:/.test(url) && new URL(url).origin !== server.origin) { evidence.externalRequests.push(url); await route.abort(); }
@@ -77,7 +78,7 @@ async function responsive(page: Page, screen: string) {
 async function openNew(page: Page) {
   const published = await page.request.get(server.origin + '/api/scenarios');
   if (!(await published.json() as unknown[]).length) {
-    const response = await page.request.post(server.origin + '/api/admin/reference-scenarios/s1/publish', { data: {} });
+    const response = await server.post(page, server.origin + '/api/admin/reference-scenarios/s1/publish', {});
     expect(response.status()).toBe(200);
   }
   await page.goto(server.origin + '/');

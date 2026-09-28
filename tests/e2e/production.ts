@@ -5,6 +5,9 @@ import { copyFileSync, existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync
 import { createServer } from 'node:net';
 import { dirname, join, resolve, sep } from 'node:path';
 import { setTimeout as delay } from 'node:timers/promises';
+import { randomBytes } from 'node:crypto';
+import type { Page } from '@playwright/test';
+import { hashPassword } from '../../apps/server/src/access/password.ts';
 
 export async function productionHarness(options: { seedDatabase?: string; label?: string } = {}) {
   assert.equal(process.version, 'v24.21.0');
@@ -18,6 +21,8 @@ export async function productionHarness(options: { seedDatabase?: string; label?
   const address = portServer.address(); assert(address && typeof address !== 'string'); const port = address.port;
   await new Promise<void>((done, reject) => portServer.close(error => error ? reject(error) : done()));
   const origin = `http://127.0.0.1:${port}`;
+  const password = randomBytes(24).toString('base64url');
+  const passwordHash = await hashPassword(password);
   const gateDeadline = Date.now() + 175_000;
   const runtime = dirname(process.execPath);
   const pids: number[] = []; let starts = 0; let stops = 0; let running: Awaited<ReturnType<typeof launch>> | null = null;
@@ -29,7 +34,8 @@ export async function productionHarness(options: { seedDatabase?: string; label?
         SystemRoot: process.env.SystemRoot, WINDIR: process.env.WINDIR,
         npm_config_cache: join(root, '.tools/npm-cache'), npm_config_update_notifier: 'false',
         NODE_OPTIONS: `--require="${join(root, 'scripts/g2-test-console.cjs').replaceAll('\\', '/')}"`,
-        HOST: '127.0.0.1', PORT: String(port), DATABASE_PATH: database },
+        HOST: '127.0.0.1', PORT: String(port), DATABASE_PATH: database,
+        ACCESS_PROFILE: 'local', APP_ORIGIN: origin, ADMIN_PASSWORD_HASH: passwordHash },
     });
     const owned = new Set<number>(child.pid ? [child.pid] : []); const exit = once(child, 'exit');
     let output = ''; let carry = ''; let forced = false;
@@ -62,6 +68,12 @@ export async function productionHarness(options: { seedDatabase?: string; label?
       assert(ready, 'npm start was not ready: ' + output); starts++;
     } catch (error) { clearTimeout(lifetime); await forceStop(); throw error; }
     return {
+      securityEvents() {
+        return output.split(/\r?\n/).flatMap(line => {
+          try { const v = JSON.parse(line); return typeof v.event === 'string' && v.event.startsWith('access.')
+            ? [{ event: v.event, routeClass: v.routeClass, reason: v.reason }] : []; } catch { return []; }
+        });
+      },
       async stop() {
         child.stdin.write('g2-stop\n'); const deadline = setTimeout(() => { void forceStop(); }, 10_000);
         try {
@@ -77,6 +89,19 @@ export async function productionHarness(options: { seedDatabase?: string; label?
   }
   return {
     origin, database,
+    securityEvents() { return running?.securityEvents() ?? []; },
+    async login(page: Page) {
+      await page.goto(origin + '/admin');
+      await page.getByLabel('Пароль администратора', { exact: true }).fill(password);
+      await page.getByRole('button', { name: 'Войти', exact: true }).click();
+      await page.getByRole('button', { name: 'Выйти', exact: true }).waitFor();
+    },
+    async post(page: Page, url: string, data: object) {
+      const session = await page.request.get(origin + '/api/auth/session');
+      assert.equal(session.status(), 200);
+      const { csrfToken } = await session.json() as { csrfToken: string };
+      return page.request.post(url, { data, headers: { Origin: origin, 'X-CSRF-Token': csrfToken } });
+    },
     async start() { assert.equal(running, null); running = await launch(); },
     async stop() { if (running) { const instance = running; running = null; await instance.stop(); } },
     evidence() { return { command: 'npm start', runtime: process.version, platform: process.platform, starts, cleanShutdowns: stops, serverPids: pids,

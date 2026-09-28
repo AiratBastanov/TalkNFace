@@ -10,7 +10,7 @@ import { S1, S2 } from '@arena/scenarios';
 import { createInitialState, transition, evaluateAuthority, evaluateConstraints, evaluateUtility, validateScenario, selectCounteroffer } from '@arena/domain';
 import { compileSettings, deriveDefinition, LIMITS } from '../src/context/compiler.ts';
 import { ContextService } from '../src/context/service.ts';
-import { buildApp } from '../src/app.ts';
+import { buildApp } from './authenticated-fixture.ts';
 import { openDatabase } from '../src/database.ts';
 import { ArenaRepository, hashBody } from '../src/repositories/arena-repository.ts';
 import { SessionService } from '../src/services/session-service.ts';
@@ -279,7 +279,7 @@ for(const migration of [2,3])it('migration '+migration+' data upgrade preserves 
     }
     const turns=db.prepare('SELECT * FROM turns ORDER BY session_id').all();db.close();db=openDatabase(filename);
     const after=new ArenaRepository(db);
-    expect(db.prepare('SELECT version FROM schema_migrations ORDER BY version').all()).toEqual([1,2,3,4].map(version=>({version})));
+    expect(db.prepare('SELECT version FROM schema_migrations ORDER BY version').all()).toEqual([1,2,3,4,5].map(version=>({version})));
     expect(after.versions().sort((a,b)=>a.id.localeCompare(b.id))).toEqual(oldVersions.sort((a,b)=>a.id.localeCompare(b.id)));
     expect(db.prepare('SELECT * FROM turns ORDER BY session_id').all()).toEqual(turns);
     for(const s of saved)expect(new SessionService(after).get(s.projection.sessionId)).toEqual(s);

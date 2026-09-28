@@ -1,0 +1,2372 @@
+{
+  "gate": "APP_G8_ACCESS_BOUNDARY_01",
+  "verdict": "APP_G8_ACCESS_BOUNDARY_01_PASS",
+  "realApplicationSmoke": "PASS",
+  "date": "2026-09-28",
+  "scope": "Bounded Qwen-independent access boundary in tested local environment, not full G8 / live AI / public certification",
+  "baseline": {
+    "worktree": "C:/Users/BastaPC/Desktop/Alag-app-work",
+    "branch": "feature/app-qwen-independent-01",
+    "head": "720a2e8ea79ac17be965c5d6fd1617a73d5b47c9",
+    "upstream": "origin/feature/app-qwen-independent-01",
+    "aheadBehind": [
+      0,
+      0
+    ],
+    "clean": true,
+    "origin": "https://github.com/AiratBastanov/TalkNFace.git",
+    "protectedMain": "2034687f6f22b2973935f2c9c30bc9380c88b071",
+    "latestMigrationBefore": 4,
+    "applicableAgentsInstructions": []
+  },
+  "securityGapBefore": "A UUID or knowledge of a route identifier is not authorization. No prior authentication, ownership or CSRF boundary.",
+  "securityModelAndExactRouteMatrix": "## Baseline and security model (written before implementation)\n\nWorktree `C:\\Users\\BastaPC\\Desktop\\Alag-app-work`, branch `feature/app-qwen-independent-01`, exact Git HEAD/upstream `720a2e8ea79ac17be965c5d6fd1617a73d5b47c9`, clean. Authoritative origin `https://github.com/AiratBastanov/TalkNFace.git`. Original checkout and remote main `2034687f6f22b2973935f2c9c30bc9380c88b071`. No applicable AGENTS.md found in ancestors or application directories. Actual latest migration: 4. Runtime Node24.21.0, Fastify5.12.5, SQLite/better-sqlite3 12.11.1; existing lockfile inspected.\n\nCurrent gap: **a UUID or knowledge of a route identifier is not authorization**. Admin configuration/publication, player sessions, reports and replay currently lack authentication, ownership and CSRF checks. Existing public/private projection, immutable publications and G5/G6 semantics remain authorities.\n\nHistorical [APP_AUDIT_AND_QWEN_INDEPENDENT_SLICE_01 PARTIAL](APP_AUDIT_AND_QWEN_INDEPENDENT_SLICE_01.md) remains exactly as recorded. It is neither erased nor reopened. Current reading: three requested gate reports; only master-plan G8 through the next same-level heading; architecture Deployment, Logging/privacy and ADR-09. No ML example contents are used; protected files are verified by byte-only hashing.\n\nActors and assets: public browser has only catalog/assets/health/bootstrap; a registration-free player principal owns its attempts, turns, preparation, results, reports and replays; administrator authenticates one deployment secret and can configure/publish the shared draft, but can inspect only its own player attempts. Unrelated browsers cannot acquire ownership by supplying IDs. Future public hosting requires explicit HTTPS origin and secure cookies, and has a separate certification boundary.\n\nDesign: 256-bit cryptographic opaque bearer; only SHA256 digest persisted. Separate stable principal ID survives privilege rotation; access-session role is player/admin. CSRF synchronizer tied to the access session, returned by same-origin auth endpoint and sent as `X-CSRF-Token`; no bearer in DTO, URL or browser storage. Derive CSRF from the bearer with HMAC-SHA256 domain separation, persist its digest. Player lifetime: 24h idle, 7d absolute; admin: 30min idle, 8h absolute. Only validated unsafe API activity may refresh idle time, at most once per 5min. GET/HEAD never write, including auth inspection. SQLite unixepoch is the lifecycle clock. Logout revokes persisted access and explicitly deletes cookie; privilege elevation atomically revokes and rotates token and CSRF, with recheck after password verification. Closing a tab cannot extend absolute expiry. Expired/revoked credentials never become valid after restart.\n\nCookie: HttpOnly; SameSite=Strict; Path=/; no Domain; fixed absolute Max-Age. Local profile only on loopback HTTP, `arena_session`, Secure=false. Future public profile requires explicit HTTPS APP_ORIGIN and `__Host-arena_session`, Secure=true. Unsafe Origin must exactly match configured origin; reject cross-site/same-site Fetch Metadata, null/missing/foreign Origin. Clients without Fetch Metadata must still supply exact Origin and CSRF. No CORS reflection. Initial POST bootstrap has no preceding CSRF token: requires exact Origin, JSON and `X-Arena-Bootstrap: 1`; it cannot elevate, accept caller identity, rotate a valid session or bind legacy data. Safe auth GET only reads an existing session.\n\nIDOR checks query ownership before loading protected data. Unknown, legacy and foreign IDs return the same safe 404. Comparison checks both attempt and predecessor ownership. Missing/expired access is 401; insufficient admin privilege / CSRF / origin is 403; existing revision/idempotency conflicts remain 409. All routes require an explicit access classification; static shell contains no protected data. No administrator override for other players.\n\nAdmin: environment-only `ADMIN_PASSWORD_HASH`, standard Node scrypt (N=32768,r=8,p=1,32-byte output,16-byte random salt), constant-time digest comparison. Missing hash disables login/admin access; malformed hash fails startup without echo. No username. Durable single-node global login budget (10 attempts per 15min, including successes) bounds verification and survives restart; no distributed rate-limit claim. No OAuth/MFA/reset/identity SDK. HttpOnly reduces credential theft through script reads, but same-origin XSS/compromised device or plaintext loopback interception remain outside its guarantee. Browser credentials are never logged; framework error bodies are replaced by fixed safe messages. Security logs use event/class/coarse reason only.\n\n## Explicit route/access matrix\n\n| Route | Access | Unsafe requirements |\n| --- | --- | --- |\n| GET/HEAD static assets and SPA shell, /health, /ready | Public; shell includes /admin login | No writes |\n| GET/HEAD /api/reference-scenarios, /api/scenarios | Existing public projections | No writes |\n| POST /api/auth/bootstrap | Public -> fresh player if no valid session | Exact Origin, Fetch Metadata check, JSON, bootstrap header |\n| GET/HEAD /api/auth/session | Existing player/admin session, returns role/configuration/CSRF | No writes |\n| POST /api/auth/login | Existing pre-auth player/admin -> rotated admin | Origin + session CSRF + login budget + password |\n| POST /api/auth/logout | Existing principal -> revoke/delete cookie | Origin + session CSRF |\n| GET/HEAD /api/admin/reference-scenarios/:key, /api/admin/context-draft | Admin | No writes |\n| POST /api/admin/reference-scenarios/:key/publish, /api/admin/context-draft/{save,validate,publish} | Admin | Origin + CSRF |\n| POST /api/sessions | Player or admin, creates own attempt | Origin + CSRF; atomic owner insert |\n| GET/HEAD /api/sessions/:sessionId, /result, /preparation, /feedback | Owner, including admin's own attempts only | No writes |\n| GET/HEAD /api/sessions/:sessionId/feedback/comparison | Owner of both attempts | No writes; existing replay relationship rules |\n| POST /api/sessions/:sessionId/{turns,preparation,replay} | Owner | Origin + CSRF; replay inherits same owner |\n| Any unclassified API/route/method | Deny | No mutation |\n\n",
+  "identity": {
+    "bearerEntropyBits": 256,
+    "bearerStorage": "HttpOnly cookie only; SHA256 digest in SQLite",
+    "csrf": "HMAC-SHA256 domain-separated synchronizer bound to access session, SHA256 digest persisted, SPA memory only",
+    "roles": [
+      "player",
+      "admin"
+    ],
+    "adminOverrideForOtherPlayers": false,
+    "ownership": "Immutable principal relationship, atomic with new attempts/replays; comparison checks both owners",
+    "rotation": "Privilege elevation revokes old token and creates new bearer/CSRF, identity preserved; post-scrypt revocation/expiry recheck",
+    "revocation": "Persisted logout; expiry and credential-hash binding checked on every protected request"
+  },
+  "lifecycle": {
+    "clock": "SQLite unixepoch",
+    "playerIdleSeconds": 86400,
+    "playerAbsoluteSeconds": 604800,
+    "adminIdleSeconds": 1800,
+    "adminAbsoluteSeconds": 28800,
+    "idleTouchMinimumSeconds": 300,
+    "touch": "Successful unsafe authenticated operations only",
+    "safeGetHeadWrites": false,
+    "authRowsAutomaticallyPurged": false
+  },
+  "cookie": {
+    "local": {
+      "name": "arena_session",
+      "httpOnly": true,
+      "sameSite": "Strict",
+      "path": "/",
+      "domain": null,
+      "secure": false,
+      "requires": "Loopback HTTP HOST and origin"
+    },
+    "public": {
+      "name": "__Host-arena_session",
+      "httpOnly": true,
+      "sameSite": "Strict",
+      "path": "/",
+      "domain": null,
+      "secure": true,
+      "requires": "Explicit HTTPS APP_ORIGIN",
+      "actualTlsTested": false
+    },
+    "logout": "Max-Age=0 and explicit expiry, same cookie attributes"
+  },
+  "csrf": {
+    "unsafeOrigin": "Exact mandatory configured Origin, no null/missing fallback",
+    "fetchMetadata": "If present must be same-origin; absent still requires exact Origin and CSRF",
+    "bootstrapException": "Only POST JSON {} plus X-Arena-Bootstrap:1 and exact Origin/Fetch Metadata; can create player only, cannot claim legacy or elevate",
+    "noCorsReflection": true,
+    "authTokenInUrlOrBrowserStorage": false
+  },
+  "administrator": {
+    "configuration": "ADMIN_PASSWORD_HASH environment only; missing disables login, invalid fails startup",
+    "algorithm": "Node scrypt N32768/r8/p1,16-byte salt,32-byte output; timingSafeEqual",
+    "username": false,
+    "bruteForce": "Persistent single-node global budget10 per15min including successes; no distributed claim",
+    "generator": "node scripts/admin-password.mjs; hidden TTY or explicit UTF-8 --stdin, no plaintext args",
+    "credentialChangeInvalidatesOldAdmin": true
+  },
+  "migration": {
+    "number": 5,
+    "additive": true,
+    "legacy": "Unowned/inaccessible normal APIs; no first UUID claimant, no archival endpoint",
+    "deletedOrRewrittenHistoricalRecords": false,
+    "dependencyAdditions": [
+      {
+        "path": "node_modules/@fastify/cookie",
+        "version": "11.1.2"
+      },
+      {
+        "path": "node_modules/@fastify/cookie/node_modules/cookie",
+        "version": "2.0.1",
+        "engines": {
+          "node": ">=22"
+        }
+      }
+    ],
+    "existingDependencyEntriesUnchanged": true,
+    "migrations1to4Unchanged": true,
+    "migrationDigests": {
+      "apps/server/src/migration-g2.ts": "32ceeff52293251f1f04b0f0a796529abcce836db003cbcc7da294e3a9e576e3",
+      "apps/server/src/migration-feedback.ts": "1aef8365a3f158b4fc5210aba43b8dfbb42edff7fa63da066bc17f6bf8786386",
+      "apps/server/src/migration-context.ts": "23d53c5186b069af0d55757dbd7854cd3de95f4815956e8ac86fea3ff2079b2d",
+      "migration1": "415c7deef921835c31d01639751999a9cb1ee9c9ea82ae8ab116466947938cb9"
+    },
+    "acceptedPinsVerified": 20,
+    "sharedPinsVerified": 8,
+    "acceptedFixture": {
+      "sourceSha256": "18511d7c506d7c78a35bea6c011183ecbcf03fc6686fa81a50139108ce0140f1",
+      "from": [
+        1,
+        2
+      ],
+      "to": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "counts": {
+        "foundation_metadata": 0,
+        "scenario_versions": 1,
+        "sessions": 1,
+        "turns": 1
+      },
+      "tableDigests": {
+        "foundation_metadata": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "scenario_versions": "2c9354be32d84ae6b2a01aa0fc5aa55098929f521f910a461e523604cb187615",
+        "sessions": "6c6c968ecf4f5531243de0ac1f99ec64f042b304693e0ceff25524eed6952b2a",
+        "turns": "dfac2f858fd8e6ceee04b81a574c413ee4f4cdf531bcc9e8908560a6d721d281"
+      },
+      "legacyOwners": 0,
+      "recordsUnchanged": true
+    }
+  },
+  "verification": {
+    "runtime": {
+      "node": "24.21.0",
+      "npm": "11.19.0",
+      "fastify": "5.12.5",
+      "betterSqlite3": "12.11.1",
+      "chrome": "153.0.8010.53",
+      "playwright": "1.63.0",
+      "platform": "Windows x64"
+    },
+    "unitIntegration": {
+      "unique": 321,
+      "existing": 272,
+      "new": 49,
+      "executions": 406,
+      "reruns": 85,
+      "initialFailedExecutions": 2,
+      "campaigns": [
+        {
+          "name": "g8-access-first",
+          "passed": 41,
+          "failed": 1,
+          "reportSha256": "91c2fbc3a0a5e98f6614d04c8df5a2c47eb9487f36b1db21e185dc48e6563fd5"
+        },
+        {
+          "name": "g8-security-second",
+          "passed": 45,
+          "failed": 0,
+          "reportSha256": "25e664f89065a219983d99f4f9f4fcff63f1f5e11ddf53c84a71365ca51e2435"
+        },
+        {
+          "name": "g8-existing-first",
+          "passed": 271,
+          "failed": 1,
+          "reportSha256": "13e09a37473d2af97062ad17b5957d7ba479150a07e41592ec88e6577db26e24"
+        },
+        {
+          "name": "g8-g2-upgrade-recheck",
+          "passed": 1,
+          "failed": 0,
+          "reportSha256": "c10e5a8dbbdf9d555bfe66e865642eec9a2f1cc4db95b0eb056e5a6576ad5ad9"
+        },
+        {
+          "name": "g8-security-review",
+          "passed": 46,
+          "failed": 0,
+          "reportSha256": "98b4f9ff6d293a523c87faceaa38ed62f4420e42fc61b4b43987192a20c6d2e5"
+        }
+      ],
+      "cases": [
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access bootstrap issues only a fresh player and ignores a fixed attacker bearer; bearer is absent from JSON/SQLite",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access public projections need no cookie and reveal neither hidden scenario data nor access credentials",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access every admin read/mutation denies anonymous and player, including guessed route IDs",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access wrong credentials give safe 401 and no privilege; correct password rotates bearer + CSRF, preserving only own identity",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access logout deletes the cookie and persists revocation across restart",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access idle_expires_at cannot revive after restart",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access absolute_expires_at cannot revive after restart",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access changing/removing the deployment hash invalidates previous administrator sessions after restart",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access owner can refresh/restart/continue; duplicates still commit once and stale/different requests retain 409",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access exact foreign UUID, report/replay, duplicate receipt and admin override all fail before protected data loads",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access comparison verifies predecessor ownership even for an owned current attempt",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access rejects missing CSRF on owned mutation, leaves domain unchanged",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access rejects wrong CSRF on owned mutation, leaves domain unchanged",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access rejects other-session CSRF on owned mutation, leaves domain unchanged",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access login CSRF, logout CSRF and authenticated admin mutation without CSRF are refused",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access rejects unsafe origin/Fetch Metadata {\"origin\":\"https://foreign.example\"} even with valid authentication and CSRF",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access rejects unsafe origin/Fetch Metadata {\"origin\":\"null\"} even with valid authentication and CSRF",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access rejects unsafe origin/Fetch Metadata {\"origin\":\"\"} even with valid authentication and CSRF",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access rejects unsafe origin/Fetch Metadata {\"origin\":\"http://127.0.0.1:3000\",\"sec-fetch-site\":\"cross-site\"} even with valid authentication and CSRF",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access rejects unsafe origin/Fetch Metadata {\"origin\":\"http://127.0.0.1:3000\",\"sec-fetch-site\":\"same-site\"} even with valid authentication and CSRF",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access missing Origin is denied; defined no-Fetch-Metadata fallback requires exact Origin plus CSRF",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access bootstrap is state-changing POST only, requires the custom header and cannot take identity from body",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access GET/HEAD, auth inspection and static/public reads never write or slide idle lifetime",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access idle refresh is bounded, absolute deadline remains fixed, and invalid unsafe requests do not touch it",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access global login work budget survives new browsers and process restart, and expires after 15min",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access malformed/oversized login errors never echo credential input or framework stacks",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access unclassified PUT cannot publish, including valid auth/CSRF",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access unclassified PATCH cannot publish, including valid auth/CSRF",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access unclassified DELETE cannot publish, including valid auth/CSRF",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access unclassified OPTIONS cannot publish, including valid auth/CSRF",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access local cookie has explicit bounded HttpOnly/Strict/Path semantics and no false Host claim",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "injected public HTTPS profile emits __Host Secure cookie, same attributes on explicit logout; no public listen",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "fails closed on contradictory access configuration {\"HOST\":\"0.0.0.0\"} without exposing values",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "fails closed on contradictory access configuration {\"HOST\":\"192.168.1.2\"} without exposing values",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "fails closed on contradictory access configuration {\"APP_ORIGIN\":\"http://public.example\"} without exposing values",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "fails closed on contradictory access configuration {\"APP_ORIGIN\":\"https://127.0.0.1\"} without exposing values",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "fails closed on contradictory access configuration {\"ACCESS_PROFILE\":\"public\"} without exposing values",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "fails closed on contradictory access configuration {\"ACCESS_PROFILE\":\"public\",\"APP_ORIGIN\":\"http://arena.example\"} without exposing values",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "fails closed on contradictory access configuration {\"ACCESS_PROFILE\":\"public\",\"APP_ORIGIN\":\"https://arena.example/path\"} without exposing values",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "fails closed on contradictory access configuration {\"ACCESS_PROFILE\":\"public\",\"APP_ORIGIN\":\"https://user:password@arena.example\"} without exposing values",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "fails closed on contradictory access configuration {\"ACCESS_PROFILE\":\"public\",\"APP_ORIGIN\":\"https://arena.example/?token=private\"} without exposing values",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "fails closed on contradictory access configuration {\"ADMIN_PASSWORD_HASH\":\"private-invalid-hash\"} without exposing values",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access-migration.test.ts",
+          "name": "migration 2 -> 5 preserves old bytes/records/reports, never claims old UUIDs, and creates new owned attempts",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access-migration.test.ts",
+          "name": "migration 3 -> 5 preserves old bytes/records/reports, never claims old UUIDs, and creates new owned attempts",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access-migration.test.ts",
+          "name": "migration 4 -> 5 preserves old bytes/records/reports, never claims old UUIDs, and creates new owned attempts",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/app.test.ts",
+          "name": "Fastify lifecycle serves minimal liveness and genuine readiness; close releases the database",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/app.test.ts",
+          "name": "Fastify lifecycle reports a database failure as 503 while process liveness stays healthy",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/catalog.test.ts",
+          "name": "application catalog and S2 through the existing transaction publishes the original definitions once, with additive public catalog schemas and safe unknown IDs",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/catalog.test.ts",
+          "name": "application catalog and S2 through the existing transaction S2 MUTUAL_GAIN: result evidence, terminal rejection and clean replay",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/catalog.test.ts",
+          "name": "application catalog and S2 through the existing transaction S2 ACCEPTABLE_PARTIAL: result evidence, terminal rejection and clean replay",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/catalog.test.ts",
+          "name": "application catalog and S2 through the existing transaction S2 POOR_AGREEMENT: result evidence, terminal rejection and clean replay",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/catalog.test.ts",
+          "name": "application catalog and S2 through the existing transaction S2 NO_AGREEMENT: result evidence, terminal rejection and clean replay",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/catalog.test.ts",
+          "name": "application catalog and S2 through the existing transaction enforces capacity and specialist proposal authority on the server, including resource grants",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/catalog.test.ts",
+          "name": "application catalog and S2 through the existing transaction keeps duplicate results stable, rejects stale proposals, and accepts the exact active terms",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/catalog.test.ts",
+          "name": "application catalog and S2 through the existing transaction S1 and S2 reopen through additive preparation migration, with immutable historical version bindings",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/catalog.test.ts",
+          "name": "application catalog and S2 through the existing transaction renders nominal resource choices without claiming absent resources; ordered scope shows hours",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/catalog.test.ts",
+          "name": "application catalog and S2 through the existing transaction does not bundle private definitions, facts, witness paths or provider code into the frontend",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "six real configuration effects and bounded common-engine proof sphere changes issue units, interests and physically feasible packages",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "six real configuration effects and bounded common-engine proof topic admits all14 only for planned supply; both settings have playable target witnesses",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "six real configuration effects and bounded common-engine proof difficulty changes actual first-offer acceptance and disclosure, with unchanged rubric",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "six real configuration effects and bounded common-engine proof tone changes actual disclosure and skeptical repair strength",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "six real configuration effects and bounded common-engine proof role changes S1 authority for the identical package, and S2 ability to originate a helper",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "six real configuration effects and bounded common-engine proof goals change complete utility/BATNA data coherently in both valid families",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "six real configuration effects and bounded common-engine proof supplier base: distinct acceptable committed witness traces plus target and exit",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "six real configuration effects and bounded common-engine proof planned margin friendly: distinct acceptable committed witness traces plus target and exit",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "six real configuration effects and bounded common-engine proof account manager beginner: distinct acceptable committed witness traces plus target and exit",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "six real configuration effects and bounded common-engine proof skeptical advanced: distinct acceptable committed witness traces plus target and exit",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "six real configuration effects and bounded common-engine proof team base: distinct acceptable committed witness traces plus target and exit",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "six real configuration effects and bounded common-engine proof team lead delivery: distinct acceptable committed witness traces plus target and exit",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "six real configuration effects and bounded common-engine proof rejects cross-family role without correction",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "six real configuration effects and bounded common-engine proof rejects cross-family goals without correction",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "six real configuration effects and bounded common-engine proof rejects missing choices without correction",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "six real configuration effects and bounded common-engine proof rejects unavailable helper / locked target without correction",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "six real configuration effects and bounded common-engine proof rejects manager margin cannot reach target62 without correction",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "six real configuration effects and bounded common-engine proof separates package feasibility from reachability under the current aspiration policy",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "six real configuration effects and bounded common-engine proof retains immutable frozen references, deterministic semantic identity and strict validation",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "real Fastify + file-backed SQLite admin transactions requires current validation and explicit approval; exact idempotent publication survives changed drafts",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "real Fastify + file-backed SQLite admin transactions changed settings invalidate approval; stale save, validation and publication never overwrite",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "real Fastify + file-backed SQLite admin transactions rechecks revision atomically when another SQLite connection saves during publication preparation",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "real Fastify + file-backed SQLite admin transactions rechecks exact revision after validation if another SQLite connection changes the draft",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "real Fastify + file-backed SQLite admin transactions rejects client validity flags and user-supplied definitions even with a current draft binding",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "real Fastify + file-backed SQLite admin transactions refuses approvals from an older compiler policy",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "real Fastify + file-backed SQLite admin transactions invalid combinations remain saved/editable with affected-field messages and no private data",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "real Fastify + file-backed SQLite admin transactions strict server settings reject {\"sphere\":\"supply\",\"topic\":\"launch\",\"difficulty\":\"normal\",\"tone\":\"neutral\",\"opponentRole\":\"director\",\"opponentGoals\":\"__proto__\"}",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "real Fastify + file-backed SQLite admin transactions strict server settings reject {\"sphere\":\"supply\",\"topic\":\"<script>alert(1)</script>\",\"difficulty\":\"normal\",\"tone\":\"neutral\",\"opponentRole\":\"director\",\"opponentGoals\":\"cashflow\"}",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "real Fastify + file-backed SQLite admin transactions strict server settings reject {\"sphere\":\"supply\",\"topic\":\"launch\",\"difficulty\":999,\"tone\":\"neutral\",\"opponentRole\":\"director\",\"opponentGoals\":\"cashflow\"}",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "real Fastify + file-backed SQLite admin transactions strict server settings reject {\"sphere\":\"supply\",\"topic\":\"launch\",\"difficulty\":\"normal\",\"tone\":\"neutral\",\"opponentRole\":\"director\",\"opponentGoals\":\"cashflow\",\"unknown\":true}",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "real Fastify + file-backed SQLite admin transactions strict server settings reject {\"sphere\":\"supply\",\"topic\":\"launch\",\"difficulty\":\"normal\",\"tone\":\"neutral\",\"opponentRole\":\"director\",\"opponentGoals\":{\"formula\":\"1+1\"}}",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "real Fastify + file-backed SQLite admin transactions malformed JSON, oversize input and unknown query fields are safe and nonpersistent",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "real Fastify + file-backed SQLite admin transactions configured version A, committed report, active replay and draft survive B publication and restart",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "real Fastify + file-backed SQLite admin transactions configured public preview, player DTO and bundle exclude private facts/tables/witnesses",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "migration 2 data upgrade preserves reference versions, active attempts and feedback",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/context.test.ts",
+          "name": "migration 3 data upgrade preserves reference versions, active attempts and feedback",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/database.test.ts",
+          "name": "real file SQLite foundation creates directories, applies the migration, and configures SQLite",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/database.test.ts",
+          "name": "real file SQLite foundation retains a sentinel and the original migration record across two reopenings",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/database.test.ts",
+          "name": "real file SQLite foundation refuses a newer schema without deleting existing metadata",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/env.test.ts",
+          "name": "server environment starts with safe defaults and no credentials",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/env.test.ts",
+          "name": "server environment accepts explicit settings and returns a typed port and deterministic file path",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/env.test.ts",
+          "name": "server environment rejects invalid PORT \"0\" without echoing it",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/env.test.ts",
+          "name": "server environment rejects invalid PORT \"-1\" without echoing it",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/env.test.ts",
+          "name": "server environment rejects invalid PORT \"65536\" without echoing it",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/env.test.ts",
+          "name": "server environment rejects invalid PORT \"3.5\" without echoing it",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/env.test.ts",
+          "name": "server environment rejects invalid PORT \"\" without echoing it",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/env.test.ts",
+          "name": "server environment rejects invalid PORT \"invalid\" without echoing it",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/env.test.ts",
+          "name": "server environment rejects invalid database path \"\"",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/env.test.ts",
+          "name": "server environment rejects invalid database path \"  \"",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/env.test.ts",
+          "name": "server environment rejects invalid database path \":memory:\"",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/env.test.ts",
+          "name": "server environment rejects invalid database path \"file:test.sqlite\"",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/env.test.ts",
+          "name": "server environment rejects invalid database path \"data/\"",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/env.test.ts",
+          "name": "server environment rejects invalid database path \"bad\\u0000path\"",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/env.test.ts",
+          "name": "server environment rejects invalid environment and host without disclosing supplied values",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records S1 prepared agreement: independently calculated 64 utility and 100 process, separate facts",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records S2 prepared agreement: independently calculated 47 utility and linked evidence",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records poor S2 agreement retains utility 20 and independent weighted process 44.12",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records no agreement can retain mutual-package process credit and 70 process",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records legacy preparation is unobservable despite defaults and enough behavioral credit",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records early exit distinguishes a missed opportunity, no opportunity and missing evidence",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records prepared early exit still does not get a perfect overall score",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records request retries and repeated facts/questions cannot multiply accepted progress",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records an unrelated acknowledged fact does not earn linked-use credit",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records a changed feasible package responds to the actual recorded capacity objection",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records ignoring an actual objection is a failure, not N/A",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records Pareto credit compares the preceding own offers without requiring agreement",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records genuine reciprocal exchange earns credit",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records a decorative condition earns no reciprocity and cannot hide wasteful concession",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records unrepaired tension is a failure and its suggested alternative is validated at the original turn",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records warning removal without a specific causal binding is unobservable, not successful repair",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records valid-looking suggestions reject unknown facts, unavailable arguments, stale offers and impossible terms",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records preparation is explicit, validated, idempotent and immutable before and after first move",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records a rejected turn and an unconfirmed draft are never report evidence",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records exact saved Cyrillic/emoji text is quoted, never regenerated with current templates",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records cross-session event references fail closed without private diagnostics",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records missing historical event instrumentation is explicit and cannot earn absence credit",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records a missing acknowledgement event stays unobservable even when other event markers survive",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records a saved public outcome inconsistent with the committed domain outcome is rejected",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records report identity and outcome survive a real file database reopening unchanged",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records direct replay compares shared checks, rejects unrelated/stale targets and leaves predecessor intact",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records different config, definition or evaluator policies keep factual outcomes but refuse score comparison",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records HTTP rejects stale/malformed references, exposes only terminal policy and does not mutate on errors",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/feedback.test.ts",
+          "name": "deterministic feedback over committed application records built browser contains no hidden scenario definitions, utility tables or witness identifiers",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/g2.test.ts",
+          "name": "G2 actual HTTP / SQLite application boundary publishes S1 once, stores exact immutable definition and metadata; only public previews/listing",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/g2.test.ts",
+          "name": "G2 actual HTTP / SQLite application boundary pins old sessions to stored definitions; a changed reference is a new version",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/g2.test.ts",
+          "name": "G2 actual HTTP / SQLite application boundary persists and renders GS1 exactly through G1: MUTUAL_GAIN",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/g2.test.ts",
+          "name": "G2 actual HTTP / SQLite application boundary persists and renders GS2 exactly through G1: ACCEPTABLE_PARTIAL",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/g2.test.ts",
+          "name": "G2 actual HTTP / SQLite application boundary persists and renders GS3 exactly through G1: NO_AGREEMENT",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/g2.test.ts",
+          "name": "G2 actual HTTP / SQLite application boundary persists and renders GS4 exactly through G1: POOR_AGREEMENT",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/g2.test.ts",
+          "name": "G2 actual HTTP / SQLite application boundary persists and renders GS5 exactly through G1: POOR_AGREEMENT",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/g2.test.ts",
+          "name": "G2 actual HTTP / SQLite application boundary persists and renders GS6 exactly through G1: NO_AGREEMENT",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/g2.test.ts",
+          "name": "G2 actual HTTP / SQLite application boundary persists and renders GS7 exactly through G1: MUTUAL_GAIN",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/g2.test.ts",
+          "name": "G2 actual HTTP / SQLite application boundary returns identical persisted response for duplicate request before checking revision, even after later moves",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/g2.test.ts",
+          "name": "G2 actual HTTP / SQLite application boundary allows just one of two different requests with the same expected revision to commit",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/g2.test.ts",
+          "name": "G2 actual HTTP / SQLite application boundary rolls back an inserted turn when SQLite fails during the session update; exact retry succeeds after repair",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/g2.test.ts",
+          "name": "G2 actual HTTP / SQLite application boundary physically impossible valid offer consumes a turn and displays rejection plus exact counteroffer",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/g2.test.ts",
+          "name": "G2 actual HTTP / SQLite application boundary keeps an active opponent commitment through an unrelated question and accepts its exact ID",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/g2.test.ts",
+          "name": "G2 actual HTTP / SQLite application boundary replays with a new ID, the same version, clean private G1 state, and unchanged original",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/g2.test.ts",
+          "name": "G2 actual HTTP / SQLite application boundary recovers the same session/transcript on database reopen and can continue to agreement",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/g2.test.ts",
+          "name": "G2 actual HTTP / SQLite application boundary reloads stored prose without regenerating historical replies",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/g2.test.ts",
+          "name": "G2 actual HTTP / SQLite application boundary fails closed on corrupt persisted state: {invalid",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/g2.test.ts",
+          "name": "G2 actual HTTP / SQLite application boundary fails closed on corrupt persisted state: {}",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/g2.test.ts",
+          "name": "G2 actual HTTP / SQLite application boundary fails closed on corrupt persisted state: schema-valid-incoherent",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/g2.test.ts",
+          "name": "G2 actual HTTP / SQLite application boundary rejects a corrupt definition hash and semantic-invalid stored definition without changing a session",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/g2.test.ts",
+          "name": "G2 actual HTTP / SQLite application boundary validates body/params, unknown resources, terminal/result state, and safe errors",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/g2.test.ts",
+          "name": "G2 actual HTTP / SQLite application boundary keeps damaging wording distinct from respectful firmness through HTTP and rendering",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/g2.test.ts",
+          "name": "upgrades an existing G0 file once, retaining original sentinel and migration timestamp",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/g2.test.ts",
+          "name": "renders authority rejection from real G1 events without its private thresholds",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/g2.test.ts",
+          "name": "renders identical canonical replies and own player messages for identical G1 events/projections",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/static.test.ts",
+          "name": "production static integration (run npm run build first) serves the real built entry and assets alongside JSON health",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/static.test.ts",
+          "name": "production static integration (run npm run build first) fails closed and releases SQLite when the production build is missing",
+          "status": "passed"
+        },
+        {
+          "file": "packages/contracts/test/schemas.test.ts",
+          "name": "domain schemas export to JSON Schema without executable conversions",
+          "status": "passed"
+        },
+        {
+          "file": "packages/contracts/test/schemas.test.ts",
+          "name": "schema round trip preserves every explicit data field and rejects unknown nested properties",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/offers.test.ts",
+          "name": "offer lifecycle and terminal precedence an active opponent offer survives unrelated questions, with its exact ID and terms",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/offers.test.ts",
+          "name": "offer lifecycle and terminal precedence an already-issued commitment survives an actual aspiration increase and is accepted on turn 8",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/offers.test.ts",
+          "name": "offer lifecycle and terminal precedence replacement closes the former offer; a stale ID or arbitrary ID consumes no turn",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/offers.test.ts",
+          "name": "offer lifecycle and terminal precedence player counteroffer must reference the exact active offer",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/offers.test.ts",
+          "name": "offer lifecycle and terminal precedence last-turn explicit player and opponent walkaways take precedence over round_limit",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/offers.test.ts",
+          "name": "offer lifecycle and terminal precedence terminal state rejects subsequent actions without mutation or extra evidence",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/offers.test.ts",
+          "name": "offer lifecycle and terminal precedence invalid shape/domain/partial offers never consume a turn; impossible full offers do",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/offers.test.ts",
+          "name": "offer lifecycle and terminal precedence no acceptable counteroffer gives a deterministic reason and does not invent terms",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/offers.test.ts",
+          "name": "bounded counteroffer proof every accepted S1-SUPPLY-LAUNCH package obeys physical, authority and reservation bounds",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/offers.test.ts",
+          "name": "bounded counteroffer proof every accepted S2-WORKLOAD-URGENT package obeys physical, authority and reservation bounds",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/offers.test.ts",
+          "name": "bounded counteroffer proof nominal distance is 0/1 while ordered distance counts domain positions",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/offers.test.ts",
+          "name": "bounded counteroffer proof equal distance and utility resolve by canonical catalog index, including per-candidate discounts",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/offers.test.ts",
+          "name": "bounded counteroffer proof every S1-SUPPLY-LAUNCH package: candidate validity and lexicographic optimality over bounded policy states",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/offers.test.ts",
+          "name": "bounded counteroffer proof every S2-WORKLOAD-URGENT package: candidate validity and lexicographic optimality over bounded policy states",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "social state, disclosure and anti-farming neutral starts at 50/20",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "social state, disclosure and anti-farming friendly starts at 60/10",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "social state, disclosure and anti-farming skeptical starts at 40/30",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "social state, disclosure and anti-farming beginner exact disclosure equality and premium",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "social state, disclosure and anti-farming normal exact disclosure equality and premium",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "social state, disclosure and anti-farming advanced exact disclosure equality and premium",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "social state, disclosure and anti-farming a compound question reveals only the primary topic and cannot use its new fact as pre-turn evidence",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "social state, disclosure and anti-farming repeated question, acknowledgement and argument earn no further social effect or credit",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "social state, disclosure and anti-farming compound turn caps trust at +6 and progress at one; skipped rewards are not farmable later",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "social state, disclosure and anti-farming credits cap at five despite additional meaningful actions",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "social state, disclosure and anti-farming damaging turn suppresses trust, repair, credit and new argument discount, retaining prior applicable discounts",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "social state, disclosure and anti-farming strongest damaging effect is selected once, including explicit contradiction",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "social state, disclosure and anti-farming trust and tension clip at 0 and 100",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "social state, disclosure and anti-farming 79 does not warn, 80 warns, then a damaging offer triggers walkaway before any new offer",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "social state, disclosure and anti-farming unused exact acknowledgement repairs a neutral warning to tension 76",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "social state, disclosure and anti-farming unused exact acknowledgement repairs a skeptical warning to tension 78",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "social state, disclosure and anti-farming questions and rejection explain physical/authority boundaries independently of trust",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "social state, disclosure and anti-farming empty clarification and elapsed turns never lower aspiration",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "social state, disclosure and anti-farming a repeated identical offer cannot earn first-offer or conditional-exchange credit",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "social state, disclosure and anti-farming a conditional exchange earns credit only for a new reciprocal change on another issue",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "social state, disclosure and anti-farming returning to an identical offer through another package cannot farm exchange credit",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "social state, disclosure and anti-farming a damaging first feasible offer cannot replay the same one-time credit on a later turn",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "economic policy and role/resource separation the aspiration formula has exact trust floors, per-package discounts and reservation floor",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "economic policy and role/resource separation reservation equality is accepted with >=; below reservation never is",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "economic policy and role/resource separation max trust, credit and arguments cannot override physical impossibility or authority",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "economic policy and role/resource separation specialist cannot initiate help; team lead can; a player offer grants a resource to either role",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "economic policy and role/resource separation new opponent commitment reveals resources, but S1 prepayment never auto-reveals cashflow motivation",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/policy.test.ts",
+          "name": "economic policy and role/resource separation counteroffer selection cannot consult the player BATNA or private utility",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/projection.test.ts",
+          "name": "explicit public/private projection boundary S1-SUPPLY-LAUNCH initial serialization excludes hidden facts, bindings, utility, reservation and witnesses",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/projection.test.ts",
+          "name": "explicit public/private projection boundary S2-WORKLOAD-URGENT initial serialization excludes hidden facts, bindings, utility, reservation and witnesses",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/projection.test.ts",
+          "name": "explicit public/private projection boundary private sentinel numbers and prose never serialize, even with unknown keys attached at runtime",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/projection.test.ts",
+          "name": "explicit public/private projection boundary revealing logistics permits only that fact and its now-grounded argument",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/projection.test.ts",
+          "name": "explicit public/private projection boundary GS1 terminal DTO still excludes opponent metrics and internal events",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/projection.test.ts",
+          "name": "explicit public/private projection boundary GS2 terminal DTO still excludes opponent metrics and internal events",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/projection.test.ts",
+          "name": "explicit public/private projection boundary GS3 terminal DTO still excludes opponent metrics and internal events",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/projection.test.ts",
+          "name": "explicit public/private projection boundary GS4 terminal DTO still excludes opponent metrics and internal events",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/projection.test.ts",
+          "name": "explicit public/private projection boundary GS5 terminal DTO still excludes opponent metrics and internal events",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/projection.test.ts",
+          "name": "explicit public/private projection boundary GS6 terminal DTO still excludes opponent metrics and internal events",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/projection.test.ts",
+          "name": "explicit public/private projection boundary GS7 terminal DTO still excludes opponent metrics and internal events",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/projection.test.ts",
+          "name": "explicit public/private projection boundary GT1 terminal DTO still excludes opponent metrics and internal events",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/projection.test.ts",
+          "name": "explicit public/private projection boundary GT2 terminal DTO still excludes opponent metrics and internal events",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/projection.test.ts",
+          "name": "explicit public/private projection boundary GT3 terminal DTO still excludes opponent metrics and internal events",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/projection.test.ts",
+          "name": "explicit public/private projection boundary GT4 terminal DTO still excludes opponent metrics and internal events",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/projection.test.ts",
+          "name": "explicit public/private projection boundary GT5 terminal DTO still excludes opponent metrics and internal events",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/projection.test.ts",
+          "name": "explicit public/private projection boundary GT6 terminal DTO still excludes opponent metrics and internal events",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/projection.test.ts",
+          "name": "explicit public/private projection boundary both projections create independent nested objects; private export is explicitly runtime-validated",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/projection.test.ts",
+          "name": "explicit public/private projection boundary player validation failure exposes no private diagnostic",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/projection.test.ts",
+          "name": "explicit public/private projection boundary production generic code has no reference IDs, RNG, clock, database or external-service dependency",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation rejects unknown root key at the runtime boundary",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation rejects unknown policy key at the runtime boundary",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation rejects function at the runtime boundary",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation rejects Date at the runtime boundary",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation rejects Map at the runtime boundary",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation rejects Set at the runtime boundary",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation rejects one participant at the runtime boundary",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation rejects one issue at the runtime boundary",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation rejects five issues at the runtime boundary",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation rejects NaN at the runtime boundary",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation rejects Infinity at the runtime boundary",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation rejects fraction at the runtime boundary",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation rejects unsafe integer at the runtime boundary",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation rejects BigInt at the runtime boundary",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation rejects arbitrary constraint at the runtime boundary",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation rejects wrong maxTurns at the runtime boundary",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: duplicate issue",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: duplicate value",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: duplicate participant",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: wrong party order",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: missing utility table",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: missing utility cell",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: undefined utility value",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: unknown issue reference",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: mismatched BATNA",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: target below reservation",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: target impossible",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: utility out of range",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: utility spread too narrow",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: unknown authority value",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: unknown fact owner",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: unknown argument fact",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: ungrounded interest argument",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: argument unrelated to its interest",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: commitment cannot disclose motivation",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: unrelated explanation trigger",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: undisclosable hidden fact",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: trust-locked authority explanation",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: hidden explanation without trigger",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: unknown witness topic",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: witness uses future evidence",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: duplicate witness actions",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: conflicting constraints",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation semantic error: empty rational agreement set",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation pair interactions require complete and unique Cartesian coverage",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation linear constraints also require complete contribution lookups",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation all three constraint types work from data; generic forbid_combination has precise reason IDs",
+          "status": "passed"
+        },
+        {
+          "file": "packages/domain/test/validation.test.ts",
+          "name": "strict schema and separate semantic validation out-of-domain, duplicate or partial packages fail normalization without rounding",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/goldens.test.ts",
+          "name": "Frozen deterministic golden traces GS1 matches all planned consequences",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/goldens.test.ts",
+          "name": "Frozen deterministic golden traces GS2 matches all planned consequences",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/goldens.test.ts",
+          "name": "Frozen deterministic golden traces GS3 matches all planned consequences",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/goldens.test.ts",
+          "name": "Frozen deterministic golden traces GS4 matches all planned consequences",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/goldens.test.ts",
+          "name": "Frozen deterministic golden traces GS5 matches all planned consequences",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/goldens.test.ts",
+          "name": "Frozen deterministic golden traces GS6 matches all planned consequences",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/goldens.test.ts",
+          "name": "Frozen deterministic golden traces GS7 matches all planned consequences",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/goldens.test.ts",
+          "name": "Frozen deterministic golden traces GT1 matches all planned consequences",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/goldens.test.ts",
+          "name": "Frozen deterministic golden traces GT2 matches all planned consequences",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/goldens.test.ts",
+          "name": "Frozen deterministic golden traces GT3 matches all planned consequences",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/goldens.test.ts",
+          "name": "Frozen deterministic golden traces GT4 matches all planned consequences",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/goldens.test.ts",
+          "name": "Frozen deterministic golden traces GT5 matches all planned consequences",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/goldens.test.ts",
+          "name": "Frozen deterministic golden traces GT6 matches all planned consequences",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/goldens.test.ts",
+          "name": "Frozen deterministic golden traces all four outcome families exist in each reference",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/goldens.test.ts",
+          "name": "Frozen deterministic golden traces GS3 warning occurs at tension 80 on the third threat; next threat walks away",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/goldens.test.ts",
+          "name": "Frozen deterministic golden traces GT5 resource disclosure from an issued counteroffer cannot be farmed as discovery",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/goldens.test.ts",
+          "name": "Frozen deterministic golden traces W1 canonical tone causes the planned causal divergence, without NLU",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/goldens.test.ts",
+          "name": "Frozen deterministic golden traces A1 equal offer terms: a grounded logistics argument changes rejection into acceptance",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/goldens.test.ts",
+          "name": "Frozen deterministic golden traces rejected/stale revisions preserve the entire state and cannot consume a turn",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/models.test.ts",
+          "name": "reference arithmetic and full enumeration S1-SUPPLY-LAUNCH strict schema, semantics and executable witnesses",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/models.test.ts",
+          "name": "reference arithmetic and full enumeration S2-WORKLOAD-URGENT strict schema, semantics and executable witnesses",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/models.test.ts",
+          "name": "reference arithmetic and full enumeration S1 95/split40at7_rest14/50 gives 64/27",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/models.test.ts",
+          "name": "reference arithmetic and full enumeration S1 100/split40at7_rest14/30 gives 62/20",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/models.test.ts",
+          "name": "reference arithmetic and full enumeration S1 105/all7/50 gives 59/21",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/models.test.ts",
+          "name": "reference arithmetic and full enumeration S1 110/all7/50 gives 54/26",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/models.test.ts",
+          "name": "reference arithmetic and full enumeration S1 90/all7/0 gives 80/-14",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/models.test.ts",
+          "name": "reference arithmetic and full enumeration S2 full/2/1/1 gives 47/30; feasible=true",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/models.test.ts",
+          "name": "reference arithmetic and full enumeration S2 core/2/1/0 gives 32/36; feasible=true",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/models.test.ts",
+          "name": "reference arithmetic and full enumeration S2 full/5/0/1 gives 35/28; feasible=true",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/models.test.ts",
+          "name": "reference arithmetic and full enumeration S2 full/2/0/0 gives 65/8; feasible=false",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/models.test.ts",
+          "name": "reference arithmetic and full enumeration S2 core/5/0/0 gives 20/34; feasible=true",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/models.test.ts",
+          "name": "reference arithmetic and full enumeration S1 has exactly 54 raw packages and the three documented rational Pareto packages",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/models.test.ts",
+          "name": "reference arithmetic and full enumeration S2 has exactly 16 raw packages, 11 feasible and 6 mutually rational",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/models.test.ts",
+          "name": "reference arithmetic and full enumeration independent arithmetic oracle over every S1-SUPPLY-LAUNCH package",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/models.test.ts",
+          "name": "reference arithmetic and full enumeration independent arithmetic oracle over every S2-WORKLOAD-URGENT package",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/models.test.ts",
+          "name": "reference arithmetic and full enumeration catalog indices are contiguous; normalization ignores term/object insertion order",
+          "status": "passed"
+        },
+        {
+          "file": "packages/scenarios/test/models.test.ts",
+          "name": "reference arithmetic and full enumeration the generic enumerator reaches the 1296-package maximum in canonical order",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access logout during asynchronous password verification prevents the pending elevation from reviving access",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/access.test.ts",
+          "name": "G8 real HTTP boundary / durable access missing CSRF rejects every classified browser mutation before domain state changes",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/local-launch.test.ts",
+          "name": "owner launch uses UTF-8 stdin / ephemeral hash, real production build and loopback; logs omit credentials",
+          "status": "passed"
+        },
+        {
+          "file": "apps/server/test/password-command.test.ts",
+          "name": "local generator reads UTF-8 password from stdin, outputs only a supported salted hash and rejects wrong password",
+          "status": "passed"
+        }
+      ]
+    },
+    "chrome": {
+      "unique": 30,
+      "existing": 25,
+      "new": 5,
+      "executions": 36,
+      "reruns": 6,
+      "initialFailedExecutions": 2,
+      "campaigns": [
+        {
+          "name": "g8-browser-first",
+          "passed": 2,
+          "failed": 1,
+          "durationMs": 11572.134,
+          "reportSha256": "3a7e3934cb263d689726874f7d6a9f974e2d21ab8f1b88256e05046cd64194c8"
+        },
+        {
+          "name": "g8-browser-origin-inspection",
+          "passed": 0,
+          "failed": 1,
+          "durationMs": 2468.245,
+          "reportSha256": "6de2ff834f6bc2cea63582c3b1a81728db287cfa3121c01d23695ac8e3fd35d4"
+        },
+        {
+          "name": "g8-browser-origin-final",
+          "passed": 1,
+          "failed": 0,
+          "durationMs": 2735.7169999999996,
+          "reportSha256": "31cf6d33565fba0bac905065d6756abaf3ba65f9e88e1ad427ae51a15a9b2683"
+        },
+        {
+          "name": "g8-browser-expired-final",
+          "passed": 1,
+          "failed": 0,
+          "durationMs": 3470.9120000000003,
+          "reportSha256": "4ea32767f11990f5a27e8dbb7bdecf06445a5e798685de8e64d54e8f7f62c8b0"
+        },
+        {
+          "name": "g8-browser-regressions",
+          "passed": 25,
+          "failed": 0,
+          "durationMs": 73188.962,
+          "reportSha256": "44a9ccd27caca4a0af471ab15ca6acae672eba6b1822781083314890aeb1bcc1"
+        },
+        {
+          "name": "g8-browser-review",
+          "passed": 5,
+          "failed": 0,
+          "durationMs": 16519.391,
+          "reportSha256": "a123c02aa2a9d6f68188b3168f38830033e5ee47f112fff2457af382c5623318"
+        }
+      ],
+      "cases": [
+        {
+          "file": "access.spec.ts",
+          "name": "G8 S1: admin login/configure/publish/logout; player G6/replay/restart and independent browser UUID isolation",
+          "status": "passed"
+        },
+        {
+          "file": "access.spec.ts",
+          "name": "G8 S2: admin login/configure/publish/logout; player G6/replay/restart and independent browser UUID isolation",
+          "status": "passed"
+        },
+        {
+          "file": "access.spec.ts",
+          "name": "G8 real foreign-origin form/fetch and browser CSRF rejection leave publication/session state unchanged",
+          "status": "passed"
+        },
+        {
+          "file": "access.spec.ts",
+          "name": "G8 expired administrator returns to login, cannot publish after restart, and retains saved draft",
+          "status": "passed"
+        },
+        {
+          "file": "app-s2.spec.ts",
+          "name": "S2 complete mutual route, concurrent S1, refresh/restart, persisted result and replay at 1280px",
+          "status": "passed"
+        },
+        {
+          "file": "app-s2.spec.ts",
+          "name": "S2 partial outcome through resource tradeoff at 390px",
+          "status": "passed"
+        },
+        {
+          "file": "app-s2.spec.ts",
+          "name": "S2 poor agreement explains own alternative at 360px",
+          "status": "passed"
+        },
+        {
+          "file": "app-s2.spec.ts",
+          "name": "S2 impossible offer, no-deal result and terminal guard at 390px",
+          "status": "passed"
+        },
+        {
+          "file": "app-s2.spec.ts",
+          "name": "S2 invalid input, counteroffer replacement, stale proposal and exact active acceptance",
+          "status": "passed"
+        },
+        {
+          "file": "app-s2.spec.ts",
+          "name": "S2 pending lock, duplicate click, lost committed response, same identity retry and stale tab error",
+          "status": "passed"
+        },
+        {
+          "file": "context-config.spec.ts",
+          "name": "configured S1: real lost publication response, safe retry, preparation, G6 evidence and same-version replay",
+          "status": "passed"
+        },
+        {
+          "file": "context-config.spec.ts",
+          "name": "configured S2: explicit dependencies, unavailable resources, valid lead goal, draft and active-session restart, G6",
+          "status": "passed"
+        },
+        {
+          "file": "context-config.spec.ts",
+          "name": "two real tabs: stale publication/save preserve input, restore is explicit, validation pending and duplicate IDs",
+          "status": "passed"
+        },
+        {
+          "file": "context-config.spec.ts",
+          "name": "admin initial defaults and keyboard focus without horizontal overflow at 360",
+          "status": "passed"
+        },
+        {
+          "file": "context-config.spec.ts",
+          "name": "admin initial defaults and keyboard focus without horizontal overflow at 390",
+          "status": "passed"
+        },
+        {
+          "file": "context-config.spec.ts",
+          "name": "admin initial defaults and keyboard focus without horizontal overflow at 1280",
+          "status": "passed"
+        },
+        {
+          "file": "feedback.spec.ts",
+          "name": "S1 real early exit then prepared replay applies the suggested question and compares shared checks at 390px",
+          "status": "passed"
+        },
+        {
+          "file": "feedback.spec.ts",
+          "name": "S2 full guided agreement renders report, exact evidence and stable refresh/restart at 1280px",
+          "status": "passed"
+        },
+        {
+          "file": "feedback.spec.ts",
+          "name": "S2 poor agreement keeps utility separate from process 44.12 at 360px",
+          "status": "passed"
+        },
+        {
+          "file": "feedback.spec.ts",
+          "name": "S1 no agreement retains grounded process credit with independently expected 70",
+          "status": "passed"
+        },
+        {
+          "file": "feedback.spec.ts",
+          "name": "network failure fetching feedback keeps terminal facts, actionable error and retry intact at 390px",
+          "status": "passed"
+        },
+        {
+          "file": "feedback.spec.ts",
+          "name": "legacy v2 records remain inaccessible; fixture-only ownership retains mismatched replay rendering",
+          "status": "passed"
+        },
+        {
+          "file": "feedback.spec.ts",
+          "name": "guided genuine conditional exchange is committed, explained and linked at 360px",
+          "status": "passed"
+        },
+        {
+          "file": "g2.spec.ts",
+          "name": "A: admin publish → GS1 → refresh + process restart → result → clean replay, 1280px",
+          "status": "passed"
+        },
+        {
+          "file": "g2.spec.ts",
+          "name": "B: early poor offer and deliberate pressure cause opponent walkaway",
+          "status": "passed"
+        },
+        {
+          "file": "g2.spec.ts",
+          "name": "active offer survives question and refresh, exact acceptance confirmation, 390px",
+          "status": "passed"
+        },
+        {
+          "file": "g2.spec.ts",
+          "name": "responsive 360px: admin, briefing, offer, keyboard confirmation, poor result",
+          "status": "passed"
+        },
+        {
+          "file": "g2.spec.ts",
+          "name": "responsive 390px: admin, briefing, offer, keyboard confirmation, poor result",
+          "status": "passed"
+        },
+        {
+          "file": "g2.spec.ts",
+          "name": "uncertain network response → reload/retry once; stale tab reloads authoritative state; confirmed walkaway",
+          "status": "passed"
+        },
+        {
+          "file": "access.spec.ts",
+          "name": "G8 logout in another tab returns stale admin to login on CSRF refusal without retrying publication",
+          "status": "passed"
+        }
+      ],
+      "finalSecurityEvidence": {
+        "browser": "153.0.8010.53",
+        "cases": [
+          "G8 S1: admin login/configure/publish/logout; player G6/replay/restart and independent browser UUID isolation",
+          "G8 S2: admin login/configure/publish/logout; player G6/replay/restart and independent browser UUID isolation",
+          "G8 real foreign-origin form/fetch and browser CSRF rejection leave publication/session state unchanged",
+          "G8 expired administrator returns to login, cannot publish after restart, and retains saved draft",
+          "G8 logout in another tab returns stale admin to login on CSRF refusal without retrying publication"
+        ],
+        "negatives": [
+          {
+            "action": "logged-out administrator publish",
+            "status": 401
+          },
+          {
+            "action": "foreign exact UUID GET",
+            "status": 404
+          },
+          {
+            "action": "foreign exact UUID turn",
+            "status": 404
+          },
+          {
+            "action": "player admin draft",
+            "status": 403
+          },
+          {
+            "action": "Chrome authenticated mutation missing CSRF",
+            "status": 403
+          },
+          {
+            "action": "foreign report",
+            "status": 404
+          },
+          {
+            "action": "foreign result",
+            "status": 404
+          },
+          {
+            "action": "foreign replay creation",
+            "status": 404
+          },
+          {
+            "action": "foreign replay GET",
+            "status": 404
+          },
+          {
+            "action": "logged-out administrator publish",
+            "status": 401
+          },
+          {
+            "action": "foreign exact UUID GET",
+            "status": 404
+          },
+          {
+            "action": "foreign exact UUID turn",
+            "status": 404
+          },
+          {
+            "action": "player admin draft",
+            "status": 403
+          },
+          {
+            "action": "Chrome authenticated mutation missing CSRF",
+            "status": 403
+          },
+          {
+            "action": "foreign report",
+            "status": 404
+          },
+          {
+            "action": "foreign result",
+            "status": 404
+          },
+          {
+            "action": "foreign replay creation",
+            "status": 404
+          },
+          {
+            "action": "foreign replay GET",
+            "status": 404
+          },
+          {
+            "action": "real cross-site Chrome mutation",
+            "status": 403
+          },
+          {
+            "action": "real Chrome wrong CSRF with admin cookie",
+            "status": 403
+          },
+          {
+            "action": "expired admin publish",
+            "status": 401
+          },
+          {
+            "action": "expired admin after real restart",
+            "status": 401
+          },
+          {
+            "action": "stale admin tab after logout",
+            "status": 403
+          }
+        ],
+        "screenshots": [
+          ".tools/g8-login-S1.png",
+          ".tools/g8-published-S1.png",
+          ".tools/g8-foreign-uuid-S1.png",
+          ".tools/g8-report-S1.png",
+          ".tools/g8-process-S1.png",
+          ".tools/g8-login-S2.png",
+          ".tools/g8-published-S2.png",
+          ".tools/g8-foreign-uuid-S2.png",
+          ".tools/g8-report-S2.png",
+          ".tools/g8-process-S2.png",
+          ".tools/g8-expired-admin.png"
+        ],
+        "productions": [
+          {
+            "command": "npm start",
+            "runtime": "v24.21.0",
+            "platform": "win32",
+            "starts": 2,
+            "cleanShutdowns": 2,
+            "serverPids": [
+              11636,
+              24832
+            ],
+            "aiCredentials": "NONE",
+            "database": "isolated real SQLite",
+            "shutdown": "real SIGINT handler via test-only stdin adapter",
+            "orphanProcesses": 0
+          },
+          {
+            "command": "npm start",
+            "runtime": "v24.21.0",
+            "platform": "win32",
+            "starts": 2,
+            "cleanShutdowns": 2,
+            "serverPids": [
+              24868,
+              19252
+            ],
+            "aiCredentials": "NONE",
+            "database": "isolated real SQLite",
+            "shutdown": "real SIGINT handler via test-only stdin adapter",
+            "orphanProcesses": 0
+          },
+          {
+            "command": "npm start",
+            "runtime": "v24.21.0",
+            "platform": "win32",
+            "starts": 1,
+            "cleanShutdowns": 1,
+            "serverPids": [
+              18100
+            ],
+            "aiCredentials": "NONE",
+            "database": "isolated real SQLite",
+            "shutdown": "real SIGINT handler via test-only stdin adapter",
+            "orphanProcesses": 0
+          },
+          {
+            "command": "npm start",
+            "runtime": "v24.21.0",
+            "platform": "win32",
+            "starts": 2,
+            "cleanShutdowns": 2,
+            "serverPids": [
+              15288,
+              24984
+            ],
+            "aiCredentials": "NONE",
+            "database": "isolated real SQLite",
+            "shutdown": "real SIGINT handler via test-only stdin adapter",
+            "orphanProcesses": 0
+          },
+          {
+            "command": "npm start",
+            "runtime": "v24.21.0",
+            "platform": "win32",
+            "starts": 1,
+            "cleanShutdowns": 1,
+            "serverPids": [
+              17212
+            ],
+            "aiCredentials": "NONE",
+            "database": "isolated real SQLite",
+            "shutdown": "real SIGINT handler via test-only stdin adapter",
+            "orphanProcesses": 0
+          }
+        ],
+        "cookies": [
+          {
+            "profile": "local",
+            "httpOnly": true,
+            "secure": false,
+            "sameSite": "Strict",
+            "path": "/",
+            "rotated": true,
+            "documentCookieReadable": false
+          },
+          {
+            "profile": "local",
+            "httpOnly": true,
+            "secure": false,
+            "sameSite": "Strict",
+            "path": "/",
+            "rotated": true,
+            "documentCookieReadable": false
+          }
+        ],
+        "errors": []
+      }
+    },
+    "nonCaseExecutions": {
+      "initialBuild": "Failed TypeScript logger serializer shape; corrected",
+      "initialTypecheck": "Failed fixture union typing; corrected",
+      "emptyBrowserCampaign": "Windows npm regex pipe quoting error; zero tests executed",
+      "finalBuildMs": 5931,
+      "finalTypecheckMs": 10759,
+      "productionLifecycleSmoke": {
+        "pass": true,
+        "starts": 2,
+        "cleanShutdowns": 2,
+        "elapsedMs": 1261
+      },
+      "ownerLaunch": "One unique integration case, real production process, ephemeral UTF-8 password; no demo DB used",
+      "acceptedG2Fixture": "Auxiliary byte-only comparison; not an extra test-case count"
+    },
+    "constraints": {
+      "gitNetworkSeconds": 120,
+      "testsTypecheckSeconds": 180,
+      "buildSeconds": 300,
+      "startupSeconds": 12,
+      "browserCampaignSeconds": 180,
+      "browserTestSeconds": 90,
+      "noTimeoutIncreases": true
+    },
+    "screenshots": [
+      {
+        "path": "docs/gates/evidence/app-g8-access-boundary-01/g8-expired-admin.png",
+        "sha256": "8eaaf882110d663e097e03f193e4022471be723ba57707edb82c40203411ee36",
+        "visuallyReviewed": true,
+        "secrets": false
+      },
+      {
+        "path": "docs/gates/evidence/app-g8-access-boundary-01/g8-foreign-uuid-S1.png",
+        "sha256": "64bfc4377ccc839ceef0bf00cb656e6bf7f06aa897ca79cdff1cc3e37fe1303e",
+        "visuallyReviewed": true,
+        "secrets": false
+      },
+      {
+        "path": "docs/gates/evidence/app-g8-access-boundary-01/g8-login-S1.png",
+        "sha256": "001525ca7c4f13b5f34d4b22b6a4b87c60cabe0a9b11e12f2ce840b5f889889c",
+        "visuallyReviewed": true,
+        "secrets": false
+      },
+      {
+        "path": "docs/gates/evidence/app-g8-access-boundary-01/g8-process-S1.png",
+        "sha256": "3f981b2c8229ef417e6c2f7e69bbd911630ce68d27d524e41dc5ce9ff77fb634",
+        "visuallyReviewed": true,
+        "secrets": false
+      },
+      {
+        "path": "docs/gates/evidence/app-g8-access-boundary-01/g8-process-S2.png",
+        "sha256": "de11784a60fb4afbd95a0e120a44ffc8ba6270fa7b21a1d479c7957164edf009",
+        "visuallyReviewed": true,
+        "secrets": false
+      },
+      {
+        "path": "docs/gates/evidence/app-g8-access-boundary-01/g8-published-S2.png",
+        "sha256": "f0c4468128e5df2c9a78d5707d5ba3da0499e72a20ae87bf49b31074d7490b33",
+        "visuallyReviewed": true,
+        "secrets": false
+      }
+    ],
+    "review": "Implementer focused self-review, no independent reviewer; no subagents",
+    "regressions": {
+      "S1Utility": 64,
+      "S2Utility": 47,
+      "preparedProcess": 100,
+      "poorProcess": 44.12,
+      "groundedNoAgreementProcess": 70,
+      "insufficientEvidencePreserved": true,
+      "immutablePublicationAndEvidenceLinks": true,
+      "revisionAndIdempotencyUnchanged": true
+    }
+  },
+  "protection": {
+    "originalHead": "2034687f6f22b2973935f2c9c30bc9380c88b071",
+    "originalStatus": "",
+    "originalTrackedFiles": 346,
+    "featureProtectedFiles": 369,
+    "trainingPinsVerified": 31,
+    "mismatches": [],
+    "originalManifestDigest": "7886fa6b3a02f1c5270f42d7d4e583108876d512bc8e1419ea3de7801bd61cf3",
+    "featureManifestDigest": "48a8b1eb2241be2dadff04ab152cd2855d6cc928cf4c15d2c4a455bd32103a26",
+    "historicalReceiptsByteIdentical": true,
+    "featureHead": "720a2e8ea79ac17be965c5d6fd1617a73d5b47c9",
+    "changed": [
+      ".env.example",
+      "README.md",
+      "apps/server/package.json",
+      "apps/server/src/api-error.ts",
+      "apps/server/src/app.ts",
+      "apps/server/src/database.ts",
+      "apps/server/src/env.ts",
+      "apps/server/src/routes/feedback-routes.ts",
+      "apps/server/src/routes/g2-routes.ts",
+      "apps/server/test/catalog.test.ts",
+      "apps/server/test/context.test.ts",
+      "apps/server/test/database.test.ts",
+      "apps/server/test/env.test.ts",
+      "apps/server/test/feedback.test.ts",
+      "apps/server/test/g2.test.ts",
+      "apps/web/src/api.ts",
+      "apps/web/src/product.tsx",
+      "apps/web/src/style.css",
+      "package-lock.json",
+      "packages/contracts/package.json",
+      "playwright.config.ts",
+      "scripts/dev.mjs",
+      "scripts/smoke-production.mjs",
+      "tests/e2e/app-s2.spec.ts",
+      "tests/e2e/context-config.spec.ts",
+      "tests/e2e/feedback.spec.ts",
+      "tests/e2e/g2.spec.ts",
+      "tests/e2e/production.ts"
+    ],
+    "acceptedTrainingPins": 20,
+    "sharedAuthorityPins": 8,
+    "originalCheckoutTrackedBytesAndMetadataUnchanged": true,
+    "mainAndQwenUntouched": true,
+    "modelProviderGpuTrainingCalls": 0,
+    "mlExampleContentsRead": false,
+    "historicalPartialIncident": "Previous PARTIAL receipt preserved byte-identically and not reopened; no new read-boundary incident",
+    "remoteTrainingExecution": "UNKNOWN"
+  },
+  "delivery": {
+    "implementation": null,
+    "receiptCommit": "Resolve with git log -1 --format=%H -- docs/gates/APP_G8_ACCESS_BOUNDARY_01.md; final verification after normal push reported to owner",
+    "mergeToMain": false,
+    "forcePush": false
+  },
+  "launch": {
+    "command": "& 'C:\\Users\\BastaPC\\Desktop\\Alag\\.tools\\node-v24.21.0-win-x64\\node.exe' .\\scripts\\local-demo.mjs",
+    "cwd": "C:/Users/BastaPC/Desktop/Alag-app-work",
+    "url": "http://127.0.0.1:3000/admin",
+    "profile": "local",
+    "password": "Hidden prompt if no configured hash",
+    "defaultDatabase": ".tmp/owner-app-demo.sqlite"
+  },
+  "remaining": [
+    "Not full G8 or full AI MVP",
+    "Real TLS/HTTPS, reverse proxy and public hosting not certified",
+    "Hosted persistence/backup and clean-machine/Linux smoke not certified",
+    "No account/cookie-loss recovery",
+    "No automatic transcript/expired-auth-row retention cleanup",
+    "Single-node global login limit; broader abuse/DoS controls separate",
+    "HttpOnly does not defeat same-origin XSS or compromised host",
+    "Local HTTP assumes trusted loopback computer"
+  ],
+  "nextRecommendedTask": "Separate Qwen-independent HTTPS/proxy and persistent-host reproducibility gate with backup/restart and clean-machine smoke before public release",
+  "stop": [
+    "NO QWEN TRAINING",
+    "NO MODEL EVALUATION",
+    "NO PROVIDER CALLS",
+    "NO PUBLIC DEPLOYMENT",
+    "NO MERGE TO MAIN"
+  ]
+}

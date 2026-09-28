@@ -7,7 +7,7 @@ import { PublishedScenarioSchema, SessionViewSchema } from '@arena/contracts/g2'
 import type { SessionView } from '@arena/contracts/g2';
 import { PublishedCatalogScenarioSchema, ReferenceCatalogSchema, formatIssueValue } from '@arena/contracts/catalog';
 import { S1, S2, acknowledge, argument, offer, question, workloadTerms, walkAway, accept } from '@arena/scenarios';
-import { buildApp } from '../src/app.ts';
+import { buildApp } from './authenticated-fixture.ts';
 import { openDatabase } from '../src/database.ts';
 import { ArenaRepository } from '../src/repositories/arena-repository.ts';
 import { referencePreview } from '../src/services/session-service.ts';
@@ -127,9 +127,9 @@ describe('application catalog and S2 through the existing transaction', () => {
     const repo = new ArenaRepository(db); const newer = repo.immediate(() => repo.publish(changed));
     expect(newer.id).not.toBe(s2.scenarioVersionId);
     expect(() => db.prepare('UPDATE scenario_versions SET definition_json = ? WHERE id = ?').run('{}', s2.scenarioVersionId)).toThrow();
-    await app.close(); db = openDatabase(temp.filename);
-    app = await buildApp({ NODE_ENV: 'development', HOST: '127.0.0.1', PORT: 3000, DATABASE_PATH: temp.filename }, { database: db });
-    expect(db.prepare('SELECT version FROM schema_migrations ORDER BY version').all()).toEqual([{ version: 1 }, { version: 2 }, { version: 3 }, { version: 4 }]);
+    const jars = app.jars; await app.close(); db = openDatabase(temp.filename);
+    app = await buildApp({ NODE_ENV: 'development', HOST: '127.0.0.1', PORT: 3000, DATABASE_PATH: temp.filename }, { database: db }, jars);
+    expect(db.prepare('SELECT version FROM schema_migrations ORDER BY version').all()).toEqual([{ version: 1 }, { version: 2 }, { version: 3 }, { version: 4 }, { version: 5 }]);
     for (const s of [s1, s2]) expect((await app.inject(`/api/sessions/${s.projection.sessionId}`)).json()).toEqual(s);
     expect((await turn(s2, acknowledge('helper-available'))).projection.scenario.title).toBe(S2.title);
   });

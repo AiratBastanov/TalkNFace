@@ -6,12 +6,14 @@ import { PROJECT_ROOT } from '../src/paths.ts';
 describe('server environment', () => {
   it('starts with safe defaults and no credentials', () => {
     expect(parseEnv({})).toEqual({ NODE_ENV: 'development', HOST: '127.0.0.1', PORT: 3000,
+      ACCESS_PROFILE: 'local', APP_ORIGIN: 'http://127.0.0.1:3000',
       DATABASE_PATH: resolve(PROJECT_ROOT, 'data/arena.sqlite') });
   });
 
   it('accepts explicit settings and returns a typed port and deterministic file path', () => {
-    expect(parseEnv({ NODE_ENV: 'production', HOST: '0.0.0.0', PORT: '4321', DATABASE_PATH: './data/custom.sqlite' }))
-      .toEqual({ NODE_ENV: 'production', HOST: '0.0.0.0', PORT: 4321, DATABASE_PATH: resolve(PROJECT_ROOT, 'data/custom.sqlite') });
+    expect(parseEnv({ NODE_ENV: 'production', HOST: '127.0.0.1', PORT: '4321', DATABASE_PATH: './data/custom.sqlite' }))
+      .toEqual({ NODE_ENV: 'production', HOST: '127.0.0.1', PORT: 4321, DATABASE_PATH: resolve(PROJECT_ROOT, 'data/custom.sqlite'),
+        ACCESS_PROFILE: 'local', APP_ORIGIN: 'http://127.0.0.1:4321' });
   });
 
   it.each(['0', '-1', '65536', '3.5', '', 'invalid'])('rejects invalid PORT %j without echoing it', (PORT) => {

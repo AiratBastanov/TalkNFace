@@ -1,4 +1,4 @@
-import type { ApiErrorBody } from '@arena/contracts/g2';
+import type { AccessErrorBody as ApiErrorBody } from '@arena/contracts/access';
 
 export class ApiError extends Error {
   readonly status: number;
