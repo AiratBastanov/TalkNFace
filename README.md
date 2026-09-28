@@ -1,19 +1,46 @@
-# Арена переговоров / Negotiation Arena
+# TalkNFace — «Арена переговоров»
 
-Тренажёр для начинающих закупщиков и руководителей: администратор задаёт контекст, проверяет и публикует ситуацию; игрок готовится, ведёт переговоры, получает разбор по сохранённым действиям и начинает повторную попытку. Доступны S1 «Поставка» и S2 «Срочная задача и нагрузка». **Guided-демо без AI**: игрок выбирает действия, результат вычисляет детерминированная учебная модель. Это не оценка реальных компетенций.
+**Отрепетируйте сложный разговор до реальной встречи.**
+
+Тренажёр для начинающего закупщика и руководителя: администратор настраивает ситуацию, игрок выбирает ходы, видит последствия и повторяет ту же версию иначе. Семьи сценариев: S1 «Поставка» и S2 «Срочная задача и нагрузка».
+
+**Сейчас работает guided-демо без AI:** игрок выбирает действия, результат считает учебная модель. Это не оценка реальных компетенций и не свободный текстовый диалог.
+
+![Результат учебной встречи S2: цель достигнута, полезность 47](docs/submission/assets/hero.png)
+
+| | |
+| --- | --- |
+| Кому | Игрок — закупщик или руководитель; администратор готовит занятие |
+| Слайды | [docs/submission/TALKNFACE_PRODUCT_PITCH_RU.pptx](docs/submission/TALKNFACE_PRODUCT_PITCH_RU.pptx) · [PDF](docs/submission/TALKNFACE_PRODUCT_PITCH_RU.pdf) |
+| Вход для жюри | [docs/submission/README.md](docs/submission/README.md) |
+| Показ 3–5 мин | [docs/DEMO_GUIDE_RU.md](docs/DEMO_GUIDE_RU.md) |
+| Обзор продукта | [docs/submission/PRODUCT_OVERVIEW_RU.md](docs/submission/PRODUCT_OVERVIEW_RU.md) |
+
+Слайды лежат на ветке `docs/organizer-presentation-01`. Ветка приложения — `feature/app-qwen-independent-01` (базовый коммит этой презентации `bb92b256ba55c72faebb69ec13a2407383bff959`). `main` — отдельный исторический handoff обучения, **не** путь запуска продукта. Команды обучения модели для показа не нужны.
+
+Интеграция этих файлов во ветку приложения владельцем ещё предстоит: на `feature/app-qwen-independent-01` каталога `docs/submission/` пока нет.
 
 ## Запустить на Windows
 
 Проверенный путь: **Windows 11 x64, Windows PowerShell 5.1, Google Chrome**, обычная учётная запись без прав администратора. Для первой установки нужен HTTPS-доступ к **nodejs.org**, **registry.npmjs.org**, **github.com** и доменам GitHub Releases (`release-assets.githubusercontent.com`, возможен `objects.githubusercontent.com`). Chrome нужен для показа; Git нужен только для получения исходников. Python, CUDA, Docker, Qwen, ключи AI, компилятор C++ и глобальные npm-пакеты не нужны.
 
-Получите именно feature-ветку (эта работа не объединена с main). **Для получения исходников нужен разрешённый доступ к GitHub-репозиторию либо исходный ZIP от владельца**: анонимное чтение репозитория в этой проверке не прошло. После получения исходников Git и GitHub credentials приложению не нужны.
+**Доступ к исходникам.** Анонимное чтение GitHub-репозитория 28 сентября 2026 вернуло 404. Нужен разрешённый доступ либо исходный ZIP от владельца. После получения файлов Git и GitHub credentials приложению не нужны.
+
+Ветка с слайдами и тем же приложением:
+
+```powershell
+git clone --single-branch --branch docs/organizer-presentation-01 https://github.com/AiratBastanov/TalkNFace.git "TalkNFace"
+Set-Location "TalkNFace"
+```
+
+Только приложение, без этой поставки слайдов:
 
 ```powershell
 git clone --single-branch --branch feature/app-qwen-independent-01 https://github.com/AiratBastanov/TalkNFace.git "Negotiation Arena"
 Set-Location "Negotiation Arena"
 ```
 
-Либо скачайте [ZIP feature-ветки](https://github.com/AiratBastanov/TalkNFace/archive/refs/heads/feature/app-qwen-independent-01.zip), распакуйте и откройте PowerShell в корне с `package.json`. Запуск не использует `.git`. Пути с пробелами поддерживаются; AI/model-каталоги запуску не нужны.
+Либо распакуйте ZIP соответствующей ветки, выданный владельцем, и откройте PowerShell в корне с `package.json`. Запуск не использует `.git`. Пути с пробелами поддерживаются; AI/model-каталоги запуску не нужны.
 
 Выполните **две команды**:
 
@@ -26,7 +53,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\windows-demo.ps1 -
 
 На проверенном ПК свежий Prepare занял **60,4 с с интерактивным вводом**, Start — **5,7 с**, из них готовность сервера — **0,67 с**. Это измерение одного ПК/сети, а не гарантия скорости любой установки.
 
-Откройте **http://127.0.0.1:3100/admin**, введите выбранный пароль. Игровой вход — **http://127.0.0.1:3100/**, регистрация не нужна. Пользуйтесь `127.0.0.1`, не заменяйте его на `localhost`: Origin проверяется точно. Без `-Port` используется 3000; занятый порт вызывает отказ. Скрипт запускает реальный Fastify/React production в фоне, только на loopback, без watch.
+Откройте **http://127.0.0.1:3100/admin**, введите выбранный пароль. Игровой вход — **http://127.0.0.1:3100/**, регистрация не нужна. Пользуйтесь `127.0.0.1`, не заменяйте его на `localhost`: Origin проверяется точно. Без `-Port` используется 3000; занятый порт вызывает отказ. Скрипт запускает реальный Fastify/React production в фоне, только на loopback, без watch. Это не публичный сайт.
 
 Остановка и последующий запуск **сохраняют данные**:
 
@@ -112,5 +139,7 @@ G8: HttpOnly/SameSite=Strict cookie, владение попытками, CSRF, 
 Этот путь — **loopback HTTP на доверенном локальном ПК**. Публичное размещение, HTTPS/reverse proxy, Linux/macOS/ARM, live AI, полные G5/G6/G7/G8 и финальная сдача хакатона не сертифицированы. Публичный listener и туннели здесь не предусмотрены.
 
 Developer-команды с Node 24: `npm ci`, `npm run build`, `npm run typecheck`, `npm test`; прежний `npm run test:e2e` использует установленный Chrome и отдельные тестовые БД. `npm start` — прежний developer entry с .env/переменными; для показа используйте Windows launcher. Новый bounded тест launcher: `node tests/clean-demo/failures.mjs`; acceptance: `node tests/clean-demo/acceptance.mjs <путь-к-чистому-checkout>` (случайный пароль только в памяти теста).
+
+Обучение и каталоги `ml/`, `tools/windows-rtx*`, `evals/` к запуску продукта не относятся. Не выполняйте команды тренировки, чтобы показать тренажёр.
 
 Принятые исторические свидетельства: [G5](docs/gates/APP_G5_CONTEXT_CONFIGURATION_01.md), [G6](docs/gates/APP_G6_DETERMINISTIC_FEEDBACK_01.md), [G8](docs/gates/APP_G8_ACCESS_BOUNDARY_01.md). Исторический [PARTIAL read-boundary incident](docs/gates/APP_AUDIT_AND_QWEN_INDEPENDENT_SLICE_01.md) сохраняется ровно как записан, не переклассифицируется и не является доказательством загрязнения gradient-training. Frozen plans/PDF и training handoff не изменяются.
