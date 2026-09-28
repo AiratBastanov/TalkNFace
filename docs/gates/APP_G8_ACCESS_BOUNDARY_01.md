@@ -2,6 +2,8 @@
 
 **VERDICT: APP_G8_ACCESS_BOUNDARY_01_PASS. REAL_APPLICATION_SMOKE = PASS.** This certifies the bounded, no-AI access component in the tested local environment, not full G8, public deployment, production hardening or live AI. [Machine receipt](evidence/APP_G8_ACCESS_BOUNDARY_01.json).
 
+Implementation commit: `dfaa7f2388d6ab7ab1af267a85e6f11bbf9cb5c0`, normally pushed and verified at feature upstream0/0 with a clean worktree. This following receipt commit records that exact verification; final delivery is checked again after its push.
+
 ## Baseline and security model (written before implementation)
 
 Worktree `C:\Users\BastaPC\Desktop\Alag-app-work`, branch `feature/app-qwen-independent-01`, exact Git HEAD/upstream `720a2e8ea79ac17be965c5d6fd1617a73d5b47c9`, clean. Authoritative origin `https://github.com/AiratBastanov/TalkNFace.git`. Original checkout and remote main `2034687f6f22b2973935f2c9c30bc9380c88b071`. No applicable AGENTS.md found in ancestors or application directories. Actual latest migration: 4. Runtime Node24.21.0, Fastify5.12.5, SQLite/better-sqlite3 12.11.1; existing lockfile inspected.
