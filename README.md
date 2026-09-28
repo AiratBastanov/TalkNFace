@@ -4,9 +4,9 @@
 
 ## Запустить на Windows
 
-Проверяемый путь: **Windows 11 x64, Windows PowerShell 5.1, Google Chrome**, обычная учётная запись без прав администратора. Для первой установки нужен HTTPS-доступ к **nodejs.org**, **registry.npmjs.org**, **github.com** и доменам GitHub Releases (`release-assets.githubusercontent.com`, возможен `objects.githubusercontent.com`). Chrome нужен для показа; Git нужен только для получения исходников. Python, CUDA, Docker, Qwen, ключи AI, компилятор C++ и глобальные npm-пакеты не нужны.
+Проверенный путь: **Windows 11 x64, Windows PowerShell 5.1, Google Chrome**, обычная учётная запись без прав администратора. Для первой установки нужен HTTPS-доступ к **nodejs.org**, **registry.npmjs.org**, **github.com** и доменам GitHub Releases (`release-assets.githubusercontent.com`, возможен `objects.githubusercontent.com`). Chrome нужен для показа; Git нужен только для получения исходников. Python, CUDA, Docker, Qwen, ключи AI, компилятор C++ и глобальные npm-пакеты не нужны.
 
-Получите именно feature-ветку (эта работа не объединена с main):
+Получите именно feature-ветку (эта работа не объединена с main). **Для получения исходников нужен разрешённый доступ к GitHub-репозиторию либо исходный ZIP от владельца**: анонимное чтение репозитория в этой проверке не прошло. После получения исходников Git и GitHub credentials приложению не нужны.
 
 ```powershell
 git clone --single-branch --branch feature/app-qwen-independent-01 https://github.com/AiratBastanov/TalkNFace.git "Negotiation Arena"
@@ -23,6 +23,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\windows-demo.ps1 -
 ```
 
 При первом Prepare дважды введите скрытый пароль администратора (12–256 символов). Придумайте свой: общего/стандартного пароля нет. Скрипт сохраняет **только scrypt-хеш**, устанавливает зависимости по lockfile, собирает production и проверяет SQLite. Постоянный сервер этот шаг не запускает. Прерванную подготовку можно повторить; БД и существующий пароль сохраняются. Повторный Prepare выполняет `npm ci` заново, без обновления lockfile.
+
+На проверенном ПК свежий Prepare занял **60,4 с с интерактивным вводом**, Start — **5,7 с**, из них готовность сервера — **0,67 с**. Это измерение одного ПК/сети, а не гарантия скорости любой установки.
 
 Откройте **http://127.0.0.1:3100/admin**, введите выбранный пароль. Игровой вход — **http://127.0.0.1:3100/**, регистрация не нужна. Пользуйтесь `127.0.0.1`, не заменяйте его на `localhost`: Origin проверяется точно. Без `-Port` используется 3000; занятый порт вызывает отказ. Скрипт запускает реальный Fastify/React production в фоне, только на loopback, без watch.
 
@@ -46,7 +48,7 @@ Windows launcher принимает **ровно Node.js 24.21.0 x64 и npm 11.1
 
 Установка: `npm ci --ignore-scripts --include=dev --no-audit --no-fund`, затем только закреплённый `prebuild-install` для `better-sqlite3@12.11.1`. Это исключает fallback на Python/node-gyp. Других Windows install hooks в текущем lockfile нет; изменение списка требует проверки. Затем проверяются `npm ls --all`, версии по lockfile, загрузка native SQLite, неизменность исходников/lockfile и выполняется `npm run build`. Кеш создаётся в `.tools/arena-npm-cache`, глобальные настройки npm не нужны. Первичная online-установка проверяется с пустым кешем; offline-установка с неполным кешем не обещается. После подготовки запуск/игра работают без внешних сервисов.
 
-Лимиты: суммарная загрузка Node 300 с, проверка/распаковка 120 с, npm ci + native prebuilt 300 с, build 300 с, startup 20 с, backup/restore 60 с. Измерения свежего checkout — в [receipt воспроизводимости](docs/gates/APP_CLEAN_MACHINE_REPRODUCIBILITY_01.md); скорость зависит от сети/ПК, время ввода пароля туда не входит.
+Лимиты: суммарная загрузка Node 300 с, проверка/распаковка 120 с, npm ci + native prebuilt 300 с, build 300 с, startup 20 с, backup/restore 60 с. Интерактивный ввод не ограничен этим таймером. Измерения свежего checkout — в [receipt воспроизводимости](docs/gates/APP_CLEAN_MACHINE_REPRODUCIBILITY_01.md); общая длительность Prepare включает ввод пароля, скорость зависит от сети/ПК.
 
 ## Данные, пароль, backup
 

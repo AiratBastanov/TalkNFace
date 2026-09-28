@@ -1,0 +1,1228 @@
+{
+  "gate": "APP_CLEAN_MACHINE_REPRODUCIBILITY_01",
+  "verdict": "APP_CLEAN_MACHINE_REPRODUCIBILITY_01_PASS",
+  "REAL_APPLICATION_SMOKE": "PASS",
+  "CLEAN_SOURCE_SMOKE": "PASS",
+  "createdAt": "2026-09-28T13:09:10.679Z",
+  "scope": "Windows x64 loopback guided/no-AI local reproducibility on isolated source directories, not a second physical PC or public hosting",
+  "baseline": {
+    "head": "13f2fda624eb15725849445d4ddcd5d786ab02ab",
+    "branch": "feature/app-qwen-independent-01",
+    "origin": "https://github.com/AiratBastanov/TalkNFace.git",
+    "initialUpstreamEqual": true,
+    "initialClean": true,
+    "acceptedG5G6G8AreAncestors": true,
+    "latestMigration": 5
+  },
+  "cleanSource": {
+    "sourceCommit": "46d2a519e26dd36f5dfa48675dc00b7699455bf3",
+    "branch": "feature/app-qwen-independent-01",
+    "origin": "https://github.com/AiratBastanov/TalkNFace.git",
+    "status": "",
+    "alternatesPresent": false,
+    "absentBefore": [
+      "node_modules",
+      ".tools",
+      ".tmp",
+      ".local",
+      ".env",
+      "apps/server/node_modules",
+      "apps/server/dist",
+      "apps/web/dist",
+      "packages/contracts/dist",
+      "packages/domain/dist",
+      "packages/scenarios/dist",
+      "AlagModels",
+      "AlagDatasets"
+    ],
+    "cloneSeconds": 6.077,
+    "sourcePathContainsSpaces": true,
+    "sourceOutsideActiveWorktree": true,
+    "artifactsCopied": 0,
+    "path": "C:\\Users\\BastaPC\\Desktop\\Alag-clean-demo-test-20260928-cm03\\Reviewer Jane\\Negotiation Arena",
+    "sourceClean": true,
+    "taskOwnedServersStopped": 6,
+    "anonymousSourceAcquisition": false,
+    "sourceAcquisitionRequiresAuthorizedRepositoryAccessOrProvidedZip": true,
+    "applicationRequiresGitOrGitHubCredentials": false,
+    "refs": [
+      "46d2a519e26dd36f5dfa48675dc00b7699455bf3\trefs/heads/feature/app-qwen-independent-01",
+      "2034687f6f22b2973935f2c9c30bc9380c88b071\trefs/heads/main"
+    ],
+    "sourceAcquisition": "Real HTTPS clone of the feature branch; authorized GitHub access used for acquisition only",
+    "simulatedProfile": "Empty USERPROFILE/APPDATA/LOCALAPPDATA under Reviewer Profile; process-local overrides; no actual second Windows account created"
+  },
+  "machine": {
+    "os": {
+      "Caption": "Майкрософт Windows 11 IoT Корпоративная LTSC",
+      "Version": "10.0.26100",
+      "OSArchitecture": "64-разрядная"
+    },
+    "powershell": "5.1.26100.9444",
+    "cpu": "AMD Ryzen 7 5700X3D 8-Core Processor           ",
+    "logicalProcessors": 16,
+    "architecture": "AMD64",
+    "browser": "153.0.8010.53",
+    "playwright": "1.63.0",
+    "node": "24.21.0",
+    "npm": "11.19.0"
+  },
+  "launch": {
+    "prepare": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\windows-demo.ps1 -Prepare",
+    "start": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\windows-demo.ps1 -Start -Port 3100",
+    "url": "http://127.0.0.1:3100/admin",
+    "firstRunPassword": "Real hidden PowerShell prompt and confirmation; no plaintext argument/file/log; hash only in ignored config",
+    "handsOn": {
+      "commandsAfterSourceAcquisition": 2,
+      "passwordEntries": 2,
+      "sourceAcquisitionCommands": 2
+    },
+    "runtimePrerequisites": "Windows x64 PowerShell plus network; Chrome is the certified presentation browser; Git only for source acquisition",
+    "data": ".local/arena-demo/arena.sqlite",
+    "config": ".local/arena-config/admin.json",
+    "configSchema": {
+      "schema": 1,
+      "adminPasswordHash": "<generated supported scrypt hash; actual value excluded>"
+    },
+    "ordinaryStopStartPreservesData": true
+  },
+  "runtime": {
+    "node": "24.21.0",
+    "npm": "11.19.0",
+    "architecture": "x64",
+    "url": "https://nodejs.org/download/release/v24.21.0/node-v24.21.0-win-x64.zip",
+    "shasums": "https://nodejs.org/download/release/v24.21.0/SHASUMS256.txt",
+    "sha256": "158f7685b44de51f6c0df1d153526cbcd3e1bc739a8dfc607721cef75de9e541",
+    "archiveBytes": 37618919,
+    "verifiedAgainstOfficialShasums": true,
+    "entryPathsTypesSizesValidatedBeforeExtraction": true,
+    "localReuseFileHashesVerifiedAgainstPinnedZip": true,
+    "systemNodeObservedAndRejected": "22.20.0",
+    "systemInstall": false,
+    "permanentPathChange": false,
+    "staticNativeImportInspection": {
+      ".tools/arena-runtime/node-v24.21.0-win-x64/node.exe": [
+        "CRYPT32.dll",
+        "WS2_32.dll",
+        "USER32.dll",
+        "dbghelp.dll",
+        "ADVAPI32.dll",
+        "IPHLPAPI.DLL",
+        "USERENV.dll",
+        "SHELL32.dll",
+        "ole32.dll",
+        "WINMM.dll",
+        "KERNEL32.dll"
+      ],
+      "apps/server/node_modules/better-sqlite3/build/Release/better_sqlite3.node": [
+        "KERNEL32.dll"
+      ]
+    },
+    "externalNativeDependencyFinding": "The inspected Node and SQLite PE import tables contain Windows OS libraries only; no owner runtime or separate C++ redistributable DLL import was found."
+  },
+  "dependencies": {
+    "lockfileAuthority": true,
+    "packageAndLockByteIdenticalToBaseline": true,
+    "lockEntries": 215,
+    "installedExternalPackages": 160,
+    "workspaceLinks": 5,
+    "workspaces": [
+      "apps/server",
+      "apps/web",
+      "packages/contracts",
+      "packages/domain",
+      "packages/scenarios"
+    ],
+    "commands": [
+      "npm ci --ignore-scripts --include=dev --no-audit --no-fund",
+      "pinned prebuild-install for better-sqlite3 (no node-gyp fallback)",
+      "npm ls --all --include=dev --json",
+      "npm run build"
+    ],
+    "nativeBetterSqlite3Loaded": true,
+    "betterSqlite3": "12.11.1",
+    "initialWorkspaceCacheEmpty": true,
+    "globalNpmConfigDisabled": true,
+    "providerWorkspaceInstalled": false,
+    "pythonOrCompilerUsed": false,
+    "upgradesOrAuditFix": false
+  },
+  "timingsSeconds": {
+    "clone": 6.077,
+    "runtimeAcquisition": 14.237,
+    "runtimeResolutionIncludingVersionChecks": 14.53,
+    "npm ci": 4.744,
+    "SQLite official prebuilt": 1.327,
+    "dependency tree": 0.591,
+    "production build": 6.261,
+    "prepareIncludingInteractiveInputAndOperatorPauses": 60.375,
+    "firstStartWholeCommand": 5.744,
+    "firstStartInternalStopwatch": 5.513,
+    "sourceToReadyIncludingInteraction": 66.119,
+    "cloneToReadySumOfMeasuredSteps": 72.196,
+    "qualification": "Observed on this PC/network. Password entry/operator pauses included in Prepare; idle time between separate commands excluded. No universal few-minute guarantee.",
+    "nodeCommandToReadyAfterPowerShellRuntimeVerification": 0.671
+  },
+  "production": {
+    "serverNodeEnv": "production",
+    "reactProductionBundle": true,
+    "file": "index-C6NLRaNP.js",
+    "bytes": 376233,
+    "sha256": "a84825003bb00824c510336966ec565532c74d46030aaf702f63b1b7b6411900",
+    "identicalAcrossCloneAndNoGitPaths": true,
+    "watch": false,
+    "host": "127.0.0.1",
+    "trustProxy": false
+  },
+  "browser": {
+    "tests": [
+      {
+        "name": "S1 configured publish, preparation, guided negotiation, G6 evidence and replay",
+        "status": "passed",
+        "seconds": 2.238
+      },
+      {
+        "name": "S2 configured publish, preparation, guided negotiation, G6 evidence and replay",
+        "status": "passed",
+        "seconds": 1.524
+      },
+      {
+        "name": "Stop/Start preserves publication, draft, turns, G6 report, replay and valid access",
+        "status": "passed",
+        "seconds": 12.374
+      },
+      {
+        "name": "Safe live backup and stopped restore preserve data without reviving logout",
+        "status": "passed",
+        "seconds": 25.604
+      },
+      {
+        "name": "Real Chrome foreign Origin and wrong CSRF cannot publish",
+        "status": "passed",
+        "seconds": 0.227
+      }
+    ],
+    "cookie": {
+      "httpOnly": true,
+      "sameSite": "Strict",
+      "path": "/",
+      "secure": false,
+      "rotated": true,
+      "readableFromScript": false
+    },
+    "security": {
+      "ownership404": true,
+      "playerAdmin403": true,
+      "csrf403": true,
+      "origin403": true,
+      "noSecretsInStorageOrBundle": true,
+      "noExternalGameplayRequests": true
+    },
+    "externalGameplayRequests": [],
+    "pageErrors": [],
+    "s1": {
+      "utility": 64,
+      "processScore": 100,
+      "allSixSettingsExplicit": true,
+      "preparedBeforeFirstTurn": true
+    },
+    "s2": {
+      "utility": 47,
+      "processScore": 100,
+      "allSixSettingsExplicit": true,
+      "preparedBeforeFirstTurn": true
+    },
+    "restart": {
+      "reportEquivalent": true,
+      "publication": true,
+      "draft": true,
+      "replay": true,
+      "continuedTurn": true,
+      "adminAndPlayerAccess": true
+    },
+    "backupRestore": {
+      "liveSqliteBackup": true,
+      "integrityVerified": true,
+      "previousDbPreserved": true,
+      "resultEquivalent": true,
+      "logoutStillRevoked": true,
+      "loginBudgetNotRolledBack": true
+    },
+    "rawSessionDataRetainedInReceipt": false,
+    "commands": [
+      {
+        "arguments": [
+          "-Start",
+          "-Port",
+          "3100"
+        ],
+        "seconds": 5.744,
+        "exitCode": 0
+      },
+      {
+        "arguments": [
+          "-Stop"
+        ],
+        "seconds": 5.536,
+        "exitCode": 0
+      },
+      {
+        "arguments": [
+          "-Start",
+          "-Port",
+          "3100"
+        ],
+        "seconds": 6.247,
+        "exitCode": 0
+      },
+      {
+        "arguments": [
+          "-Backup"
+        ],
+        "seconds": 7.268,
+        "exitCode": 0
+      },
+      {
+        "arguments": [
+          "-Stop"
+        ],
+        "seconds": 6.333,
+        "exitCode": 0
+      },
+      {
+        "arguments": [
+          "-Restore",
+          "demo-2026-09-28T12-58-23-054Z-57f97b29"
+        ],
+        "seconds": 5.717,
+        "exitCode": 0
+      },
+      {
+        "arguments": [
+          "-Start",
+          "-Port",
+          "3100"
+        ],
+        "seconds": 6.054,
+        "exitCode": 0
+      },
+      {
+        "arguments": [
+          "-Stop"
+        ],
+        "seconds": 5.091,
+        "exitCode": 0
+      }
+    ]
+  },
+  "sourceWithoutGit": {
+    "sourceCommit": "46d2a519e26dd36f5dfa48675dc00b7699455bf3",
+    "trackedFilesByteVerified": 428,
+    "withoutGit": true,
+    "absentBefore": [
+      ".git",
+      "node_modules",
+      ".tools",
+      ".tmp",
+      ".local",
+      ".env",
+      "apps/server/node_modules",
+      "apps/server/dist",
+      "apps/web/dist",
+      "packages/contracts/dist",
+      "packages/domain/dist",
+      "packages/scenarios/dist",
+      "AlagModels",
+      "AlagDatasets"
+    ],
+    "sourcePathContainsSpaces": true,
+    "artifactsCopied": 0,
+    "path": "C:\\Users\\BastaPC\\Desktop\\Alag-clean-demo-test-20260928-cm03\\Source ZIP Space",
+    "result": "passed",
+    "production": {
+      "serverNodeEnv": "production",
+      "reactProductionBundle": true
+    },
+    "tests": [
+      {
+        "name": "Tracked source without .git bootstraps, builds, starts and authenticates in Chrome",
+        "status": "passed",
+        "seconds": 0.735
+      }
+    ],
+    "commands": [
+      {
+        "arguments": [
+          "-Prepare",
+          "-PasswordFromStdin"
+        ],
+        "seconds": 30.252,
+        "exitCode": 0
+      },
+      {
+        "arguments": [
+          "-Start",
+          "-Port",
+          "3101"
+        ],
+        "seconds": 6.197,
+        "exitCode": 0
+      },
+      {
+        "arguments": [
+          "-Stop"
+        ],
+        "seconds": 5.057,
+        "exitCode": 0
+      }
+    ],
+    "timings": {
+      "runtimeAcquisition": 13.753,
+      "npm ci": 5.221,
+      "SQLite official prebuilt": 1.549,
+      "dependency tree": 1.026,
+      "production build": 7.241
+    },
+    "method": "Standard git archive of exact tracked source; no separate distribution format and no ignored runtime artifacts copied"
+  },
+  "validation": {
+    "counts": {
+      "unitIntegrationUnique": 66,
+      "unitIntegrationExecutions": 66,
+      "unitIntegrationReruns": 0,
+      "failureLifecycleUnique": 19,
+      "failureLifecycleExecutions": 41,
+      "failureLifecycleReruns": 22,
+      "browserUnique": 6,
+      "browserExecutions": 23,
+      "browserReruns": 17,
+      "totalUnique": 91,
+      "totalNamedExecutions": 130,
+      "totalReruns": 39
+    },
+    "countScope": "Named automated cases only. Setup/build/typecheck, byte checks and manual launcher experiments are separate and not additional unique cases.",
+    "unitCases": [
+      {
+        "name": "migration 2 -> 5 preserves old bytes/records/reports, never claims old UUIDs, and creates new owned attempts",
+        "status": "passed"
+      },
+      {
+        "name": "migration 3 -> 5 preserves old bytes/records/reports, never claims old UUIDs, and creates new owned attempts",
+        "status": "passed"
+      },
+      {
+        "name": "migration 4 -> 5 preserves old bytes/records/reports, never claims old UUIDs, and creates new owned attempts",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access bootstrap issues only a fresh player and ignores a fixed attacker bearer; bearer is absent from JSON/SQLite",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access public projections need no cookie and reveal neither hidden scenario data nor access credentials",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access every admin read/mutation denies anonymous and player, including guessed route IDs",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access wrong credentials give safe 401 and no privilege; correct password rotates bearer + CSRF, preserving only own identity",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access logout deletes the cookie and persists revocation across restart",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access logout during asynchronous password verification prevents the pending elevation from reviving access",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access missing CSRF rejects every classified browser mutation before domain state changes",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access idle_expires_at cannot revive after restart",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access absolute_expires_at cannot revive after restart",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access changing/removing the deployment hash invalidates previous administrator sessions after restart",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access owner can refresh/restart/continue; duplicates still commit once and stale/different requests retain 409",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access exact foreign UUID, report/replay, duplicate receipt and admin override all fail before protected data loads",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access comparison verifies predecessor ownership even for an owned current attempt",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access rejects missing CSRF on owned mutation, leaves domain unchanged",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access rejects wrong CSRF on owned mutation, leaves domain unchanged",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access rejects other-session CSRF on owned mutation, leaves domain unchanged",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access login CSRF, logout CSRF and authenticated admin mutation without CSRF are refused",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access rejects unsafe origin/Fetch Metadata {\"origin\":\"https://foreign.example\"} even with valid authentication and CSRF",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access rejects unsafe origin/Fetch Metadata {\"origin\":\"null\"} even with valid authentication and CSRF",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access rejects unsafe origin/Fetch Metadata {\"origin\":\"\"} even with valid authentication and CSRF",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access rejects unsafe origin/Fetch Metadata {\"origin\":\"http://127.0.0.1:3000\",\"sec-fetch-site\":\"cross-site\"} even with valid authentication and CSRF",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access rejects unsafe origin/Fetch Metadata {\"origin\":\"http://127.0.0.1:3000\",\"sec-fetch-site\":\"same-site\"} even with valid authentication and CSRF",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access missing Origin is denied; defined no-Fetch-Metadata fallback requires exact Origin plus CSRF",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access bootstrap is state-changing POST only, requires the custom header and cannot take identity from body",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access GET/HEAD, auth inspection and static/public reads never write or slide idle lifetime",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access idle refresh is bounded, absolute deadline remains fixed, and invalid unsafe requests do not touch it",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access global login work budget survives new browsers and process restart, and expires after 15min",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access malformed/oversized login errors never echo credential input or framework stacks",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access unclassified PUT cannot publish, including valid auth/CSRF",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access unclassified PATCH cannot publish, including valid auth/CSRF",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access unclassified DELETE cannot publish, including valid auth/CSRF",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access unclassified OPTIONS cannot publish, including valid auth/CSRF",
+        "status": "passed"
+      },
+      {
+        "name": "G8 real HTTP boundary / durable access local cookie has explicit bounded HttpOnly/Strict/Path semantics and no false Host claim",
+        "status": "passed"
+      },
+      {
+        "name": "injected public HTTPS profile emits __Host Secure cookie, same attributes on explicit logout; no public listen",
+        "status": "passed"
+      },
+      {
+        "name": "fails closed on contradictory access configuration {\"HOST\":\"0.0.0.0\"} without exposing values",
+        "status": "passed"
+      },
+      {
+        "name": "fails closed on contradictory access configuration {\"HOST\":\"192.168.1.2\"} without exposing values",
+        "status": "passed"
+      },
+      {
+        "name": "fails closed on contradictory access configuration {\"APP_ORIGIN\":\"http://public.example\"} without exposing values",
+        "status": "passed"
+      },
+      {
+        "name": "fails closed on contradictory access configuration {\"APP_ORIGIN\":\"https://127.0.0.1\"} without exposing values",
+        "status": "passed"
+      },
+      {
+        "name": "fails closed on contradictory access configuration {\"ACCESS_PROFILE\":\"public\"} without exposing values",
+        "status": "passed"
+      },
+      {
+        "name": "fails closed on contradictory access configuration {\"ACCESS_PROFILE\":\"public\",\"APP_ORIGIN\":\"http://arena.example\"} without exposing values",
+        "status": "passed"
+      },
+      {
+        "name": "fails closed on contradictory access configuration {\"ACCESS_PROFILE\":\"public\",\"APP_ORIGIN\":\"https://arena.example/path\"} without exposing values",
+        "status": "passed"
+      },
+      {
+        "name": "fails closed on contradictory access configuration {\"ACCESS_PROFILE\":\"public\",\"APP_ORIGIN\":\"https://user:password@arena.example\"} without exposing values",
+        "status": "passed"
+      },
+      {
+        "name": "fails closed on contradictory access configuration {\"ACCESS_PROFILE\":\"public\",\"APP_ORIGIN\":\"https://arena.example/?token=private\"} without exposing values",
+        "status": "passed"
+      },
+      {
+        "name": "fails closed on contradictory access configuration {\"ADMIN_PASSWORD_HASH\":\"private-invalid-hash\"} without exposing values",
+        "status": "passed"
+      },
+      {
+        "name": "real file SQLite foundation creates directories, applies the migration, and configures SQLite",
+        "status": "passed"
+      },
+      {
+        "name": "real file SQLite foundation retains a sentinel and the original migration record across two reopenings",
+        "status": "passed"
+      },
+      {
+        "name": "real file SQLite foundation refuses a newer schema without deleting existing metadata",
+        "status": "passed"
+      },
+      {
+        "name": "server environment starts with safe defaults and no credentials",
+        "status": "passed"
+      },
+      {
+        "name": "server environment accepts explicit settings and returns a typed port and deterministic file path",
+        "status": "passed"
+      },
+      {
+        "name": "server environment rejects invalid PORT \"0\" without echoing it",
+        "status": "passed"
+      },
+      {
+        "name": "server environment rejects invalid PORT \"-1\" without echoing it",
+        "status": "passed"
+      },
+      {
+        "name": "server environment rejects invalid PORT \"65536\" without echoing it",
+        "status": "passed"
+      },
+      {
+        "name": "server environment rejects invalid PORT \"3.5\" without echoing it",
+        "status": "passed"
+      },
+      {
+        "name": "server environment rejects invalid PORT \"\" without echoing it",
+        "status": "passed"
+      },
+      {
+        "name": "server environment rejects invalid PORT \"invalid\" without echoing it",
+        "status": "passed"
+      },
+      {
+        "name": "server environment rejects invalid database path \"\"",
+        "status": "passed"
+      },
+      {
+        "name": "server environment rejects invalid database path \"  \"",
+        "status": "passed"
+      },
+      {
+        "name": "server environment rejects invalid database path \":memory:\"",
+        "status": "passed"
+      },
+      {
+        "name": "server environment rejects invalid database path \"file:test.sqlite\"",
+        "status": "passed"
+      },
+      {
+        "name": "server environment rejects invalid database path \"data/\"",
+        "status": "passed"
+      },
+      {
+        "name": "server environment rejects invalid database path \"bad\\u0000path\"",
+        "status": "passed"
+      },
+      {
+        "name": "server environment rejects invalid environment and host without disclosing supplied values",
+        "status": "passed"
+      },
+      {
+        "name": "local generator reads UTF-8 password from stdin, outputs only a supported salted hash and rejects wrong password",
+        "status": "passed"
+      }
+    ],
+    "failureRuns": [
+      {
+        "label": "first",
+        "cases": [
+          {
+            "name": "pristine Status is read-only and does not bootstrap",
+            "status": "passed",
+            "seconds": 0.396
+          },
+          {
+            "name": "explicit unsupported Node is rejected before installation",
+            "status": "passed",
+            "seconds": 0.945
+          },
+          {
+            "name": "no network on first Node acquisition gives actionable error",
+            "status": "failed",
+            "seconds": 0.382
+          }
+        ],
+        "seconds": 2.414
+      },
+      {
+        "label": "second",
+        "cases": [
+          {
+            "name": "no network on first Node acquisition gives actionable error",
+            "status": "passed",
+            "seconds": 2.645
+          },
+          {
+            "name": "manifest/lock disagreement fails without mutation",
+            "status": "passed",
+            "seconds": 0.944
+          },
+          {
+            "name": "empty-cache npm ci network failure is bounded and preserves source/config",
+            "status": "passed",
+            "seconds": 11.908
+          },
+          {
+            "name": "incomplete local runtime is refused",
+            "status": "passed",
+            "seconds": 0.368
+          },
+          {
+            "name": "corrupt Node archive is refused before extraction/execution",
+            "status": "passed",
+            "seconds": 0.41
+          },
+          {
+            "name": "modified previously verified runtime file is detected",
+            "status": "passed",
+            "seconds": 4.255
+          },
+          {
+            "name": "missing admin config fails Start without touching DB",
+            "status": "passed",
+            "seconds": 0.577
+          },
+          {
+            "name": "malformed admin config is not overwritten by Prepare",
+            "status": "passed",
+            "seconds": 0.612
+          },
+          {
+            "name": "interrupted first preparation refuses Start and preserves DB",
+            "status": "passed",
+            "seconds": 0.629
+          },
+          {
+            "name": "interrupted build cannot reuse old preparation marker",
+            "status": "passed",
+            "seconds": 0.625
+          },
+          {
+            "name": "occupied port fails without stopping its listener",
+            "status": "passed",
+            "seconds": 0.709
+          },
+          {
+            "name": "locked DB gives safe startup error and is not reset",
+            "status": "failed",
+            "seconds": 6.622
+          }
+        ],
+        "seconds": 30.895
+      },
+      {
+        "label": "third",
+        "cases": [
+          {
+            "name": "locked DB gives safe startup error and is not reset",
+            "status": "passed",
+            "seconds": 6.902
+          },
+          {
+            "name": "inaccessible DB path fails without deleting anything",
+            "status": "passed",
+            "seconds": 0.681
+          },
+          {
+            "name": "reset refuses junction escape and preserves outside sentinel",
+            "status": "passed",
+            "seconds": 0.299
+          },
+          {
+            "name": "stale PID Status/Stop never signal an unrelated process",
+            "status": "passed",
+            "seconds": 1.159
+          },
+          {
+            "name": "unexpected task-owned server termination recovers persisted SQLite",
+            "status": "failed",
+            "seconds": 35.016
+          }
+        ],
+        "seconds": 44.674
+      },
+      {
+        "label": "fourth",
+        "cases": [
+          {
+            "name": "unexpected task-owned server termination recovers persisted SQLite",
+            "status": "passed",
+            "seconds": 3.186
+          },
+          {
+            "name": "explicit reset preserves password and verified previous-state backup",
+            "status": "passed",
+            "seconds": 0.623
+          }
+        ],
+        "seconds": 4.398
+      },
+      {
+        "label": "final-production",
+        "cases": [
+          {
+            "name": "pristine Status is read-only and does not bootstrap",
+            "status": "passed",
+            "seconds": 0.371
+          },
+          {
+            "name": "explicit unsupported Node is rejected before installation",
+            "status": "passed",
+            "seconds": 0.689
+          },
+          {
+            "name": "no network on first Node acquisition gives actionable error",
+            "status": "passed",
+            "seconds": 2.686
+          },
+          {
+            "name": "manifest/lock disagreement fails without mutation",
+            "status": "passed",
+            "seconds": 1.046
+          },
+          {
+            "name": "empty-cache npm ci network failure is bounded and preserves source/config",
+            "status": "passed",
+            "seconds": 12.323
+          },
+          {
+            "name": "incomplete local runtime is refused",
+            "status": "passed",
+            "seconds": 0.395
+          },
+          {
+            "name": "corrupt Node archive is refused before extraction/execution",
+            "status": "passed",
+            "seconds": 0.439
+          },
+          {
+            "name": "modified previously verified runtime file is detected",
+            "status": "passed",
+            "seconds": 4.737
+          },
+          {
+            "name": "missing admin config fails Start without touching DB",
+            "status": "passed",
+            "seconds": 0.63
+          },
+          {
+            "name": "malformed admin config is not overwritten by Prepare",
+            "status": "passed",
+            "seconds": 0.619
+          },
+          {
+            "name": "interrupted first preparation refuses Start and preserves DB",
+            "status": "passed",
+            "seconds": 0.6
+          },
+          {
+            "name": "interrupted build cannot reuse old preparation marker",
+            "status": "passed",
+            "seconds": 0.686
+          },
+          {
+            "name": "occupied port fails without stopping its listener",
+            "status": "passed",
+            "seconds": 0.727
+          },
+          {
+            "name": "locked DB gives safe startup error and is not reset",
+            "status": "passed",
+            "seconds": 6.774
+          },
+          {
+            "name": "inaccessible DB path fails without deleting anything",
+            "status": "passed",
+            "seconds": 0.693
+          },
+          {
+            "name": "reset refuses junction escape and preserves outside sentinel",
+            "status": "passed",
+            "seconds": 0.323
+          },
+          {
+            "name": "stale PID Status/Stop never signal an unrelated process",
+            "status": "passed",
+            "seconds": 1.224
+          },
+          {
+            "name": "unexpected task-owned server termination recovers persisted SQLite",
+            "status": "passed",
+            "seconds": 3.285
+          },
+          {
+            "name": "explicit reset preserves password and verified previous-state backup",
+            "status": "passed",
+            "seconds": 0.659
+          }
+        ],
+        "seconds": 39.543
+      }
+    ],
+    "browserRuns": [
+      {
+        "label": "warm development",
+        "eligibleForProductionCertification": false,
+        "status": "passed",
+        "tests": [
+          {
+            "name": "S1 configured publish, preparation, guided negotiation, G6 evidence and replay",
+            "status": "passed",
+            "seconds": 2.256
+          },
+          {
+            "name": "S2 configured publish, preparation, guided negotiation, G6 evidence and replay",
+            "status": "passed",
+            "seconds": 1.579
+          },
+          {
+            "name": "Stop/Start preserves publication, draft, turns, G6 report, replay and valid access",
+            "status": "passed",
+            "seconds": 10.636
+          },
+          {
+            "name": "Safe live backup and stopped restore preserve data without reviving logout",
+            "status": "passed",
+            "seconds": 19.611
+          },
+          {
+            "name": "Real Chrome foreign Origin and wrong CSRF cannot publish",
+            "status": "passed",
+            "seconds": 0.203
+          }
+        ]
+      },
+      {
+        "label": "cm01 Reviewer Jane/Negotiation Arena",
+        "eligibleForProductionCertification": false,
+        "status": "passed",
+        "tests": [
+          {
+            "name": "S1 configured publish, preparation, guided negotiation, G6 evidence and replay",
+            "status": "passed",
+            "seconds": 2.399
+          },
+          {
+            "name": "S2 configured publish, preparation, guided negotiation, G6 evidence and replay",
+            "status": "passed",
+            "seconds": 1.569
+          },
+          {
+            "name": "Stop/Start preserves publication, draft, turns, G6 report, replay and valid access",
+            "status": "passed",
+            "seconds": 11.267
+          },
+          {
+            "name": "Safe live backup and stopped restore preserve data without reviving logout",
+            "status": "passed",
+            "seconds": 20.856
+          },
+          {
+            "name": "Real Chrome foreign Origin and wrong CSRF cannot publish",
+            "status": "passed",
+            "seconds": 0.202
+          }
+        ]
+      },
+      {
+        "label": "cm01 Source ZIP Space",
+        "eligibleForProductionCertification": false,
+        "status": "passed",
+        "tests": [
+          {
+            "name": "Tracked source without .git bootstraps, builds, starts and authenticates in Chrome",
+            "status": "passed",
+            "seconds": 0.585
+          }
+        ]
+      },
+      {
+        "label": "cm02 Reviewer Jane/Negotiation Arena",
+        "eligibleForProductionCertification": false,
+        "status": "passed",
+        "tests": [
+          {
+            "name": "S1 configured publish, preparation, guided negotiation, G6 evidence and replay",
+            "status": "passed",
+            "seconds": 2.301
+          },
+          {
+            "name": "S2 configured publish, preparation, guided negotiation, G6 evidence and replay",
+            "status": "passed",
+            "seconds": 1.734
+          },
+          {
+            "name": "Stop/Start preserves publication, draft, turns, G6 report, replay and valid access",
+            "status": "passed",
+            "seconds": 12.199
+          },
+          {
+            "name": "Safe live backup and stopped restore preserve data without reviving logout",
+            "status": "passed",
+            "seconds": 24.201
+          },
+          {
+            "name": "Real Chrome foreign Origin and wrong CSRF cannot publish",
+            "status": "passed",
+            "seconds": 0.213
+          }
+        ]
+      },
+      {
+        "label": "cm02 Source ZIP Space",
+        "eligibleForProductionCertification": false,
+        "status": "passed",
+        "tests": [
+          {
+            "name": "Tracked source without .git bootstraps, builds, starts and authenticates in Chrome",
+            "status": "passed",
+            "seconds": 0.714
+          }
+        ]
+      },
+      {
+        "label": "cm03 Reviewer Jane/Negotiation Arena",
+        "eligibleForProductionCertification": true,
+        "status": "passed",
+        "tests": [
+          {
+            "name": "S1 configured publish, preparation, guided negotiation, G6 evidence and replay",
+            "status": "passed",
+            "seconds": 2.238
+          },
+          {
+            "name": "S2 configured publish, preparation, guided negotiation, G6 evidence and replay",
+            "status": "passed",
+            "seconds": 1.524
+          },
+          {
+            "name": "Stop/Start preserves publication, draft, turns, G6 report, replay and valid access",
+            "status": "passed",
+            "seconds": 12.374
+          },
+          {
+            "name": "Safe live backup and stopped restore preserve data without reviving logout",
+            "status": "passed",
+            "seconds": 25.604
+          },
+          {
+            "name": "Real Chrome foreign Origin and wrong CSRF cannot publish",
+            "status": "passed",
+            "seconds": 0.227
+          }
+        ]
+      },
+      {
+        "label": "cm03 Source ZIP Space",
+        "eligibleForProductionCertification": true,
+        "status": "passed",
+        "tests": [
+          {
+            "name": "Tracked source without .git bootstraps, builds, starts and authenticates in Chrome",
+            "status": "passed",
+            "seconds": 0.735
+          }
+        ]
+      }
+    ],
+    "typecheck": "PASS; application/type files unchanged after this check",
+    "javascriptSyntax": "PASS",
+    "gitDiffCheck": "PASS"
+  },
+  "review": {
+    "kind": "Implementer self-review, no independent audit or delegated agents",
+    "fixes": [
+      "Windows PowerShell 5.1 stdin encoding compatibility",
+      "Failure harness quoted switches corrected",
+      "SQLite busy startup polls remain within original 20s deadline",
+      "Windows test harness waits for launcher exit rather than inherited stream closure",
+      "Restore preserves revocation/expiry/activity and does not roll back login budget",
+      "Final review found NODE_ENV=development in launcher; final source explicitly builds and starts production and asserts production React"
+    ],
+    "preliminarySources": [
+      "1db9c34890af322c68df1c1e719c79bd4d73592c",
+      "b2f7c991e7a46fb57d56da147c226a3599bef1b3"
+    ],
+    "preliminaryRunsDoNotCertifyProduction": true,
+    "noTimeoutIncrease": true
+  },
+  "protection": {
+    "originalHead": "2034687f6f22b2973935f2c9c30bc9380c88b071",
+    "originalStatus": "",
+    "originalTrackedFiles": 346,
+    "featureProtectedFiles": 418,
+    "trainingPinsVerified": 31,
+    "mismatches": [],
+    "originalManifestDigest": "7886fa6b3a02f1c5270f42d7d4e583108876d512bc8e1419ea3de7801bd61cf3",
+    "featureManifestDigest": "206d2dc84b016e19b73c38f2d6404957dee61b0f95474a865ddb2141c1d5c902",
+    "historicalReceiptsByteIdentical": true,
+    "featureHead": "46d2a519e26dd36f5dfa48675dc00b7699455bf3",
+    "changed": [
+      ".gitignore",
+      "README.md",
+      "docs/DEMO_GUIDE_RU.md",
+      "docs/gates/APP_CLEAN_MACHINE_REPRODUCIBILITY_01.md",
+      "scripts/demo/cli.mjs",
+      "scripts/demo/common.mjs",
+      "scripts/demo/server.mjs",
+      "scripts/windows-demo.ps1",
+      "tests/clean-demo/acceptance.mjs",
+      "tests/clean-demo/failures.mjs"
+    ],
+    "mainAndQwenPin": "2034687f6f22b2973935f2c9c30bc9380c88b071",
+    "modelProviderGpuTrainingCalls": 0,
+    "protectedExampleContentsRead": false,
+    "historicalPartialReceiptPreservedByteIdentically": true,
+    "initialFilenameDiscovery": "Initial filename-only discovery returned ML README pathnames; no contents opened. Subsequent content searches were application-scoped.",
+    "remoteTrainingExecution": "UNKNOWN"
+  },
+  "requirementsAuthority": {
+    "pdfSha256": "ff50f0ade59e2060818815284a8be0ccd1f10065a0ce6f46f48b664e4df0d75d",
+    "pages": [
+      3,
+      4,
+      5
+    ],
+    "usedOnlyFor": [
+      "local/public launch alternative",
+      "working prototype",
+      "restart persistence",
+      "administrator context configuration",
+      "negotiation and feedback demo",
+      "reproducible documentation"
+    ]
+  },
+  "screenshots": [
+    {
+      "path": "docs/gates/evidence/app-clean-machine-reproducibility-01/clean-admin-login.png",
+      "bytes": 38331,
+      "sha256": "4e06334b28affb9910848b145a7db08a2bb8889849642b0c09285e95e67c76b8"
+    },
+    {
+      "path": "docs/gates/evidence/app-clean-machine-reproducibility-01/clean-preview-S1.png",
+      "bytes": 60724,
+      "sha256": "b95486aca2c7507dc2d02a4922a6cf5082eecb4f703f7de4b7fa4ba213036c56"
+    },
+    {
+      "path": "docs/gates/evidence/app-clean-machine-reproducibility-01/clean-foreign-uuid.png",
+      "bytes": 18399,
+      "sha256": "11f0afd15a2c3f01c4a5c75a52c669b8865e0c9a63583016970b1ea09b7b91da"
+    },
+    {
+      "path": "docs/gates/evidence/app-clean-machine-reproducibility-01/clean-feedback-S1.png",
+      "bytes": 42304,
+      "sha256": "3f981b2c8229ef417e6c2f7e69bbd911630ce68d27d524e41dc5ce9ff77fb634"
+    },
+    {
+      "path": "docs/gates/evidence/app-clean-machine-reproducibility-01/clean-preview-S2.png",
+      "bytes": 60165,
+      "sha256": "9b29445b5b3ca2893cf96c36711b566ed96554565dfac0cb341d5b761006d630"
+    },
+    {
+      "path": "docs/gates/evidence/app-clean-machine-reproducibility-01/clean-feedback-S2.png",
+      "bytes": 42237,
+      "sha256": "de11784a60fb4afbd95a0e120a44ffc8ba6270fa7b21a1d479c7957164edf009"
+    },
+    {
+      "path": "docs/gates/evidence/app-clean-machine-reproducibility-01/clean-continued-after-restart.png",
+      "bytes": 33389,
+      "sha256": "df67c253985f224cf1650f25f76e5d343567090e0c14ae8e59598898edd3bd4c"
+    },
+    {
+      "path": "docs/gates/evidence/app-clean-machine-reproducibility-01/archive-admin-ready.png",
+      "bytes": 50639,
+      "sha256": "9702c31dc0163fa5ab566f20ec6e5c4e8f2358b58de4c40b0166969e2674326d"
+    }
+  ],
+  "cleanup": {
+    "allTaskOwnedServersStopped": true,
+    "originalPort3000ListenerUntouched": true,
+    "workingCheckoutTestDataAndConfigMovedToIgnoredArchive": ".local/gate-clean-machine-01",
+    "workingCheckoutNextPreparePromptsForOwnerPassword": true,
+    "noUserDataDeleted": true
+  },
+  "budgetsSeconds": {
+    "git": 120,
+    "nodeDownload": 300,
+    "nodeExtraction": 120,
+    "ciIncludingNativePrebuilt": 300,
+    "build": 300,
+    "startup": 20,
+    "focusedGroup": 180,
+    "browserGlobal": 300,
+    "browserCase": 90,
+    "backupRestore": 60
+  },
+  "delivery": {
+    "testedSourceCommit": "46d2a519e26dd36f5dfa48675dc00b7699455bf3",
+    "testedSourceNormallyPushed": true,
+    "testedSourceUpstreamAheadBehind": [
+      0,
+      0
+    ],
+    "receiptCommit": "Following documentation commit; resolve with git log -1 --format=%H -- docs/gates/APP_CLEAN_MACHINE_REPRODUCIBILITY_01.md. Final HEAD/upstream/clean/main verification occurs after its normal push and is reported to the user.",
+    "merge": false,
+    "forcePush": false
+  },
+  "remaining": [
+    "Authorized repository access or provided source ZIP needed for acquisition; anonymous GitHub read did not succeed",
+    "Windows 10, other Windows accounts/physical PCs, ARM, Linux/macOS and non-Chrome browsers not independently certified",
+    "Public deployment, HTTPS/reverse proxy and public-host backups not certified",
+    "Live AI and full G8/G5/G6/G7 not certified",
+    "Cookie-loss/account recovery remains absent by accepted G8 design",
+    "Final hackathon submission/presentation not completed by this gate"
+  ],
+  "nextRecommendedTask": "Arrange reviewer access to feature source or its standard ZIP, then rehearse the documented local workflow on another Windows PC; no automatic contact or next gate",
+  "stop": [
+    "NO QWEN TRAINING",
+    "NO MODEL EVALUATION",
+    "NO PROVIDER CALLS",
+    "NO PUBLIC DEPLOYMENT",
+    "NO MERGE TO MAIN"
+  ]
+}
