@@ -3,6 +3,7 @@ import { randomUUID } from 'node:crypto';
 import { test, expect } from '@playwright/test';
 import type { Page } from '@playwright/test';
 import { SessionViewSchema } from '@arena/contracts/g2';
+import { FeedbackReportSchema } from '@arena/contracts/feedback';
 import { S1, S2, accept, walkAway } from '@arena/scenarios';
 import { productionHarness } from './production.ts';
 
@@ -11,10 +12,13 @@ const evidence = { browser: '', responses: 0, externalRequests: [] as string[], 
   layouts: [] as { width: number; screen: string; overflow: number }[], outcomes: [] as { family: string; utility: number | null }[] };
 const inspections: Promise<void>[] = [];
 function inspect(value: unknown) {
-  const body = JSON.stringify(value); evidence.responses++;
+  const report = FeedbackReportSchema.safeParse(value);
+  // The strict terminal report permits a derived accepted-credit count, never raw private state.
+  const body = JSON.stringify(report.success ? { ...report.data, overall: { ...report.data.overall, progressCredits: undefined } } : value); evidence.responses++;
   if (/"(?:trust|tension|resourceAuthorizations|opponentUtility|opponentBatna|witnessTraces|definition_json|participants)"\s*:/.test(body)) evidence.privacyFailures.push('private state');
   const session = SessionViewSchema.safeParse(value);
-  const known = session.success ? session.data.projection.knownFacts.map(f => f.id) : [];
+  const known = session.success ? session.data.projection.knownFacts.map(f => f.id)
+    : report.success ? [...S1.facts, ...S2.facts].filter(f => report.data.outcome.observations.some(o => o.ruleId === 'FACT_DISCLOSED' && o.text.includes(f.text))).map(f => f.id) : [];
   for (const scenario of [S1, S2]) {
     if (body.includes(scenario.participants[1].privateBrief) || body.includes(scenario.participants[1].batna.description)) evidence.privacyFailures.push('private opponent');
     for (const fact of scenario.facts.filter(f => f.visibility === 'hidden' && !known.includes(f.id))) {

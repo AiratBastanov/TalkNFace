@@ -21,9 +21,9 @@ export function Terms({ terms, p }: { terms: Package; p: PublicProjection['scena
 export function Transcript({ data }: { data: SessionView }) {
   return <section className="panel dialogue" aria-label="История переговоров">
     <h2>Диалог</h2><div className="message opponent"><strong>{data.projection.scenario.opponent.label}</strong><p>{data.projection.scenario.opponent.initialPosition}</p></div>
-    {data.transcript.map(turn => <article className="turn" id={`turn-${turn.turnNumber}`} key={turn.turnNumber} data-testid="turn">
+    {data.transcript.map(turn => <article className="turn" id={`turn-${turn.turnNumber}`} key={turn.turnNumber} data-testid="turn" tabIndex={-1}>
       <p className="turn-label">Ход {turn.turnNumber}</p>
-      <div className="message player"><strong>Вы</strong><p>{turn.playerText}</p></div>
+      <div className="message player"><strong>Вы · сохранённая guided-фраза</strong><p>{turn.playerText}</p></div>
       <div className="message opponent"><strong>Оппонент</strong><p>{turn.opponentText}</p></div>
     </article>)}
     {!data.transcript.length && <p className="muted">Разговор ещё не начался. Выберите первое действие.</p>}
@@ -45,6 +45,7 @@ export function Board({ data, onChange }: { data: SessionView; onChange(data: Se
   const [fact, setFact] = useState('');
   const [argument, setArgument] = useState('');
   const [values, setValues] = useState<Record<string, string>>({});
+  const [conditionIssue, setConditionIssue] = useState('');
   const [confirmation, setConfirmation] = useState<CanonicalAction | null>(null);
   const [pending, setPending] = useState<PlayTurnRequest | null>(() => readPending(p.sessionId));
   const [busy, setBusy] = useState(false);
@@ -85,7 +86,7 @@ export function Board({ data, onChange }: { data: SessionView; onChange(data: Se
       case 'acknowledge': return fact ? { ...social(), kind, acknowledgementFactId: fact } : null;
       case 'argument': return argument ? { ...social(), kind, argumentId: argument } : null;
       case 'offer': return p.scenario.issues.every(issue => values[issue.id])
-        ? { ...social(), kind, terms: p.scenario.issues.map(issue => ({ issueId: issue.id, valueId: values[issue.id]! })), conditionalOn: [] } : null;
+        ? { ...social(), kind, terms: p.scenario.issues.map(issue => ({ issueId: issue.id, valueId: values[issue.id]! })), conditionalOn: conditionIssue && values[conditionIssue] ? [{ issueId: conditionIssue, valueId: values[conditionIssue]! }] : [] } : null;
       case 'accept': return p.activeOffer ? { ...social(), kind, offerId: p.activeOffer.id } : null;
       case 'pressure': return { ...social(), kind, tone };
       case 'walk_away': return { ...social(), kind };
@@ -119,7 +120,10 @@ export function Board({ data, onChange }: { data: SessionView; onChange(data: Se
             {p.lastUserOffer && <button className="small" onClick={() => copyTerms(p.lastUserOffer!.terms)}>Изменить последнее предложение</button>}
             <div className="offer-fields">{p.scenario.issues.map(issue => <label key={issue.id}>{issue.label} ({issue.unit})
               <select value={values[issue.id] ?? ''} onChange={event => { setValues({ ...values, [issue.id]: event.target.value }); setConfirmation(null); }}>
-                <option value="">Выберите значение</option>{issue.values.map(v => <option key={v.id} value={v.id}>{formatIssueValue(issue, v)}</option>)}</select></label>)}</div></>}
+                <option value="">Выберите значение</option>{issue.values.map(v => <option key={v.id} value={v.id}>{formatIssueValue(issue, v)}</option>)}</select></label>)}</div>
+            <label>Встречное условие<select value={conditionIssue} onChange={e => { setConditionIssue(e.target.value); setConfirmation(null); }}>
+              <option value="">Без встречного условия</option>{p.scenario.issues.filter(i => values[i.id]).map(i => <option key={i.id} value={i.id}>{i.label}: {i.values.find(v => v.id === values[i.id])?.label}</option>)}
+            </select></label><p className="hint">Укажите условие, в обмен на которое вы меняете предыдущую оферту. Сам ярлык не доказывает реальную взаимность.</p></>}
           {kind === 'accept' && p.activeOffer && <><p>Вы принимаете именно это действующее предложение:</p><Terms terms={p.activeOffer.terms} p={p.scenario} /></>}
           {kind === 'pressure' && <p className="hint">Твёрдо обозначить альтернативу и перейти к личному давлению — разные действия. Выберите намеренно.</p>}
           {kind === 'walk_away' && <p>Вы можете закончить разговор без сделки и выбрать свою альтернативу.</p>}
@@ -129,7 +133,7 @@ export function Board({ data, onChange }: { data: SessionView; onChange(data: Se
           }}>{kind === 'offer' ? 'Проверить предложение' : kind === 'accept' ? 'Проверить принятие' : kind === 'walk_away' ? 'Подтвердить выход…' : 'Отправить ход'}</button>}
           {confirmation && <section className="confirmation" aria-label="Подтверждение действия">
             <h3 ref={confirmationTitle} tabIndex={-1}>Проверьте перед отправкой</h3>
-            {confirmation.kind === 'offer' && <Terms terms={confirmation.terms} p={p.scenario} />}
+            {confirmation.kind === 'offer' && <><Terms terms={confirmation.terms} p={p.scenario} />{confirmation.conditionalOn.length > 0 && <p>Встречное условие: {p.scenario.issues.find(i => i.id === confirmation.conditionalOn[0]!.issueId)?.label}.</p>}</>}
             {confirmation.kind === 'accept' && p.activeOffer && <Terms terms={p.activeOffer.terms} p={p.scenario} />}
             {confirmation.kind === 'walk_away' && <p>Переговоры завершатся без соглашения. Эту сессию нельзя будет продолжить.</p>}
             <div className="button-row"><button className="primary" onClick={() => void submit(confirmation)}>

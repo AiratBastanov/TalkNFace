@@ -256,7 +256,7 @@ it('upgrades an existing G0 file once, retaining original sentinel and migration
       INSERT INTO foundation_metadata VALUES('sentinel', 'keep-g0');`);
     db.close(); db = openDatabase(temp.filename);
     const versions = db.prepare('SELECT * FROM schema_migrations ORDER BY version').all();
-    expect(versions).toHaveLength(2); expect(versions[0]).toMatchObject({ version: 1, applied_at: '2026-09-16T00:00:00Z' });
+    expect(versions).toHaveLength(3); expect(versions[0]).toMatchObject({ version: 1, applied_at: '2026-09-16T00:00:00Z' });
     db.close(); db = openDatabase(temp.filename); expect(db.prepare('SELECT * FROM schema_migrations ORDER BY version').all()).toEqual(versions);
     expect(db.prepare('SELECT value FROM foundation_metadata').get()).toEqual({ value: 'keep-g0' });
   } finally { if (db.open) db.close(); temp.cleanup(); }

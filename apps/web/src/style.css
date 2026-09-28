@@ -85,3 +85,19 @@ summary { cursor: pointer; min-height: 44px; font-weight: 600; }
   .button-row > button { flex: 1 1 auto; }
   .confirmation .button-row { display: grid; }
 }
+
+/* Evidence report uses the existing reading width and semantic details. */
+.feedback { overflow-wrap: anywhere; }
+.process-score { font-size: 1.3rem; font-weight: 700; }
+.rubric details { border-bottom: 1px solid #dce5e2; padding: .8rem 0; }
+summary { cursor: pointer; min-height: 44px; padding: .45rem 0; }
+.rubric h3 { margin-top: 1rem; }
+.feedback-evidence { font-size: .9rem; }
+.feedback-evidence blockquote { margin: .6rem 0; padding: .7rem; border-left: 3px solid #448d7b; background: #f3f6f5; }
+.feedback-evidence footer { text-align: left; padding: .3rem 0; }
+.checkbox-label { display: flex; align-items: flex-start; gap: .7rem; }
+.checkbox-label input { flex: 0 0 auto; margin-top: .5rem; width: 20px; height: 20px; }
+.check-status { font-weight: 650; }
+.check-status.failed { color: #792b24; }
+.check-status.unobservable { color: #72501e; }
+.turn:target, #preparation-record:target { outline: 3px solid #bc6b1b; outline-offset: 3px; }

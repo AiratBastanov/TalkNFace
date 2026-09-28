@@ -3,6 +3,7 @@ import { join } from 'node:path';
 import { test, expect } from '@playwright/test';
 import type { Page } from '@playwright/test';
 import { SessionViewSchema } from '@arena/contracts/g2';
+import { FeedbackReportSchema } from '@arena/contracts/feedback';
 import type { SessionView } from '@arena/contracts/g2';
 import { S1 } from '@arena/scenarios';
 import { productionHarness } from './production.ts';
@@ -16,11 +17,14 @@ const evidence: { browser: string; channel: string; routes: string[]; cases: Rec
 const inspectionTasks: Promise<void>[] = [];
 
 function inspectBody(value: unknown) {
-  const body = JSON.stringify(value);
+  const report = FeedbackReportSchema.safeParse(value);
+  // The strict terminal report permits a derived accepted-credit count, never raw private state.
+  const body = JSON.stringify(report.success ? { ...report.data, overall: { ...report.data.overall, progressCredits: undefined } } : value);
   if (/"(?:trust|tension|warning|earnedEventKeys|progressCredits|groundedArgumentIds|resourceAuthorizations|aspiration|opponentUtility|opponentBatna|witnessTraces|definition_json|definitionJson|participants)"\s*:/.test(body)) evidence.privacyFailures.push('Private field');
   if (body.includes(S1.participants[1].privateBrief) || body.includes(S1.participants[1].batna.description)) evidence.privacyFailures.push('Private opponent description');
   const parsed = SessionViewSchema.safeParse(value);
-  const known = parsed.success ? parsed.data.projection.knownFacts.map(f => f.id) : [];
+  const known = parsed.success ? parsed.data.projection.knownFacts.map(f => f.id)
+    : report.success ? S1.facts.filter(f => report.data.outcome.observations.some(o => o.ruleId === 'FACT_DISCLOSED' && o.text.includes(f.text))).map(f => f.id) : [];
   for (const fact of S1.facts.filter(f => f.visibility === 'hidden' && !known.includes(f.id))) {
     if (body.includes(fact.text) || body.includes(fact.id)) evidence.privacyFailures.push('Undisclosed fact');
   }

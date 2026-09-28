@@ -2,6 +2,7 @@ import { mkdirSync } from 'node:fs';
 import { dirname } from 'node:path';
 import Database from 'better-sqlite3';
 import { g2Migration } from './migration-g2.ts';
+import { feedbackMigration } from './migration-feedback.ts';
 
 const migrations = [
   {
@@ -10,6 +11,7 @@ const migrations = [
     sql: 'CREATE TABLE foundation_metadata (key TEXT PRIMARY KEY, value TEXT NOT NULL) STRICT;',
   },
   g2Migration,
+  feedbackMigration,
 ] as const;
 
 export function openDatabase(filename: string): Database.Database {

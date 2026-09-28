@@ -10,6 +10,8 @@ import { WEB_ROOT } from './paths.ts';
 import { ArenaRepository } from './repositories/arena-repository.ts';
 import { SessionService } from './services/session-service.ts';
 import { registerG2Routes } from './routes/g2-routes.ts';
+import { registerFeedbackRoutes } from './routes/feedback-routes.ts';
+import { FeedbackService } from './feedback/service.ts';
 
 export async function buildApp(config: ServerConfig, options: {
   database?: Database.Database;
@@ -36,7 +38,9 @@ export async function buildApp(config: ServerConfig, options: {
   });
 
   try {
-    registerG2Routes(app, new SessionService(new ArenaRepository(database)));
+    const repository = new ArenaRepository(database);
+    registerG2Routes(app, new SessionService(repository));
+    registerFeedbackRoutes(app, new FeedbackService(repository));
     if (config.NODE_ENV === 'production') {
       const webRoot = options.webRoot ?? WEB_ROOT;
       if (!existsSync(join(webRoot, 'index.html'))) {

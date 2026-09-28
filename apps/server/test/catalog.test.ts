@@ -120,7 +120,7 @@ describe('application catalog and S2 through the existing transaction', () => {
     expect(ended.result?.agreementOffer?.terms).toEqual(terms);
     expect(new ArenaRepository(db).turns(s.projection.sessionId)).toHaveLength(3);
   });
-  it('S1 and S2 reopen on unchanged G2 schema, with immutable historical version bindings', async () => {
+  it('S1 and S2 reopen through additive preparation migration, with immutable historical version bindings', async () => {
     const s1 = await turn(await create('s1'), question('logistics'));
     const s2 = await turn(await create(), question('resources'));
     const changed = structuredClone(S2); changed.title = 'Следующая редакция S2';
@@ -129,7 +129,7 @@ describe('application catalog and S2 through the existing transaction', () => {
     expect(() => db.prepare('UPDATE scenario_versions SET definition_json = ? WHERE id = ?').run('{}', s2.scenarioVersionId)).toThrow();
     await app.close(); db = openDatabase(temp.filename);
     app = await buildApp({ NODE_ENV: 'development', HOST: '127.0.0.1', PORT: 3000, DATABASE_PATH: temp.filename }, { database: db });
-    expect(db.prepare('SELECT version FROM schema_migrations ORDER BY version').all()).toEqual([{ version: 1 }, { version: 2 }]);
+    expect(db.prepare('SELECT version FROM schema_migrations ORDER BY version').all()).toEqual([{ version: 1 }, { version: 2 }, { version: 3 }]);
     for (const s of [s1, s2]) expect((await app.inject(`/api/sessions/${s.projection.sessionId}`)).json()).toEqual(s);
     expect((await turn(s2, acknowledge('helper-available'))).projection.scenario.title).toBe(S2.title);
   });

@@ -7,6 +7,7 @@ import { PublishedCatalogScenarioSchema as PublishedScenarioSchema, ReferenceCat
 import type { PublishedCatalogScenario as PublishedScenario, CatalogReference as ReferencePreview } from '@arena/contracts/catalog';
 import { errorMessage, request } from './api';
 import { Board, Terms, Transcript } from './board';
+import { Feedback, PreparationForm } from './feedback';
 
 export function navigate(path: string, replace = false) {
   if (replace) history.replaceState(null, '', path); else history.pushState(null, '', path);
@@ -54,6 +55,7 @@ function Briefing({ data }: { data: SessionView }) {
     <h2>Обязательные условия</h2><ul>{p.knownFacts.map(fact => <li key={fact.id}>{fact.text}</li>)}</ul>
     <h2>Как вести разговор</h2><p>Выбирайте действие, тему и тон. Узнавайте условия, признавайте факты, приводите аргументы или сразу предлагайте пакет. Предложение, принятие и выход требуют подтверждения. Каждый отправленный ход приближает завершение: всего {p.maxTurns}.</p>
     <p>В этом демо вы выбираете смысл реплики через элементы управления. Произвольный текст не вводится.</p>
+    <PreparationForm data={data} />
     <button className="primary" onClick={() => navigate(sessionPath(data))}>Начать переговоры</button>
   </article>;
 }
@@ -65,10 +67,10 @@ function Result({ data, replay, busy }: { data: SessionView; replay(): void; bus
     {result.agreementOffer && <><h2>Согласованные условия</h2><Terms terms={result.agreementOffer.terms} p={data.projection.scenario} /></>}
     <h2>Ваша цель</h2>{result.goals.map(goal => <p key={goal}>{goal}</p>)}<p>{result.targetReached ? 'Целевая граница достигнута.' : 'Целевая граница не достигнута.'}</p>
     <p className="note">{comparisons[result.batnaComparison]}.{result.playerUtility !== null && <> Учебная полезность сделки: {result.playerUtility}; ваша альтернатива: {result.playerBatna}; цель: {result.playerTarget}.</>}</p>
-    <h2>Что повлияло на результат</h2><p className="hint">Наблюдения основаны на событиях этой попытки. Это базовый разбор без общего балла.</p>
+    <h2>Что повлияло на результат</h2><p className="hint">Наблюдения основаны на событиях этой попытки. Детерминированный разбор процесса приведён ниже.</p>
     <ol className="observations">{result.observations.map(item => <li key={`${item.eventId}-${item.ruleId}`}><p>{item.text}</p><a href={`#turn-${item.turnNumber}`}>Ход {item.turnNumber} — открыть в диалоге</a></li>)}</ol>
     <button className="primary" disabled={busy} onClick={replay}>Повторить ту же ситуацию</button><p className="hint">Новая попытка начнётся с чистого состояния на той же версии сценария.</p>
-  </article><div className="reading"><Transcript data={data} /></div></>;
+  </article><Feedback key={data.projection.sessionId} data={data} /><div className="reading"><Transcript data={data} /></div></>;
 }
 export function Product() {
   const [path, setPath] = useState(location.pathname);
@@ -141,6 +143,6 @@ export function Product() {
         </> : session ? (session.result ? <Result data={session} busy={busy} replay={() => void perform(async () => {
           const value = await request(`/api/sessions/${session.projection.sessionId}/replay`, SessionViewSchema, {}); remember(value.projection.sessionId); navigate(sessionPath(value, true));
         })} /> : path.endsWith('/briefing') ? <Briefing data={session} /> : <Board key={session.projection.sessionId} data={session} onChange={setSession} />) : null}
-    </main><footer>Учебная ситуация. Выбор действий и условий определяет результат.</footer>
+    </main><footer>Локальное демо без AI. Авторизация, владение сессиями и CSRF-защита ещё не реализованы. Для публичного доступа не предназначено.</footer>
   </>;
 }
