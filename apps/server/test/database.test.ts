@@ -13,9 +13,9 @@ describe('real file SQLite foundation', () => {
       expect(db.pragma('busy_timeout', { simple: true })).toBe(5000);
       expect(db.pragma('journal_mode', { simple: true })).toBe('wal');
       expect(db.prepare('SELECT version, name FROM schema_migrations').all())
-        .toEqual([{ version: 1, name: 'foundation_metadata' }, { version: 2, name: 's1_sessions_turns' }, { version: 3, name: 'explicit_preparation' }]);
+        .toEqual([{ version: 1, name: 'foundation_metadata' }, { version: 2, name: 's1_sessions_turns' }, { version: 3, name: 'explicit_preparation' }, { version: 4, name: 'administrator_context_draft' }]);
       expect(db.prepare("SELECT name FROM sqlite_master WHERE type = 'table' ORDER BY name").all())
-        .toEqual([{ name: 'foundation_metadata' }, { name: 'scenario_versions' }, { name: 'schema_migrations' }, { name: 'session_preparation' }, { name: 'sessions' }, { name: 'turns' }]);
+        .toEqual([{ name: 'context_drafts' }, { name: 'context_requests' }, { name: 'foundation_metadata' }, { name: 'scenario_versions' }, { name: 'schema_migrations' }, { name: 'session_preparation' }, { name: 'sessions' }, { name: 'turns' }]);
     } finally { db.close(); temp.cleanup(); }
   });
 

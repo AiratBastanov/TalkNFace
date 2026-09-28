@@ -8,6 +8,7 @@ import type { PublishedCatalogScenario as PublishedScenario, CatalogReference as
 import { errorMessage, request } from './api';
 import { Board, Terms, Transcript } from './board';
 import { Feedback, PreparationForm } from './feedback';
+import { ContextAdmin } from './context-admin';
 
 export function navigate(path: string, replace = false) {
   if (replace) history.replaceState(null, '', path); else history.pushState(null, '', path);
@@ -29,7 +30,7 @@ function IssueList({ scenario }: { scenario: PublicProjection['scenario'] }) {
 function Preview({ data }: { data: ReferencePreview }) {
   const s = data.scenario;
   return <>
-    <p className="eyebrow">{data.templateId}</p><h2>{s.title}</h2><p>{s.publicBrief}</p>
+    <p className="eyebrow">{data.templateId.startsWith('G5-') ? 'Настроенная версия ' + data.templateId.split('-')[1] : data.templateId}</p><h2>{s.title}</h2><p>{s.publicBrief}</p>
     <dl className="properties">
       <div><dt>Сфера</dt><dd>{s.sphere}</dd></div><div><dt>Тема</dt><dd>{s.topic}</dd></div>
       <div><dt>Игрок</dt><dd>{s.player.label}</dd></div><div><dt>Оппонент</dt><dd>{s.opponent.label}</dd></div>
@@ -127,7 +128,9 @@ export function Product() {
     <main>
       {error && <div className="error" role="alert"><p>{error}</p><button disabled={busy} onClick={() => setVersion(v => v + 1)}>Обновить данные</button> <Link to="/">К ситуациям</Link></div>}
       {loading ? <p role="status">Загружаем ситуацию…</p> : path === '/admin' && preview ? <>
-        <div className="page-heading"><div><p className="eyebrow">Администратор · эталонный сценарий</p><h1>Подготовить тренировку</h1></div></div>
+        <div className="page-heading"><div><p className="eyebrow">Администратор · настройка контекста</p><h1>Подготовить тренировку</h1></div></div>
+        <ContextAdmin start={start} preview={data => <Preview data={data} />} />
+        <h2>Неизменённые эталонные сценарии</h2>
         <div className="button-row reading" role="group" aria-label="Эталонные сценарии">{references.map(item => <button key={item.templateId}
           disabled={busy} aria-pressed={item.templateId === selectedReference} onClick={() => { setSelectedReference(item.templateId); setPublished(null); }}>
           {item.templateId.split('-')[0]} — {item.scenario.title}</button>)}</div>

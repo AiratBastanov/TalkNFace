@@ -129,7 +129,7 @@ describe('application catalog and S2 through the existing transaction', () => {
     expect(() => db.prepare('UPDATE scenario_versions SET definition_json = ? WHERE id = ?').run('{}', s2.scenarioVersionId)).toThrow();
     await app.close(); db = openDatabase(temp.filename);
     app = await buildApp({ NODE_ENV: 'development', HOST: '127.0.0.1', PORT: 3000, DATABASE_PATH: temp.filename }, { database: db });
-    expect(db.prepare('SELECT version FROM schema_migrations ORDER BY version').all()).toEqual([{ version: 1 }, { version: 2 }, { version: 3 }]);
+    expect(db.prepare('SELECT version FROM schema_migrations ORDER BY version').all()).toEqual([{ version: 1 }, { version: 2 }, { version: 3 }, { version: 4 }]);
     for (const s of [s1, s2]) expect((await app.inject(`/api/sessions/${s.projection.sessionId}`)).json()).toEqual(s);
     expect((await turn(s2, acknowledge('helper-available'))).projection.scenario.title).toBe(S2.title);
   });

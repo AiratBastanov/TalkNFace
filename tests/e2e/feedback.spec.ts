@@ -211,7 +211,7 @@ test('legacy v2 S1/S2 records migrate intact and mismatched replay version rende
     await expect(page.getByTestId('comparison')).toContainText('Ранее: Соглашение не достигнуто. Сейчас: Соглашение не достигнуто.');
     await screenshot(page, 'g6-noncomparable-1280');
     const inspect = new Database(server!.database, { readonly: true });
-    try { expect(inspect.prepare('SELECT version FROM schema_migrations ORDER BY version').all()).toEqual([{ version: 1 }, { version: 2 }, { version: 3 }]); }
+    try { expect(inspect.prepare('SELECT version FROM schema_migrations ORDER BY version').all()).toEqual([{ version: 1 }, { version: 2 }, { version: 3 }, { version: 4 }]); }
     finally { inspect.close(); }
   } finally { temp.cleanup(); }
 });

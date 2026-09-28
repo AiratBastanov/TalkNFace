@@ -4,7 +4,7 @@ import type { PublicProjection } from './projection.ts';
 
 // Application publication metadata only. Frozen G1/G2/G3 and ML imports stay unchanged.
 export const CatalogReferenceSchema = ReferencePreviewSchema.extend({
-  templateId: z.enum(['S1-SUPPLY-LAUNCH', 'S2-WORKLOAD-URGENT']),
+  templateId: z.union([z.enum(['S1-SUPPLY-LAUNCH', 'S2-WORKLOAD-URGENT']), z.string().regex(/^G5-S[12]-[a-f0-9]{40}$/)]),
 });
 export const PublishedCatalogScenarioSchema = PublishedScenarioSchema.extend({ preview: CatalogReferenceSchema });
 export const ReferenceCatalogSchema = z.array(CatalogReferenceSchema).max(2);

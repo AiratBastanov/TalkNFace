@@ -3,6 +3,7 @@ import { dirname } from 'node:path';
 import Database from 'better-sqlite3';
 import { g2Migration } from './migration-g2.ts';
 import { feedbackMigration } from './migration-feedback.ts';
+import { contextMigration } from './migration-context.ts';
 
 const migrations = [
   {
@@ -12,6 +13,7 @@ const migrations = [
   },
   g2Migration,
   feedbackMigration,
+  contextMigration,
 ] as const;
 
 export function openDatabase(filename: string): Database.Database {

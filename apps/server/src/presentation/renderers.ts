@@ -31,7 +31,7 @@ export function renderPlayer(action: CanonicalAction, before: PublicProjection):
       const topic = before.scenario.topics.find(item => item.id === action.primaryTopicId);
       if (!topic) throw new Error('Unknown public topic');
       const questions: Record<string, string> = {
-        logistics: 'Можно ли разделить поставку: часть к запуску, остальное позже?',
+        logistics: before.scenario.topic === 'Плановая поставка' ? 'Какие графики плановой поставки вам подходят?' : 'Можно ли разделить поставку: часть к запуску, остальное позже?',
         payment: 'Какие условия оплаты для вас наиболее важны?',
         authority: 'Какие у вас полномочия по согласованию цены?',
       };

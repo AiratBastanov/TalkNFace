@@ -116,7 +116,8 @@ async function sendOffer(page: Page, turn: number) {
 
 test('A: admin publish → GS1 → refresh + process restart → result → clean replay, 1280px', async ({ page }) => {
   await page.goto(server.origin + '/admin'); await expect(page.getByText('S1-SUPPLY-LAUNCH', { exact: true })).toBeVisible();
-  await expect(page.locator('input, select, textarea')).toHaveCount(0);
+  await expect(page.getByRole('region', { name: 'Настроить контекст' }).locator('select')).toHaveCount(6);
+  await expect(page.locator('textarea')).toHaveCount(0);
   await expect(page.getByRole('heading', { name: 'Предмет переговоров' })).toBeVisible();
   await responsive(page, 'admin');
   await page.getByRole('button', { name: 'Опубликовать S1' }).click();
