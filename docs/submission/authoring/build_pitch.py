@@ -1,6 +1,7 @@
 """Build the TalkNFace LCT 2026 pitch from the official template canvases."""
 from __future__ import annotations
 
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -24,6 +25,9 @@ PPTX = ROOT / "docs" / "submission" / "TALKNFACE_PRODUCT_PITCH_RU.pptx"
 TMP = ROOT / ".tmp" / "organizer-presentation-01"
 ASSEMBLED = TMP / "assembled.pptx"
 ASSEMBLE_PS1 = Path(__file__).resolve().parent / "assemble_template.ps1"
+TEAM_LOGO_SRC = ROOT / "photo_2026-09-29_23-15-40.jpg"
+TEAM_LOGO = ASSETS / "khodoki-logo.jpg"
+BLOB = "https://github.com/AiratBastanov/TalkNFace/blob/docs/organizer-presentation-01/"
 
 
 def find_template() -> Path:
@@ -59,6 +63,10 @@ def prepare_assets() -> dict[str, Path]:
         dest = ASSETS / f"{name}.png"
         crop(src, box, dest)
         out[name] = dest
+    if not TEAM_LOGO_SRC.exists():
+        raise FileNotFoundError(f"Team logo not found: {TEAM_LOGO_SRC}")
+    shutil.copyfile(TEAM_LOGO_SRC, TEAM_LOGO)
+    out["khodoki"] = TEAM_LOGO
     return out
 
 
@@ -188,7 +196,7 @@ def fill_title(slide, logo: Path) -> None:
     insert_into_placeholder(slide, logo, "Рисунок 3")
 
 
-def fill_team(slide) -> None:
+def fill_team(slide, team_logo: Path) -> None:
     for sh in slide.shapes:
         if not sh.has_text_frame:
             continue
@@ -196,10 +204,11 @@ def fill_team(slide) -> None:
         if t.startswith("Капитан:"):
             put(
                 sh,
-                "Капитан: не указан\n"
-                "Кол-во участников: не указано\n"
-                "Как образовалась команда: не указано\n"
-                "Место работы/учебы: не указано\n"
+                "Капитан: Бастанов Айрат Иршатович\n"
+                "Специальность: автоматизация тестирования, машинное обучение, прикладное ПО\n"
+                "Кол-во участников: 2 человека\n"
+                "Как образовалась команда: давно знакомы друг с другом\n"
+                "Место учёбы: КФУ\n"
                 "Город и регион: не указан\n"
                 "Название команды: Ходоки",
                 INK,
@@ -225,19 +234,46 @@ def fill_team(slide) -> None:
                 "В показанном продукте нет живого AI: выбор действий считает учебный движок.",
                 INK,
             )
+    ph = shape_by_name(slide, "Рисунок 1")
+    add_picture_fit(slide, team_logo, ph.left, ph.top, ph.width, ph.height)
+    drop_shape(ph)
 
 
 def fill_members(slide) -> None:
+    for sh in slide.shapes:
+        if sh.has_text_frame and "Заголовок" in sh.name:
+            put(sh, "Команда «Ходоки»")
+    names = []
+    roles = []
     for sh in slide.shapes:
         if not sh.has_text_frame:
             continue
         t = sh.text_frame.text.strip()
         if t.startswith("Имя"):
-            put(sh, "Не указано", PURPLE)
+            names.append(sh)
         elif t.startswith("Роль"):
-            put(sh, "ФИО, роль, мессенджер, телефон и место учёбы не переданы", INK)
-        elif "Заголовок" in sh.name:
-            put(sh, "Команда «Ходоки»")
+            roles.append(sh)
+    names.sort(key=lambda s: int(s.left))
+    roles.sort(key=lambda s: int(s.left))
+    for i in range(2):
+        names[i].height = Inches(0.95)
+        roles[i].top = names[i].top + names[i].height + Inches(0.04)
+        roles[i].height = Inches(1.55)
+    put(names[0], "Бастанов Айрат Иршатович", PURPLE)
+    put(
+        roles[0],
+        "Капитан\nКФУ\nАвтоматизация тестирования, машинное обучение, прикладное ПО\nМессенджер и телефон не переданы",
+        INK,
+    )
+    put(names[1], "Садыков Булат Фаридович", PURPLE)
+    put(
+        roles[1],
+        "Участник\nКФУ\nАвтоматизация тестирования, машинное обучение, прикладное ПО\nМессенджер и телефон не переданы",
+        INK,
+    )
+    for sh in list(slide.shapes):
+        if int(sh.left) > int(Inches(5.2)) and int(sh.left) < int(Inches(12.0)):
+            drop_shape(sh)
 
 
 def fill_problem(slide) -> None:
@@ -442,26 +478,41 @@ def fill_next(slide) -> None:
     )
 
 
+def add_link_para(tf, label: str, url: str) -> None:
+    p = tf.add_paragraph()
+    run = p.add_run()
+    run.text = label
+    run.font.color.rgb = PINK
+    run.hyperlink.address = url
+
+
 def fill_materials(slide) -> None:
     by = {sh.name: sh for sh in slide.shapes if sh.has_text_frame}
-    put(by["Заголовок 1"], "Материалы для жюри")
+    put(by["Заголовок 1"], "Материалы в репозитории")
     body = shape_by_name(slide, "Объект 2")
     put(
         body,
-        "Один вход в поставку: docs/submission/README.md\n"
-        "Четыре поля формы (исходники, прототип, презентация, документация) — "
-        "неизменяемые адреса коммита в docs/submission/FORM_LINKS_RU.md.\n"
-        "Прототип: локальный запуск по docs/DEMO_GUIDE_RU.md, не публичный сайт.\n"
-        "Команда «Ходоки». Состав, контакты и логотип в материалах не подтверждены — "
-        "см. docs/submission/ACTION_REQUIRED_FROM_OWNER_RU.md.",
+        "Команда «Ходоки», 2 человека, КФУ. Публичного сайта нет: прототип — локальный запуск.",
         INK,
     )
     tf = body.text_frame
-    p = tf.add_paragraph()
-    run = p.add_run()
-    run.text = "Репозиторий TalkNFace на GitHub"
-    run.font.color.rgb = PINK
-    run.hyperlink.address = "https://github.com/AiratBastanov/TalkNFace"
+    add_link_para(tf, "Документация — docs/submission/README.md", BLOB + "docs/submission/README.md")
+    add_link_para(
+        tf,
+        "Презентация — docs/submission/TALKNFACE_PRODUCT_PITCH_RU.pdf",
+        BLOB + "docs/submission/TALKNFACE_PRODUCT_PITCH_RU.pdf",
+    )
+    add_link_para(tf, "Прототип — docs/DEMO_GUIDE_RU.md", BLOB + "docs/DEMO_GUIDE_RU.md")
+    add_link_para(
+        tf,
+        "Дополнительно — docs/submission/PRODUCT_OVERVIEW_RU.md",
+        BLOB + "docs/submission/PRODUCT_OVERVIEW_RU.md",
+    )
+    add_link_para(
+        tf,
+        "PPTX и адреса коммита — docs/submission/FORM_LINKS_RU.md",
+        BLOB + "docs/submission/FORM_LINKS_RU.md",
+    )
 
 
 def build() -> None:
@@ -476,7 +527,7 @@ def build() -> None:
         raise RuntimeError(f"Expected 14 slides, got {len(prs.slides)}")
     slides = list(prs.slides)
     fill_title(slides[0], logo)
-    fill_team(slides[1])
+    fill_team(slides[1], assets["khodoki"])
     fill_members(slides[2])
     fill_problem(slides[3])
     fill_journey(slides[4])
