@@ -1,46 +1,45 @@
-"""Build the editable TalkNFace organizer pitch (16:9 PPTX)."""
+"""Build the TalkNFace LCT 2026 pitch from the official template canvases."""
 from __future__ import annotations
 
+import subprocess
+import sys
 from pathlib import Path
+from typing import Optional
 
 from PIL import Image
 from pptx import Presentation
 from pptx.dml.color import RGBColor
-from pptx.enum.shapes import MSO_SHAPE
-from pptx.enum.text import PP_ALIGN
+from pptx.enum.shapes import MSO_SHAPE_TYPE
 from pptx.oxml.ns import qn
-from pptx.util import Inches, Pt
-from lxml import etree
+from pptx.util import Emu, Inches
+
+INK = RGBColor(0x1C, 0x1D, 0x22)
+PURPLE = RGBColor(0x31, 0x0F, 0x53)
+PINK = RGBColor(0xFC, 0x37, 0x77)
 
 ROOT = Path(__file__).resolve().parents[3]
 ASSETS = ROOT / "docs" / "submission" / "assets"
 EVIDENCE = ROOT / "docs" / "gates" / "evidence"
 PPTX = ROOT / "docs" / "submission" / "TALKNFACE_PRODUCT_PITCH_RU.pptx"
-
-TEAL = "17695e"
-TEAL_DARK = "104f47"
-TEAL_SOFT = "e3efea"
-INK = "183331"
-BODY = "203240"
-MUTED = "586b72"
-LINE = "dce5e2"
-WHITE = "ffffff"
-BG = "f3f6f5"
-ORANGE = "bc6b1b"
-CREAM = "fff6ea"
-DANGER_BG = "fff1ed"
-DANGER = "792b24"
+TMP = ROOT / ".tmp" / "organizer-presentation-01"
+ASSEMBLED = TMP / "assembled.pptx"
+ASSEMBLE_PS1 = Path(__file__).resolve().parent / "assemble_template.ps1"
 
 
-def rgb(hex_color: str) -> RGBColor:
-    h = hex_color.lstrip("#")
-    return RGBColor(int(h[0:2], 16), int(h[2:4], 16), int(h[4:6], 16))
+def find_template() -> Path:
+    names = list(ROOT.glob("ЛЦТ2026*.pptx"))
+    if names:
+        return names[0]
+    desktop = Path.home() / "Desktop"
+    found = list(desktop.glob("ЛЦТ2026*.pptx")) if desktop.exists() else []
+    if found:
+        return found[0]
+    raise FileNotFoundError("Official LCT 2026 template PPTX not found next to the repo or on Desktop.")
 
 
 def crop(src: Path, box: tuple[int, int, int, int], dest: Path) -> None:
     im = Image.open(src).convert("RGB")
     cut = im.crop(box)
-    # Thin product-like frame so crops sit cleanly on the slide.
     framed = Image.new("RGB", (cut.width + 2, cut.height + 2), (220, 229, 226))
     framed.paste(cut, (1, 1))
     dest.parent.mkdir(parents=True, exist_ok=True)
@@ -51,17 +50,9 @@ def prepare_assets() -> dict[str, Path]:
     ASSETS.mkdir(parents=True, exist_ok=True)
     files = {
         "hero": (EVIDENCE / "app-qwen-independent-01" / "app-s2-result-1280.png", (150, 78, 1130, 1000)),
-        "dialogue": (EVIDENCE / "app-qwen-independent-01" / "app-s2-result-1280.png", (160, 1680, 1120, 2580)),
         "settings": (EVIDENCE / "app-g5-context-configuration-01" / "g5-initial-1280-viewport.png", (40, 240, 1240, 820)),
-        "preview": (EVIDENCE / "app-clean-machine-reproducibility-01" / "clean-preview-S1.png", (40, 40, 1240, 880)),
-        "move": (EVIDENCE / "app-clean-machine-reproducibility-01" / "clean-continued-after-restart.png", (8, 8, 382, 720)),
         "evidence": (EVIDENCE / "app-g6-deterministic-feedback-01" / "g6-s1-evidence-390.png", (4, 0, 386, 530)),
         "process100": (EVIDENCE / "app-clean-machine-reproducibility-01" / "clean-feedback-S1.png", (8, 88, 382, 800)),
-        "poor": (EVIDENCE / "app-g6-deterministic-feedback-01" / "g6-poor-report-360.png", (4, 4, 356, 640)),
-        "insufficient": (EVIDENCE / "app-g6-deterministic-feedback-01" / "g6-insufficient-390.png", (8, 8, 382, 620)),
-        "noagree": (EVIDENCE / "app-g6-deterministic-feedback-01" / "g6-no-agreement-360.png", (4, 4, 356, 560)),
-        "login": (EVIDENCE / "app-clean-machine-reproducibility-01" / "clean-admin-login.png", (180, 40, 1100, 820)),
-        "publish": (EVIDENCE / "app-g8-access-boundary-01" / "g8-published-S2.png", (8, 120, 382, 780)),
     }
     out = {}
     for name, (src, box) in files.items():
@@ -71,470 +62,442 @@ def prepare_assets() -> dict[str, Path]:
     return out
 
 
-def set_run(run, text, size, color, bold=False, name="Calibri"):
-    run.text = text
-    run.font.size = Pt(size)
-    run.font.bold = bold
-    run.font.color.rgb = rgb(color)
-    run.font.name = name
-    rPr = run._r.get_or_add_rPr()
-    latin = rPr.find(qn("a:latin"))
-    if latin is None:
-        latin = etree.SubElement(rPr, qn("a:latin"))
-    latin.set("typeface", name)
-    ea = rPr.find(qn("a:ea"))
-    if ea is None:
-        ea = etree.SubElement(rPr, qn("a:ea"))
-    ea.set("typeface", name)
-    cs = rPr.find(qn("a:cs"))
-    if cs is None:
-        cs = etree.SubElement(rPr, qn("a:cs"))
-    cs.set("typeface", name)
+def extract_alabuga(template: Path) -> Path:
+    """Copy the official Алабуга mark from template slide 6; knock out the black sheet."""
+    prs = Presentation(str(template))
+    slide = prs.slides[5]
+    dest = TMP / "alabuga-logo.png"
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    picked = None
+    for sh in slide.shapes:
+        if sh.shape_type != MSO_SHAPE_TYPE.PICTURE:
+            continue
+        if int(sh.left) == 7956509:
+            picked = sh
+            break
+    if picked is None:
+        raise RuntimeError("Could not find the Алабуга picture on template slide 6.")
+    raw = TMP / "alabuga-raw.png"
+    raw.write_bytes(picked.image.blob)
+    im = Image.open(raw).convert("RGBA")
+    pixels = []
+    for r, g, b, a in im.getdata():
+        if r < 40 and g < 40 and b < 40:
+            pixels.append((255, 255, 255, 0))
+        else:
+            pixels.append((r, g, b, a))
+    im.putdata(pixels)
+    im.save(dest, "PNG")
+    return dest
 
 
-def add_text(slide, l, t, w, h, text, size=16, color=BODY, bold=False, name="Calibri",
-             align="left", anchor="top"):
-    box = slide.shapes.add_textbox(Inches(l), Inches(t), Inches(w), Inches(h))
-    tf = box.text_frame
+def put(shape, text: str, color: Optional[RGBColor] = None) -> None:
+    """Replace text, drop leftover empty bullets, keep the theme font."""
+    if shape is None or not getattr(shape, "has_text_frame", False):
+        return
+    tf = shape.text_frame
     tf.word_wrap = True
-    tf.auto_size = None
-    if anchor == "middle":
-        tf.paragraphs[0].alignment = PP_ALIGN.LEFT
-        box.text_frame._txBody.bodyPr.set("anchor", "ctr")
-    p = tf.paragraphs[0]
-    p.alignment = {"left": PP_ALIGN.LEFT, "center": PP_ALIGN.CENTER, "right": PP_ALIGN.RIGHT}[align]
-    p.space_after = Pt(0)
-    p.space_before = Pt(0)
-    run = p.add_run()
-    set_run(run, text, size, color, bold, name)
-    return box
+    lines = [ln for ln in text.split("\n") if ln.strip() != ""]
+    if not lines:
+        lines = [""]
+    paras = list(tf.paragraphs)
+    for i, line in enumerate(lines):
+        if i < len(paras):
+            p = paras[i]
+        else:
+            p = tf.add_paragraph()
+            p.alignment = paras[0].alignment
+        if p.runs:
+            p.runs[0].text = line
+            for run in p.runs[1:]:
+                run.text = ""
+        else:
+            p.add_run().text = line
+        if color is not None:
+            for run in p.runs:
+                if run.text:
+                    run.font.color.rgb = color
+    body = tf._txBody
+    xml_paras = body.findall(qn("a:p"))
+    for el in xml_paras[len(lines) :]:
+        body.remove(el)
 
 
-def add_para(tf, text, size=16, color=BODY, bold=False, name="Calibri", space_before=6, align="left"):
-    p = tf.add_paragraph()
-    p.alignment = {"left": PP_ALIGN.LEFT, "center": PP_ALIGN.CENTER, "right": PP_ALIGN.RIGHT}[align]
-    p.space_before = Pt(space_before)
-    p.space_after = Pt(0)
-    run = p.add_run()
-    set_run(run, text, size, color, bold, name)
-    return p
+def shape_by_name(slide, name: str):
+    for sh in slide.shapes:
+        if sh.name == name:
+            return sh
+    raise KeyError(name)
 
 
-def add_rect(slide, l, t, w, h, fill, line=None, rounded=True):
-    shape = MSO_SHAPE.ROUNDED_RECTANGLE if rounded else MSO_SHAPE.RECTANGLE
-    sh = slide.shapes.add_shape(shape, Inches(l), Inches(t), Inches(w), Inches(h))
-    sh.fill.solid()
-    sh.fill.fore_color.rgb = rgb(fill)
-    if line:
-        sh.line.color.rgb = rgb(line)
-        sh.line.width = Pt(1)
+def drop_shape(shape) -> None:
+    el = shape._element
+    el.getparent().remove(el)
+
+
+def insert_into_placeholder(slide, image: Path, name: str) -> None:
+    ph = shape_by_name(slide, name)
+    ph.insert_picture(str(image))
+
+
+def add_picture_fit(slide, image: Path, left, top, width, height) -> None:
+    im = Image.open(image)
+    aspect = im.width / float(im.height)
+    box_aspect = width / float(height)
+    if aspect > box_aspect:
+        h = int(width / aspect)
+        t = top + (height - h) // 2
+        slide.shapes.add_picture(str(image), left, t, width, h)
     else:
-        sh.line.fill.background()
-    if rounded:
-        try:
-            sh.adjustments[0] = 0.08
-        except Exception:
-            pass
-    return sh
+        w = int(height * aspect)
+        l = left + (width - w) // 2
+        slide.shapes.add_picture(str(image), l, top, w, height)
 
 
-def add_picture(slide, path, l, t, w, h):
-    return slide.shapes.add_picture(str(path), Inches(l), Inches(t), Inches(w), Inches(h))
+def strip_notes(prs: Presentation) -> None:
+    for slide in prs.slides:
+        if not slide.has_notes_slide:
+            continue
+        tf = slide.notes_slide.notes_text_frame
+        tf.text = ""
 
 
-def add_picture_fit(slide, path, l, t, w, h):
-    im = Image.open(path)
-    ar = im.width / im.height
-    box_ar = w / h
-    if ar > box_ar:
-        nh = w / ar
-        return add_picture(slide, path, l, t + (h - nh) / 2, w, nh)
-    nw = h * ar
-    return add_picture(slide, path, l + (w - nw) / 2, t, nw, h)
+def assemble(template: Path) -> None:
+    TMP.mkdir(parents=True, exist_ok=True)
+    cmd = [
+        "powershell",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        str(ASSEMBLE_PS1),
+        "-Template",
+        str(template),
+        "-OutFile",
+        str(ASSEMBLED),
+    ]
+    subprocess.run(cmd, check=True)
 
 
-def add_link(slide, l, t, w, h, label, url, size=16):
-    box = add_text(slide, l, t, w, h, label, size=size, color=TEAL, bold=True, name="Segoe UI")
-    run = box.text_frame.paragraphs[0].runs[0]
-    run.hyperlink.address = url
-    return box
+def fill_title(slide, logo: Path) -> None:
+    put(shape_by_name(slide, "Заголовок 2"), "Ходоки")
+    put(
+        shape_by_name(slide, "Текст 4"),
+        "TalkNFace — «Арена переговоров»\nКейс ЛЦТ 2026 · постановщик ОЭЗ «Алабуга»",
+    )
+    insert_into_placeholder(slide, logo, "Рисунок 3")
 
 
-def add_notes(slide, text):
-    notes = slide.notes_slide
-    tf = notes.notes_text_frame
-    tf.text = text
+def fill_team(slide) -> None:
+    for sh in slide.shapes:
+        if not sh.has_text_frame:
+            continue
+        t = sh.text_frame.text
+        if t.startswith("Капитан:"):
+            put(
+                sh,
+                "Капитан: не указан\n"
+                "Кол-во участников: не указано\n"
+                "Как образовалась команда: не указано\n"
+                "Место работы/учебы: не указано\n"
+                "Город и регион: не указан\n"
+                "Название команды: Ходоки",
+                INK,
+            )
+        elif t.startswith("О команде"):
+            put(sh, "О команде", PURPLE)
+        elif t.startswith("Краткое описание решения"):
+            put(sh, "Краткое описание решения:", PURPLE)
+        elif "суть вашего решения" in t:
+            put(
+                sh,
+                "Отрепетируйте сложный разговор до реальной встречи. "
+                "Администратор настраивает ситуацию, игрок выбирает ходы, "
+                "видит последствия и повторяет ту же версию иначе.",
+                INK,
+            )
+        elif t.startswith("Уникальность решения"):
+            put(sh, "Уникальность решения:", PURPLE)
+        elif "уникальным или инновационным" in t:
+            put(
+                sh,
+                "Разбор ссылается на сохранённый ход. Отказ не обнуляет процесс. "
+                "В показанном продукте нет живого AI: выбор действий считает учебный движок.",
+                INK,
+            )
 
 
-def new_slide(prs):
-    slide = prs.slides.add_slide(prs.slide_layouts[6])
-    fill = slide.background.fill
-    fill.solid()
-    fill.fore_color.rgb = rgb(BG)
-    add_rect(slide, 0, 0, 13.333, 0.09, TEAL, rounded=False)
-    return slide
+def fill_members(slide) -> None:
+    for sh in slide.shapes:
+        if not sh.has_text_frame:
+            continue
+        t = sh.text_frame.text.strip()
+        if t.startswith("Имя"):
+            put(sh, "Не указано", PURPLE)
+        elif t.startswith("Роль"):
+            put(sh, "ФИО, роль, мессенджер, телефон и место учёбы не переданы", INK)
+        elif "Заголовок" in sh.name:
+            put(sh, "Команда «Ходоки»")
 
 
-def footer(slide, n, extra="TalkNFace · Арена переговоров"):
-    add_text(slide, 0.45, 7.18, 10.2, 0.24, extra, size=11, color=MUTED, name="Segoe UI")
-    add_text(slide, 11.6, 7.18, 1.25, 0.24, str(n), size=11, color=MUTED, name="Segoe UI", align="right")
+def fill_problem(slide) -> None:
+    by = {sh.name: sh for sh in slide.shapes if sh.has_text_frame}
+    put(by["Заголовок 13"], "ЗАЧЕМ ТРЕНАЖЁР")
+    put(by["Текст 14"], "01", PINK)
+    put(by["Текст 1"], "Приём ≠ выбор", PURPLE)
+    put(by["Текст 2"], "Знать интересы и пакет недостаточно, чтобы выбрать вопрос или уступку под давлением.", INK)
+    put(by["Текст 15"], "02", PINK)
+    put(by["Текст 3"], "Лекция", PURPLE)
+    put(by["Текст 4"], "Не создаёт этот выбор в момент сделки.", INK)
+    put(by["Текст 16"], "03", PINK)
+    put(by["Текст 5"], "Живой тренинг", PURPLE)
+    put(by["Текст 6"], "Трудно повторить в том же составе, с теми же ставками.", INK)
+    put(by["Текст 17"], "04", PINK)
+    put(by["Текст 7"], "Игрок", PURPLE)
+    put(by["Текст 8"], "Начинающий закупщик или руководитель. Ошибка без цены реальной сделки.", INK)
+    put(by["Текст 18"], "05", PINK)
+    put(by["Текст 9"], "Администратор", PURPLE)
+    put(by["Текст 10"], "Задаёт шесть полей и публикует ситуацию. Чужие попытки и отчёты ему закрыты.", INK)
+    put(by["Текст 19"], "06", PINK)
+    put(by["Текст 11"], "Наставник", PURPLE)
+    put(by["Текст 12"], "Разбирает отчёт на экране игрока. Отдельного доступа к чужим попыткам нет.", INK)
 
 
-def eyebrow(slide, text, l=0.45, t=0.22, w=8):
-    add_text(slide, l, t, w, 0.28, text.upper(), size=11, color=TEAL, bold=True, name="Segoe UI")
+def fill_journey(slide) -> None:
+    by = {sh.name: sh for sh in slide.shapes if sh.has_text_frame}
+    put(by["Заголовок 13"], "КАК ПРОХОДИТ ВСТРЕЧА", PINK)
+    put(by["Текст 14"], "01", PINK)
+    put(by["Текст 1"], "Настроить", PURPLE)
+    put(
+        by["Текст 2"],
+        "Шесть полей: сфера, тема, сложность, тон, роль, цель. "
+        "Недостижимая цель не публикуется. До 8 ходов; встреча может закончиться раньше.",
+        INK,
+    )
+    put(by["Текст 15"], "02", PINK)
+    put(by["Текст 3"], "Выбрать", PURPLE)
+    put(
+        by["Текст 4"],
+        "Игрок без регистрации фиксирует цель и альтернативу, затем выбирает ход: "
+        "вопрос, признание факта, довод, пакет, принятие, выход.",
+        INK,
+    )
+    put(by["Текст 16"], "03", PINK)
+    put(by["Текст 5"], "Разобрать", PURPLE)
+    put(
+        by["Текст 6"],
+        "Исход сделки отдельно от процесса. Ссылка открывает сохранённый ход. "
+        "«Повторить ту же ситуацию» создаёт новую попытку той же версии.",
+        INK,
+    )
 
 
-def headline(slide, text, l=0.45, t=0.46, w=12.4, h=1.15, size=28):
-    add_text(slide, l, t, w, h, text, size=size, color=INK, bold=True, name="Segoe UI")
+def fill_settings(slide, settings_png: Path) -> None:
+    by = {sh.name: sh for sh in slide.shapes if sh.has_text_frame}
+    put(by["Заголовок 2"], "Шесть полей администратора", PURPLE)
+    put(
+        by["Текст 6"],
+        "Сфера · тема · сложность · тон · роль · цель.\n"
+        "Сложность «обычная» держит до 8 ходов.\n"
+        "Недостижимая цель блокируется до публикации.\n"
+        "Справа — форма настройки. Это не живой показ "
+        "«плановая / дружелюбный / маржа»: проверенная пара исходов на следующем слайде "
+        "идёт по неизменённому эталону «Закупка к запуску».",
+        INK,
+    )
+    drop_shape(shape_by_name(slide, "Рисунок 3"))
+    slide.shapes.add_picture(str(settings_png), Inches(6.9), Inches(1.2), Inches(6.0), Inches(5.7))
 
 
-def caption(slide, l, t, w, h, text):
-    add_text(slide, l, t, w, h, text, size=11, color=MUTED, name="Calibri")
+def fill_families(slide) -> None:
+    by = {sh.name: sh for sh in slide.shapes if sh.has_text_frame}
+    put(by["Заголовок 13"], "ДВЕ СЕМЬИ СЦЕНАРИЕВ")
+    put(by["Текст 14"], "S1", PINK)
+    put(by["Текст 1"], "Закупка к запуску", PURPLE)
+    put(by["Текст 2"], "Промышленные закупки. Цена партии, график поставки, предоплата.", INK)
+    put(by["Текст 15"], "S2", PINK)
+    put(by["Текст 3"], "Срочная задача", PURPLE)
+    put(by["Текст 4"], "Нагрузка команды. Объём, срок, помощник, перенос отчёта.", INK)
+    put(by["Текст 16"], "03", PINK)
+    put(by["Текст 5"], "Граница", PURPLE)
+    put(by["Текст 6"], "Третьей отрасли нет. Не каждая комбинация шести полей проходит проверку.", INK)
+    put(by["Текст 17"], "04", PINK)
+    put(by["Текст 7"], "Баллы", PURPLE)
+    put(
+        by["Текст 8"],
+        "Полезность описывает пакет в учебной модели. "
+        "100 процесса — применимые проверки записи, не компетенция человека.",
+        INK,
+    )
 
 
-def build():
+def fill_attempts(slide) -> None:
+    by = {sh.name: sh for sh in slide.shapes if sh.has_text_frame}
+    put(by["Заголовок 13"], "ДВА ИСХОДА ОДНОГО ЭТАЛОНА")
+    put(by["Текст 14"], "Попытка А", PURPLE)
+    put(by["Текст 16"], "Попытка Б", PURPLE)
+    put(
+        by["Текст 2"],
+        "Неизменённый эталон «Закупка к запуску»: обычная сложность, нейтральный тон, "
+        "директор продаж, оборотные средства.\n"
+        "Вопрос про логистику → признание экономии на разделении партии → довод → "
+        "вопрос про оплату → пакет 95 / 40% на день 7 и остаток на 14 / предоплата 50%.\n"
+        "Исход: взаимная выгода. Учебная полезность 64. Процесс 100.",
+        INK,
+    )
+    put(
+        by["Текст 6"],
+        "Тот же эталон. Сначала тот же пакет, затем вопросы, затем явный выход из переговоров.\n"
+        "Исход: нет соглашения. Полезность сделки не считается. Процесс 70. "
+        "Зачёт взаимно приемлемого пакета сохраняется.\n"
+        "Отказ — отдельный ход игрока, а не следствие порядка вопросов.",
+        INK,
+    )
+
+
+def fill_evidence(slide, evidence_png: Path) -> None:
+    by = {sh.name: sh for sh in slide.shapes if sh.has_text_frame}
+    put(by["Заголовок 13"], "РАЗБОР ПО ХОДАМ")
+    put(by["Текст 3"], "Проверка «выполнено» со ссылкой «Ход 5 — открыть сохранённый момент».", INK)
+    put(by["Текст 4"], "Сохранённая фраза пакета: 95 / 40% на день 7, остаток на 14 / предоплата 50%.", INK)
+    put(by["Текст 5"], "Если наблюдений мало или нет явной подготовки, общий балл процесса не выводится.", INK)
+    ph = shape_by_name(slide, "Рисунок 1")
+    add_picture_fit(slide, evidence_png, ph.left, ph.top, ph.width, ph.height)
+    drop_shape(ph)
+
+
+def fill_quiz(slide) -> None:
+    by = {sh.name: sh for sh in slide.shapes if sh.has_text_frame}
+    put(by["Заголовок 27"], "Это не тест на 100 баллов", PURPLE)
+    put(
+        by["Объект 28"],
+        "100 из 100 — применимые проверки этой записи, не оценка компетенции человека.\n"
+        "Отказ не равен провалу процесса: попытка Б без соглашения получила процесс 70.\n"
+        "Слабое соглашение в семье нагрузки: учебная полезность 20, процесс 44,12.\n"
+        "Администратор не читает чужие отчёты. Наставник обсуждает разбор на экране игрока.",
+        INK,
+    )
+
+
+def fill_marketing(slide) -> None:
+    by = {sh.name: sh for sh in slide.shapes if sh.has_text_frame}
+    put(by["Заголовок 13"], "КОМУ И КАКАЯ ГИПОТЕЗА")
+    put(by["Текст 14"], "Маркетинг", PURPLE)
+    put(by["Текст 16"], "Бизнес", PURPLE)
+    put(
+        by["Текст 2"],
+        "Целевой сегмент: HR / L&D, начинающий закупщик и руководитель в обучении.\n"
+        "Пилотов, договоров и названных клиентов нет.\n"
+        "ОЭЗ «Алабуга» — постановщик кейса хакатона, не клиент продукта.",
+        INK,
+    )
+    put(
+        by["Текст 6"],
+        "Гипотеза пользы: безопасные попытки дешевле ошибки на реальной встрече.\n"
+        "Измеренного ROI, выручки и воронки нет — цифры не выдуманы.\n"
+        "Файла LICENSE в репозитории нет. Это решение владельца, не дисквалификация из PDF кейса.",
+        INK,
+    )
+
+
+def fill_tech(slide) -> None:
+    by = {sh.name: sh for sh in slide.shapes if sh.has_text_frame}
+    put(by["Заголовок 13"], "КАК УСТРОЕНО")
+    put(
+        by["Текст 2"],
+        "Браузер. Один origin: Fastify + React. Показ слушает 127.0.0.1. Регистрации игрока нет.",
+        INK,
+    )
+    put(
+        by["Текст 3"],
+        "Учебный движок считает допустимость, раскрытие фактов и полезность. "
+        "Модель, CUDA и платный API для игры не нужны.",
+        INK,
+    )
+    put(
+        by["Текст 4"],
+        "SQLite хранит публикации и попытки. Администратор не обходит границу чужих отчётов.",
+        INK,
+    )
+
+
+def fill_next(slide) -> None:
+    by = {sh.name: sh for sh in slide.shapes if sh.has_text_frame}
+    put(by["Заголовок 13"], "СЕЙЧАС И ДАЛЬШЕ")
+    put(by["Текст 14"], "Работает сейчас", PURPLE)
+    put(by["Текст 16"], "Не в этом демо", PURPLE)
+    put(
+        by["Текст 2"],
+        "Выбор действий, две семьи, шесть полей, последствия, разбор, повторная попытка.\n"
+        "Локальный запуск на Windows без модели и ключа API.\n"
+        "Команды Prepare и Start — отдельно от Stop. Адрес после запуска: http://127.0.0.1:3100/admin на том компьютере.",
+        INK,
+    )
+    put(
+        by["Текст 6"],
+        "Свободный текст, AI-оппонент, генерация сценария моделью.\n"
+        "Qwen не встроена и по качеству не проверена.\n"
+        "Публичного сайта нет. 127.0.0.1 не является ссылкой для формы хакатона.",
+        INK,
+    )
+
+
+def fill_materials(slide) -> None:
+    by = {sh.name: sh for sh in slide.shapes if sh.has_text_frame}
+    put(by["Заголовок 1"], "Материалы для жюри")
+    body = shape_by_name(slide, "Объект 2")
+    put(
+        body,
+        "Один вход в поставку: docs/submission/README.md\n"
+        "Четыре поля формы (исходники, прототип, презентация, документация) — "
+        "неизменяемые адреса коммита в docs/submission/FORM_LINKS_RU.md.\n"
+        "Прототип: локальный запуск по docs/DEMO_GUIDE_RU.md, не публичный сайт.\n"
+        "Команда «Ходоки». Состав, контакты и логотип в материалах не подтверждены — "
+        "см. docs/submission/ACTION_REQUIRED_FROM_OWNER_RU.md.",
+        INK,
+    )
+    tf = body.text_frame
+    p = tf.add_paragraph()
+    run = p.add_run()
+    run.text = "Репозиторий TalkNFace на GitHub"
+    run.font.color.rgb = PINK
+    run.hyperlink.address = "https://github.com/AiratBastanov/TalkNFace"
+
+
+def build() -> None:
+    template = find_template()
+    if template.resolve() == PPTX.resolve():
+        raise RuntimeError("Refusing to treat the submission PPTX as the official template.")
     assets = prepare_assets()
-    prs = Presentation()
-    prs.slide_width = Inches(13.333333)
-    prs.slide_height = Inches(7.5)
-
-    # --- 1 ---
-    s = new_slide(prs)
-    eyebrow(s, "TalkNFace  ·  Арена переговоров")
-    headline(s, "Отрепетируйте сложный разговор до реальной встречи", w=7.3, h=1.45, size=30)
-    add_text(s, 0.45, 2.05, 6.9, 1.15,
-             "Закупщик или руководитель проходит учебную встречу, видит, как вопрос, уступка или отказ меняют исход, и пробует другой подход.",
-             size=18, color=BODY, name="Calibri")
-    chips = [
-        (0.45, "Без AI и ключей"),
-        (2.75, "Исход от действий"),
-        (5.05, "Повтор ситуации"),
-    ]
-    for x, label in chips:
-        add_rect(s, x, 3.35, 2.2, 0.42, TEAL_SOFT, TEAL_SOFT)
-        add_text(s, x + 0.06, 3.42, 2.08, 0.3, label, size=12, color=TEAL_DARK, bold=True, name="Segoe UI", align="center")
-    add_rect(s, 0.45, 4.05, 6.9, 2.85, WHITE, LINE)
-    add_text(s, 0.7, 4.22, 6.4, 0.32, "Что делает человек", size=13, color=TEAL, bold=True, name="Segoe UI")
-    steps = [
-        "Администратор задаёт сферу, тему, сложность, тон, роль и цель.",
-        "Игрок выбирает вопросы, факты, доводы и пакет условий.",
-        "Движок считает последствия. Разбор ссылается на сохранённый ход.",
-    ]
-    y = 4.6
-    for i, line in enumerate(steps, 1):
-        add_rect(s, 0.7, y, 0.38, 0.38, TEAL, rounded=True)
-        add_text(s, 0.7, y + 0.04, 0.38, 0.32, str(i), size=14, color=WHITE, bold=True, name="Segoe UI", align="center")
-        add_text(s, 1.22, y, 5.85, 0.5, line, size=15, color=BODY)
-        y += 0.68
-    add_rect(s, 7.55, 0.95, 5.35, 5.95, WHITE, LINE)
-    add_picture_fit(s, assets["hero"], 7.68, 1.08, 5.09, 5.35)
-    caption(s, 7.68, 6.48, 5.09, 0.32, "Реальный результат S2. Guided-режим, без внешнего API.")
-    footer(s, 1)
-    add_notes(s, """0:00–0:35. Откройте с обещания, не со стека.
-«TalkNFace — Арена переговоров. Отрепетируйте сложный разговор до реальной встречи.»
-Покажите кадр настоящего экрана: цель достигнута, условия сделки, полезность 47 против альтернативы 25. Это учебная модель, не оценка сотрудника.
-Сразу скажите честно: демо guided, без живого AI. Ценность уже есть: выбор → последствие → разбор → повтор.
-Переход: «Зачем репетировать? Потому что на настоящей встрече нет паузы на учебник.»""")
-
-    # --- 2 ---
-    s = new_slide(prs)
-    eyebrow(s, "Ситуация, которую узнают")
-    headline(s, "Знать приём мало. На встрече ответ выбирают сразу", h=0.95, size=28)
-    add_rect(s, 0.45, 1.85, 12.4, 1.35, WHITE, LINE)
-    add_text(s, 0.7, 2.0, 11.9, 1.05,
-             "Плановая поставка. Закупщик обсуждает цену, график и предоплату с директором продаж. Производство не должно встать, бюджет нельзя отдать целиком. Книжка про интересы сторон не делает этот выбор за человека.",
-             size=17, color=BODY)
-    cards = [
-        ("Лекция и чек-лист", "Дают словарь: интересы, альтернатива, пакет. Не требуют ответить оппоненту в эту минуту."),
-        ("Живой тренинг", "Сильный разбор, но дорого собрать пару и повторить ту же сцену несколько раз."),
-        ("Пробел, который закрываем", "Безопасные попытки в том же контексте, с видимой ценой конкретного хода."),
-    ]
-    for i, (title, body) in enumerate(cards):
-        x = 0.45 + i * 4.2
-        add_rect(s, x, 3.4, 4.0, 3.35, WHITE, LINE)
-        add_rect(s, x, 3.4, 4.0, 0.12, TEAL if i != 1 else MUTED, rounded=False)
-        add_text(s, x + 0.25, 3.7, 3.5, 0.7, title, size=18, color=INK, bold=True, name="Segoe UI")
-        add_text(s, x + 0.25, 4.45, 3.5, 1.9, body, size=15, color=BODY)
-    footer(s, 2)
-    add_notes(s, """0:35–1:05. Не проценты рынка и не «тренеры бесполезны».
-Опишите одну сцену S1: плановая поставка, директор продаж, цена / график / предоплата.
-Лекция не бесполезна — она не создаёт давление выбора. Живой тренинг ценен, но его трудно повторить в том же составе.
-Наша гипотеза, не измеренный ROI: короткие попытки с последствиями помогают перенести знание в действие.
-Переход: «Как выглядит попытка в продукте.»""")
-
-    # --- 3 ---
-    s = new_slide(prs)
-    eyebrow(s, "Путь пользователя")
-    headline(s, "Настроить → договориться → понять → повторить иначе", h=0.7, size=26)
-    loop = [
-        ("1. Настроить", "Администратор", "Шесть полей. Проверка. Предпросмотр. Явная публикация."),
-        ("2. Договариваться", "Игрок", "Цель и альтернатива до хода. Затем вопрос, факт, довод, пакет."),
-        ("3. Понять", "Игрок", "Исход сделки отдельно от процесса. Ссылка на сохранённый ход."),
-        ("4. Иначе", "Игрок", "Повтор той же версии. Старая попытка не затирается."),
-    ]
-    for i, (title, who, body) in enumerate(loop):
-        x = 0.45 + i * 3.2
-        add_rect(s, x, 1.35, 3.05, 2.15, WHITE, LINE)
-        add_text(s, x + 0.18, 1.48, 2.7, 0.35, title, size=16, color=TEAL, bold=True, name="Segoe UI")
-        add_text(s, x + 0.18, 1.85, 2.7, 0.28, who, size=12, color=MUTED, bold=True)
-        add_text(s, x + 0.18, 2.18, 2.7, 1.1, body, size=14, color=BODY)
-    add_rect(s, 0.45, 3.65, 12.4, 3.25, WHITE, LINE)
-    add_picture_fit(s, assets["settings"], 0.6, 3.75, 12.1, 2.85)
-    caption(s, 0.6, 6.62, 12.1, 0.22, "Администратор задаёт шесть полей. Игрок затем выбирает ход из списка, не свободный текст.")
-    footer(s, 3)
-    add_notes(s, """1:05–1:45. Чётко разделите роли.
-Администратор не играет за оппонента: он задаёт контекст, проверяет достижимость, публикует.
-Игрок без регистрации выбирает действия из списка. Это не линейный тест: оппонент раскрывает факты по правилам, пакет может быть принят, отвергнут или закончиться отказом.
-Подготовка до первого хода обязательна, если хотите зачёт за неё: галочка в брифинге сама балл не ставит.
-Переход: «Покажем две попытки в одной закупке.»""")
-
-    # --- 4 ---
-    s = new_slide(prs)
-    eyebrow(s, "Учебные примеры, не исследование навыка")
-    headline(s, "Одна ситуация — два решения и два разных исхода", h=0.7, size=26)
-    add_text(s, 0.45, 1.22, 12.4, 0.55,
-             "Обе попытки — неизменённый эталон «Закупка к запуску»: обычная сложность, нейтральный тон, директор продаж, оборотные средства. Живой показ использует другую, настроенную версию.",
-             size=14, color=MUTED)
-    add_rect(s, 0.45, 1.9, 6.1, 4.9, WHITE, LINE)
-    add_rect(s, 0.45, 1.9, 6.1, 0.1, TEAL, rounded=False)
-    add_text(s, 0.7, 2.15, 5.6, 0.4, "А. Сначала слушает", size=20, color=INK, bold=True, name="Segoe UI")
-    add_text(s, 0.7, 2.65, 5.6, 1.55,
-             "Вопрос о логистике, признание экономии, довод, вопрос об оплате. Затем пакет: 95 / 40% на день 7, остаток на 14 / предоплата 50%.",
-             size=16, color=BODY)
-    add_rect(s, 0.7, 4.4, 5.55, 2.05, TEAL_SOFT, TEAL_SOFT)
-    add_text(s, 0.9, 4.55, 5.2, 1.75, "Соглашение. Полезность 64 — выше цели 62 и альтернативы 55.\nПроцесс 100 по 7 применимым проверкам.", size=16, color=TEAL_DARK)
-    add_rect(s, 6.75, 1.9, 6.1, 4.9, WHITE, LINE)
-    add_rect(s, 6.75, 1.9, 6.1, 0.1, ORANGE, rounded=False)
-    add_text(s, 7.0, 2.15, 5.6, 0.4, "Б. Предлагает и выходит", size=20, color=INK, bold=True, name="Segoe UI")
-    add_text(s, 7.0, 2.65, 5.6, 1.55,
-             "Тот же пакет — первым ходом, затем вопросы. Игрок сам выбирает выход без сделки.",
-             size=16, color=BODY)
-    add_rect(s, 7.0, 4.4, 5.55, 2.05, CREAM, CREAM)
-    add_text(s, 7.2, 4.55, 5.2, 1.75, "Соглашения нет. Процесс 70: зачёт за взаимный пакет остаётся.\nЭто выбор выхода, не рост навыка.", size=16, color="72501e")
-    footer(s, 4)
-    add_notes(s, """1:45–2:25. Обе попытки — неизменённый эталон S1 «Закупка к запуску»: запуск производства, обычная сложность, нейтральный тон, директор, оборотные средства. Источники: s1-supply-launch.ts, feedback.test.ts, e2e feedback.spec.ts. Это не настроенная плановая поставка живого показа.
-А: полезность 64, процесс 100.
-Б: тот же пакет первым, затем вопросы, затем явный выход без сделки. Соглашения нет, процесс 70. Не говорите, что сам порядок вопросов автоматически дал отказ: финал — потому что игрок вышел.
-Не вычитайте 100 и 70 как рост компетенции. Не переводите 64 в рубли.
-Живой показ отдельно: плановая поставка, дружелюбный тон, доходность.
-Переход: «Тот же продукт — и для разговора о нагрузке.»""")
-
-    # --- 5 ---
-    s = new_slide(prs)
-    eyebrow(s, "Конфигурируемость")
-    headline(s, "Закупка и нагрузка команды: один тренажёр, шесть настроек", h=0.95, size=26)
-    add_rect(s, 0.45, 1.55, 6.1, 2.15, WHITE, LINE)
-    add_text(s, 0.7, 1.7, 5.6, 0.35, "S1. Промышленные закупки", size=18, color=INK, bold=True, name="Segoe UI")
-    add_text(s, 0.7, 2.15, 5.6, 1.3, "Цена, график партии, предоплата. Плановая поставка допускает всю партию на день 14; запуск производства — нет. Проверенный пакет: полезность 64.", size=14, color=BODY)
-    add_rect(s, 6.75, 1.55, 6.1, 2.15, WHITE, LINE)
-    add_text(s, 7.0, 1.7, 5.6, 0.35, "S2. Срочная задача и нагрузка", size=18, color=INK, bold=True, name="Segoe UI")
-    add_text(s, 7.0, 2.15, 5.6, 1.3, "Объём, срок, помощник, перенос отчёта. Проверенный путь: полный объём / 2 дня / помощник / перенос. Полезность 47, цель 45.", size=14, color=BODY)
-    effects = [
-        ("Сфера", "Меняет предмет и единицы: деньги и график либо часы и ресурсы."),
-        ("Тема", "Меняет допустимые условия. Недостижимый запрос не публикуется."),
-        ("Сложность", "Когда оппонент раскрывает интерес и насколько жёстко принимает пакет. До 8 ходов."),
-        ("Тон", "Стартовое доверие и напряжение. Скептик слабее снимает напряжение признанием факта."),
-        ("Роль", "Полномочия: директор согласует цену шире, менеджер — уже; лид может сам предложить помощь."),
-        ("Цель", "Что для оппонента ценнее: оборот или доходность; нагрузка или полный объём."),
-    ]
-    for i, (title, body) in enumerate(effects):
-        x = 0.45 + (i % 3) * 4.2
-        y = 3.9 + (i // 3) * 1.5
-        add_rect(s, x, y, 4.05, 1.38, WHITE, LINE)
-        add_text(s, x + 0.18, y + 0.12, 3.7, 0.32, title, size=14, color=TEAL, bold=True, name="Segoe UI")
-        add_text(s, x + 0.18, y + 0.46, 3.7, 0.8, body, size=13, color=BODY)
-    footer(s, 5)
-    add_notes(s, """2:35–3:15. Две семьи, не «любая отрасль».
-Шесть полей совпадают с постановкой PDF. Эффекты — из компилятора G5, без раскрытия скрытых порогов цены.
-Не обещайте, что каждая комбинация валидна: тема «переприоритизация» в этой версии отклоняется, потому что без помощника цель 45 недостижима.
-Третьей семьи сценариев нет.
-Переход: «После попытки человек видит не оценку личности, а разбор ходов.»""")
-
-    # --- 6 ---
-    s = new_slide(prs)
-    eyebrow(s, "Обратная связь")
-    headline(s, "Разбор указывает на сохранённый ход, а не на общий совет", h=0.7, size=26)
-    add_rect(s, 0.45, 1.4, 5.15, 5.45, WHITE, LINE)
-    add_picture_fit(s, assets["evidence"], 0.6, 1.52, 4.85, 5.2)
-    add_rect(s, 5.8, 1.4, 7.05, 1.7, WHITE, LINE)
-    add_text(s, 6.0, 1.52, 6.65, 0.35, "Сделка и процесс — разные вещи", size=16, color=INK, bold=True, name="Segoe UI")
-    add_text(s, 6.0, 1.95, 6.65, 1.0, "Полезность — про пакет. Балл процесса — про записанные действия. 100 из 100 — не компетентность человека.", size=15, color=BODY)
-    add_rect(s, 5.8, 3.25, 7.05, 1.55, WHITE, LINE)
-    add_text(s, 6.0, 3.37, 6.65, 0.35, "Слабое соглашение", size=16, color=INK, bold=True, name="Segoe UI")
-    add_text(s, 6.0, 3.78, 6.65, 0.85, "В нагрузке команды урезанный пакет: полезность 20, процесс 44.12. Подготовка может быть зачтена, аргументация — нет.", size=15, color=BODY)
-    add_rect(s, 5.8, 4.95, 7.05, 1.9, WHITE, LINE)
-    add_text(s, 6.0, 5.07, 6.65, 0.35, "Один следующий фокус", size=16, color=INK, bold=True, name="Segoe UI")
-    add_text(s, 6.0, 5.48, 6.65, 1.2, "Совет привязан к непройденной проверке и не обещает согласия. Мало ходов или нет подготовки — «Недостаточно наблюдений», общего балла нет.", size=15, color=BODY)
-    footer(s, 6)
-    add_notes(s, """3:15–3:55. На экране — фрагмент настоящего разбора: проверка «взаимный пакет», объяснение и ссылка «Ход 5» на сохранённую фразу.
-100 — 7 применимых проверок из 12, не компетенция человека.
-44.12 в S2 — веса проверок, не «человек на 44%».
-«Недостаточно наблюдений» — если нет явной подготовки или мало событий. Второй скриншот для этого не показываем: он был слишком мелким.
-Переход: «Кому это нужно — как гипотеза, не как клиентский кейс.»""")
-
-    # --- 7 ---
-    s = new_slide(prs)
-    eyebrow(s, "Ценность")
-    headline(s, "Повторяемая практика для игрока и понятный контур для организатора", h=1.05, size=25)
-    roles = [
-        ("Игрок", "Начинающий закупщик или руководитель", "Несколько попыток без стыда за «не тот» ответ. Видит, какой ход изменил исход, и повторяет ту же версию."),
-        ("Администратор и наставник", "Готовят занятие, не играют оппонента", "Администратор публикует ситуацию. Отчёт видит сам игрок. Наставник разбирает его вместе с игроком, на экране игрока."),
-        ("Возможный покупатель", "HR / L&D, гипотеза", "Короткий корпоративный модуль soft skills. Нет пилотов, договоров и измеренного ROI. Алабуга — автор кейса, не наш клиент."),
-    ]
-    for i, (title, who, body) in enumerate(roles):
-        x = 0.45 + i * 4.2
-        add_rect(s, x, 1.7, 4.05, 4.95, WHITE, LINE)
-        add_rect(s, x, 1.7, 4.05, 0.12, TEAL, rounded=False)
-        add_text(s, x + 0.25, 2.0, 3.55, 0.7, title, size=20, color=INK, bold=True, name="Segoe UI")
-        add_text(s, x + 0.25, 2.75, 3.55, 0.7, who, size=14, color=TEAL, bold=True)
-        add_text(s, x + 0.25, 3.55, 3.55, 2.7, body, size=15, color=BODY)
-    footer(s, 7)
-    add_notes(s, """4:00–4:30. Три роли.
-Игрок получает свой отчёт. Администратор настраивает и публикует, но не открывает чужие попытки: такого обхода в продукте нет.
-Наставник смотрит разбор вместе с игроком на его экране. Живого тренера не заменяем.
-Покупатель — сегмент, не клиент. Алабуга — автор кейса.
-Переход: «Почему одинаковые ходы дают одинаковый исход.»""")
-
-    # --- 8 ---
-    s = new_slide(prs)
-    eyebrow(s, "Почему этому можно доверять")
-    headline(s, "Одинаковые действия на той же версии дают тот же исход", h=0.95, size=27)
-    boxes = [
-        ("Интерфейс", "Игрок выбирает ход. Администратор публикует версию. Фразы сохраняются как есть."),
-        ("Правила переговоров", "Допустимость пакета, раскрытие фактов, полномочия и полезность считает учебный движок."),
-        ("Сохранённый разбор", "Отчёт строится по событиям попытки. Повтор — новая попытка той же публикации."),
-    ]
-    for i, (title, body) in enumerate(boxes):
-        x = 0.45 + i * 4.2
-        add_rect(s, x, 1.65, 4.05, 2.55, WHITE, LINE)
-        add_rect(s, x + 1.7, 1.82, 0.7, 0.7, TEAL)
-        add_text(s, x + 1.7, 1.95, 0.7, 0.5, str(i + 1), size=20, color=WHITE, bold=True, name="Segoe UI", align="center")
-        add_text(s, x + 0.25, 2.65, 3.55, 0.4, title, size=18, color=INK, bold=True, name="Segoe UI")
-        add_text(s, x + 0.25, 3.1, 3.55, 0.9, body, size=14, color=BODY)
-        if i < 2:
-            add_text(s, x + 3.85, 2.55, 0.45, 0.4, "→", size=22, color=TEAL, bold=True, align="center")
-    add_rect(s, 0.45, 4.45, 12.4, 2.35, WHITE, LINE)
-    add_text(s, 0.7, 4.65, 12.0, 0.35, "Зачем это игроку", size=16, color=TEAL, bold=True, name="Segoe UI")
-    add_text(s, 0.7, 5.1, 12.0, 0.7, "Можно открыть ход и сверить вывод. Те же сохранённые действия на той же версии не меняют исход сами по себе.", size=16, color=BODY)
-    add_text(s, 0.7, 5.9, 12.0, 0.65, "Веб, Fastify, React, SQLite. Локальный запуск; остановка и новый старт сохраняют попытку. Это не публичный сайт.", size=14, color=MUTED)
-    footer(s, 8)
-    add_notes(s, """4:30–4:55. Три шага: экран, правила, сохранённый разбор.
-Польза для человека: исход можно проверить по ходу.
-Стек — одна строка. Локальный запуск, не сайт. Перезапуск с сохранением попытки измерен на одном Windows-ПК, не на любой системе.
-Переход: «Что уже можно пройти и что ещё впереди.»""")
-
-    # --- 9 ---
-    s = new_slide(prs)
-    eyebrow(s, "Границы MVP")
-    headline(s, "Выбор действий работает сейчас. Свободный диалог — впереди", h=0.75, size=26)
-    add_rect(s, 0.45, 1.65, 6.1, 5.15, WHITE, LINE)
-    add_rect(s, 0.45, 1.65, 6.1, 0.55, TEAL, rounded=False)
-    add_text(s, 0.7, 1.75, 5.6, 0.4, "Работает сейчас", size=18, color=WHITE, bold=True, name="Segoe UI")
-    now = [
-        "Две семьи сценариев с ветвлением: закупка и нагрузка.",
-        "Шесть настроек, проверка и публикация версии.",
-        "Выбор действий, последствия, отказ или сделка.",
-        "Разбор по сохранённым ходам и повтор ситуации.",
-        "Локальный Windows-запуск: без модели и без платного API.",
-    ]
-    y = 2.4
-    for line in now:
-        add_text(s, 0.75, y, 5.5, 0.7, "●  " + line, size=15, color=BODY)
-        y += 0.8
-    add_rect(s, 6.75, 1.65, 6.1, 5.15, WHITE, LINE)
-    add_rect(s, 6.75, 1.65, 6.1, 0.55, WHITE, LINE)
-    add_rect(s, 6.75, 1.65, 0.12, 5.15, MUTED, rounded=False)
-    add_text(s, 7.05, 1.75, 5.5, 0.4, "Следующий этап", size=18, color=MUTED, bold=True, name="Segoe UI")
-    nxt = [
-        "Свободный текст и AI-оппонент — не в этом демо.",
-        "Генерация сценария моделью — не в этом демо.",
-        "Модель Qwen ещё не встроена и не проверена.",
-        "Публичный сайт и запуск на чужом компьютере не проверялись.",
-        "Сроки этих шагов не назначаем.",
-    ]
-    y = 2.4
-    for line in nxt:
-        add_text(s, 7.1, y, 5.45, 0.7, "○  " + line, size=15, color=MUTED)
-        y += 0.8
-    footer(s, 9)
-    add_notes(s, """4:55–5:20. Граница после показанной ценности, не открытие питча.
-Сейчас игрок выбирает действие из списка. Свободный текст и Qwen — следующий этап, не текущая возможность. Скачанная модель сама по себе продукт не включает.
-Переход: «Давайте пройдём прототип.»""")
-
-    # --- 10 ---
-    s = new_slide(prs)
-    eyebrow(s, "Демонстрация")
-    headline(s, "Пройдите прототип: настройка, переговоры, разбор", h=0.85, size=28)
-    add_text(s, 0.45, 1.5, 12.4, 0.7, "Отрепетируйте сложный разговор до реальной встречи. Выбор действий, без ключей и без модели.", size=18, color=BODY)
-    add_rect(s, 0.45, 2.4, 7.5, 4.3, WHITE, LINE)
-    add_text(s, 0.7, 2.6, 7.05, 0.4, "Материалы для жюри", size=16, color=TEAL, bold=True, name="Segoe UI")
-    add_text(s, 0.7, 3.15, 7.05, 0.7, "Одна страница: исходники, запуск, презентация и описание продукта.", size=16, color=BODY)
-    add_link(s, 0.7, 3.9, 7.05, 0.45, "Открыть страницу материалов",
-             "https://github.com/AiratBastanov/TalkNFace/blob/docs/organizer-presentation-01/docs/submission/README.md",
-             size=18)
-    add_text(s, 0.7, 4.5, 7.05, 1.8, "Ссылка ведёт в репозиторий. Анонимно он сейчас не открывается: нужен доступ владельца или ZIP. Это не публичный сайт продукта.", size=15, color=MUTED)
-    add_rect(s, 8.15, 2.4, 4.7, 4.3, TEAL)
-    add_text(s, 8.4, 2.65, 4.25, 0.7, "После запуска на этом компьютере", size=16, color=WHITE, bold=True, name="Segoe UI")
-    add_text(s, 8.4, 3.5, 4.25, 2.6, "127.0.0.1:3100/admin\n\nТолько здесь, не удалённое демо.\nСвой пароль.\nМодель не нужна.", size=18, color=WHITE)
-    footer(s, 10)
-    add_notes(s, """5:20–5:40, затем живой показ 3–5 минут. Вместе с речью ориентир 8–12 минут. Официальный лимит мероприятия не выдумываем: его проверяет владелец.
-Живой показ — настроенная плановая поставка, не эталон со слайда 4: дружелюбный тон, доходность, пакет 95 / 40% / 50, затем «Повторить ту же ситуацию». Маршрут в DEMO_GUIDE_RU.
-Если сервер недоступен: слайды 3, 1, 4 и 6.
-Контактов команды нет — не выдумывайте. QR нет: публичного адреса нет, localhost в код не кладём.""")
-
-    # --- 11 appendix ---
-    s = new_slide(prs)
-    eyebrow(s, "Приложение А")
-    headline(s, "Как решение закрывает постановку хакатона", h=0.85, size=26)
-    rows = [
-        ("Аудитория и проблема", "Закупщик и руководитель; разрыв между теорией и выбором под давлением."),
-        ("Ценность формата", "Повтор в том же контексте и разбор своих ходов. Не замена тренера."),
-        ("Механики и путь", "Настройки, публикация, подготовка, ходы, исход, разбор, повторная попытка."),
-        ("Конфигурация", "Шесть полей администратора. Невалидная цель не публикуется."),
-        ("Сценарии", "Две полноценные семьи: поставка и нагрузка. Третьей отрасли нет."),
-        ("Обратная связь", "Сделка отдельно от процесса; ссылка на сохранённое действие."),
-        ("Прототип и запуск", "Локальный запуск на Windows по инструкции. Публичной ссылки нет."),
-        ("Граница MVP", "Выбор действий, без AI. Свободный диалог — следующий шаг."),
-    ]
-    for i, (k, v) in enumerate(rows):
-        y = 1.5 + i * 0.65
-        add_rect(s, 0.45, y, 3.6, 0.58, TEAL_SOFT, TEAL_SOFT)
-        add_text(s, 0.6, y + 0.12, 3.3, 0.38, k, size=13, color=TEAL_DARK, bold=True, name="Segoe UI")
-        add_rect(s, 4.15, y, 8.7, 0.58, WHITE, LINE)
-        add_text(s, 4.3, y + 0.12, 8.4, 0.38, v, size=14, color=BODY)
-    footer(s, 11, "Приложение · не основной питч")
-    add_notes(s, """Приложение. Показывайте, если жюри просит трассировку к ТЗ.
-Источники: PDF с.2–7, README, DEMO_GUIDE, G5/G6/G8/clean-machine.
-Опциональные геймификация «уровней персонажа» и публичный деплой не реализованы и не красились как готовые.""")
-
-    # --- 12 appendix ---
-    s = new_slide(prs)
-    eyebrow(s, "Приложение Б")
-    headline(s, "Короткие ответы: баллы, AI, данные, запуск", h=0.85, size=26)
-    qa = [
-        ("Что значит 100?", "Зачтены применимые проверки этой попытки. Это не компетенция человека и не деньги."),
-        ("Почему не квиз?", "Пакет, полномочия и раскрытие фактов зависят от порядка ходов. Отказ и слабая сделка — валидные финалы."),
-        ("Где AI?", "В показанном продукте его нет. Qwen задуман для более свободного диалога на тех же правилах сделки."),
-        ("Данные", "Локальная база. Регистрации игрока нет. Чужой адрес попытку не открывает. Это локальный запуск, не публичный сайт."),
-        ("Как запустить", "Prepare и Start -Port 3100. Нужны сеть на первую установку Node/npm и свой пароль администратора."),
-        ("Что не проверено", "Linux и macOS, другой браузер, публичный сайт, чужой компьютер жюри, качество модели."),
-    ]
-    for i, (q, a) in enumerate(qa):
-        x = 0.45 + (i % 2) * 6.4
-        y = 1.5 + (i // 2) * 1.8
-        add_rect(s, x, y, 6.2, 1.65, WHITE, LINE)
-        add_text(s, x + 0.22, y + 0.12, 5.75, 0.4, q, size=15, color=TEAL, bold=True, name="Segoe UI")
-        add_text(s, x + 0.22, y + 0.55, 5.75, 0.95, a, size=14, color=BODY)
-    footer(s, 12, "Приложение · не основной питч")
-    add_notes(s, """Приложение для вопросов.
-Не уходите в CUDA, QLoRA, хеши гейтов и миграции.
-Если спросят лицензию: файла LICENSE в репозитории нет, решение за владельцем.
-Если спросят команду: состав и контакты в материалах не подтверждены.""")
-
+    logo = extract_alabuga(template)
+    assemble(template)
+    prs = Presentation(str(ASSEMBLED))
+    if len(prs.slides) != 14:
+        raise RuntimeError(f"Expected 14 slides, got {len(prs.slides)}")
+    slides = list(prs.slides)
+    fill_title(slides[0], logo)
+    fill_team(slides[1])
+    fill_members(slides[2])
+    fill_problem(slides[3])
+    fill_journey(slides[4])
+    fill_settings(slides[5], assets["settings"])
+    fill_families(slides[6])
+    fill_attempts(slides[7])
+    fill_evidence(slides[8], assets["evidence"])
+    fill_quiz(slides[9])
+    fill_marketing(slides[10])
+    fill_tech(slides[11])
+    fill_next(slides[12])
+    fill_materials(slides[13])
+    strip_notes(prs)
     PPTX.parent.mkdir(parents=True, exist_ok=True)
     prs.save(str(PPTX))
-    print(f"Wrote {PPTX} with {len(prs.slides)} slides")
+    print(f"wrote {PPTX} slides={len(prs.slides)}")
 
 
 if __name__ == "__main__":
-    build()
+    try:
+        build()
+    except Exception as exc:
+        print(f"build failed: {exc}", file=sys.stderr)
+        raise
