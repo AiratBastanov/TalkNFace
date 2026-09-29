@@ -1,44 +1,49 @@
-# Арена переговоров / Negotiation Arena
+# TalkNFace — «Арена переговоров»
 
-Тренажёр для начинающих закупщиков и руководителей: администратор задаёт контекст, проверяет и публикует ситуацию; игрок готовится, ведёт переговоры, получает разбор по сохранённым действиям и начинает повторную попытку. Доступны S1 «Поставка» и S2 «Срочная задача и нагрузка». **Guided-демо без AI**: игрок выбирает действия, результат вычисляет детерминированная учебная модель. Это не оценка реальных компетенций.
+**Отрепетируйте сложный разговор до реальной встречи.**
+
+Команда **«Ходоки»**. Капитан — Бастанов Айрат Иршатович; участник — Садыков Булат Фаридович. Место учёбы — КФУ.
+
+Тренажёр для начинающего закупщика и руководителя: администратор настраивает ситуацию, игрок выбирает ходы, видит последствия и повторяет ту же версию иначе. Семьи сценариев: S1 «Поставка» и S2 «Срочная задача и нагрузка».
+
+Игрок выбирает готовые действия; результат считает учебный движок. Свободный текстовый диалог и ИИ-оппонент в эту версию не входят.
+
+![Результат учебной встречи S2: цель достигнута, полезность 47](docs/submission/assets/hero.png)
+
+**Для организаторов: [как развернуть и запустить](docs/ORGANIZER_LAUNCH_RU.md).**
+
+| | |
+| --- | --- |
+| Запуск | [docs/ORGANIZER_LAUNCH_RU.md](docs/ORGANIZER_LAUNCH_RU.md) |
+| Показ 3–5 мин | [docs/DEMO_GUIDE_RU.md](docs/DEMO_GUIDE_RU.md) |
+| Презентация | [PPTX](docs/submission/TALKNFACE_PRODUCT_PITCH_RU.pptx) · [PDF](docs/submission/TALKNFACE_PRODUCT_PITCH_RU.pdf) |
+| Документация | [docs/submission/README.md](docs/submission/README.md) |
+| Обзор продукта | [docs/submission/PRODUCT_OVERVIEW_RU.md](docs/submission/PRODUCT_OVERVIEW_RU.md) |
 
 ## Запустить на Windows
 
-Проверенный путь: **Windows 11 x64, Windows PowerShell 5.1, Google Chrome**, обычная учётная запись без прав администратора. Для первой установки нужен HTTPS-доступ к **nodejs.org**, **registry.npmjs.org**, **github.com** и доменам GitHub Releases (`release-assets.githubusercontent.com`, возможен `objects.githubusercontent.com`). Chrome нужен для показа; Git нужен только для получения исходников. Python, CUDA, Docker, Qwen, ключи AI, компилятор C++ и глобальные npm-пакеты не нужны.
+Кратко те же три шага, что в [инструкции для организаторов](docs/ORGANIZER_LAUNCH_RU.md).
 
-Получите именно feature-ветку (эта работа не объединена с main). **Для получения исходников нужен разрешённый доступ к GitHub-репозиторию либо исходный ZIP от владельца**: анонимное чтение репозитория в этой проверке не прошло. После получения исходников Git и GitHub credentials приложению не нужны.
-
-```powershell
-git clone --single-branch --branch feature/app-qwen-independent-01 https://github.com/AiratBastanov/TalkNFace.git "Negotiation Arena"
-Set-Location "Negotiation Arena"
-```
-
-Либо скачайте [ZIP feature-ветки](https://github.com/AiratBastanov/TalkNFace/archive/refs/heads/feature/app-qwen-independent-01.zip), распакуйте и откройте PowerShell в корне с `package.json`. Запуск не использует `.git`. Пути с пробелами поддерживаются; AI/model-каталоги запуску не нужны.
-
-Выполните **две команды**:
+Нужны **Windows 10/11 x64**, PowerShell и Chrome. Для первого Prepare — сеть к **nodejs.org**, **registry.npmjs.org** и **github.com**. Python, CUDA, Docker, ключи AI и права администратора Windows не нужны.
 
 ```powershell
+git clone --single-branch --branch docs/organizer-presentation-01 https://github.com/AiratBastanov/TalkNFace.git "TalkNFace"
+Set-Location "TalkNFace"
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\windows-demo.ps1 -Prepare
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\windows-demo.ps1 -Start -Port 3100
 ```
 
-При первом Prepare дважды введите скрытый пароль администратора (12–256 символов). Придумайте свой: общего/стандартного пароля нет. Скрипт сохраняет **только scrypt-хеш**, устанавливает зависимости по lockfile, собирает production и проверяет SQLite. Постоянный сервер этот шаг не запускает. Прерванную подготовку можно повторить; БД и существующий пароль сохраняются. Повторный Prepare выполняет `npm ci` заново, без обновления lockfile.
+При Prepare дважды введите свой пароль администратора (12–256 символов). Общего пароля в репозитории нет.
 
-На проверенном ПК свежий Prepare занял **60,4 с с интерактивным вводом**, Start — **5,7 с**, из них готовность сервера — **0,67 с**. Это измерение одного ПК/сети, а не гарантия скорости любой установки.
+Откройте **http://127.0.0.1:3100/admin**. Игрок: **http://127.0.0.1:3100/**. Используйте `127.0.0.1`, не `localhost`.
 
-Откройте **http://127.0.0.1:3100/admin**, введите выбранный пароль. Игровой вход — **http://127.0.0.1:3100/**, регистрация не нужна. Пользуйтесь `127.0.0.1`, не заменяйте его на `localhost`: Origin проверяется точно. Без `-Port` используется 3000; занятый порт вызывает отказ. Скрипт запускает реальный Fastify/React production в фоне, только на loopback, без watch.
-
-Остановка и последующий запуск **сохраняют данные**:
+Остановка — **отдельной** командой:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\windows-demo.ps1 -Status
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\windows-demo.ps1 -Stop
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\windows-demo.ps1 -Start -Port 3100
 ```
 
-Status только читает состояние. Stop обращается к управляющему каналу именно этого checkout, закрывает HTTP/SQLite и никогда не завершает процесс по PID из старого файла. После аварии снова выполните Start: SQLite восстановит WAL, старое status-состояние не даёт права убить чужой процесс.
-
-[Сценарий показа на русском, 3–5 минут](docs/DEMO_GUIDE_RU.md).
+Сценарий показа: [docs/DEMO_GUIDE_RU.md](docs/DEMO_GUIDE_RU.md).
 
 ## Runtime и воспроизводимость
 
@@ -109,8 +114,6 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\windows-demo.ps1 -
 
 G8: HttpOnly/SameSite=Strict cookie, владение попытками, CSRF, Origin/Fetch Metadata, rotation/logout/expiry. UUID — адрес, не авторизация. Player access: 24ч idle/7д absolute; admin: 30мин idle/8ч absolute. GET не продлевает доступ. Потеря cookie/выход/истечение срока не имеют восстановления аккаунта; данные остаются в БД. Перезапуск с прежним хешем сохраняет действующий доступ. Общий лимит входа — 10 попыток за 15мин, включая успешные. trustProxy не включается.
 
-Этот путь — **loopback HTTP на доверенном локальном ПК**. Публичное размещение, HTTPS/reverse proxy, Linux/macOS/ARM, live AI, полные G5/G6/G7/G8 и финальная сдача хакатона не сертифицированы. Публичный listener и туннели здесь не предусмотрены.
+Этот путь — **loopback HTTP на локальном ПК**. Публичный сайт, HTTPS и Linux/macOS в эту поставку не входят.
 
-Developer-команды с Node 24: `npm ci`, `npm run build`, `npm run typecheck`, `npm test`; прежний `npm run test:e2e` использует установленный Chrome и отдельные тестовые БД. `npm start` — прежний developer entry с .env/переменными; для показа используйте Windows launcher. Новый bounded тест launcher: `node tests/clean-demo/failures.mjs`; acceptance: `node tests/clean-demo/acceptance.mjs <путь-к-чистому-checkout>` (случайный пароль только в памяти теста).
-
-Принятые исторические свидетельства: [G5](docs/gates/APP_G5_CONTEXT_CONFIGURATION_01.md), [G6](docs/gates/APP_G6_DETERMINISTIC_FEEDBACK_01.md), [G8](docs/gates/APP_G8_ACCESS_BOUNDARY_01.md). Исторический [PARTIAL read-boundary incident](docs/gates/APP_AUDIT_AND_QWEN_INDEPENDENT_SLICE_01.md) сохраняется ровно как записан, не переклассифицируется и не является доказательством загрязнения gradient-training. Frozen plans/PDF и training handoff не изменяются.
+Обучение модели и каталоги `ml/`, `tools/windows-rtx*`, `evals/` к запуску тренажёра не относятся. Их не нужно выполнять, чтобы показать продукт.
