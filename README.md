@@ -16,9 +16,7 @@
 | Показ 3–5 мин | [docs/DEMO_GUIDE_RU.md](docs/DEMO_GUIDE_RU.md) |
 | Обзор продукта | [docs/submission/PRODUCT_OVERVIEW_RU.md](docs/submission/PRODUCT_OVERVIEW_RU.md) |
 
-Слайды лежат на ветке `docs/organizer-presentation-01`. Ветка приложения — `feature/app-qwen-independent-01` (базовый коммит этой презентации `bb92b256ba55c72faebb69ec13a2407383bff959`). `main` — отдельный исторический handoff обучения, **не** путь запуска продукта. Команды обучения модели для показа не нужны.
-
-Интеграция этих файлов во ветку приложения владельцем ещё предстоит: на `feature/app-qwen-independent-01` каталога `docs/submission/` пока нет.
+Слайды и этот обзор связаны относительными ссылками ниже. До объединения владельцем их смотрите на ветке `docs/organizer-presentation-01`. База приложения этой презентации — `feature/app-qwen-independent-01` @ `bb92b256ba55c72faebb69ec13a2407383bff959`. Объединение ещё не выполнено. `main` — исторический handoff обучения, не путь запуска продукта. Команды обучения модели для показа не нужны.
 
 ## Запустить на Windows
 
