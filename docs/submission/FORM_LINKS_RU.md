@@ -1,18 +1,18 @@
 # Адреса для четырёх полей формы ЛЦТ 2026
 
-Коммит поставки материалов: `69ca8bb576fe2e8400db68879f8bed25f95c7264` ветки `docs/organizer-presentation-01`. Это не URL ветки и не pull request. Этот файл записан дочерним коммитом, чтобы внутри стоял уже известный SHA.
+Коммит поставки: `8919090a580258d3e42305e8238e475ddbea877f` ветки `docs/organizer-presentation-01`. Это не URL ветки и не pull request.
 
-Публичного прототипа нет. `http://127.0.0.1:3100` открывается только после локального Start на том компьютере и **не копируется в форму**.
+Публичного прототипа нет. `http://127.0.0.1:3100` — только после локального Start на том компьютере, **не копировать в форму**.
 
-Поле «Прототип» ведёт в инструкцию показа: команды Prepare и Start отдельно от Stop.
-
-| # | Поле формы | Адрес | Доступ |
+| # | Поле формы | Адрес в репозитории | GitHub (коммит) |
 | --- | --- | --- | --- |
-| 1 | Исходники | https://github.com/AiratBastanov/TalkNFace/tree/69ca8bb576fe2e8400db68879f8bed25f95c7264 | Проверка после push: см. колонку в ответе товарища; ранее анонимно 404 |
-| 2 | Прототип (локальный запуск) | https://github.com/AiratBastanov/TalkNFace/blob/69ca8bb576fe2e8400db68879f8bed25f95c7264/docs/DEMO_GUIDE_RU.md | То же |
-| 3 | Презентация | https://github.com/AiratBastanov/TalkNFace/blob/69ca8bb576fe2e8400db68879f8bed25f95c7264/docs/submission/TALKNFACE_PRODUCT_PITCH_RU.pdf | То же. Рядом PPTX |
-| 4 | Документация | https://github.com/AiratBastanov/TalkNFace/blob/69ca8bb576fe2e8400db68879f8bed25f95c7264/docs/submission/README.md | То же |
+| 1 | Исходники | корень репозитория | https://github.com/AiratBastanov/TalkNFace/tree/8919090a580258d3e42305e8238e475ddbea877f |
+| 2 | Прототип | [docs/DEMO_GUIDE_RU.md](../DEMO_GUIDE_RU.md) | https://github.com/AiratBastanov/TalkNFace/blob/8919090a580258d3e42305e8238e475ddbea877f/docs/DEMO_GUIDE_RU.md |
+| 3 | Презентация | [docs/submission/TALKNFACE_PRODUCT_PITCH_RU.pdf](TALKNFACE_PRODUCT_PITCH_RU.pdf) | https://github.com/AiratBastanov/TalkNFace/blob/8919090a580258d3e42305e8238e475ddbea877f/docs/submission/TALKNFACE_PRODUCT_PITCH_RU.pdf |
+| 4 | Документация | [docs/submission/README.md](README.md) | https://github.com/AiratBastanov/TalkNFace/blob/8919090a580258d3e42305e8238e475ddbea877f/docs/submission/README.md |
 
-PPTX: https://github.com/AiratBastanov/TalkNFace/blob/69ca8bb576fe2e8400db68879f8bed25f95c7264/docs/submission/TALKNFACE_PRODUCT_PITCH_RU.pptx
+PPTX: [TALKNFACE_PRODUCT_PITCH_RU.pptx](TALKNFACE_PRODUCT_PITCH_RU.pptx) · https://github.com/AiratBastanov/TalkNFace/blob/8919090a580258d3e42305e8238e475ddbea877f/docs/submission/TALKNFACE_PRODUCT_PITCH_RU.pptx
+
+Дополнительно: [PRODUCT_OVERVIEW_RU.md](PRODUCT_OVERVIEW_RU.md) · https://github.com/AiratBastanov/TalkNFace/blob/8919090a580258d3e42305e8238e475ddbea877f/docs/submission/PRODUCT_OVERVIEW_RU.md
 
 Форма хакатона этим файлом не отправлена.
